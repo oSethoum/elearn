@@ -1,0 +1,1 @@
+import{J as n,j as e,U as o,z as r,a7 as a,a8 as i}from"./vendor.665d6fa4.js";function m({to:s}){const t=n();return e(o,{component:r,to:s||"/",radius:"xl",size:"xl",children:t.dir==="ltr"?e(a,{size:28}):e(i,{size:28})})}export{m as B};
