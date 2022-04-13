@@ -72,6 +72,6 @@ export const refresh: Handler = async (req, res) => {
   });
 };
 
-export const logout: Handler = (req, res) => {
+export const logout: Handler = (_, res) => {
   res.clearCookie("access_token").status(200).end();
 };
