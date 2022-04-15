@@ -1,11 +1,11 @@
 import {
   ComponentPropsWithoutRef,
   ReactNode,
+  useContext,
   useEffect,
   useState,
 } from "react";
 import {
-  ActionIcon,
   Box,
   Burger,
   Button,
@@ -21,6 +21,7 @@ import { useMediaQuery, useWindowScroll } from "@mantine/hooks";
 import { Logo } from "./Logo";
 import { useLocation } from "react-router-dom";
 import { FaUniversity, FaBook, FaRocket } from "react-icons/fa";
+import { UserContext } from "../context/user";
 
 interface stylesProps {
   y: number;
@@ -91,6 +92,8 @@ export function Header({
     setOpened(false);
   }, [tablet]);
 
+  const { user } = useContext(UserContext);
+
   return (
     <Box className={classes.root}>
       <Box className={classes.inner}>
@@ -144,9 +147,11 @@ export function Header({
             Departements
           </Button>
           <Space h={15} />
-          <Button leftIcon={<FaBook />} size="lg" color="red" fullWidth>
-            Courses
-          </Button>
+          {user && (
+            <Button leftIcon={<FaBook />} size="lg" color="red" fullWidth>
+              Courses
+            </Button>
+          )}
         </Box>
       </Drawer>
     </Box>

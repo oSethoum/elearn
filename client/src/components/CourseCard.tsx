@@ -7,8 +7,10 @@ import {
   Box,
   Button,
   useMantineTheme,
+  Space,
 } from "@mantine/core";
 import { useMediaQuery } from "@mantine/hooks";
+import { Link } from "react-router-dom";
 
 export interface ICourseCardProps {
   id: string;
@@ -41,13 +43,21 @@ export default function CourseCard({
       }}
     >
       <Image mb={-8} src={src} />
-      <Group spacing="xl" direction="column">
+      <Box
+        sx={{
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "space-between",
+        }}
+      >
         <Box>
           <Text size="xl" weight="bold">
             {title}
           </Text>
+          <Space h={10} />
           <Text>{description}</Text>
         </Box>
+        <Space h={20} />
         <Group direction="row" style={{ width: "100%" }} position="apart">
           <Group>
             <Text weight="bold">{author}</Text>
@@ -55,10 +65,12 @@ export default function CourseCard({
           <Group>
             {video && <Badge color="red">Video</Badge>}
             {meeting && <Badge color="blue">Meetings</Badge>}
-            <Button style={{ width: 130 }}>Explore</Button>
+            <Link to={`/courses/${id}`}>
+              <Button style={{ width: 130 }}>Explore</Button>
+            </Link>
           </Group>
         </Group>
-      </Group>
+      </Box>
     </Card>
   );
 }

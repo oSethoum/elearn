@@ -4,6 +4,7 @@ import morgan from "morgan";
 import cookieParser from "cookie-parser";
 import * as graphql from "./src/graphql";
 import * as routes from "./src/routes";
+import { publicRoutes } from "./src/routes/public";
 
 async function main() {
   const app = express();
@@ -13,6 +14,7 @@ async function main() {
   app.use(json());
   app.use(cookieParser());
 
+  publicRoutes(app);
   routes.setup(app);
   //await graphql.setup(app);
 

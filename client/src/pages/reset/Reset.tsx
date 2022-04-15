@@ -18,6 +18,9 @@ import {
 
 import z from "zod";
 import { zodResolver } from "@mantine/form";
+import { useContext } from "react";
+import { UserContext } from "../../context/user";
+import { Navigate } from "react-router-dom";
 
 export function Reset() {
   const schema = z.object({
@@ -28,7 +31,11 @@ export function Reset() {
     initialValues: { email: "" },
   });
 
-  return (
+  const { user } = useContext(UserContext);
+
+  return user ? (
+    <Navigate to="/404" />
+  ) : (
     <>
       <Header
         withBorder

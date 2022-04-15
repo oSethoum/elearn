@@ -2,6 +2,7 @@ import {
   Alert,
   Button,
   Center,
+  Checkbox,
   Container,
   Group,
   Paper,
@@ -37,6 +38,7 @@ export function Login() {
       .email({ message: "email is not valid" })
       .min(12, { message: "email is too short" }),
     password: z.string().min(6, { message: "password is too short" }),
+    rememberMe: z.boolean(),
   });
 
   const form = useForm({
@@ -44,6 +46,7 @@ export function Login() {
     initialValues: {
       email: "",
       password: "",
+      rememberMe: false,
     },
   });
 
@@ -79,7 +82,7 @@ export function Login() {
               }).then((res) => {
                 if (res.status == 200) {
                   res.json().then((data) => {
-                    console.log("Done");
+                    console.log("Logged in successfully");
 
                     setUser(data);
                     setAlert(false);
@@ -108,6 +111,11 @@ export function Login() {
                 {...form.getInputProps("password")}
               />
             </Group>
+            <Checkbox
+              mt={15}
+              label={"Remember me"}
+              {...form.getInputProps("rememberMe")}
+            />
             <Space h={30} />
             {alert && (
               <Alert

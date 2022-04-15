@@ -2,9 +2,17 @@ import { Handler } from "express";
 import { sign, verify } from "jsonwebtoken";
 import { getConnection } from "../db";
 
-export const login: Handler = async (req, res) => {
-  console.log("body:", req.body);
+export const register: Handler = (req, res) => {
+  const prisma = getConnection();
 
+  prisma.student.create({
+    data: {
+      ...req.body,
+    },
+  });
+};
+
+export const login: Handler = async (req, res) => {
   const prisma = getConnection();
 
   const user = await prisma.user.findFirst({
@@ -34,8 +42,12 @@ export const login: Handler = async (req, res) => {
 
   res.cookie("access_token", token, {
     httpOnly: true,
-    secure: process.env.NODE_ENV === "production",
+    secure: true,
+    expires: req.body.rememberMe
+      ? new Date(Date.now() + 60 * 60 * 24 * 7)
+      : undefined,
   });
+
   const { password, ...payload } = user;
   return res.status(200).json({
     ...payload,

@@ -7,7 +7,7 @@ export const fr = {
     lastName: "Nom",
     loginInformation: "Informations de connexion",
     personalInformation: "Informations personnelles",
-    major: "Specialite", //specialty
+    topic: "Specialite", //specialty
     register: "S'inscrire",
     login: "Se connecter",
     email: "Email",

@@ -7,7 +7,7 @@ export const ar = {
     lastName: "اللقب",
     loginInformation: "معلومات تسجيل الدخول",
     personalInformation: "المعلومات الشخصية",
-    major: "رئيسي", //specialty
+    topic: "رئيسي", //specialty
     register: "تسجيل",
     login: "تسجيل الدخول",
     email: "البريد الإلكتروني",

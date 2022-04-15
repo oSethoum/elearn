@@ -7,7 +7,7 @@ export const en = {
     lastName: "Last name",
     loginInformation: "Login Information",
     personalInformation: "Personal Information",
-    major: "Major", //specialty
+    topic: "Topic", //specialty
     register: "Register",
     login: "Login",
     email: "Email",

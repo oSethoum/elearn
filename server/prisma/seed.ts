@@ -4,21 +4,21 @@ const prisma = new PrismaClient();
 
 async function main() {
   await prisma.$connect();
-  await prisma.student.create({
+
+  await prisma.departement.create({
     data: {
-      grade: 1,
-      user: {
-        create: {
-          firstName: "oussama",
-          lastName: "benhaddou",
-          password: "123456",
-          pictureLink: "empty",
-          username: "osethoum",
-          role: "student",
-          disabled: false,
-          email: "o.sethoum@gmail.com",
-          phone: "+21655555555",
-        },
+      name: "Computer science",
+      topics: {
+        create: [
+          {
+            name: "Algorithm",
+            grades: 5,
+          },
+          {
+            name: "Data structure",
+            grades: 5,
+          },
+        ],
       },
     },
   });

@@ -1,15 +1,4 @@
-import {
-  ActionIcon,
-  Box,
-  Button,
-  Container,
-  Group,
-  Modal,
-  Paper,
-  Select,
-  SimpleGrid,
-  Title,
-} from "@mantine/core";
+import { Text, ActionIcon, Box, Container, Group, Paper } from "@mantine/core";
 import CourseCard from "../../components/CourseCard";
 import { useMantineTheme } from "@mantine/core";
 import { useMediaQuery } from "@mantine/hooks";
@@ -34,45 +23,8 @@ export function Courses() {
     }
   }, [tablet]);
 
-  const FilterForm = () => (
-    <Paper p={20} withBorder>
-      <form>
-        <SimpleGrid cols={1} spacing="lg">
-          <Select
-            label="Department"
-            data={[
-              { label: "Physics", value: "ph" },
-              { label: "Computer Science", value: "cs" },
-            ]}
-            placeholder="Department"
-          />
-          <Select
-            label="Class"
-            data={[{ label: "Physics", value: "ph" }]}
-            placeholder="Class"
-          />
-          <Select
-            label="Grade"
-            placeholder="Grade"
-            data={["1", "2", "3", "4"]}
-          />
-
-          <Button onClick={() => setOpened(false)}>Filter</Button>
-        </SimpleGrid>
-      </form>
-    </Paper>
-  );
-
   return (
     <>
-      <Modal
-        opened={opened}
-        size="80%"
-        title={<Title order={2}>Filter</Title>}
-        onClose={() => setOpened(false)}
-      >
-        <FilterForm />
-      </Modal>
       <Header
         rightSide={
           <Group direction="row">
@@ -83,21 +35,12 @@ export function Courses() {
         leftSide={<BackButton />}
         withBorder
         responsive
-      ></Header>
+      >
+        <Text weight="bold" align="center" size="xl">
+          Courses
+        </Text>
+      </Header>
       <Container my={20} size="xl" sx={{ display: "flex", gap: 15 }}>
-        <Box
-          sx={{
-            position: "sticky",
-            zIndex: 2,
-            top: 65,
-            display: tablet ? "none" : "block",
-            width: 800,
-          }}
-          mb={20}
-        >
-          <FilterForm />
-        </Box>
-
         <Box>
           <Paper
             withBorder
@@ -130,7 +73,7 @@ export function Courses() {
             video={true}
             meeting={true}
             author="Benkadour"
-            id="1212212"
+            id="1"
             src="https://cdnuploads.aa.com.tr/uploads/Contents/2020/12/02/thumbs_b_c_d964d85c0b58d7f3b08c1b17631787d9.jpg?v=220851"
           />
         </Box>

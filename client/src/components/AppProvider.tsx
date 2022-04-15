@@ -51,9 +51,13 @@ export function AppProvider({ children }: React.ComponentPropsWithRef<"div">) {
   const [dir, setDir] = useState<"ltr" | "rtl">("ltr");
 
   const toggleColorScheme = (value?: ColorScheme) => {
-    setColorScheme(value || colorScheme === "dark" ? "light" : "dark");
-    document.documentElement.style.colorScheme = colorScheme;
+    const scheme = value || colorScheme === "dark" ? "light" : "dark";
+    setColorScheme(scheme);
   };
+
+  useEffect(() => {
+    document.documentElement.style.colorScheme = colorScheme;
+  }, [colorScheme]);
 
   useEffect(() => {
     document.documentElement.setAttribute("dir", dir);
@@ -93,8 +97,6 @@ export function AppProvider({ children }: React.ComponentPropsWithRef<"div">) {
         res.json().then((data) => {
           setUser(data);
         });
-      } else {
-        console.log("Error");
       }
     });
   }, []);

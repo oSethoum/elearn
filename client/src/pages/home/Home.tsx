@@ -24,9 +24,12 @@ import {
 import { FeatureCard } from "../../components/FeatureCard";
 import { HeroSection } from "../../components/HeroSection";
 import { FaBook, FaUniversity, FaRocket } from "react-icons/fa";
+import { useContext } from "react";
+import { UserContext } from "../../context/user";
 
 export function Home() {
   const theme = useMantineTheme();
+  const { user } = useContext(UserContext);
   return (
     <>
       <Header
@@ -47,11 +50,13 @@ export function Home() {
           <Button leftIcon={<FaUniversity />} radius="xl" color="green">
             Departements
           </Button>
-          <Link to="courses">
-            <Button leftIcon={<FaBook />} radius="xl" color="red">
-              Courses
-            </Button>
-          </Link>
+          {user && (
+            <Link to="courses">
+              <Button leftIcon={<FaBook />} radius="xl" color="red">
+                Courses
+              </Button>
+            </Link>
+          )}
         </Group>
       </Header>
       <HeroSection />
@@ -133,7 +138,6 @@ export function Home() {
           </h1>
         </Card>
       </Box>
-
       <Footer withBorder />
     </>
   );

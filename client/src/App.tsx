@@ -1,6 +1,11 @@
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Navigate,
+  Route,
+  Routes,
+} from "react-router-dom";
 import { ScrollTop } from "./components/ScrollTop";
-import { lazy } from "react";
+import { lazy, useContext } from "react";
 import { Loader } from "./components";
 import {
   ApolloClient,
@@ -11,6 +16,8 @@ import {
 } from "@apollo/client";
 import { onError } from "@apollo/client/link/error";
 import { Suspense } from "react";
+import { Course } from "./pages/course/Course";
+import { UserContext } from "./context/user";
 
 const Home = lazy(() => import("./pages/home/Home"));
 const Courses = lazy(() => import("./pages/courses/Courses"));
@@ -51,10 +58,11 @@ function App() {
           <Suspense fallback={<Loader />}>
             <Routes>
               <Route path="/" element={<Home />} />
+              <Route path="/dashboard" element={<Dashboard />} />
               <Route path="/courses" element={<Courses />} />
+              <Route path="/courses/:id" element={<Course />} />
               <Route path="/login" element={<Login />} />
               <Route path="/register" element={<Register />} />
-              <Route path="/dashboard" element={<Dashboard />} />
               <Route path="/reset" element={<Reset />} />
               <Route path="/*" element={<NotFound />} />
             </Routes>
@@ -63,6 +71,18 @@ function App() {
       </ApolloProvider>
     </>
   );
+}
+
+function Auth({
+  children,
+  reverse,
+}: {
+  children: React.ReactNode;
+  reverse: boolean;
+}) {
+  const { user } = useContext(UserContext);
+
+  return user && !reverse ? <>{children}</> : <Navigate to="/404" />;
 }
 
 export default App;

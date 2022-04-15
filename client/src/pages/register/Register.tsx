@@ -25,33 +25,99 @@ import {
 import z from "zod";
 import { useTranslation } from "react-i18next";
 import { useForm, zodResolver } from "@mantine/form";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { UserContext } from "../../context/user";
+
+function signup(values) {
+  const { grade, ...user } = values;
+
+  const body = {
+    grade,
+    user: {
+      create: {
+        ...user,
+      },
+    },
+  };
+
+  return fetch("/api/signup", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(body),
+  })
+    .then((res) => {
+      if (res.status === 201) {
+        return true;
+      }
+    })
+    .catch((err) => {
+      return err;
+    });
+}
 
 export const Register = () => {
   const theme = useMantineTheme();
   const { t } = useTranslation();
   const { user } = useContext(UserContext);
+  const [topics, setTopics] = useState<
+    { value: string; label: string; grades: number }[]
+  >([]);
+  const [isFetching, setIsFetching] = useState(true);
   const schema = z.object({
     firstName: z.string().min(4, "minimum 4"),
     lastName: z.string().min(4, "minimum 4"),
-    major: z.string().nonempty("not empty"),
+    topic: z.string().nonempty("not empty"),
     username: z.string().min(6, "minimum 6"),
     email: z.string().email("invalid email").min(8, "minimum 8"),
     password: z.string().min(6, "minimum 6"),
   });
+
+  const [grades, setGrades] = useState<string[]>([]);
+
+  useEffect(() => {
+    fetch("/api/topics")
+      .then((res) => res.json())
+      .then((data) => {
+        setTopics(
+          data.map((topic) => ({
+            label: topic.name,
+            value: topic.id.toString(),
+            grades: topic.grades,
+          }))
+        );
+        setIsFetching(false);
+      })
+      .catch((err) => console.log(err));
+  }, []);
 
   const form = useForm({
     schema: zodResolver(schema),
     initialValues: {
       firstName: "",
       lastName: "",
-      major: "",
+      topic: "",
+      grade: "",
       username: "",
       email: "",
       password: "",
     },
   });
+
+  useEffect(() => {
+    const cuurentTopic = topics.find((t) => t.value === form.values.topic);
+    const computerGrades: string[] = [];
+
+    if (cuurentTopic) {
+      for (let i = 1; i <= cuurentTopic.grades; i++) {
+        computerGrades.push(i.toString());
+      }
+    }
+    setGrades(computerGrades);
+    form.values.grade = "1";
+  }, [form.values.topic]);
+
   const [alert, setAlert] = useState(false);
 
   return user ? (
@@ -75,7 +141,7 @@ export const Register = () => {
           <Space h={10} />
           <form
             onSubmit={form.onSubmit((values) => {
-              console.log(values);
+              signup(values);
             })}
             noValidate
           >
@@ -94,14 +160,24 @@ export const Register = () => {
                   required
                   {...form.getInputProps("lastName")}
                 />
-                <Select
-                  searchable
-                  label={t("major")}
-                  placeholder={t("major")}
-                  required
-                  data={["Hello", "nothing"]}
-                  {...form.getInputProps("major")}
-                />
+                {topics.length > 0 && (
+                  <Select
+                    label={t("topic")}
+                    placeholder={t("topic")}
+                    required
+                    data={topics}
+                    {...form.getInputProps("topic")}
+                  />
+                )}
+                {grades.length > 0 && (
+                  <Select
+                    label={t("grade")}
+                    placeholder={t("grade")}
+                    required
+                    data={grades}
+                    {...form.getInputProps("grade")}
+                  />
+                )}
               </Group>
               <Space h={10} />
               <Group direction="column" grow>
