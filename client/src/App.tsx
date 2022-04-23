@@ -41,7 +41,7 @@ function App() {
   const link = from([
     errorLink,
     new HttpLink({
-      uri: "http://localhost:3001/graphql",
+      uri: "/graphql",
     }),
   ]);
 

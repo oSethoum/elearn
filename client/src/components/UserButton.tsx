@@ -16,6 +16,12 @@ export function UserButton() {
   const theme = useMantineTheme();
   const { user, setUser } = useContext(UserContext);
   const [opened, setOpened] = useState(false);
+  const firstName =
+    user?.student?.firstName ||
+    user?.admin?.firstName ||
+    user?.student?.firstName;
+  const lastName =
+    user?.student?.lastName || user?.admin?.lastName || user?.teacher?.lastName;
 
   return (
     <>
@@ -26,14 +32,9 @@ export function UserButton() {
         size="xl"
       >
         <Group mx={8} direction="row" spacing="xs">
-          <Avatar
-            color={theme.primaryColor}
-            size={34}
-            radius={50}
-            src={user?.pictureLink}
-          />
+          <Avatar color={theme.primaryColor} size={34} radius={50} />
           <Text color={theme.primaryColor} weight="bold">
-            {user ? user.username : t("anonymous")}
+            {user ? firstName + " " + lastName : t("anonymous")}
           </Text>
         </Group>
       </ActionIcon>

@@ -4,8 +4,9 @@
 # -----------------------------------------------
 
 type Admin {
+  firstName: String!
   id: Int!
-  role: String!
+  lastName: String!
   user: User!
   userId: Int!
 }
@@ -22,19 +23,22 @@ input AdminAvgOrderByAggregateInput {
 
 type AdminCountAggregate {
   _all: Int!
+  firstName: Int!
   id: Int!
-  role: Int!
+  lastName: Int!
   userId: Int!
 }
 
 input AdminCountOrderByAggregateInput {
+  firstName: SortOrder
   id: SortOrder
-  role: SortOrder
+  lastName: SortOrder
   userId: SortOrder
 }
 
 input AdminCreateInput {
-  role: String!
+  firstName: String!
+  lastName: String!
   user: UserCreateNestedOneWithoutAdminInput!
 }
 
@@ -50,7 +54,8 @@ input AdminCreateOrConnectWithoutUserInput {
 }
 
 input AdminCreateWithoutUserInput {
-  role: String!
+  firstName: String!
+  lastName: String!
 }
 
 type AdminGroupBy {
@@ -59,32 +64,37 @@ type AdminGroupBy {
   _max: AdminMaxAggregate
   _min: AdminMinAggregate
   _sum: AdminSumAggregate
+  firstName: String!
   id: Int!
-  role: String!
+  lastName: String!
   userId: Int!
 }
 
 type AdminMaxAggregate {
+  firstName: String
   id: Int
-  role: String
+  lastName: String
   userId: Int
 }
 
 input AdminMaxOrderByAggregateInput {
+  firstName: SortOrder
   id: SortOrder
-  role: SortOrder
+  lastName: SortOrder
   userId: SortOrder
 }
 
 type AdminMinAggregate {
+  firstName: String
   id: Int
-  role: String
+  lastName: String
   userId: Int
 }
 
 input AdminMinOrderByAggregateInput {
+  firstName: SortOrder
   id: SortOrder
-  role: SortOrder
+  lastName: SortOrder
   userId: SortOrder
 }
 
@@ -94,14 +104,16 @@ input AdminOrderByWithAggregationInput {
   _max: AdminMaxOrderByAggregateInput
   _min: AdminMinOrderByAggregateInput
   _sum: AdminSumOrderByAggregateInput
+  firstName: SortOrder
   id: SortOrder
-  role: SortOrder
+  lastName: SortOrder
   userId: SortOrder
 }
 
 input AdminOrderByWithRelationInput {
+  firstName: SortOrder
   id: SortOrder
-  role: SortOrder
+  lastName: SortOrder
   user: UserOrderByWithRelationInput
   userId: SortOrder
 }
@@ -112,8 +124,9 @@ input AdminRelationFilter {
 }
 
 enum AdminScalarFieldEnum {
+  firstName
   id
-  role
+  lastName
   userId
 }
 
@@ -121,8 +134,9 @@ input AdminScalarWhereWithAggregatesInput {
   AND: [AdminScalarWhereWithAggregatesInput!]
   NOT: [AdminScalarWhereWithAggregatesInput!]
   OR: [AdminScalarWhereWithAggregatesInput!]
+  firstName: StringWithAggregatesFilter
   id: IntWithAggregatesFilter
-  role: StringWithAggregatesFilter
+  lastName: StringWithAggregatesFilter
   userId: IntWithAggregatesFilter
 }
 
@@ -137,12 +151,14 @@ input AdminSumOrderByAggregateInput {
 }
 
 input AdminUpdateInput {
-  role: StringFieldUpdateOperationsInput
+  firstName: StringFieldUpdateOperationsInput
+  lastName: StringFieldUpdateOperationsInput
   user: UserUpdateOneRequiredWithoutAdminInput
 }
 
 input AdminUpdateManyMutationInput {
-  role: StringFieldUpdateOperationsInput
+  firstName: StringFieldUpdateOperationsInput
+  lastName: StringFieldUpdateOperationsInput
 }
 
 input AdminUpdateOneWithoutUserInput {
@@ -156,7 +172,8 @@ input AdminUpdateOneWithoutUserInput {
 }
 
 input AdminUpdateWithoutUserInput {
-  role: StringFieldUpdateOperationsInput
+  firstName: StringFieldUpdateOperationsInput
+  lastName: StringFieldUpdateOperationsInput
 }
 
 input AdminUpsertWithoutUserInput {
@@ -168,8 +185,9 @@ input AdminWhereInput {
   AND: [AdminWhereInput!]
   NOT: [AdminWhereInput!]
   OR: [AdminWhereInput!]
+  firstName: StringFilter
   id: IntFilter
-  role: StringFilter
+  lastName: StringFilter
   user: UserRelationFilter
   userId: IntFilter
 }
@@ -199,14 +217,6 @@ type AggregateAssignment {
   _sum: AssignmentSumAggregate
 }
 
-type AggregateClassroom {
-  _avg: ClassroomAvgAggregate
-  _count: ClassroomCountAggregate
-  _max: ClassroomMaxAggregate
-  _min: ClassroomMinAggregate
-  _sum: ClassroomSumAggregate
-}
-
 type AggregateContent {
   _avg: ContentAvgAggregate
   _count: ContentCountAggregate
@@ -223,12 +233,12 @@ type AggregateCourse {
   _sum: CourseSumAggregate
 }
 
-type AggregateDepartement {
-  _avg: DepartementAvgAggregate
-  _count: DepartementCountAggregate
-  _max: DepartementMaxAggregate
-  _min: DepartementMinAggregate
-  _sum: DepartementSumAggregate
+type AggregateDepartment {
+  _avg: DepartmentAvgAggregate
+  _count: DepartmentCountAggregate
+  _max: DepartmentMaxAggregate
+  _min: DepartmentMinAggregate
+  _sum: DepartmentSumAggregate
 }
 
 type AggregateFile {
@@ -237,6 +247,14 @@ type AggregateFile {
   _max: FileMaxAggregate
   _min: FileMinAggregate
   _sum: FileSumAggregate
+}
+
+type AggregateLesson {
+  _avg: LessonAvgAggregate
+  _count: LessonCountAggregate
+  _max: LessonMaxAggregate
+  _min: LessonMinAggregate
+  _sum: LessonSumAggregate
 }
 
 type AggregateMeeting {
@@ -296,6 +314,7 @@ type Assignment {
   createdAt: DateTime!
   deadline: DateTime!
   id: Int!
+  published: Boolean
   submissions(cursor: SubmissionWhereUniqueInput, distinct: [SubmissionScalarFieldEnum!], orderBy: [SubmissionOrderByWithRelationInput!], skip: Int, take: Int, where: SubmissionWhereInput): [Submission!]!
   updatedAt: DateTime!
 }
@@ -323,6 +342,7 @@ type AssignmentCountAggregate {
   createdAt: Int!
   deadline: Int!
   id: Int!
+  published: Int!
   updatedAt: Int!
 }
 
@@ -332,15 +352,17 @@ input AssignmentCountOrderByAggregateInput {
   createdAt: SortOrder
   deadline: SortOrder
   id: SortOrder
+  published: SortOrder
   updatedAt: SortOrder
 }
 
 input AssignmentCreateInput {
-  content: ContentCreateNestedOneWithoutAssignmentsInput!
+  content: ContentCreateNestedOneWithoutAssignmentInput!
   course: CourseCreateNestedOneWithoutAssignmentsInput
   createdAt: DateTime
   deadline: DateTime!
-  submissions: SubmissionCreateNestedManyWithoutAssignementInput
+  published: Boolean
+  submissions: SubmissionCreateNestedManyWithoutAssignmentInput
   updatedAt: DateTime
 }
 
@@ -381,23 +403,26 @@ input AssignmentCreateWithoutContentInput {
   course: CourseCreateNestedOneWithoutAssignmentsInput
   createdAt: DateTime
   deadline: DateTime!
-  submissions: SubmissionCreateNestedManyWithoutAssignementInput
+  published: Boolean
+  submissions: SubmissionCreateNestedManyWithoutAssignmentInput
   updatedAt: DateTime
 }
 
 input AssignmentCreateWithoutCourseInput {
-  content: ContentCreateNestedOneWithoutAssignmentsInput!
+  content: ContentCreateNestedOneWithoutAssignmentInput!
   createdAt: DateTime
   deadline: DateTime!
-  submissions: SubmissionCreateNestedManyWithoutAssignementInput
+  published: Boolean
+  submissions: SubmissionCreateNestedManyWithoutAssignmentInput
   updatedAt: DateTime
 }
 
 input AssignmentCreateWithoutSubmissionsInput {
-  content: ContentCreateNestedOneWithoutAssignmentsInput!
+  content: ContentCreateNestedOneWithoutAssignmentInput!
   course: CourseCreateNestedOneWithoutAssignmentsInput
   createdAt: DateTime
   deadline: DateTime!
+  published: Boolean
   updatedAt: DateTime
 }
 
@@ -412,6 +437,7 @@ type AssignmentGroupBy {
   createdAt: DateTime!
   deadline: DateTime!
   id: Int!
+  published: Boolean
   updatedAt: DateTime!
 }
 
@@ -427,6 +453,7 @@ type AssignmentMaxAggregate {
   createdAt: DateTime
   deadline: DateTime
   id: Int
+  published: Boolean
   updatedAt: DateTime
 }
 
@@ -436,6 +463,7 @@ input AssignmentMaxOrderByAggregateInput {
   createdAt: SortOrder
   deadline: SortOrder
   id: SortOrder
+  published: SortOrder
   updatedAt: SortOrder
 }
 
@@ -445,6 +473,7 @@ type AssignmentMinAggregate {
   createdAt: DateTime
   deadline: DateTime
   id: Int
+  published: Boolean
   updatedAt: DateTime
 }
 
@@ -454,6 +483,7 @@ input AssignmentMinOrderByAggregateInput {
   createdAt: SortOrder
   deadline: SortOrder
   id: SortOrder
+  published: SortOrder
   updatedAt: SortOrder
 }
 
@@ -472,6 +502,7 @@ input AssignmentOrderByWithAggregationInput {
   createdAt: SortOrder
   deadline: SortOrder
   id: SortOrder
+  published: SortOrder
   updatedAt: SortOrder
 }
 
@@ -483,6 +514,7 @@ input AssignmentOrderByWithRelationInput {
   createdAt: SortOrder
   deadline: SortOrder
   id: SortOrder
+  published: SortOrder
   submissions: SubmissionOrderByRelationAggregateInput
   updatedAt: SortOrder
 }
@@ -498,6 +530,7 @@ enum AssignmentScalarFieldEnum {
   createdAt
   deadline
   id
+  published
   updatedAt
 }
 
@@ -510,6 +543,7 @@ input AssignmentScalarWhereInput {
   createdAt: DateTimeFilter
   deadline: DateTimeFilter
   id: IntFilter
+  published: BoolNullableFilter
   updatedAt: DateTimeFilter
 }
 
@@ -522,6 +556,7 @@ input AssignmentScalarWhereWithAggregatesInput {
   createdAt: DateTimeWithAggregatesFilter
   deadline: DateTimeWithAggregatesFilter
   id: IntWithAggregatesFilter
+  published: BoolNullableWithAggregatesFilter
   updatedAt: DateTimeWithAggregatesFilter
 }
 
@@ -538,17 +573,19 @@ input AssignmentSumOrderByAggregateInput {
 }
 
 input AssignmentUpdateInput {
-  content: ContentUpdateOneRequiredWithoutAssignmentsInput
+  content: ContentUpdateOneRequiredWithoutAssignmentInput
   course: CourseUpdateOneWithoutAssignmentsInput
   createdAt: DateTimeFieldUpdateOperationsInput
   deadline: DateTimeFieldUpdateOperationsInput
-  submissions: SubmissionUpdateManyWithoutAssignementInput
+  published: NullableBoolFieldUpdateOperationsInput
+  submissions: SubmissionUpdateManyWithoutAssignmentInput
   updatedAt: DateTimeFieldUpdateOperationsInput
 }
 
 input AssignmentUpdateManyMutationInput {
   createdAt: DateTimeFieldUpdateOperationsInput
   deadline: DateTimeFieldUpdateOperationsInput
+  published: NullableBoolFieldUpdateOperationsInput
   updatedAt: DateTimeFieldUpdateOperationsInput
 }
 
@@ -599,23 +636,26 @@ input AssignmentUpdateWithoutContentInput {
   course: CourseUpdateOneWithoutAssignmentsInput
   createdAt: DateTimeFieldUpdateOperationsInput
   deadline: DateTimeFieldUpdateOperationsInput
-  submissions: SubmissionUpdateManyWithoutAssignementInput
+  published: NullableBoolFieldUpdateOperationsInput
+  submissions: SubmissionUpdateManyWithoutAssignmentInput
   updatedAt: DateTimeFieldUpdateOperationsInput
 }
 
 input AssignmentUpdateWithoutCourseInput {
-  content: ContentUpdateOneRequiredWithoutAssignmentsInput
+  content: ContentUpdateOneRequiredWithoutAssignmentInput
   createdAt: DateTimeFieldUpdateOperationsInput
   deadline: DateTimeFieldUpdateOperationsInput
-  submissions: SubmissionUpdateManyWithoutAssignementInput
+  published: NullableBoolFieldUpdateOperationsInput
+  submissions: SubmissionUpdateManyWithoutAssignmentInput
   updatedAt: DateTimeFieldUpdateOperationsInput
 }
 
 input AssignmentUpdateWithoutSubmissionsInput {
-  content: ContentUpdateOneRequiredWithoutAssignmentsInput
+  content: ContentUpdateOneRequiredWithoutAssignmentInput
   course: CourseUpdateOneWithoutAssignmentsInput
   createdAt: DateTimeFieldUpdateOperationsInput
   deadline: DateTimeFieldUpdateOperationsInput
+  published: NullableBoolFieldUpdateOperationsInput
   updatedAt: DateTimeFieldUpdateOperationsInput
 }
 
@@ -646,6 +686,7 @@ input AssignmentWhereInput {
   createdAt: DateTimeFilter
   deadline: DateTimeFilter
   id: IntFilter
+  published: BoolNullableFilter
   submissions: SubmissionListRelationFilter
   updatedAt: DateTimeFilter
 }
@@ -664,6 +705,19 @@ input BoolFilter {
   not: NestedBoolFilter
 }
 
+input BoolNullableFilter {
+  equals: Boolean
+  not: NestedBoolNullableFilter
+}
+
+input BoolNullableWithAggregatesFilter {
+  _count: NestedIntNullableFilter
+  _max: NestedBoolNullableFilter
+  _min: NestedBoolNullableFilter
+  equals: Boolean
+  not: NestedBoolNullableWithAggregatesFilter
+}
+
 input BoolWithAggregatesFilter {
   _count: NestedIntFilter
   _max: NestedBoolFilter
@@ -672,313 +726,15 @@ input BoolWithAggregatesFilter {
   not: NestedBoolWithAggregatesFilter
 }
 
-type Classroom {
-  _count: ClassroomCount
-  createdAt: DateTime!
-  id: Int!
-  name: String!
-  students(cursor: StudentWhereUniqueInput, distinct: [StudentScalarFieldEnum!], orderBy: [StudentOrderByWithRelationInput!], skip: Int, take: Int, where: StudentWhereInput): [Student!]!
-  topic: Topic
-  topicId: Int
-  updatedAt: DateTime!
-}
-
-type ClassroomAvgAggregate {
-  id: Float
-  topicId: Float
-}
-
-input ClassroomAvgOrderByAggregateInput {
-  id: SortOrder
-  topicId: SortOrder
-}
-
-type ClassroomCount {
-  students: Int!
-}
-
-type ClassroomCountAggregate {
-  _all: Int!
-  createdAt: Int!
-  id: Int!
-  name: Int!
-  topicId: Int!
-  updatedAt: Int!
-}
-
-input ClassroomCountOrderByAggregateInput {
-  createdAt: SortOrder
-  id: SortOrder
-  name: SortOrder
-  topicId: SortOrder
-  updatedAt: SortOrder
-}
-
-input ClassroomCreateInput {
-  createdAt: DateTime
-  name: String!
-  students: StudentCreateNestedManyWithoutClassroomInput
-  topic: TopicCreateNestedOneWithoutClassroomsInput
-  updatedAt: DateTime
-}
-
-input ClassroomCreateNestedManyWithoutTopicInput {
-  connect: [ClassroomWhereUniqueInput!]
-  connectOrCreate: [ClassroomCreateOrConnectWithoutTopicInput!]
-  create: [ClassroomCreateWithoutTopicInput!]
-}
-
-input ClassroomCreateNestedOneWithoutStudentsInput {
-  connect: ClassroomWhereUniqueInput
-  connectOrCreate: ClassroomCreateOrConnectWithoutStudentsInput
-  create: ClassroomCreateWithoutStudentsInput
-}
-
-input ClassroomCreateOrConnectWithoutStudentsInput {
-  create: ClassroomCreateWithoutStudentsInput!
-  where: ClassroomWhereUniqueInput!
-}
-
-input ClassroomCreateOrConnectWithoutTopicInput {
-  create: ClassroomCreateWithoutTopicInput!
-  where: ClassroomWhereUniqueInput!
-}
-
-input ClassroomCreateWithoutStudentsInput {
-  createdAt: DateTime
-  name: String!
-  topic: TopicCreateNestedOneWithoutClassroomsInput
-  updatedAt: DateTime
-}
-
-input ClassroomCreateWithoutTopicInput {
-  createdAt: DateTime
-  name: String!
-  students: StudentCreateNestedManyWithoutClassroomInput
-  updatedAt: DateTime
-}
-
-type ClassroomGroupBy {
-  _avg: ClassroomAvgAggregate
-  _count: ClassroomCountAggregate
-  _max: ClassroomMaxAggregate
-  _min: ClassroomMinAggregate
-  _sum: ClassroomSumAggregate
-  createdAt: DateTime!
-  id: Int!
-  name: String!
-  topicId: Int
-  updatedAt: DateTime!
-}
-
-input ClassroomListRelationFilter {
-  every: ClassroomWhereInput
-  none: ClassroomWhereInput
-  some: ClassroomWhereInput
-}
-
-type ClassroomMaxAggregate {
-  createdAt: DateTime
-  id: Int
-  name: String
-  topicId: Int
-  updatedAt: DateTime
-}
-
-input ClassroomMaxOrderByAggregateInput {
-  createdAt: SortOrder
-  id: SortOrder
-  name: SortOrder
-  topicId: SortOrder
-  updatedAt: SortOrder
-}
-
-type ClassroomMinAggregate {
-  createdAt: DateTime
-  id: Int
-  name: String
-  topicId: Int
-  updatedAt: DateTime
-}
-
-input ClassroomMinOrderByAggregateInput {
-  createdAt: SortOrder
-  id: SortOrder
-  name: SortOrder
-  topicId: SortOrder
-  updatedAt: SortOrder
-}
-
-input ClassroomOrderByRelationAggregateInput {
-  _count: SortOrder
-}
-
-input ClassroomOrderByWithAggregationInput {
-  _avg: ClassroomAvgOrderByAggregateInput
-  _count: ClassroomCountOrderByAggregateInput
-  _max: ClassroomMaxOrderByAggregateInput
-  _min: ClassroomMinOrderByAggregateInput
-  _sum: ClassroomSumOrderByAggregateInput
-  createdAt: SortOrder
-  id: SortOrder
-  name: SortOrder
-  topicId: SortOrder
-  updatedAt: SortOrder
-}
-
-input ClassroomOrderByWithRelationInput {
-  createdAt: SortOrder
-  id: SortOrder
-  name: SortOrder
-  students: StudentOrderByRelationAggregateInput
-  topic: TopicOrderByWithRelationInput
-  topicId: SortOrder
-  updatedAt: SortOrder
-}
-
-input ClassroomRelationFilter {
-  is: ClassroomWhereInput
-  isNot: ClassroomWhereInput
-}
-
-enum ClassroomScalarFieldEnum {
-  createdAt
-  id
-  name
-  topicId
-  updatedAt
-}
-
-input ClassroomScalarWhereInput {
-  AND: [ClassroomScalarWhereInput!]
-  NOT: [ClassroomScalarWhereInput!]
-  OR: [ClassroomScalarWhereInput!]
-  createdAt: DateTimeFilter
-  id: IntFilter
-  name: StringFilter
-  topicId: IntNullableFilter
-  updatedAt: DateTimeFilter
-}
-
-input ClassroomScalarWhereWithAggregatesInput {
-  AND: [ClassroomScalarWhereWithAggregatesInput!]
-  NOT: [ClassroomScalarWhereWithAggregatesInput!]
-  OR: [ClassroomScalarWhereWithAggregatesInput!]
-  createdAt: DateTimeWithAggregatesFilter
-  id: IntWithAggregatesFilter
-  name: StringWithAggregatesFilter
-  topicId: IntNullableWithAggregatesFilter
-  updatedAt: DateTimeWithAggregatesFilter
-}
-
-type ClassroomSumAggregate {
-  id: Int
-  topicId: Int
-}
-
-input ClassroomSumOrderByAggregateInput {
-  id: SortOrder
-  topicId: SortOrder
-}
-
-input ClassroomUpdateInput {
-  createdAt: DateTimeFieldUpdateOperationsInput
-  name: StringFieldUpdateOperationsInput
-  students: StudentUpdateManyWithoutClassroomInput
-  topic: TopicUpdateOneWithoutClassroomsInput
-  updatedAt: DateTimeFieldUpdateOperationsInput
-}
-
-input ClassroomUpdateManyMutationInput {
-  createdAt: DateTimeFieldUpdateOperationsInput
-  name: StringFieldUpdateOperationsInput
-  updatedAt: DateTimeFieldUpdateOperationsInput
-}
-
-input ClassroomUpdateManyWithWhereWithoutTopicInput {
-  data: ClassroomUpdateManyMutationInput!
-  where: ClassroomScalarWhereInput!
-}
-
-input ClassroomUpdateManyWithoutTopicInput {
-  connect: [ClassroomWhereUniqueInput!]
-  connectOrCreate: [ClassroomCreateOrConnectWithoutTopicInput!]
-  create: [ClassroomCreateWithoutTopicInput!]
-  delete: [ClassroomWhereUniqueInput!]
-  deleteMany: [ClassroomScalarWhereInput!]
-  disconnect: [ClassroomWhereUniqueInput!]
-  set: [ClassroomWhereUniqueInput!]
-  update: [ClassroomUpdateWithWhereUniqueWithoutTopicInput!]
-  updateMany: [ClassroomUpdateManyWithWhereWithoutTopicInput!]
-  upsert: [ClassroomUpsertWithWhereUniqueWithoutTopicInput!]
-}
-
-input ClassroomUpdateOneWithoutStudentsInput {
-  connect: ClassroomWhereUniqueInput
-  connectOrCreate: ClassroomCreateOrConnectWithoutStudentsInput
-  create: ClassroomCreateWithoutStudentsInput
-  delete: Boolean
-  disconnect: Boolean
-  update: ClassroomUpdateWithoutStudentsInput
-  upsert: ClassroomUpsertWithoutStudentsInput
-}
-
-input ClassroomUpdateWithWhereUniqueWithoutTopicInput {
-  data: ClassroomUpdateWithoutTopicInput!
-  where: ClassroomWhereUniqueInput!
-}
-
-input ClassroomUpdateWithoutStudentsInput {
-  createdAt: DateTimeFieldUpdateOperationsInput
-  name: StringFieldUpdateOperationsInput
-  topic: TopicUpdateOneWithoutClassroomsInput
-  updatedAt: DateTimeFieldUpdateOperationsInput
-}
-
-input ClassroomUpdateWithoutTopicInput {
-  createdAt: DateTimeFieldUpdateOperationsInput
-  name: StringFieldUpdateOperationsInput
-  students: StudentUpdateManyWithoutClassroomInput
-  updatedAt: DateTimeFieldUpdateOperationsInput
-}
-
-input ClassroomUpsertWithWhereUniqueWithoutTopicInput {
-  create: ClassroomCreateWithoutTopicInput!
-  update: ClassroomUpdateWithoutTopicInput!
-  where: ClassroomWhereUniqueInput!
-}
-
-input ClassroomUpsertWithoutStudentsInput {
-  create: ClassroomCreateWithoutStudentsInput!
-  update: ClassroomUpdateWithoutStudentsInput!
-}
-
-input ClassroomWhereInput {
-  AND: [ClassroomWhereInput!]
-  NOT: [ClassroomWhereInput!]
-  OR: [ClassroomWhereInput!]
-  createdAt: DateTimeFilter
-  id: IntFilter
-  name: StringFilter
-  students: StudentListRelationFilter
-  topic: TopicRelationFilter
-  topicId: IntNullableFilter
-  updatedAt: DateTimeFilter
-}
-
-input ClassroomWhereUniqueInput {
-  id: Int
-}
-
 type Content {
   _count: ContentCount
-  assignments: Assignment
+  assignment: Assignment
   content: String!
-  courses: Course
   createdAt: DateTime!
   files(cursor: FileWhereUniqueInput, distinct: [FileScalarFieldEnum!], orderBy: [FileOrderByWithRelationInput!], skip: Int, take: Int, where: FileWhereInput): [File!]!
   id: Int!
-  submissions: Submission
+  lesson: Lesson
+  submission: Submission
   updatedAt: DateTime!
 }
 
@@ -1010,25 +766,19 @@ input ContentCountOrderByAggregateInput {
 }
 
 input ContentCreateInput {
-  assignments: AssignmentCreateNestedOneWithoutContentInput
+  assignment: AssignmentCreateNestedOneWithoutContentInput
   content: String!
-  courses: CourseCreateNestedOneWithoutContentInput
   createdAt: DateTime
   files: FileCreateNestedManyWithoutContentInput
-  submissions: SubmissionCreateNestedOneWithoutContentInput
+  lesson: LessonCreateNestedOneWithoutContentInput
+  submission: SubmissionCreateNestedOneWithoutContentInput
   updatedAt: DateTime
 }
 
-input ContentCreateNestedOneWithoutAssignmentsInput {
+input ContentCreateNestedOneWithoutAssignmentInput {
   connect: ContentWhereUniqueInput
-  connectOrCreate: ContentCreateOrConnectWithoutAssignmentsInput
-  create: ContentCreateWithoutAssignmentsInput
-}
-
-input ContentCreateNestedOneWithoutCoursesInput {
-  connect: ContentWhereUniqueInput
-  connectOrCreate: ContentCreateOrConnectWithoutCoursesInput
-  create: ContentCreateWithoutCoursesInput
+  connectOrCreate: ContentCreateOrConnectWithoutAssignmentInput
+  create: ContentCreateWithoutAssignmentInput
 }
 
 input ContentCreateNestedOneWithoutFilesInput {
@@ -1037,19 +787,20 @@ input ContentCreateNestedOneWithoutFilesInput {
   create: ContentCreateWithoutFilesInput
 }
 
-input ContentCreateNestedOneWithoutSubmissionsInput {
+input ContentCreateNestedOneWithoutLessonInput {
   connect: ContentWhereUniqueInput
-  connectOrCreate: ContentCreateOrConnectWithoutSubmissionsInput
-  create: ContentCreateWithoutSubmissionsInput
+  connectOrCreate: ContentCreateOrConnectWithoutLessonInput
+  create: ContentCreateWithoutLessonInput
 }
 
-input ContentCreateOrConnectWithoutAssignmentsInput {
-  create: ContentCreateWithoutAssignmentsInput!
-  where: ContentWhereUniqueInput!
+input ContentCreateNestedOneWithoutSubmissionInput {
+  connect: ContentWhereUniqueInput
+  connectOrCreate: ContentCreateOrConnectWithoutSubmissionInput
+  create: ContentCreateWithoutSubmissionInput
 }
 
-input ContentCreateOrConnectWithoutCoursesInput {
-  create: ContentCreateWithoutCoursesInput!
+input ContentCreateOrConnectWithoutAssignmentInput {
+  create: ContentCreateWithoutAssignmentInput!
   where: ContentWhereUniqueInput!
 }
 
@@ -1058,44 +809,49 @@ input ContentCreateOrConnectWithoutFilesInput {
   where: ContentWhereUniqueInput!
 }
 
-input ContentCreateOrConnectWithoutSubmissionsInput {
-  create: ContentCreateWithoutSubmissionsInput!
+input ContentCreateOrConnectWithoutLessonInput {
+  create: ContentCreateWithoutLessonInput!
   where: ContentWhereUniqueInput!
 }
 
-input ContentCreateWithoutAssignmentsInput {
-  content: String!
-  courses: CourseCreateNestedOneWithoutContentInput
-  createdAt: DateTime
-  files: FileCreateNestedManyWithoutContentInput
-  submissions: SubmissionCreateNestedOneWithoutContentInput
-  updatedAt: DateTime
+input ContentCreateOrConnectWithoutSubmissionInput {
+  create: ContentCreateWithoutSubmissionInput!
+  where: ContentWhereUniqueInput!
 }
 
-input ContentCreateWithoutCoursesInput {
-  assignments: AssignmentCreateNestedOneWithoutContentInput
+input ContentCreateWithoutAssignmentInput {
   content: String!
   createdAt: DateTime
   files: FileCreateNestedManyWithoutContentInput
-  submissions: SubmissionCreateNestedOneWithoutContentInput
+  lesson: LessonCreateNestedOneWithoutContentInput
+  submission: SubmissionCreateNestedOneWithoutContentInput
   updatedAt: DateTime
 }
 
 input ContentCreateWithoutFilesInput {
-  assignments: AssignmentCreateNestedOneWithoutContentInput
+  assignment: AssignmentCreateNestedOneWithoutContentInput
   content: String!
-  courses: CourseCreateNestedOneWithoutContentInput
   createdAt: DateTime
-  submissions: SubmissionCreateNestedOneWithoutContentInput
+  lesson: LessonCreateNestedOneWithoutContentInput
+  submission: SubmissionCreateNestedOneWithoutContentInput
   updatedAt: DateTime
 }
 
-input ContentCreateWithoutSubmissionsInput {
-  assignments: AssignmentCreateNestedOneWithoutContentInput
+input ContentCreateWithoutLessonInput {
+  assignment: AssignmentCreateNestedOneWithoutContentInput
   content: String!
-  courses: CourseCreateNestedOneWithoutContentInput
   createdAt: DateTime
   files: FileCreateNestedManyWithoutContentInput
+  submission: SubmissionCreateNestedOneWithoutContentInput
+  updatedAt: DateTime
+}
+
+input ContentCreateWithoutSubmissionInput {
+  assignment: AssignmentCreateNestedOneWithoutContentInput
+  content: String!
+  createdAt: DateTime
+  files: FileCreateNestedManyWithoutContentInput
+  lesson: LessonCreateNestedOneWithoutContentInput
   updatedAt: DateTime
 }
 
@@ -1152,13 +908,13 @@ input ContentOrderByWithAggregationInput {
 }
 
 input ContentOrderByWithRelationInput {
-  assignments: AssignmentOrderByWithRelationInput
+  assignment: AssignmentOrderByWithRelationInput
   content: SortOrder
-  courses: CourseOrderByWithRelationInput
   createdAt: SortOrder
   files: FileOrderByRelationAggregateInput
   id: SortOrder
-  submissions: SubmissionOrderByWithRelationInput
+  lesson: LessonOrderByWithRelationInput
+  submission: SubmissionOrderByWithRelationInput
   updatedAt: SortOrder
 }
 
@@ -1193,12 +949,12 @@ input ContentSumOrderByAggregateInput {
 }
 
 input ContentUpdateInput {
-  assignments: AssignmentUpdateOneWithoutContentInput
+  assignment: AssignmentUpdateOneWithoutContentInput
   content: StringFieldUpdateOperationsInput
-  courses: CourseUpdateOneWithoutContentInput
   createdAt: DateTimeFieldUpdateOperationsInput
   files: FileUpdateManyWithoutContentInput
-  submissions: SubmissionUpdateOneWithoutContentInput
+  lesson: LessonUpdateOneWithoutContentInput
+  submission: SubmissionUpdateOneWithoutContentInput
   updatedAt: DateTimeFieldUpdateOperationsInput
 }
 
@@ -1208,28 +964,28 @@ input ContentUpdateManyMutationInput {
   updatedAt: DateTimeFieldUpdateOperationsInput
 }
 
-input ContentUpdateOneRequiredWithoutAssignmentsInput {
+input ContentUpdateOneRequiredWithoutAssignmentInput {
   connect: ContentWhereUniqueInput
-  connectOrCreate: ContentCreateOrConnectWithoutAssignmentsInput
-  create: ContentCreateWithoutAssignmentsInput
-  update: ContentUpdateWithoutAssignmentsInput
-  upsert: ContentUpsertWithoutAssignmentsInput
+  connectOrCreate: ContentCreateOrConnectWithoutAssignmentInput
+  create: ContentCreateWithoutAssignmentInput
+  update: ContentUpdateWithoutAssignmentInput
+  upsert: ContentUpsertWithoutAssignmentInput
 }
 
-input ContentUpdateOneRequiredWithoutCoursesInput {
+input ContentUpdateOneRequiredWithoutLessonInput {
   connect: ContentWhereUniqueInput
-  connectOrCreate: ContentCreateOrConnectWithoutCoursesInput
-  create: ContentCreateWithoutCoursesInput
-  update: ContentUpdateWithoutCoursesInput
-  upsert: ContentUpsertWithoutCoursesInput
+  connectOrCreate: ContentCreateOrConnectWithoutLessonInput
+  create: ContentCreateWithoutLessonInput
+  update: ContentUpdateWithoutLessonInput
+  upsert: ContentUpsertWithoutLessonInput
 }
 
-input ContentUpdateOneRequiredWithoutSubmissionsInput {
+input ContentUpdateOneRequiredWithoutSubmissionInput {
   connect: ContentWhereUniqueInput
-  connectOrCreate: ContentCreateOrConnectWithoutSubmissionsInput
-  create: ContentCreateWithoutSubmissionsInput
-  update: ContentUpdateWithoutSubmissionsInput
-  upsert: ContentUpsertWithoutSubmissionsInput
+  connectOrCreate: ContentCreateOrConnectWithoutSubmissionInput
+  create: ContentCreateWithoutSubmissionInput
+  update: ContentUpdateWithoutSubmissionInput
+  upsert: ContentUpsertWithoutSubmissionInput
 }
 
 input ContentUpdateOneWithoutFilesInput {
@@ -1242,50 +998,45 @@ input ContentUpdateOneWithoutFilesInput {
   upsert: ContentUpsertWithoutFilesInput
 }
 
-input ContentUpdateWithoutAssignmentsInput {
-  content: StringFieldUpdateOperationsInput
-  courses: CourseUpdateOneWithoutContentInput
-  createdAt: DateTimeFieldUpdateOperationsInput
-  files: FileUpdateManyWithoutContentInput
-  submissions: SubmissionUpdateOneWithoutContentInput
-  updatedAt: DateTimeFieldUpdateOperationsInput
-}
-
-input ContentUpdateWithoutCoursesInput {
-  assignments: AssignmentUpdateOneWithoutContentInput
+input ContentUpdateWithoutAssignmentInput {
   content: StringFieldUpdateOperationsInput
   createdAt: DateTimeFieldUpdateOperationsInput
   files: FileUpdateManyWithoutContentInput
-  submissions: SubmissionUpdateOneWithoutContentInput
+  lesson: LessonUpdateOneWithoutContentInput
+  submission: SubmissionUpdateOneWithoutContentInput
   updatedAt: DateTimeFieldUpdateOperationsInput
 }
 
 input ContentUpdateWithoutFilesInput {
-  assignments: AssignmentUpdateOneWithoutContentInput
+  assignment: AssignmentUpdateOneWithoutContentInput
   content: StringFieldUpdateOperationsInput
-  courses: CourseUpdateOneWithoutContentInput
   createdAt: DateTimeFieldUpdateOperationsInput
-  submissions: SubmissionUpdateOneWithoutContentInput
+  lesson: LessonUpdateOneWithoutContentInput
+  submission: SubmissionUpdateOneWithoutContentInput
   updatedAt: DateTimeFieldUpdateOperationsInput
 }
 
-input ContentUpdateWithoutSubmissionsInput {
-  assignments: AssignmentUpdateOneWithoutContentInput
+input ContentUpdateWithoutLessonInput {
+  assignment: AssignmentUpdateOneWithoutContentInput
   content: StringFieldUpdateOperationsInput
-  courses: CourseUpdateOneWithoutContentInput
   createdAt: DateTimeFieldUpdateOperationsInput
   files: FileUpdateManyWithoutContentInput
+  submission: SubmissionUpdateOneWithoutContentInput
   updatedAt: DateTimeFieldUpdateOperationsInput
 }
 
-input ContentUpsertWithoutAssignmentsInput {
-  create: ContentCreateWithoutAssignmentsInput!
-  update: ContentUpdateWithoutAssignmentsInput!
+input ContentUpdateWithoutSubmissionInput {
+  assignment: AssignmentUpdateOneWithoutContentInput
+  content: StringFieldUpdateOperationsInput
+  createdAt: DateTimeFieldUpdateOperationsInput
+  files: FileUpdateManyWithoutContentInput
+  lesson: LessonUpdateOneWithoutContentInput
+  updatedAt: DateTimeFieldUpdateOperationsInput
 }
 
-input ContentUpsertWithoutCoursesInput {
-  create: ContentCreateWithoutCoursesInput!
-  update: ContentUpdateWithoutCoursesInput!
+input ContentUpsertWithoutAssignmentInput {
+  create: ContentCreateWithoutAssignmentInput!
+  update: ContentUpdateWithoutAssignmentInput!
 }
 
 input ContentUpsertWithoutFilesInput {
@@ -1293,22 +1044,27 @@ input ContentUpsertWithoutFilesInput {
   update: ContentUpdateWithoutFilesInput!
 }
 
-input ContentUpsertWithoutSubmissionsInput {
-  create: ContentCreateWithoutSubmissionsInput!
-  update: ContentUpdateWithoutSubmissionsInput!
+input ContentUpsertWithoutLessonInput {
+  create: ContentCreateWithoutLessonInput!
+  update: ContentUpdateWithoutLessonInput!
+}
+
+input ContentUpsertWithoutSubmissionInput {
+  create: ContentCreateWithoutSubmissionInput!
+  update: ContentUpdateWithoutSubmissionInput!
 }
 
 input ContentWhereInput {
   AND: [ContentWhereInput!]
   NOT: [ContentWhereInput!]
   OR: [ContentWhereInput!]
-  assignments: AssignmentRelationFilter
+  assignment: AssignmentRelationFilter
   content: StringFilter
-  courses: CourseRelationFilter
   createdAt: DateTimeFilter
   files: FileListRelationFilter
   id: IntFilter
-  submissions: SubmissionRelationFilter
+  lesson: LessonRelationFilter
+  submission: SubmissionRelationFilter
   updatedAt: DateTimeFilter
 }
 
@@ -1319,12 +1075,13 @@ input ContentWhereUniqueInput {
 type Course {
   _count: CourseCount
   assignments(cursor: AssignmentWhereUniqueInput, distinct: [AssignmentScalarFieldEnum!], orderBy: [AssignmentOrderByWithRelationInput!], skip: Int, take: Int, where: AssignmentWhereInput): [Assignment!]!
-  content: Content!
-  contentId: Int!
   createdAt: DateTime!
-  enabled: Boolean!
+  description: String
+  grade: Int!
   id: Int!
+  lessons(cursor: LessonWhereUniqueInput, distinct: [LessonScalarFieldEnum!], orderBy: [LessonOrderByWithRelationInput!], skip: Int, take: Int, where: LessonWhereInput): [Lesson!]!
   meetings(cursor: MeetingWhereUniqueInput, distinct: [MeetingScalarFieldEnum!], orderBy: [MeetingOrderByWithRelationInput!], skip: Int, take: Int, where: MeetingWhereInput): [Meeting!]!
+  published: Boolean!
   teacher: Teacher
   teacherId: Int
   title: String!
@@ -1334,14 +1091,14 @@ type Course {
 }
 
 type CourseAvgAggregate {
-  contentId: Float
+  grade: Float
   id: Float
   teacherId: Float
   topicId: Float
 }
 
 input CourseAvgOrderByAggregateInput {
-  contentId: SortOrder
+  grade: SortOrder
   id: SortOrder
   teacherId: SortOrder
   topicId: SortOrder
@@ -1349,15 +1106,17 @@ input CourseAvgOrderByAggregateInput {
 
 type CourseCount {
   assignments: Int!
+  lessons: Int!
   meetings: Int!
 }
 
 type CourseCountAggregate {
   _all: Int!
-  contentId: Int!
   createdAt: Int!
-  enabled: Int!
+  description: Int!
+  grade: Int!
   id: Int!
+  published: Int!
   teacherId: Int!
   title: Int!
   topicId: Int!
@@ -1365,10 +1124,11 @@ type CourseCountAggregate {
 }
 
 input CourseCountOrderByAggregateInput {
-  contentId: SortOrder
   createdAt: SortOrder
-  enabled: SortOrder
+  description: SortOrder
+  grade: SortOrder
   id: SortOrder
+  published: SortOrder
   teacherId: SortOrder
   title: SortOrder
   topicId: SortOrder
@@ -1377,10 +1137,12 @@ input CourseCountOrderByAggregateInput {
 
 input CourseCreateInput {
   assignments: AssignmentCreateNestedManyWithoutCourseInput
-  content: ContentCreateNestedOneWithoutCoursesInput!
   createdAt: DateTime
-  enabled: Boolean!
+  description: String
+  grade: Int!
+  lessons: LessonCreateNestedManyWithoutLessonsInput
   meetings: MeetingCreateNestedManyWithoutCourseInput
+  published: Boolean
   teacher: TeacherCreateNestedOneWithoutCoursesInput
   title: String!
   topic: TopicCreateNestedOneWithoutCoursesInput
@@ -1405,10 +1167,10 @@ input CourseCreateNestedOneWithoutAssignmentsInput {
   create: CourseCreateWithoutAssignmentsInput
 }
 
-input CourseCreateNestedOneWithoutContentInput {
+input CourseCreateNestedOneWithoutLessonsInput {
   connect: CourseWhereUniqueInput
-  connectOrCreate: CourseCreateOrConnectWithoutContentInput
-  create: CourseCreateWithoutContentInput
+  connectOrCreate: CourseCreateOrConnectWithoutLessonsInput
+  create: CourseCreateWithoutLessonsInput
 }
 
 input CourseCreateNestedOneWithoutMeetingsInput {
@@ -1422,8 +1184,8 @@ input CourseCreateOrConnectWithoutAssignmentsInput {
   where: CourseWhereUniqueInput!
 }
 
-input CourseCreateOrConnectWithoutContentInput {
-  create: CourseCreateWithoutContentInput!
+input CourseCreateOrConnectWithoutLessonsInput {
+  create: CourseCreateWithoutLessonsInput!
   where: CourseWhereUniqueInput!
 }
 
@@ -1443,21 +1205,25 @@ input CourseCreateOrConnectWithoutTopicInput {
 }
 
 input CourseCreateWithoutAssignmentsInput {
-  content: ContentCreateNestedOneWithoutCoursesInput!
   createdAt: DateTime
-  enabled: Boolean!
+  description: String
+  grade: Int!
+  lessons: LessonCreateNestedManyWithoutLessonsInput
   meetings: MeetingCreateNestedManyWithoutCourseInput
+  published: Boolean
   teacher: TeacherCreateNestedOneWithoutCoursesInput
   title: String!
   topic: TopicCreateNestedOneWithoutCoursesInput
   updatedAt: DateTime
 }
 
-input CourseCreateWithoutContentInput {
+input CourseCreateWithoutLessonsInput {
   assignments: AssignmentCreateNestedManyWithoutCourseInput
   createdAt: DateTime
-  enabled: Boolean!
+  description: String
+  grade: Int!
   meetings: MeetingCreateNestedManyWithoutCourseInput
+  published: Boolean
   teacher: TeacherCreateNestedOneWithoutCoursesInput
   title: String!
   topic: TopicCreateNestedOneWithoutCoursesInput
@@ -1466,9 +1232,11 @@ input CourseCreateWithoutContentInput {
 
 input CourseCreateWithoutMeetingsInput {
   assignments: AssignmentCreateNestedManyWithoutCourseInput
-  content: ContentCreateNestedOneWithoutCoursesInput!
   createdAt: DateTime
-  enabled: Boolean!
+  description: String
+  grade: Int!
+  lessons: LessonCreateNestedManyWithoutLessonsInput
+  published: Boolean
   teacher: TeacherCreateNestedOneWithoutCoursesInput
   title: String!
   topic: TopicCreateNestedOneWithoutCoursesInput
@@ -1477,10 +1245,12 @@ input CourseCreateWithoutMeetingsInput {
 
 input CourseCreateWithoutTeacherInput {
   assignments: AssignmentCreateNestedManyWithoutCourseInput
-  content: ContentCreateNestedOneWithoutCoursesInput!
   createdAt: DateTime
-  enabled: Boolean!
+  description: String
+  grade: Int!
+  lessons: LessonCreateNestedManyWithoutLessonsInput
   meetings: MeetingCreateNestedManyWithoutCourseInput
+  published: Boolean
   title: String!
   topic: TopicCreateNestedOneWithoutCoursesInput
   updatedAt: DateTime
@@ -1488,10 +1258,12 @@ input CourseCreateWithoutTeacherInput {
 
 input CourseCreateWithoutTopicInput {
   assignments: AssignmentCreateNestedManyWithoutCourseInput
-  content: ContentCreateNestedOneWithoutCoursesInput!
   createdAt: DateTime
-  enabled: Boolean!
+  description: String
+  grade: Int!
+  lessons: LessonCreateNestedManyWithoutLessonsInput
   meetings: MeetingCreateNestedManyWithoutCourseInput
+  published: Boolean
   teacher: TeacherCreateNestedOneWithoutCoursesInput
   title: String!
   updatedAt: DateTime
@@ -1503,10 +1275,11 @@ type CourseGroupBy {
   _max: CourseMaxAggregate
   _min: CourseMinAggregate
   _sum: CourseSumAggregate
-  contentId: Int!
   createdAt: DateTime!
-  enabled: Boolean!
+  description: String
+  grade: Int!
   id: Int!
+  published: Boolean!
   teacherId: Int
   title: String!
   topicId: Int
@@ -1520,10 +1293,11 @@ input CourseListRelationFilter {
 }
 
 type CourseMaxAggregate {
-  contentId: Int
   createdAt: DateTime
-  enabled: Boolean
+  description: String
+  grade: Int
   id: Int
+  published: Boolean
   teacherId: Int
   title: String
   topicId: Int
@@ -1531,10 +1305,11 @@ type CourseMaxAggregate {
 }
 
 input CourseMaxOrderByAggregateInput {
-  contentId: SortOrder
   createdAt: SortOrder
-  enabled: SortOrder
+  description: SortOrder
+  grade: SortOrder
   id: SortOrder
+  published: SortOrder
   teacherId: SortOrder
   title: SortOrder
   topicId: SortOrder
@@ -1542,10 +1317,11 @@ input CourseMaxOrderByAggregateInput {
 }
 
 type CourseMinAggregate {
-  contentId: Int
   createdAt: DateTime
-  enabled: Boolean
+  description: String
+  grade: Int
   id: Int
+  published: Boolean
   teacherId: Int
   title: String
   topicId: Int
@@ -1553,10 +1329,11 @@ type CourseMinAggregate {
 }
 
 input CourseMinOrderByAggregateInput {
-  contentId: SortOrder
   createdAt: SortOrder
-  enabled: SortOrder
+  description: SortOrder
+  grade: SortOrder
   id: SortOrder
+  published: SortOrder
   teacherId: SortOrder
   title: SortOrder
   topicId: SortOrder
@@ -1573,10 +1350,11 @@ input CourseOrderByWithAggregationInput {
   _max: CourseMaxOrderByAggregateInput
   _min: CourseMinOrderByAggregateInput
   _sum: CourseSumOrderByAggregateInput
-  contentId: SortOrder
   createdAt: SortOrder
-  enabled: SortOrder
+  description: SortOrder
+  grade: SortOrder
   id: SortOrder
+  published: SortOrder
   teacherId: SortOrder
   title: SortOrder
   topicId: SortOrder
@@ -1585,12 +1363,13 @@ input CourseOrderByWithAggregationInput {
 
 input CourseOrderByWithRelationInput {
   assignments: AssignmentOrderByRelationAggregateInput
-  content: ContentOrderByWithRelationInput
-  contentId: SortOrder
   createdAt: SortOrder
-  enabled: SortOrder
+  description: SortOrder
+  grade: SortOrder
   id: SortOrder
+  lessons: LessonOrderByRelationAggregateInput
   meetings: MeetingOrderByRelationAggregateInput
+  published: SortOrder
   teacher: TeacherOrderByWithRelationInput
   teacherId: SortOrder
   title: SortOrder
@@ -1605,10 +1384,11 @@ input CourseRelationFilter {
 }
 
 enum CourseScalarFieldEnum {
-  contentId
   createdAt
-  enabled
+  description
+  grade
   id
+  published
   teacherId
   title
   topicId
@@ -1619,10 +1399,11 @@ input CourseScalarWhereInput {
   AND: [CourseScalarWhereInput!]
   NOT: [CourseScalarWhereInput!]
   OR: [CourseScalarWhereInput!]
-  contentId: IntFilter
   createdAt: DateTimeFilter
-  enabled: BoolFilter
+  description: StringNullableFilter
+  grade: IntFilter
   id: IntFilter
+  published: BoolFilter
   teacherId: IntNullableFilter
   title: StringFilter
   topicId: IntNullableFilter
@@ -1633,10 +1414,11 @@ input CourseScalarWhereWithAggregatesInput {
   AND: [CourseScalarWhereWithAggregatesInput!]
   NOT: [CourseScalarWhereWithAggregatesInput!]
   OR: [CourseScalarWhereWithAggregatesInput!]
-  contentId: IntWithAggregatesFilter
   createdAt: DateTimeWithAggregatesFilter
-  enabled: BoolWithAggregatesFilter
+  description: StringNullableWithAggregatesFilter
+  grade: IntWithAggregatesFilter
   id: IntWithAggregatesFilter
+  published: BoolWithAggregatesFilter
   teacherId: IntNullableWithAggregatesFilter
   title: StringWithAggregatesFilter
   topicId: IntNullableWithAggregatesFilter
@@ -1644,14 +1426,14 @@ input CourseScalarWhereWithAggregatesInput {
 }
 
 type CourseSumAggregate {
-  contentId: Int
+  grade: Int
   id: Int
   teacherId: Int
   topicId: Int
 }
 
 input CourseSumOrderByAggregateInput {
-  contentId: SortOrder
+  grade: SortOrder
   id: SortOrder
   teacherId: SortOrder
   topicId: SortOrder
@@ -1659,10 +1441,12 @@ input CourseSumOrderByAggregateInput {
 
 input CourseUpdateInput {
   assignments: AssignmentUpdateManyWithoutCourseInput
-  content: ContentUpdateOneRequiredWithoutCoursesInput
   createdAt: DateTimeFieldUpdateOperationsInput
-  enabled: BoolFieldUpdateOperationsInput
+  description: NullableStringFieldUpdateOperationsInput
+  grade: IntFieldUpdateOperationsInput
+  lessons: LessonUpdateManyWithoutLessonsInput
   meetings: MeetingUpdateManyWithoutCourseInput
+  published: BoolFieldUpdateOperationsInput
   teacher: TeacherUpdateOneWithoutCoursesInput
   title: StringFieldUpdateOperationsInput
   topic: TopicUpdateOneWithoutCoursesInput
@@ -1671,7 +1455,9 @@ input CourseUpdateInput {
 
 input CourseUpdateManyMutationInput {
   createdAt: DateTimeFieldUpdateOperationsInput
-  enabled: BoolFieldUpdateOperationsInput
+  description: NullableStringFieldUpdateOperationsInput
+  grade: IntFieldUpdateOperationsInput
+  published: BoolFieldUpdateOperationsInput
   title: StringFieldUpdateOperationsInput
   updatedAt: DateTimeFieldUpdateOperationsInput
 }
@@ -1722,14 +1508,14 @@ input CourseUpdateOneWithoutAssignmentsInput {
   upsert: CourseUpsertWithoutAssignmentsInput
 }
 
-input CourseUpdateOneWithoutContentInput {
+input CourseUpdateOneWithoutLessonsInput {
   connect: CourseWhereUniqueInput
-  connectOrCreate: CourseCreateOrConnectWithoutContentInput
-  create: CourseCreateWithoutContentInput
+  connectOrCreate: CourseCreateOrConnectWithoutLessonsInput
+  create: CourseCreateWithoutLessonsInput
   delete: Boolean
   disconnect: Boolean
-  update: CourseUpdateWithoutContentInput
-  upsert: CourseUpsertWithoutContentInput
+  update: CourseUpdateWithoutLessonsInput
+  upsert: CourseUpsertWithoutLessonsInput
 }
 
 input CourseUpdateOneWithoutMeetingsInput {
@@ -1753,21 +1539,25 @@ input CourseUpdateWithWhereUniqueWithoutTopicInput {
 }
 
 input CourseUpdateWithoutAssignmentsInput {
-  content: ContentUpdateOneRequiredWithoutCoursesInput
   createdAt: DateTimeFieldUpdateOperationsInput
-  enabled: BoolFieldUpdateOperationsInput
+  description: NullableStringFieldUpdateOperationsInput
+  grade: IntFieldUpdateOperationsInput
+  lessons: LessonUpdateManyWithoutLessonsInput
   meetings: MeetingUpdateManyWithoutCourseInput
+  published: BoolFieldUpdateOperationsInput
   teacher: TeacherUpdateOneWithoutCoursesInput
   title: StringFieldUpdateOperationsInput
   topic: TopicUpdateOneWithoutCoursesInput
   updatedAt: DateTimeFieldUpdateOperationsInput
 }
 
-input CourseUpdateWithoutContentInput {
+input CourseUpdateWithoutLessonsInput {
   assignments: AssignmentUpdateManyWithoutCourseInput
   createdAt: DateTimeFieldUpdateOperationsInput
-  enabled: BoolFieldUpdateOperationsInput
+  description: NullableStringFieldUpdateOperationsInput
+  grade: IntFieldUpdateOperationsInput
   meetings: MeetingUpdateManyWithoutCourseInput
+  published: BoolFieldUpdateOperationsInput
   teacher: TeacherUpdateOneWithoutCoursesInput
   title: StringFieldUpdateOperationsInput
   topic: TopicUpdateOneWithoutCoursesInput
@@ -1776,9 +1566,11 @@ input CourseUpdateWithoutContentInput {
 
 input CourseUpdateWithoutMeetingsInput {
   assignments: AssignmentUpdateManyWithoutCourseInput
-  content: ContentUpdateOneRequiredWithoutCoursesInput
   createdAt: DateTimeFieldUpdateOperationsInput
-  enabled: BoolFieldUpdateOperationsInput
+  description: NullableStringFieldUpdateOperationsInput
+  grade: IntFieldUpdateOperationsInput
+  lessons: LessonUpdateManyWithoutLessonsInput
+  published: BoolFieldUpdateOperationsInput
   teacher: TeacherUpdateOneWithoutCoursesInput
   title: StringFieldUpdateOperationsInput
   topic: TopicUpdateOneWithoutCoursesInput
@@ -1787,10 +1579,12 @@ input CourseUpdateWithoutMeetingsInput {
 
 input CourseUpdateWithoutTeacherInput {
   assignments: AssignmentUpdateManyWithoutCourseInput
-  content: ContentUpdateOneRequiredWithoutCoursesInput
   createdAt: DateTimeFieldUpdateOperationsInput
-  enabled: BoolFieldUpdateOperationsInput
+  description: NullableStringFieldUpdateOperationsInput
+  grade: IntFieldUpdateOperationsInput
+  lessons: LessonUpdateManyWithoutLessonsInput
   meetings: MeetingUpdateManyWithoutCourseInput
+  published: BoolFieldUpdateOperationsInput
   title: StringFieldUpdateOperationsInput
   topic: TopicUpdateOneWithoutCoursesInput
   updatedAt: DateTimeFieldUpdateOperationsInput
@@ -1798,10 +1592,12 @@ input CourseUpdateWithoutTeacherInput {
 
 input CourseUpdateWithoutTopicInput {
   assignments: AssignmentUpdateManyWithoutCourseInput
-  content: ContentUpdateOneRequiredWithoutCoursesInput
   createdAt: DateTimeFieldUpdateOperationsInput
-  enabled: BoolFieldUpdateOperationsInput
+  description: NullableStringFieldUpdateOperationsInput
+  grade: IntFieldUpdateOperationsInput
+  lessons: LessonUpdateManyWithoutLessonsInput
   meetings: MeetingUpdateManyWithoutCourseInput
+  published: BoolFieldUpdateOperationsInput
   teacher: TeacherUpdateOneWithoutCoursesInput
   title: StringFieldUpdateOperationsInput
   updatedAt: DateTimeFieldUpdateOperationsInput
@@ -1824,9 +1620,9 @@ input CourseUpsertWithoutAssignmentsInput {
   update: CourseUpdateWithoutAssignmentsInput!
 }
 
-input CourseUpsertWithoutContentInput {
-  create: CourseCreateWithoutContentInput!
-  update: CourseUpdateWithoutContentInput!
+input CourseUpsertWithoutLessonsInput {
+  create: CourseCreateWithoutLessonsInput!
+  update: CourseUpdateWithoutLessonsInput!
 }
 
 input CourseUpsertWithoutMeetingsInput {
@@ -1839,12 +1635,13 @@ input CourseWhereInput {
   NOT: [CourseWhereInput!]
   OR: [CourseWhereInput!]
   assignments: AssignmentListRelationFilter
-  content: ContentRelationFilter
-  contentId: IntFilter
   createdAt: DateTimeFilter
-  enabled: BoolFilter
+  description: StringNullableFilter
+  grade: IntFilter
   id: IntFilter
+  lessons: LessonListRelationFilter
   meetings: MeetingListRelationFilter
+  published: BoolFilter
   teacher: TeacherRelationFilter
   teacherId: IntNullableFilter
   title: StringFilter
@@ -1854,7 +1651,6 @@ input CourseWhereInput {
 }
 
 input CourseWhereUniqueInput {
-  contentId: Int
   id: Int
 }
 
@@ -1892,166 +1688,166 @@ input DateTimeWithAggregatesFilter {
   notIn: [DateTime!]
 }
 
-type Departement {
-  _count: DepartementCount
+type Department {
+  _count: DepartmentCount
   id: Int!
   name: String!
   topics(cursor: TopicWhereUniqueInput, distinct: [TopicScalarFieldEnum!], orderBy: [TopicOrderByWithRelationInput!], skip: Int, take: Int, where: TopicWhereInput): [Topic!]!
 }
 
-type DepartementAvgAggregate {
+type DepartmentAvgAggregate {
   id: Float
 }
 
-input DepartementAvgOrderByAggregateInput {
+input DepartmentAvgOrderByAggregateInput {
   id: SortOrder
 }
 
-type DepartementCount {
+type DepartmentCount {
   topics: Int!
 }
 
-type DepartementCountAggregate {
+type DepartmentCountAggregate {
   _all: Int!
   id: Int!
   name: Int!
 }
 
-input DepartementCountOrderByAggregateInput {
+input DepartmentCountOrderByAggregateInput {
   id: SortOrder
   name: SortOrder
 }
 
-input DepartementCreateInput {
+input DepartmentCreateInput {
   name: String!
-  topics: TopicCreateNestedManyWithoutDepartmenetInput
+  topics: TopicCreateNestedManyWithoutDepartmentInput
 }
 
-input DepartementCreateNestedOneWithoutTopicsInput {
-  connect: DepartementWhereUniqueInput
-  connectOrCreate: DepartementCreateOrConnectWithoutTopicsInput
-  create: DepartementCreateWithoutTopicsInput
+input DepartmentCreateNestedOneWithoutTopicsInput {
+  connect: DepartmentWhereUniqueInput
+  connectOrCreate: DepartmentCreateOrConnectWithoutTopicsInput
+  create: DepartmentCreateWithoutTopicsInput
 }
 
-input DepartementCreateOrConnectWithoutTopicsInput {
-  create: DepartementCreateWithoutTopicsInput!
-  where: DepartementWhereUniqueInput!
+input DepartmentCreateOrConnectWithoutTopicsInput {
+  create: DepartmentCreateWithoutTopicsInput!
+  where: DepartmentWhereUniqueInput!
 }
 
-input DepartementCreateWithoutTopicsInput {
+input DepartmentCreateWithoutTopicsInput {
   name: String!
 }
 
-type DepartementGroupBy {
-  _avg: DepartementAvgAggregate
-  _count: DepartementCountAggregate
-  _max: DepartementMaxAggregate
-  _min: DepartementMinAggregate
-  _sum: DepartementSumAggregate
+type DepartmentGroupBy {
+  _avg: DepartmentAvgAggregate
+  _count: DepartmentCountAggregate
+  _max: DepartmentMaxAggregate
+  _min: DepartmentMinAggregate
+  _sum: DepartmentSumAggregate
   id: Int!
   name: String!
 }
 
-type DepartementMaxAggregate {
+type DepartmentMaxAggregate {
   id: Int
   name: String
 }
 
-input DepartementMaxOrderByAggregateInput {
+input DepartmentMaxOrderByAggregateInput {
   id: SortOrder
   name: SortOrder
 }
 
-type DepartementMinAggregate {
+type DepartmentMinAggregate {
   id: Int
   name: String
 }
 
-input DepartementMinOrderByAggregateInput {
+input DepartmentMinOrderByAggregateInput {
   id: SortOrder
   name: SortOrder
 }
 
-input DepartementOrderByWithAggregationInput {
-  _avg: DepartementAvgOrderByAggregateInput
-  _count: DepartementCountOrderByAggregateInput
-  _max: DepartementMaxOrderByAggregateInput
-  _min: DepartementMinOrderByAggregateInput
-  _sum: DepartementSumOrderByAggregateInput
+input DepartmentOrderByWithAggregationInput {
+  _avg: DepartmentAvgOrderByAggregateInput
+  _count: DepartmentCountOrderByAggregateInput
+  _max: DepartmentMaxOrderByAggregateInput
+  _min: DepartmentMinOrderByAggregateInput
+  _sum: DepartmentSumOrderByAggregateInput
   id: SortOrder
   name: SortOrder
 }
 
-input DepartementOrderByWithRelationInput {
+input DepartmentOrderByWithRelationInput {
   id: SortOrder
   name: SortOrder
   topics: TopicOrderByRelationAggregateInput
 }
 
-input DepartementRelationFilter {
-  is: DepartementWhereInput
-  isNot: DepartementWhereInput
+input DepartmentRelationFilter {
+  is: DepartmentWhereInput
+  isNot: DepartmentWhereInput
 }
 
-enum DepartementScalarFieldEnum {
+enum DepartmentScalarFieldEnum {
   id
   name
 }
 
-input DepartementScalarWhereWithAggregatesInput {
-  AND: [DepartementScalarWhereWithAggregatesInput!]
-  NOT: [DepartementScalarWhereWithAggregatesInput!]
-  OR: [DepartementScalarWhereWithAggregatesInput!]
+input DepartmentScalarWhereWithAggregatesInput {
+  AND: [DepartmentScalarWhereWithAggregatesInput!]
+  NOT: [DepartmentScalarWhereWithAggregatesInput!]
+  OR: [DepartmentScalarWhereWithAggregatesInput!]
   id: IntWithAggregatesFilter
   name: StringWithAggregatesFilter
 }
 
-type DepartementSumAggregate {
+type DepartmentSumAggregate {
   id: Int
 }
 
-input DepartementSumOrderByAggregateInput {
+input DepartmentSumOrderByAggregateInput {
   id: SortOrder
 }
 
-input DepartementUpdateInput {
+input DepartmentUpdateInput {
   name: StringFieldUpdateOperationsInput
-  topics: TopicUpdateManyWithoutDepartmenetInput
+  topics: TopicUpdateManyWithoutDepartmentInput
 }
 
-input DepartementUpdateManyMutationInput {
+input DepartmentUpdateManyMutationInput {
   name: StringFieldUpdateOperationsInput
 }
 
-input DepartementUpdateOneWithoutTopicsInput {
-  connect: DepartementWhereUniqueInput
-  connectOrCreate: DepartementCreateOrConnectWithoutTopicsInput
-  create: DepartementCreateWithoutTopicsInput
+input DepartmentUpdateOneWithoutTopicsInput {
+  connect: DepartmentWhereUniqueInput
+  connectOrCreate: DepartmentCreateOrConnectWithoutTopicsInput
+  create: DepartmentCreateWithoutTopicsInput
   delete: Boolean
   disconnect: Boolean
-  update: DepartementUpdateWithoutTopicsInput
-  upsert: DepartementUpsertWithoutTopicsInput
+  update: DepartmentUpdateWithoutTopicsInput
+  upsert: DepartmentUpsertWithoutTopicsInput
 }
 
-input DepartementUpdateWithoutTopicsInput {
+input DepartmentUpdateWithoutTopicsInput {
   name: StringFieldUpdateOperationsInput
 }
 
-input DepartementUpsertWithoutTopicsInput {
-  create: DepartementCreateWithoutTopicsInput!
-  update: DepartementUpdateWithoutTopicsInput!
+input DepartmentUpsertWithoutTopicsInput {
+  create: DepartmentCreateWithoutTopicsInput!
+  update: DepartmentUpdateWithoutTopicsInput!
 }
 
-input DepartementWhereInput {
-  AND: [DepartementWhereInput!]
-  NOT: [DepartementWhereInput!]
-  OR: [DepartementWhereInput!]
+input DepartmentWhereInput {
+  AND: [DepartmentWhereInput!]
+  NOT: [DepartmentWhereInput!]
+  OR: [DepartmentWhereInput!]
   id: IntFilter
   name: StringFilter
   topics: TopicListRelationFilter
 }
 
-input DepartementWhereUniqueInput {
+input DepartmentWhereUniqueInput {
   id: Int
 }
 
@@ -2377,12 +2173,325 @@ input IntWithAggregatesFilter {
   notIn: [Int!]
 }
 
+type Lesson {
+  content: Content!
+  contentId: Int!
+  createdAt: DateTime!
+  id: Int!
+  lessons: Course
+  lessonsId: Int
+  published: Boolean!
+  updatedAt: DateTime!
+}
+
+type LessonAvgAggregate {
+  contentId: Float
+  id: Float
+  lessonsId: Float
+}
+
+input LessonAvgOrderByAggregateInput {
+  contentId: SortOrder
+  id: SortOrder
+  lessonsId: SortOrder
+}
+
+type LessonCountAggregate {
+  _all: Int!
+  contentId: Int!
+  createdAt: Int!
+  id: Int!
+  lessonsId: Int!
+  published: Int!
+  updatedAt: Int!
+}
+
+input LessonCountOrderByAggregateInput {
+  contentId: SortOrder
+  createdAt: SortOrder
+  id: SortOrder
+  lessonsId: SortOrder
+  published: SortOrder
+  updatedAt: SortOrder
+}
+
+input LessonCreateInput {
+  content: ContentCreateNestedOneWithoutLessonInput!
+  createdAt: DateTime
+  lessons: CourseCreateNestedOneWithoutLessonsInput
+  published: Boolean
+  updatedAt: DateTime
+}
+
+input LessonCreateNestedManyWithoutLessonsInput {
+  connect: [LessonWhereUniqueInput!]
+  connectOrCreate: [LessonCreateOrConnectWithoutLessonsInput!]
+  create: [LessonCreateWithoutLessonsInput!]
+}
+
+input LessonCreateNestedOneWithoutContentInput {
+  connect: LessonWhereUniqueInput
+  connectOrCreate: LessonCreateOrConnectWithoutContentInput
+  create: LessonCreateWithoutContentInput
+}
+
+input LessonCreateOrConnectWithoutContentInput {
+  create: LessonCreateWithoutContentInput!
+  where: LessonWhereUniqueInput!
+}
+
+input LessonCreateOrConnectWithoutLessonsInput {
+  create: LessonCreateWithoutLessonsInput!
+  where: LessonWhereUniqueInput!
+}
+
+input LessonCreateWithoutContentInput {
+  createdAt: DateTime
+  lessons: CourseCreateNestedOneWithoutLessonsInput
+  published: Boolean
+  updatedAt: DateTime
+}
+
+input LessonCreateWithoutLessonsInput {
+  content: ContentCreateNestedOneWithoutLessonInput!
+  createdAt: DateTime
+  published: Boolean
+  updatedAt: DateTime
+}
+
+type LessonGroupBy {
+  _avg: LessonAvgAggregate
+  _count: LessonCountAggregate
+  _max: LessonMaxAggregate
+  _min: LessonMinAggregate
+  _sum: LessonSumAggregate
+  contentId: Int!
+  createdAt: DateTime!
+  id: Int!
+  lessonsId: Int
+  published: Boolean!
+  updatedAt: DateTime!
+}
+
+input LessonListRelationFilter {
+  every: LessonWhereInput
+  none: LessonWhereInput
+  some: LessonWhereInput
+}
+
+type LessonMaxAggregate {
+  contentId: Int
+  createdAt: DateTime
+  id: Int
+  lessonsId: Int
+  published: Boolean
+  updatedAt: DateTime
+}
+
+input LessonMaxOrderByAggregateInput {
+  contentId: SortOrder
+  createdAt: SortOrder
+  id: SortOrder
+  lessonsId: SortOrder
+  published: SortOrder
+  updatedAt: SortOrder
+}
+
+type LessonMinAggregate {
+  contentId: Int
+  createdAt: DateTime
+  id: Int
+  lessonsId: Int
+  published: Boolean
+  updatedAt: DateTime
+}
+
+input LessonMinOrderByAggregateInput {
+  contentId: SortOrder
+  createdAt: SortOrder
+  id: SortOrder
+  lessonsId: SortOrder
+  published: SortOrder
+  updatedAt: SortOrder
+}
+
+input LessonOrderByRelationAggregateInput {
+  _count: SortOrder
+}
+
+input LessonOrderByWithAggregationInput {
+  _avg: LessonAvgOrderByAggregateInput
+  _count: LessonCountOrderByAggregateInput
+  _max: LessonMaxOrderByAggregateInput
+  _min: LessonMinOrderByAggregateInput
+  _sum: LessonSumOrderByAggregateInput
+  contentId: SortOrder
+  createdAt: SortOrder
+  id: SortOrder
+  lessonsId: SortOrder
+  published: SortOrder
+  updatedAt: SortOrder
+}
+
+input LessonOrderByWithRelationInput {
+  content: ContentOrderByWithRelationInput
+  contentId: SortOrder
+  createdAt: SortOrder
+  id: SortOrder
+  lessons: CourseOrderByWithRelationInput
+  lessonsId: SortOrder
+  published: SortOrder
+  updatedAt: SortOrder
+}
+
+input LessonRelationFilter {
+  is: LessonWhereInput
+  isNot: LessonWhereInput
+}
+
+enum LessonScalarFieldEnum {
+  contentId
+  createdAt
+  id
+  lessonsId
+  published
+  updatedAt
+}
+
+input LessonScalarWhereInput {
+  AND: [LessonScalarWhereInput!]
+  NOT: [LessonScalarWhereInput!]
+  OR: [LessonScalarWhereInput!]
+  contentId: IntFilter
+  createdAt: DateTimeFilter
+  id: IntFilter
+  lessonsId: IntNullableFilter
+  published: BoolFilter
+  updatedAt: DateTimeFilter
+}
+
+input LessonScalarWhereWithAggregatesInput {
+  AND: [LessonScalarWhereWithAggregatesInput!]
+  NOT: [LessonScalarWhereWithAggregatesInput!]
+  OR: [LessonScalarWhereWithAggregatesInput!]
+  contentId: IntWithAggregatesFilter
+  createdAt: DateTimeWithAggregatesFilter
+  id: IntWithAggregatesFilter
+  lessonsId: IntNullableWithAggregatesFilter
+  published: BoolWithAggregatesFilter
+  updatedAt: DateTimeWithAggregatesFilter
+}
+
+type LessonSumAggregate {
+  contentId: Int
+  id: Int
+  lessonsId: Int
+}
+
+input LessonSumOrderByAggregateInput {
+  contentId: SortOrder
+  id: SortOrder
+  lessonsId: SortOrder
+}
+
+input LessonUpdateInput {
+  content: ContentUpdateOneRequiredWithoutLessonInput
+  createdAt: DateTimeFieldUpdateOperationsInput
+  lessons: CourseUpdateOneWithoutLessonsInput
+  published: BoolFieldUpdateOperationsInput
+  updatedAt: DateTimeFieldUpdateOperationsInput
+}
+
+input LessonUpdateManyMutationInput {
+  createdAt: DateTimeFieldUpdateOperationsInput
+  published: BoolFieldUpdateOperationsInput
+  updatedAt: DateTimeFieldUpdateOperationsInput
+}
+
+input LessonUpdateManyWithWhereWithoutLessonsInput {
+  data: LessonUpdateManyMutationInput!
+  where: LessonScalarWhereInput!
+}
+
+input LessonUpdateManyWithoutLessonsInput {
+  connect: [LessonWhereUniqueInput!]
+  connectOrCreate: [LessonCreateOrConnectWithoutLessonsInput!]
+  create: [LessonCreateWithoutLessonsInput!]
+  delete: [LessonWhereUniqueInput!]
+  deleteMany: [LessonScalarWhereInput!]
+  disconnect: [LessonWhereUniqueInput!]
+  set: [LessonWhereUniqueInput!]
+  update: [LessonUpdateWithWhereUniqueWithoutLessonsInput!]
+  updateMany: [LessonUpdateManyWithWhereWithoutLessonsInput!]
+  upsert: [LessonUpsertWithWhereUniqueWithoutLessonsInput!]
+}
+
+input LessonUpdateOneWithoutContentInput {
+  connect: LessonWhereUniqueInput
+  connectOrCreate: LessonCreateOrConnectWithoutContentInput
+  create: LessonCreateWithoutContentInput
+  delete: Boolean
+  disconnect: Boolean
+  update: LessonUpdateWithoutContentInput
+  upsert: LessonUpsertWithoutContentInput
+}
+
+input LessonUpdateWithWhereUniqueWithoutLessonsInput {
+  data: LessonUpdateWithoutLessonsInput!
+  where: LessonWhereUniqueInput!
+}
+
+input LessonUpdateWithoutContentInput {
+  createdAt: DateTimeFieldUpdateOperationsInput
+  lessons: CourseUpdateOneWithoutLessonsInput
+  published: BoolFieldUpdateOperationsInput
+  updatedAt: DateTimeFieldUpdateOperationsInput
+}
+
+input LessonUpdateWithoutLessonsInput {
+  content: ContentUpdateOneRequiredWithoutLessonInput
+  createdAt: DateTimeFieldUpdateOperationsInput
+  published: BoolFieldUpdateOperationsInput
+  updatedAt: DateTimeFieldUpdateOperationsInput
+}
+
+input LessonUpsertWithWhereUniqueWithoutLessonsInput {
+  create: LessonCreateWithoutLessonsInput!
+  update: LessonUpdateWithoutLessonsInput!
+  where: LessonWhereUniqueInput!
+}
+
+input LessonUpsertWithoutContentInput {
+  create: LessonCreateWithoutContentInput!
+  update: LessonUpdateWithoutContentInput!
+}
+
+input LessonWhereInput {
+  AND: [LessonWhereInput!]
+  NOT: [LessonWhereInput!]
+  OR: [LessonWhereInput!]
+  content: ContentRelationFilter
+  contentId: IntFilter
+  createdAt: DateTimeFilter
+  id: IntFilter
+  lessons: CourseRelationFilter
+  lessonsId: IntNullableFilter
+  published: BoolFilter
+  updatedAt: DateTimeFilter
+}
+
+input LessonWhereUniqueInput {
+  contentId: Int
+  id: Int
+}
+
 type Meeting {
   course: Course
   courseId: Int
   createdAt: DateTime!
   duration: DateTime!
   id: Int!
+  link: String
   start: DateTime!
   title: String!
   updatedAt: DateTime!
@@ -2404,6 +2513,7 @@ type MeetingCountAggregate {
   createdAt: Int!
   duration: Int!
   id: Int!
+  link: Int!
   start: Int!
   title: Int!
   updatedAt: Int!
@@ -2414,6 +2524,7 @@ input MeetingCountOrderByAggregateInput {
   createdAt: SortOrder
   duration: SortOrder
   id: SortOrder
+  link: SortOrder
   start: SortOrder
   title: SortOrder
   updatedAt: SortOrder
@@ -2423,6 +2534,7 @@ input MeetingCreateInput {
   course: CourseCreateNestedOneWithoutMeetingsInput
   createdAt: DateTime
   duration: DateTime!
+  link: String
   start: DateTime!
   title: String!
   updatedAt: DateTime
@@ -2442,6 +2554,7 @@ input MeetingCreateOrConnectWithoutCourseInput {
 input MeetingCreateWithoutCourseInput {
   createdAt: DateTime
   duration: DateTime!
+  link: String
   start: DateTime!
   title: String!
   updatedAt: DateTime
@@ -2457,6 +2570,7 @@ type MeetingGroupBy {
   createdAt: DateTime!
   duration: DateTime!
   id: Int!
+  link: String
   start: DateTime!
   title: String!
   updatedAt: DateTime!
@@ -2473,6 +2587,7 @@ type MeetingMaxAggregate {
   createdAt: DateTime
   duration: DateTime
   id: Int
+  link: String
   start: DateTime
   title: String
   updatedAt: DateTime
@@ -2483,6 +2598,7 @@ input MeetingMaxOrderByAggregateInput {
   createdAt: SortOrder
   duration: SortOrder
   id: SortOrder
+  link: SortOrder
   start: SortOrder
   title: SortOrder
   updatedAt: SortOrder
@@ -2493,6 +2609,7 @@ type MeetingMinAggregate {
   createdAt: DateTime
   duration: DateTime
   id: Int
+  link: String
   start: DateTime
   title: String
   updatedAt: DateTime
@@ -2503,6 +2620,7 @@ input MeetingMinOrderByAggregateInput {
   createdAt: SortOrder
   duration: SortOrder
   id: SortOrder
+  link: SortOrder
   start: SortOrder
   title: SortOrder
   updatedAt: SortOrder
@@ -2522,6 +2640,7 @@ input MeetingOrderByWithAggregationInput {
   createdAt: SortOrder
   duration: SortOrder
   id: SortOrder
+  link: SortOrder
   start: SortOrder
   title: SortOrder
   updatedAt: SortOrder
@@ -2533,6 +2652,7 @@ input MeetingOrderByWithRelationInput {
   createdAt: SortOrder
   duration: SortOrder
   id: SortOrder
+  link: SortOrder
   start: SortOrder
   title: SortOrder
   updatedAt: SortOrder
@@ -2543,6 +2663,7 @@ enum MeetingScalarFieldEnum {
   createdAt
   duration
   id
+  link
   start
   title
   updatedAt
@@ -2556,6 +2677,7 @@ input MeetingScalarWhereInput {
   createdAt: DateTimeFilter
   duration: DateTimeFilter
   id: IntFilter
+  link: StringNullableFilter
   start: DateTimeFilter
   title: StringFilter
   updatedAt: DateTimeFilter
@@ -2569,6 +2691,7 @@ input MeetingScalarWhereWithAggregatesInput {
   createdAt: DateTimeWithAggregatesFilter
   duration: DateTimeWithAggregatesFilter
   id: IntWithAggregatesFilter
+  link: StringNullableWithAggregatesFilter
   start: DateTimeWithAggregatesFilter
   title: StringWithAggregatesFilter
   updatedAt: DateTimeWithAggregatesFilter
@@ -2588,6 +2711,7 @@ input MeetingUpdateInput {
   course: CourseUpdateOneWithoutMeetingsInput
   createdAt: DateTimeFieldUpdateOperationsInput
   duration: DateTimeFieldUpdateOperationsInput
+  link: NullableStringFieldUpdateOperationsInput
   start: DateTimeFieldUpdateOperationsInput
   title: StringFieldUpdateOperationsInput
   updatedAt: DateTimeFieldUpdateOperationsInput
@@ -2596,6 +2720,7 @@ input MeetingUpdateInput {
 input MeetingUpdateManyMutationInput {
   createdAt: DateTimeFieldUpdateOperationsInput
   duration: DateTimeFieldUpdateOperationsInput
+  link: NullableStringFieldUpdateOperationsInput
   start: DateTimeFieldUpdateOperationsInput
   title: StringFieldUpdateOperationsInput
   updatedAt: DateTimeFieldUpdateOperationsInput
@@ -2627,6 +2752,7 @@ input MeetingUpdateWithWhereUniqueWithoutCourseInput {
 input MeetingUpdateWithoutCourseInput {
   createdAt: DateTimeFieldUpdateOperationsInput
   duration: DateTimeFieldUpdateOperationsInput
+  link: NullableStringFieldUpdateOperationsInput
   start: DateTimeFieldUpdateOperationsInput
   title: StringFieldUpdateOperationsInput
   updatedAt: DateTimeFieldUpdateOperationsInput
@@ -2647,6 +2773,7 @@ input MeetingWhereInput {
   createdAt: DateTimeFilter
   duration: DateTimeFilter
   id: IntFilter
+  link: StringNullableFilter
   start: DateTimeFilter
   title: StringFilter
   updatedAt: DateTimeFilter
@@ -2659,11 +2786,11 @@ input MeetingWhereUniqueInput {
 type Mutation {
   createAdmin(data: AdminCreateInput!): Admin!
   createAssignment(data: AssignmentCreateInput!): Assignment!
-  createClassroom(data: ClassroomCreateInput!): Classroom!
   createContent(data: ContentCreateInput!): Content!
   createCourse(data: CourseCreateInput!): Course!
-  createDepartement(data: DepartementCreateInput!): Departement!
+  createDepartment(data: DepartmentCreateInput!): Department!
   createFile(data: FileCreateInput!): File!
+  createLesson(data: LessonCreateInput!): Lesson!
   createMeeting(data: MeetingCreateInput!): Meeting!
   createStudent(data: StudentCreateInput!): Student!
   createSubmission(data: SubmissionCreateInput!): Submission!
@@ -2672,18 +2799,18 @@ type Mutation {
   createUser(data: UserCreateInput!): User!
   deleteAdmin(where: AdminWhereUniqueInput!): Admin
   deleteAssignment(where: AssignmentWhereUniqueInput!): Assignment
-  deleteClassroom(where: ClassroomWhereUniqueInput!): Classroom
   deleteContent(where: ContentWhereUniqueInput!): Content
   deleteCourse(where: CourseWhereUniqueInput!): Course
-  deleteDepartement(where: DepartementWhereUniqueInput!): Departement
+  deleteDepartment(where: DepartmentWhereUniqueInput!): Department
   deleteFile(where: FileWhereUniqueInput!): File
+  deleteLesson(where: LessonWhereUniqueInput!): Lesson
   deleteManyAdmin(where: AdminWhereInput): AffectedRowsOutput!
   deleteManyAssignment(where: AssignmentWhereInput): AffectedRowsOutput!
-  deleteManyClassroom(where: ClassroomWhereInput): AffectedRowsOutput!
   deleteManyContent(where: ContentWhereInput): AffectedRowsOutput!
   deleteManyCourse(where: CourseWhereInput): AffectedRowsOutput!
-  deleteManyDepartement(where: DepartementWhereInput): AffectedRowsOutput!
+  deleteManyDepartment(where: DepartmentWhereInput): AffectedRowsOutput!
   deleteManyFile(where: FileWhereInput): AffectedRowsOutput!
+  deleteManyLesson(where: LessonWhereInput): AffectedRowsOutput!
   deleteManyMeeting(where: MeetingWhereInput): AffectedRowsOutput!
   deleteManyStudent(where: StudentWhereInput): AffectedRowsOutput!
   deleteManySubmission(where: SubmissionWhereInput): AffectedRowsOutput!
@@ -2698,18 +2825,18 @@ type Mutation {
   deleteUser(where: UserWhereUniqueInput!): User
   updateAdmin(data: AdminUpdateInput!, where: AdminWhereUniqueInput!): Admin
   updateAssignment(data: AssignmentUpdateInput!, where: AssignmentWhereUniqueInput!): Assignment
-  updateClassroom(data: ClassroomUpdateInput!, where: ClassroomWhereUniqueInput!): Classroom
   updateContent(data: ContentUpdateInput!, where: ContentWhereUniqueInput!): Content
   updateCourse(data: CourseUpdateInput!, where: CourseWhereUniqueInput!): Course
-  updateDepartement(data: DepartementUpdateInput!, where: DepartementWhereUniqueInput!): Departement
+  updateDepartment(data: DepartmentUpdateInput!, where: DepartmentWhereUniqueInput!): Department
   updateFile(data: FileUpdateInput!, where: FileWhereUniqueInput!): File
+  updateLesson(data: LessonUpdateInput!, where: LessonWhereUniqueInput!): Lesson
   updateManyAdmin(data: AdminUpdateManyMutationInput!, where: AdminWhereInput): AffectedRowsOutput!
   updateManyAssignment(data: AssignmentUpdateManyMutationInput!, where: AssignmentWhereInput): AffectedRowsOutput!
-  updateManyClassroom(data: ClassroomUpdateManyMutationInput!, where: ClassroomWhereInput): AffectedRowsOutput!
   updateManyContent(data: ContentUpdateManyMutationInput!, where: ContentWhereInput): AffectedRowsOutput!
   updateManyCourse(data: CourseUpdateManyMutationInput!, where: CourseWhereInput): AffectedRowsOutput!
-  updateManyDepartement(data: DepartementUpdateManyMutationInput!, where: DepartementWhereInput): AffectedRowsOutput!
+  updateManyDepartment(data: DepartmentUpdateManyMutationInput!, where: DepartmentWhereInput): AffectedRowsOutput!
   updateManyFile(data: FileUpdateManyMutationInput!, where: FileWhereInput): AffectedRowsOutput!
+  updateManyLesson(data: LessonUpdateManyMutationInput!, where: LessonWhereInput): AffectedRowsOutput!
   updateManyMeeting(data: MeetingUpdateManyMutationInput!, where: MeetingWhereInput): AffectedRowsOutput!
   updateManyStudent(data: StudentUpdateManyMutationInput!, where: StudentWhereInput): AffectedRowsOutput!
   updateManySubmission(data: SubmissionUpdateManyMutationInput!, where: SubmissionWhereInput): AffectedRowsOutput!
@@ -2724,11 +2851,11 @@ type Mutation {
   updateUser(data: UserUpdateInput!, where: UserWhereUniqueInput!): User
   upsertAdmin(create: AdminCreateInput!, update: AdminUpdateInput!, where: AdminWhereUniqueInput!): Admin!
   upsertAssignment(create: AssignmentCreateInput!, update: AssignmentUpdateInput!, where: AssignmentWhereUniqueInput!): Assignment!
-  upsertClassroom(create: ClassroomCreateInput!, update: ClassroomUpdateInput!, where: ClassroomWhereUniqueInput!): Classroom!
   upsertContent(create: ContentCreateInput!, update: ContentUpdateInput!, where: ContentWhereUniqueInput!): Content!
   upsertCourse(create: CourseCreateInput!, update: CourseUpdateInput!, where: CourseWhereUniqueInput!): Course!
-  upsertDepartement(create: DepartementCreateInput!, update: DepartementUpdateInput!, where: DepartementWhereUniqueInput!): Departement!
+  upsertDepartment(create: DepartmentCreateInput!, update: DepartmentUpdateInput!, where: DepartmentWhereUniqueInput!): Department!
   upsertFile(create: FileCreateInput!, update: FileUpdateInput!, where: FileWhereUniqueInput!): File!
+  upsertLesson(create: LessonCreateInput!, update: LessonUpdateInput!, where: LessonWhereUniqueInput!): Lesson!
   upsertMeeting(create: MeetingCreateInput!, update: MeetingUpdateInput!, where: MeetingWhereUniqueInput!): Meeting!
   upsertStudent(create: StudentCreateInput!, update: StudentUpdateInput!, where: StudentWhereUniqueInput!): Student!
   upsertSubmission(create: SubmissionCreateInput!, update: SubmissionUpdateInput!, where: SubmissionWhereUniqueInput!): Submission!
@@ -2740,6 +2867,19 @@ type Mutation {
 input NestedBoolFilter {
   equals: Boolean
   not: NestedBoolFilter
+}
+
+input NestedBoolNullableFilter {
+  equals: Boolean
+  not: NestedBoolNullableFilter
+}
+
+input NestedBoolNullableWithAggregatesFilter {
+  _count: NestedIntNullableFilter
+  _max: NestedBoolNullableFilter
+  _min: NestedBoolNullableFilter
+  equals: Boolean
+  not: NestedBoolNullableWithAggregatesFilter
 }
 
 input NestedBoolWithAggregatesFilter {
@@ -2865,6 +3005,37 @@ input NestedStringFilter {
   startsWith: String
 }
 
+input NestedStringNullableFilter {
+  contains: String
+  endsWith: String
+  equals: String
+  gt: String
+  gte: String
+  in: [String!]
+  lt: String
+  lte: String
+  not: NestedStringNullableFilter
+  notIn: [String!]
+  startsWith: String
+}
+
+input NestedStringNullableWithAggregatesFilter {
+  _count: NestedIntNullableFilter
+  _max: NestedStringNullableFilter
+  _min: NestedStringNullableFilter
+  contains: String
+  endsWith: String
+  equals: String
+  gt: String
+  gte: String
+  in: [String!]
+  lt: String
+  lte: String
+  not: NestedStringNullableWithAggregatesFilter
+  notIn: [String!]
+  startsWith: String
+}
+
 input NestedStringWithAggregatesFilter {
   _count: NestedIntFilter
   _max: NestedStringFilter
@@ -2882,16 +3053,24 @@ input NestedStringWithAggregatesFilter {
   startsWith: String
 }
 
+input NullableBoolFieldUpdateOperationsInput {
+  set: Boolean
+}
+
+input NullableStringFieldUpdateOperationsInput {
+  set: String
+}
+
 type Query {
   admin(where: AdminWhereUniqueInput!): Admin
   admins(cursor: AdminWhereUniqueInput, distinct: [AdminScalarFieldEnum!], orderBy: [AdminOrderByWithRelationInput!], skip: Int, take: Int, where: AdminWhereInput): [Admin!]!
   aggregateAdmin(cursor: AdminWhereUniqueInput, orderBy: [AdminOrderByWithRelationInput!], skip: Int, take: Int, where: AdminWhereInput): AggregateAdmin!
   aggregateAssignment(cursor: AssignmentWhereUniqueInput, orderBy: [AssignmentOrderByWithRelationInput!], skip: Int, take: Int, where: AssignmentWhereInput): AggregateAssignment!
-  aggregateClassroom(cursor: ClassroomWhereUniqueInput, orderBy: [ClassroomOrderByWithRelationInput!], skip: Int, take: Int, where: ClassroomWhereInput): AggregateClassroom!
   aggregateContent(cursor: ContentWhereUniqueInput, orderBy: [ContentOrderByWithRelationInput!], skip: Int, take: Int, where: ContentWhereInput): AggregateContent!
   aggregateCourse(cursor: CourseWhereUniqueInput, orderBy: [CourseOrderByWithRelationInput!], skip: Int, take: Int, where: CourseWhereInput): AggregateCourse!
-  aggregateDepartement(cursor: DepartementWhereUniqueInput, orderBy: [DepartementOrderByWithRelationInput!], skip: Int, take: Int, where: DepartementWhereInput): AggregateDepartement!
+  aggregateDepartment(cursor: DepartmentWhereUniqueInput, orderBy: [DepartmentOrderByWithRelationInput!], skip: Int, take: Int, where: DepartmentWhereInput): AggregateDepartment!
   aggregateFile(cursor: FileWhereUniqueInput, orderBy: [FileOrderByWithRelationInput!], skip: Int, take: Int, where: FileWhereInput): AggregateFile!
+  aggregateLesson(cursor: LessonWhereUniqueInput, orderBy: [LessonOrderByWithRelationInput!], skip: Int, take: Int, where: LessonWhereInput): AggregateLesson!
   aggregateMeeting(cursor: MeetingWhereUniqueInput, orderBy: [MeetingOrderByWithRelationInput!], skip: Int, take: Int, where: MeetingWhereInput): AggregateMeeting!
   aggregateStudent(cursor: StudentWhereUniqueInput, orderBy: [StudentOrderByWithRelationInput!], skip: Int, take: Int, where: StudentWhereInput): AggregateStudent!
   aggregateSubmission(cursor: SubmissionWhereUniqueInput, orderBy: [SubmissionOrderByWithRelationInput!], skip: Int, take: Int, where: SubmissionWhereInput): AggregateSubmission!
@@ -2900,23 +3079,21 @@ type Query {
   aggregateUser(cursor: UserWhereUniqueInput, orderBy: [UserOrderByWithRelationInput!], skip: Int, take: Int, where: UserWhereInput): AggregateUser!
   assignment(where: AssignmentWhereUniqueInput!): Assignment
   assignments(cursor: AssignmentWhereUniqueInput, distinct: [AssignmentScalarFieldEnum!], orderBy: [AssignmentOrderByWithRelationInput!], skip: Int, take: Int, where: AssignmentWhereInput): [Assignment!]!
-  classroom(where: ClassroomWhereUniqueInput!): Classroom
-  classrooms(cursor: ClassroomWhereUniqueInput, distinct: [ClassroomScalarFieldEnum!], orderBy: [ClassroomOrderByWithRelationInput!], skip: Int, take: Int, where: ClassroomWhereInput): [Classroom!]!
   content(where: ContentWhereUniqueInput!): Content
   contents(cursor: ContentWhereUniqueInput, distinct: [ContentScalarFieldEnum!], orderBy: [ContentOrderByWithRelationInput!], skip: Int, take: Int, where: ContentWhereInput): [Content!]!
   course(where: CourseWhereUniqueInput!): Course
   courses(cursor: CourseWhereUniqueInput, distinct: [CourseScalarFieldEnum!], orderBy: [CourseOrderByWithRelationInput!], skip: Int, take: Int, where: CourseWhereInput): [Course!]!
-  departement(where: DepartementWhereUniqueInput!): Departement
-  departements(cursor: DepartementWhereUniqueInput, distinct: [DepartementScalarFieldEnum!], orderBy: [DepartementOrderByWithRelationInput!], skip: Int, take: Int, where: DepartementWhereInput): [Departement!]!
+  department(where: DepartmentWhereUniqueInput!): Department
+  departments(cursor: DepartmentWhereUniqueInput, distinct: [DepartmentScalarFieldEnum!], orderBy: [DepartmentOrderByWithRelationInput!], skip: Int, take: Int, where: DepartmentWhereInput): [Department!]!
   file(where: FileWhereUniqueInput!): File
   files(cursor: FileWhereUniqueInput, distinct: [FileScalarFieldEnum!], orderBy: [FileOrderByWithRelationInput!], skip: Int, take: Int, where: FileWhereInput): [File!]!
   findFirstAdmin(cursor: AdminWhereUniqueInput, distinct: [AdminScalarFieldEnum!], orderBy: [AdminOrderByWithRelationInput!], skip: Int, take: Int, where: AdminWhereInput): Admin
   findFirstAssignment(cursor: AssignmentWhereUniqueInput, distinct: [AssignmentScalarFieldEnum!], orderBy: [AssignmentOrderByWithRelationInput!], skip: Int, take: Int, where: AssignmentWhereInput): Assignment
-  findFirstClassroom(cursor: ClassroomWhereUniqueInput, distinct: [ClassroomScalarFieldEnum!], orderBy: [ClassroomOrderByWithRelationInput!], skip: Int, take: Int, where: ClassroomWhereInput): Classroom
   findFirstContent(cursor: ContentWhereUniqueInput, distinct: [ContentScalarFieldEnum!], orderBy: [ContentOrderByWithRelationInput!], skip: Int, take: Int, where: ContentWhereInput): Content
   findFirstCourse(cursor: CourseWhereUniqueInput, distinct: [CourseScalarFieldEnum!], orderBy: [CourseOrderByWithRelationInput!], skip: Int, take: Int, where: CourseWhereInput): Course
-  findFirstDepartement(cursor: DepartementWhereUniqueInput, distinct: [DepartementScalarFieldEnum!], orderBy: [DepartementOrderByWithRelationInput!], skip: Int, take: Int, where: DepartementWhereInput): Departement
+  findFirstDepartment(cursor: DepartmentWhereUniqueInput, distinct: [DepartmentScalarFieldEnum!], orderBy: [DepartmentOrderByWithRelationInput!], skip: Int, take: Int, where: DepartmentWhereInput): Department
   findFirstFile(cursor: FileWhereUniqueInput, distinct: [FileScalarFieldEnum!], orderBy: [FileOrderByWithRelationInput!], skip: Int, take: Int, where: FileWhereInput): File
+  findFirstLesson(cursor: LessonWhereUniqueInput, distinct: [LessonScalarFieldEnum!], orderBy: [LessonOrderByWithRelationInput!], skip: Int, take: Int, where: LessonWhereInput): Lesson
   findFirstMeeting(cursor: MeetingWhereUniqueInput, distinct: [MeetingScalarFieldEnum!], orderBy: [MeetingOrderByWithRelationInput!], skip: Int, take: Int, where: MeetingWhereInput): Meeting
   findFirstStudent(cursor: StudentWhereUniqueInput, distinct: [StudentScalarFieldEnum!], orderBy: [StudentOrderByWithRelationInput!], skip: Int, take: Int, where: StudentWhereInput): Student
   findFirstSubmission(cursor: SubmissionWhereUniqueInput, distinct: [SubmissionScalarFieldEnum!], orderBy: [SubmissionOrderByWithRelationInput!], skip: Int, take: Int, where: SubmissionWhereInput): Submission
@@ -2925,17 +3102,19 @@ type Query {
   findFirstUser(cursor: UserWhereUniqueInput, distinct: [UserScalarFieldEnum!], orderBy: [UserOrderByWithRelationInput!], skip: Int, take: Int, where: UserWhereInput): User
   groupByAdmin(by: [AdminScalarFieldEnum!]!, having: AdminScalarWhereWithAggregatesInput, orderBy: [AdminOrderByWithAggregationInput!], skip: Int, take: Int, where: AdminWhereInput): [AdminGroupBy!]!
   groupByAssignment(by: [AssignmentScalarFieldEnum!]!, having: AssignmentScalarWhereWithAggregatesInput, orderBy: [AssignmentOrderByWithAggregationInput!], skip: Int, take: Int, where: AssignmentWhereInput): [AssignmentGroupBy!]!
-  groupByClassroom(by: [ClassroomScalarFieldEnum!]!, having: ClassroomScalarWhereWithAggregatesInput, orderBy: [ClassroomOrderByWithAggregationInput!], skip: Int, take: Int, where: ClassroomWhereInput): [ClassroomGroupBy!]!
   groupByContent(by: [ContentScalarFieldEnum!]!, having: ContentScalarWhereWithAggregatesInput, orderBy: [ContentOrderByWithAggregationInput!], skip: Int, take: Int, where: ContentWhereInput): [ContentGroupBy!]!
   groupByCourse(by: [CourseScalarFieldEnum!]!, having: CourseScalarWhereWithAggregatesInput, orderBy: [CourseOrderByWithAggregationInput!], skip: Int, take: Int, where: CourseWhereInput): [CourseGroupBy!]!
-  groupByDepartement(by: [DepartementScalarFieldEnum!]!, having: DepartementScalarWhereWithAggregatesInput, orderBy: [DepartementOrderByWithAggregationInput!], skip: Int, take: Int, where: DepartementWhereInput): [DepartementGroupBy!]!
+  groupByDepartment(by: [DepartmentScalarFieldEnum!]!, having: DepartmentScalarWhereWithAggregatesInput, orderBy: [DepartmentOrderByWithAggregationInput!], skip: Int, take: Int, where: DepartmentWhereInput): [DepartmentGroupBy!]!
   groupByFile(by: [FileScalarFieldEnum!]!, having: FileScalarWhereWithAggregatesInput, orderBy: [FileOrderByWithAggregationInput!], skip: Int, take: Int, where: FileWhereInput): [FileGroupBy!]!
+  groupByLesson(by: [LessonScalarFieldEnum!]!, having: LessonScalarWhereWithAggregatesInput, orderBy: [LessonOrderByWithAggregationInput!], skip: Int, take: Int, where: LessonWhereInput): [LessonGroupBy!]!
   groupByMeeting(by: [MeetingScalarFieldEnum!]!, having: MeetingScalarWhereWithAggregatesInput, orderBy: [MeetingOrderByWithAggregationInput!], skip: Int, take: Int, where: MeetingWhereInput): [MeetingGroupBy!]!
   groupByStudent(by: [StudentScalarFieldEnum!]!, having: StudentScalarWhereWithAggregatesInput, orderBy: [StudentOrderByWithAggregationInput!], skip: Int, take: Int, where: StudentWhereInput): [StudentGroupBy!]!
   groupBySubmission(by: [SubmissionScalarFieldEnum!]!, having: SubmissionScalarWhereWithAggregatesInput, orderBy: [SubmissionOrderByWithAggregationInput!], skip: Int, take: Int, where: SubmissionWhereInput): [SubmissionGroupBy!]!
   groupByTeacher(by: [TeacherScalarFieldEnum!]!, having: TeacherScalarWhereWithAggregatesInput, orderBy: [TeacherOrderByWithAggregationInput!], skip: Int, take: Int, where: TeacherWhereInput): [TeacherGroupBy!]!
   groupByTopic(by: [TopicScalarFieldEnum!]!, having: TopicScalarWhereWithAggregatesInput, orderBy: [TopicOrderByWithAggregationInput!], skip: Int, take: Int, where: TopicWhereInput): [TopicGroupBy!]!
   groupByUser(by: [UserScalarFieldEnum!]!, having: UserScalarWhereWithAggregatesInput, orderBy: [UserOrderByWithAggregationInput!], skip: Int, take: Int, where: UserWhereInput): [UserGroupBy!]!
+  lesson(where: LessonWhereUniqueInput!): Lesson
+  lessons(cursor: LessonWhereUniqueInput, distinct: [LessonScalarFieldEnum!], orderBy: [LessonOrderByWithRelationInput!], skip: Int, take: Int, where: LessonWhereInput): [Lesson!]!
   meeting(where: MeetingWhereUniqueInput!): Meeting
   meetings(cursor: MeetingWhereUniqueInput, distinct: [MeetingScalarFieldEnum!], orderBy: [MeetingOrderByWithRelationInput!], skip: Int, take: Int, where: MeetingWhereInput): [Meeting!]!
   student(where: StudentWhereUniqueInput!): Student
@@ -2973,6 +3152,37 @@ input StringFilter {
   startsWith: String
 }
 
+input StringNullableFilter {
+  contains: String
+  endsWith: String
+  equals: String
+  gt: String
+  gte: String
+  in: [String!]
+  lt: String
+  lte: String
+  not: NestedStringNullableFilter
+  notIn: [String!]
+  startsWith: String
+}
+
+input StringNullableWithAggregatesFilter {
+  _count: NestedIntNullableFilter
+  _max: NestedStringNullableFilter
+  _min: NestedStringNullableFilter
+  contains: String
+  endsWith: String
+  equals: String
+  gt: String
+  gte: String
+  in: [String!]
+  lt: String
+  lte: String
+  not: NestedStringNullableWithAggregatesFilter
+  notIn: [String!]
+  startsWith: String
+}
+
 input StringWithAggregatesFilter {
   _count: NestedIntFilter
   _max: NestedStringFilter
@@ -2992,26 +3202,28 @@ input StringWithAggregatesFilter {
 
 type Student {
   _count: StudentCount
-  classroom: Classroom
-  classroomId: Int
+  firstName: String!
   grade: Int!
   id: Int!
+  lastName: String!
   submissions(cursor: SubmissionWhereUniqueInput, distinct: [SubmissionScalarFieldEnum!], orderBy: [SubmissionOrderByWithRelationInput!], skip: Int, take: Int, where: SubmissionWhereInput): [Submission!]!
+  topic: Topic
+  topicId: Int
   user: User!
   userId: Int!
 }
 
 type StudentAvgAggregate {
-  classroomId: Float
   grade: Float
   id: Float
+  topicId: Float
   userId: Float
 }
 
 input StudentAvgOrderByAggregateInput {
-  classroomId: SortOrder
   grade: SortOrder
   id: SortOrder
+  topicId: SortOrder
   userId: SortOrder
 }
 
@@ -3021,30 +3233,36 @@ type StudentCount {
 
 type StudentCountAggregate {
   _all: Int!
-  classroomId: Int!
+  firstName: Int!
   grade: Int!
   id: Int!
+  lastName: Int!
+  topicId: Int!
   userId: Int!
 }
 
 input StudentCountOrderByAggregateInput {
-  classroomId: SortOrder
+  firstName: SortOrder
   grade: SortOrder
   id: SortOrder
+  lastName: SortOrder
+  topicId: SortOrder
   userId: SortOrder
 }
 
 input StudentCreateInput {
-  classroom: ClassroomCreateNestedOneWithoutStudentsInput
+  firstName: String!
   grade: Int!
+  lastName: String!
   submissions: SubmissionCreateNestedManyWithoutStudentInput
+  topic: TopicCreateNestedOneWithoutStudentsInput
   user: UserCreateNestedOneWithoutStudentInput!
 }
 
-input StudentCreateNestedManyWithoutClassroomInput {
+input StudentCreateNestedManyWithoutTopicInput {
   connect: [StudentWhereUniqueInput!]
-  connectOrCreate: [StudentCreateOrConnectWithoutClassroomInput!]
-  create: [StudentCreateWithoutClassroomInput!]
+  connectOrCreate: [StudentCreateOrConnectWithoutTopicInput!]
+  create: [StudentCreateWithoutTopicInput!]
 }
 
 input StudentCreateNestedOneWithoutSubmissionsInput {
@@ -3059,13 +3277,13 @@ input StudentCreateNestedOneWithoutUserInput {
   create: StudentCreateWithoutUserInput
 }
 
-input StudentCreateOrConnectWithoutClassroomInput {
-  create: StudentCreateWithoutClassroomInput!
+input StudentCreateOrConnectWithoutSubmissionsInput {
+  create: StudentCreateWithoutSubmissionsInput!
   where: StudentWhereUniqueInput!
 }
 
-input StudentCreateOrConnectWithoutSubmissionsInput {
-  create: StudentCreateWithoutSubmissionsInput!
+input StudentCreateOrConnectWithoutTopicInput {
+  create: StudentCreateWithoutTopicInput!
   where: StudentWhereUniqueInput!
 }
 
@@ -3074,22 +3292,28 @@ input StudentCreateOrConnectWithoutUserInput {
   where: StudentWhereUniqueInput!
 }
 
-input StudentCreateWithoutClassroomInput {
+input StudentCreateWithoutSubmissionsInput {
+  firstName: String!
   grade: Int!
-  submissions: SubmissionCreateNestedManyWithoutStudentInput
+  lastName: String!
+  topic: TopicCreateNestedOneWithoutStudentsInput
   user: UserCreateNestedOneWithoutStudentInput!
 }
 
-input StudentCreateWithoutSubmissionsInput {
-  classroom: ClassroomCreateNestedOneWithoutStudentsInput
+input StudentCreateWithoutTopicInput {
+  firstName: String!
   grade: Int!
+  lastName: String!
+  submissions: SubmissionCreateNestedManyWithoutStudentInput
   user: UserCreateNestedOneWithoutStudentInput!
 }
 
 input StudentCreateWithoutUserInput {
-  classroom: ClassroomCreateNestedOneWithoutStudentsInput
+  firstName: String!
   grade: Int!
+  lastName: String!
   submissions: SubmissionCreateNestedManyWithoutStudentInput
+  topic: TopicCreateNestedOneWithoutStudentsInput
 }
 
 type StudentGroupBy {
@@ -3098,9 +3322,11 @@ type StudentGroupBy {
   _max: StudentMaxAggregate
   _min: StudentMinAggregate
   _sum: StudentSumAggregate
-  classroomId: Int
+  firstName: String!
   grade: Int!
   id: Int!
+  lastName: String!
+  topicId: Int
   userId: Int!
 }
 
@@ -3111,30 +3337,38 @@ input StudentListRelationFilter {
 }
 
 type StudentMaxAggregate {
-  classroomId: Int
+  firstName: String
   grade: Int
   id: Int
+  lastName: String
+  topicId: Int
   userId: Int
 }
 
 input StudentMaxOrderByAggregateInput {
-  classroomId: SortOrder
+  firstName: SortOrder
   grade: SortOrder
   id: SortOrder
+  lastName: SortOrder
+  topicId: SortOrder
   userId: SortOrder
 }
 
 type StudentMinAggregate {
-  classroomId: Int
+  firstName: String
   grade: Int
   id: Int
+  lastName: String
+  topicId: Int
   userId: Int
 }
 
 input StudentMinOrderByAggregateInput {
-  classroomId: SortOrder
+  firstName: SortOrder
   grade: SortOrder
   id: SortOrder
+  lastName: SortOrder
+  topicId: SortOrder
   userId: SortOrder
 }
 
@@ -3148,18 +3382,22 @@ input StudentOrderByWithAggregationInput {
   _max: StudentMaxOrderByAggregateInput
   _min: StudentMinOrderByAggregateInput
   _sum: StudentSumOrderByAggregateInput
-  classroomId: SortOrder
+  firstName: SortOrder
   grade: SortOrder
   id: SortOrder
+  lastName: SortOrder
+  topicId: SortOrder
   userId: SortOrder
 }
 
 input StudentOrderByWithRelationInput {
-  classroom: ClassroomOrderByWithRelationInput
-  classroomId: SortOrder
+  firstName: SortOrder
   grade: SortOrder
   id: SortOrder
+  lastName: SortOrder
   submissions: SubmissionOrderByRelationAggregateInput
+  topic: TopicOrderByWithRelationInput
+  topicId: SortOrder
   user: UserOrderByWithRelationInput
   userId: SortOrder
 }
@@ -3170,9 +3408,11 @@ input StudentRelationFilter {
 }
 
 enum StudentScalarFieldEnum {
-  classroomId
+  firstName
   grade
   id
+  lastName
+  topicId
   userId
 }
 
@@ -3180,9 +3420,11 @@ input StudentScalarWhereInput {
   AND: [StudentScalarWhereInput!]
   NOT: [StudentScalarWhereInput!]
   OR: [StudentScalarWhereInput!]
-  classroomId: IntNullableFilter
+  firstName: StringFilter
   grade: IntFilter
   id: IntFilter
+  lastName: StringFilter
+  topicId: IntNullableFilter
   userId: IntFilter
 }
 
@@ -3190,53 +3432,59 @@ input StudentScalarWhereWithAggregatesInput {
   AND: [StudentScalarWhereWithAggregatesInput!]
   NOT: [StudentScalarWhereWithAggregatesInput!]
   OR: [StudentScalarWhereWithAggregatesInput!]
-  classroomId: IntNullableWithAggregatesFilter
+  firstName: StringWithAggregatesFilter
   grade: IntWithAggregatesFilter
   id: IntWithAggregatesFilter
+  lastName: StringWithAggregatesFilter
+  topicId: IntNullableWithAggregatesFilter
   userId: IntWithAggregatesFilter
 }
 
 type StudentSumAggregate {
-  classroomId: Int
   grade: Int
   id: Int
+  topicId: Int
   userId: Int
 }
 
 input StudentSumOrderByAggregateInput {
-  classroomId: SortOrder
   grade: SortOrder
   id: SortOrder
+  topicId: SortOrder
   userId: SortOrder
 }
 
 input StudentUpdateInput {
-  classroom: ClassroomUpdateOneWithoutStudentsInput
+  firstName: StringFieldUpdateOperationsInput
   grade: IntFieldUpdateOperationsInput
+  lastName: StringFieldUpdateOperationsInput
   submissions: SubmissionUpdateManyWithoutStudentInput
+  topic: TopicUpdateOneWithoutStudentsInput
   user: UserUpdateOneRequiredWithoutStudentInput
 }
 
 input StudentUpdateManyMutationInput {
+  firstName: StringFieldUpdateOperationsInput
   grade: IntFieldUpdateOperationsInput
+  lastName: StringFieldUpdateOperationsInput
 }
 
-input StudentUpdateManyWithWhereWithoutClassroomInput {
+input StudentUpdateManyWithWhereWithoutTopicInput {
   data: StudentUpdateManyMutationInput!
   where: StudentScalarWhereInput!
 }
 
-input StudentUpdateManyWithoutClassroomInput {
+input StudentUpdateManyWithoutTopicInput {
   connect: [StudentWhereUniqueInput!]
-  connectOrCreate: [StudentCreateOrConnectWithoutClassroomInput!]
-  create: [StudentCreateWithoutClassroomInput!]
+  connectOrCreate: [StudentCreateOrConnectWithoutTopicInput!]
+  create: [StudentCreateWithoutTopicInput!]
   delete: [StudentWhereUniqueInput!]
   deleteMany: [StudentScalarWhereInput!]
   disconnect: [StudentWhereUniqueInput!]
   set: [StudentWhereUniqueInput!]
-  update: [StudentUpdateWithWhereUniqueWithoutClassroomInput!]
-  updateMany: [StudentUpdateManyWithWhereWithoutClassroomInput!]
-  upsert: [StudentUpsertWithWhereUniqueWithoutClassroomInput!]
+  update: [StudentUpdateWithWhereUniqueWithoutTopicInput!]
+  updateMany: [StudentUpdateManyWithWhereWithoutTopicInput!]
+  upsert: [StudentUpsertWithWhereUniqueWithoutTopicInput!]
 }
 
 input StudentUpdateOneWithoutSubmissionsInput {
@@ -3259,32 +3507,38 @@ input StudentUpdateOneWithoutUserInput {
   upsert: StudentUpsertWithoutUserInput
 }
 
-input StudentUpdateWithWhereUniqueWithoutClassroomInput {
-  data: StudentUpdateWithoutClassroomInput!
+input StudentUpdateWithWhereUniqueWithoutTopicInput {
+  data: StudentUpdateWithoutTopicInput!
   where: StudentWhereUniqueInput!
 }
 
-input StudentUpdateWithoutClassroomInput {
+input StudentUpdateWithoutSubmissionsInput {
+  firstName: StringFieldUpdateOperationsInput
   grade: IntFieldUpdateOperationsInput
-  submissions: SubmissionUpdateManyWithoutStudentInput
+  lastName: StringFieldUpdateOperationsInput
+  topic: TopicUpdateOneWithoutStudentsInput
   user: UserUpdateOneRequiredWithoutStudentInput
 }
 
-input StudentUpdateWithoutSubmissionsInput {
-  classroom: ClassroomUpdateOneWithoutStudentsInput
+input StudentUpdateWithoutTopicInput {
+  firstName: StringFieldUpdateOperationsInput
   grade: IntFieldUpdateOperationsInput
+  lastName: StringFieldUpdateOperationsInput
+  submissions: SubmissionUpdateManyWithoutStudentInput
   user: UserUpdateOneRequiredWithoutStudentInput
 }
 
 input StudentUpdateWithoutUserInput {
-  classroom: ClassroomUpdateOneWithoutStudentsInput
+  firstName: StringFieldUpdateOperationsInput
   grade: IntFieldUpdateOperationsInput
+  lastName: StringFieldUpdateOperationsInput
   submissions: SubmissionUpdateManyWithoutStudentInput
+  topic: TopicUpdateOneWithoutStudentsInput
 }
 
-input StudentUpsertWithWhereUniqueWithoutClassroomInput {
-  create: StudentCreateWithoutClassroomInput!
-  update: StudentUpdateWithoutClassroomInput!
+input StudentUpsertWithWhereUniqueWithoutTopicInput {
+  create: StudentCreateWithoutTopicInput!
+  update: StudentUpdateWithoutTopicInput!
   where: StudentWhereUniqueInput!
 }
 
@@ -3302,11 +3556,13 @@ input StudentWhereInput {
   AND: [StudentWhereInput!]
   NOT: [StudentWhereInput!]
   OR: [StudentWhereInput!]
-  classroom: ClassroomRelationFilter
-  classroomId: IntNullableFilter
+  firstName: StringFilter
   grade: IntFilter
   id: IntFilter
+  lastName: StringFilter
   submissions: SubmissionListRelationFilter
+  topic: TopicRelationFilter
+  topicId: IntNullableFilter
   user: UserRelationFilter
   userId: IntFilter
 }
@@ -3317,8 +3573,8 @@ input StudentWhereUniqueInput {
 }
 
 type Submission {
-  assignement: Assignment
-  assignementId: Int
+  assignment: Assignment
+  assignmentId: Int
   content: Content!
   contentId: Int!
   createdAt: DateTime!
@@ -3329,14 +3585,14 @@ type Submission {
 }
 
 type SubmissionAvgAggregate {
-  assignementId: Float
+  assignmentId: Float
   contentId: Float
   id: Float
   studentId: Float
 }
 
 input SubmissionAvgOrderByAggregateInput {
-  assignementId: SortOrder
+  assignmentId: SortOrder
   contentId: SortOrder
   id: SortOrder
   studentId: SortOrder
@@ -3344,7 +3600,7 @@ input SubmissionAvgOrderByAggregateInput {
 
 type SubmissionCountAggregate {
   _all: Int!
-  assignementId: Int!
+  assignmentId: Int!
   contentId: Int!
   createdAt: Int!
   id: Int!
@@ -3353,7 +3609,7 @@ type SubmissionCountAggregate {
 }
 
 input SubmissionCountOrderByAggregateInput {
-  assignementId: SortOrder
+  assignmentId: SortOrder
   contentId: SortOrder
   createdAt: SortOrder
   id: SortOrder
@@ -3362,17 +3618,17 @@ input SubmissionCountOrderByAggregateInput {
 }
 
 input SubmissionCreateInput {
-  assignement: AssignmentCreateNestedOneWithoutSubmissionsInput
-  content: ContentCreateNestedOneWithoutSubmissionsInput!
+  assignment: AssignmentCreateNestedOneWithoutSubmissionsInput
+  content: ContentCreateNestedOneWithoutSubmissionInput!
   createdAt: DateTime
   student: StudentCreateNestedOneWithoutSubmissionsInput
   updatedAt: DateTime
 }
 
-input SubmissionCreateNestedManyWithoutAssignementInput {
+input SubmissionCreateNestedManyWithoutAssignmentInput {
   connect: [SubmissionWhereUniqueInput!]
-  connectOrCreate: [SubmissionCreateOrConnectWithoutAssignementInput!]
-  create: [SubmissionCreateWithoutAssignementInput!]
+  connectOrCreate: [SubmissionCreateOrConnectWithoutAssignmentInput!]
+  create: [SubmissionCreateWithoutAssignmentInput!]
 }
 
 input SubmissionCreateNestedManyWithoutStudentInput {
@@ -3387,8 +3643,8 @@ input SubmissionCreateNestedOneWithoutContentInput {
   create: SubmissionCreateWithoutContentInput
 }
 
-input SubmissionCreateOrConnectWithoutAssignementInput {
-  create: SubmissionCreateWithoutAssignementInput!
+input SubmissionCreateOrConnectWithoutAssignmentInput {
+  create: SubmissionCreateWithoutAssignmentInput!
   where: SubmissionWhereUniqueInput!
 }
 
@@ -3402,23 +3658,23 @@ input SubmissionCreateOrConnectWithoutStudentInput {
   where: SubmissionWhereUniqueInput!
 }
 
-input SubmissionCreateWithoutAssignementInput {
-  content: ContentCreateNestedOneWithoutSubmissionsInput!
+input SubmissionCreateWithoutAssignmentInput {
+  content: ContentCreateNestedOneWithoutSubmissionInput!
   createdAt: DateTime
   student: StudentCreateNestedOneWithoutSubmissionsInput
   updatedAt: DateTime
 }
 
 input SubmissionCreateWithoutContentInput {
-  assignement: AssignmentCreateNestedOneWithoutSubmissionsInput
+  assignment: AssignmentCreateNestedOneWithoutSubmissionsInput
   createdAt: DateTime
   student: StudentCreateNestedOneWithoutSubmissionsInput
   updatedAt: DateTime
 }
 
 input SubmissionCreateWithoutStudentInput {
-  assignement: AssignmentCreateNestedOneWithoutSubmissionsInput
-  content: ContentCreateNestedOneWithoutSubmissionsInput!
+  assignment: AssignmentCreateNestedOneWithoutSubmissionsInput
+  content: ContentCreateNestedOneWithoutSubmissionInput!
   createdAt: DateTime
   updatedAt: DateTime
 }
@@ -3429,7 +3685,7 @@ type SubmissionGroupBy {
   _max: SubmissionMaxAggregate
   _min: SubmissionMinAggregate
   _sum: SubmissionSumAggregate
-  assignementId: Int
+  assignmentId: Int
   contentId: Int!
   createdAt: DateTime!
   id: Int!
@@ -3444,7 +3700,7 @@ input SubmissionListRelationFilter {
 }
 
 type SubmissionMaxAggregate {
-  assignementId: Int
+  assignmentId: Int
   contentId: Int
   createdAt: DateTime
   id: Int
@@ -3453,7 +3709,7 @@ type SubmissionMaxAggregate {
 }
 
 input SubmissionMaxOrderByAggregateInput {
-  assignementId: SortOrder
+  assignmentId: SortOrder
   contentId: SortOrder
   createdAt: SortOrder
   id: SortOrder
@@ -3462,7 +3718,7 @@ input SubmissionMaxOrderByAggregateInput {
 }
 
 type SubmissionMinAggregate {
-  assignementId: Int
+  assignmentId: Int
   contentId: Int
   createdAt: DateTime
   id: Int
@@ -3471,7 +3727,7 @@ type SubmissionMinAggregate {
 }
 
 input SubmissionMinOrderByAggregateInput {
-  assignementId: SortOrder
+  assignmentId: SortOrder
   contentId: SortOrder
   createdAt: SortOrder
   id: SortOrder
@@ -3489,7 +3745,7 @@ input SubmissionOrderByWithAggregationInput {
   _max: SubmissionMaxOrderByAggregateInput
   _min: SubmissionMinOrderByAggregateInput
   _sum: SubmissionSumOrderByAggregateInput
-  assignementId: SortOrder
+  assignmentId: SortOrder
   contentId: SortOrder
   createdAt: SortOrder
   id: SortOrder
@@ -3498,8 +3754,8 @@ input SubmissionOrderByWithAggregationInput {
 }
 
 input SubmissionOrderByWithRelationInput {
-  assignement: AssignmentOrderByWithRelationInput
-  assignementId: SortOrder
+  assignment: AssignmentOrderByWithRelationInput
+  assignmentId: SortOrder
   content: ContentOrderByWithRelationInput
   contentId: SortOrder
   createdAt: SortOrder
@@ -3515,7 +3771,7 @@ input SubmissionRelationFilter {
 }
 
 enum SubmissionScalarFieldEnum {
-  assignementId
+  assignmentId
   contentId
   createdAt
   id
@@ -3527,7 +3783,7 @@ input SubmissionScalarWhereInput {
   AND: [SubmissionScalarWhereInput!]
   NOT: [SubmissionScalarWhereInput!]
   OR: [SubmissionScalarWhereInput!]
-  assignementId: IntNullableFilter
+  assignmentId: IntNullableFilter
   contentId: IntFilter
   createdAt: DateTimeFilter
   id: IntFilter
@@ -3539,7 +3795,7 @@ input SubmissionScalarWhereWithAggregatesInput {
   AND: [SubmissionScalarWhereWithAggregatesInput!]
   NOT: [SubmissionScalarWhereWithAggregatesInput!]
   OR: [SubmissionScalarWhereWithAggregatesInput!]
-  assignementId: IntNullableWithAggregatesFilter
+  assignmentId: IntNullableWithAggregatesFilter
   contentId: IntWithAggregatesFilter
   createdAt: DateTimeWithAggregatesFilter
   id: IntWithAggregatesFilter
@@ -3548,22 +3804,22 @@ input SubmissionScalarWhereWithAggregatesInput {
 }
 
 type SubmissionSumAggregate {
-  assignementId: Int
+  assignmentId: Int
   contentId: Int
   id: Int
   studentId: Int
 }
 
 input SubmissionSumOrderByAggregateInput {
-  assignementId: SortOrder
+  assignmentId: SortOrder
   contentId: SortOrder
   id: SortOrder
   studentId: SortOrder
 }
 
 input SubmissionUpdateInput {
-  assignement: AssignmentUpdateOneWithoutSubmissionsInput
-  content: ContentUpdateOneRequiredWithoutSubmissionsInput
+  assignment: AssignmentUpdateOneWithoutSubmissionsInput
+  content: ContentUpdateOneRequiredWithoutSubmissionInput
   createdAt: DateTimeFieldUpdateOperationsInput
   student: StudentUpdateOneWithoutSubmissionsInput
   updatedAt: DateTimeFieldUpdateOperationsInput
@@ -3574,7 +3830,7 @@ input SubmissionUpdateManyMutationInput {
   updatedAt: DateTimeFieldUpdateOperationsInput
 }
 
-input SubmissionUpdateManyWithWhereWithoutAssignementInput {
+input SubmissionUpdateManyWithWhereWithoutAssignmentInput {
   data: SubmissionUpdateManyMutationInput!
   where: SubmissionScalarWhereInput!
 }
@@ -3584,17 +3840,17 @@ input SubmissionUpdateManyWithWhereWithoutStudentInput {
   where: SubmissionScalarWhereInput!
 }
 
-input SubmissionUpdateManyWithoutAssignementInput {
+input SubmissionUpdateManyWithoutAssignmentInput {
   connect: [SubmissionWhereUniqueInput!]
-  connectOrCreate: [SubmissionCreateOrConnectWithoutAssignementInput!]
-  create: [SubmissionCreateWithoutAssignementInput!]
+  connectOrCreate: [SubmissionCreateOrConnectWithoutAssignmentInput!]
+  create: [SubmissionCreateWithoutAssignmentInput!]
   delete: [SubmissionWhereUniqueInput!]
   deleteMany: [SubmissionScalarWhereInput!]
   disconnect: [SubmissionWhereUniqueInput!]
   set: [SubmissionWhereUniqueInput!]
-  update: [SubmissionUpdateWithWhereUniqueWithoutAssignementInput!]
-  updateMany: [SubmissionUpdateManyWithWhereWithoutAssignementInput!]
-  upsert: [SubmissionUpsertWithWhereUniqueWithoutAssignementInput!]
+  update: [SubmissionUpdateWithWhereUniqueWithoutAssignmentInput!]
+  updateMany: [SubmissionUpdateManyWithWhereWithoutAssignmentInput!]
+  upsert: [SubmissionUpsertWithWhereUniqueWithoutAssignmentInput!]
 }
 
 input SubmissionUpdateManyWithoutStudentInput {
@@ -3620,8 +3876,8 @@ input SubmissionUpdateOneWithoutContentInput {
   upsert: SubmissionUpsertWithoutContentInput
 }
 
-input SubmissionUpdateWithWhereUniqueWithoutAssignementInput {
-  data: SubmissionUpdateWithoutAssignementInput!
+input SubmissionUpdateWithWhereUniqueWithoutAssignmentInput {
+  data: SubmissionUpdateWithoutAssignmentInput!
   where: SubmissionWhereUniqueInput!
 }
 
@@ -3630,30 +3886,30 @@ input SubmissionUpdateWithWhereUniqueWithoutStudentInput {
   where: SubmissionWhereUniqueInput!
 }
 
-input SubmissionUpdateWithoutAssignementInput {
-  content: ContentUpdateOneRequiredWithoutSubmissionsInput
+input SubmissionUpdateWithoutAssignmentInput {
+  content: ContentUpdateOneRequiredWithoutSubmissionInput
   createdAt: DateTimeFieldUpdateOperationsInput
   student: StudentUpdateOneWithoutSubmissionsInput
   updatedAt: DateTimeFieldUpdateOperationsInput
 }
 
 input SubmissionUpdateWithoutContentInput {
-  assignement: AssignmentUpdateOneWithoutSubmissionsInput
+  assignment: AssignmentUpdateOneWithoutSubmissionsInput
   createdAt: DateTimeFieldUpdateOperationsInput
   student: StudentUpdateOneWithoutSubmissionsInput
   updatedAt: DateTimeFieldUpdateOperationsInput
 }
 
 input SubmissionUpdateWithoutStudentInput {
-  assignement: AssignmentUpdateOneWithoutSubmissionsInput
-  content: ContentUpdateOneRequiredWithoutSubmissionsInput
+  assignment: AssignmentUpdateOneWithoutSubmissionsInput
+  content: ContentUpdateOneRequiredWithoutSubmissionInput
   createdAt: DateTimeFieldUpdateOperationsInput
   updatedAt: DateTimeFieldUpdateOperationsInput
 }
 
-input SubmissionUpsertWithWhereUniqueWithoutAssignementInput {
-  create: SubmissionCreateWithoutAssignementInput!
-  update: SubmissionUpdateWithoutAssignementInput!
+input SubmissionUpsertWithWhereUniqueWithoutAssignmentInput {
+  create: SubmissionCreateWithoutAssignmentInput!
+  update: SubmissionUpdateWithoutAssignmentInput!
   where: SubmissionWhereUniqueInput!
 }
 
@@ -3672,8 +3928,8 @@ input SubmissionWhereInput {
   AND: [SubmissionWhereInput!]
   NOT: [SubmissionWhereInput!]
   OR: [SubmissionWhereInput!]
-  assignement: AssignmentRelationFilter
-  assignementId: IntNullableFilter
+  assignment: AssignmentRelationFilter
+  assignmentId: IntNullableFilter
   content: ContentRelationFilter
   contentId: IntFilter
   createdAt: DateTimeFilter
@@ -3691,8 +3947,9 @@ input SubmissionWhereUniqueInput {
 type Teacher {
   _count: TeacherCount
   courses(cursor: CourseWhereUniqueInput, distinct: [CourseScalarFieldEnum!], orderBy: [CourseOrderByWithRelationInput!], skip: Int, take: Int, where: CourseWhereInput): [Course!]!
-  grade: String!
+  firstName: String!
   id: Int!
+  lastName: String!
   user: User!
   userId: Int!
 }
@@ -3713,20 +3970,23 @@ type TeacherCount {
 
 type TeacherCountAggregate {
   _all: Int!
-  grade: Int!
+  firstName: Int!
   id: Int!
+  lastName: Int!
   userId: Int!
 }
 
 input TeacherCountOrderByAggregateInput {
-  grade: SortOrder
+  firstName: SortOrder
   id: SortOrder
+  lastName: SortOrder
   userId: SortOrder
 }
 
 input TeacherCreateInput {
   courses: CourseCreateNestedManyWithoutTeacherInput
-  grade: String!
+  firstName: String!
+  lastName: String!
   user: UserCreateNestedOneWithoutTeacherInput!
 }
 
@@ -3753,13 +4013,15 @@ input TeacherCreateOrConnectWithoutUserInput {
 }
 
 input TeacherCreateWithoutCoursesInput {
-  grade: String!
+  firstName: String!
+  lastName: String!
   user: UserCreateNestedOneWithoutTeacherInput!
 }
 
 input TeacherCreateWithoutUserInput {
   courses: CourseCreateNestedManyWithoutTeacherInput
-  grade: String!
+  firstName: String!
+  lastName: String!
 }
 
 type TeacherGroupBy {
@@ -3768,32 +4030,37 @@ type TeacherGroupBy {
   _max: TeacherMaxAggregate
   _min: TeacherMinAggregate
   _sum: TeacherSumAggregate
-  grade: String!
+  firstName: String!
   id: Int!
+  lastName: String!
   userId: Int!
 }
 
 type TeacherMaxAggregate {
-  grade: String
+  firstName: String
   id: Int
+  lastName: String
   userId: Int
 }
 
 input TeacherMaxOrderByAggregateInput {
-  grade: SortOrder
+  firstName: SortOrder
   id: SortOrder
+  lastName: SortOrder
   userId: SortOrder
 }
 
 type TeacherMinAggregate {
-  grade: String
+  firstName: String
   id: Int
+  lastName: String
   userId: Int
 }
 
 input TeacherMinOrderByAggregateInput {
-  grade: SortOrder
+  firstName: SortOrder
   id: SortOrder
+  lastName: SortOrder
   userId: SortOrder
 }
 
@@ -3803,15 +4070,17 @@ input TeacherOrderByWithAggregationInput {
   _max: TeacherMaxOrderByAggregateInput
   _min: TeacherMinOrderByAggregateInput
   _sum: TeacherSumOrderByAggregateInput
-  grade: SortOrder
+  firstName: SortOrder
   id: SortOrder
+  lastName: SortOrder
   userId: SortOrder
 }
 
 input TeacherOrderByWithRelationInput {
   courses: CourseOrderByRelationAggregateInput
-  grade: SortOrder
+  firstName: SortOrder
   id: SortOrder
+  lastName: SortOrder
   user: UserOrderByWithRelationInput
   userId: SortOrder
 }
@@ -3822,8 +4091,9 @@ input TeacherRelationFilter {
 }
 
 enum TeacherScalarFieldEnum {
-  grade
+  firstName
   id
+  lastName
   userId
 }
 
@@ -3831,8 +4101,9 @@ input TeacherScalarWhereWithAggregatesInput {
   AND: [TeacherScalarWhereWithAggregatesInput!]
   NOT: [TeacherScalarWhereWithAggregatesInput!]
   OR: [TeacherScalarWhereWithAggregatesInput!]
-  grade: StringWithAggregatesFilter
+  firstName: StringWithAggregatesFilter
   id: IntWithAggregatesFilter
+  lastName: StringWithAggregatesFilter
   userId: IntWithAggregatesFilter
 }
 
@@ -3848,12 +4119,14 @@ input TeacherSumOrderByAggregateInput {
 
 input TeacherUpdateInput {
   courses: CourseUpdateManyWithoutTeacherInput
-  grade: StringFieldUpdateOperationsInput
+  firstName: StringFieldUpdateOperationsInput
+  lastName: StringFieldUpdateOperationsInput
   user: UserUpdateOneRequiredWithoutTeacherInput
 }
 
 input TeacherUpdateManyMutationInput {
-  grade: StringFieldUpdateOperationsInput
+  firstName: StringFieldUpdateOperationsInput
+  lastName: StringFieldUpdateOperationsInput
 }
 
 input TeacherUpdateOneWithoutCoursesInput {
@@ -3877,13 +4150,15 @@ input TeacherUpdateOneWithoutUserInput {
 }
 
 input TeacherUpdateWithoutCoursesInput {
-  grade: StringFieldUpdateOperationsInput
+  firstName: StringFieldUpdateOperationsInput
+  lastName: StringFieldUpdateOperationsInput
   user: UserUpdateOneRequiredWithoutTeacherInput
 }
 
 input TeacherUpdateWithoutUserInput {
   courses: CourseUpdateManyWithoutTeacherInput
-  grade: StringFieldUpdateOperationsInput
+  firstName: StringFieldUpdateOperationsInput
+  lastName: StringFieldUpdateOperationsInput
 }
 
 input TeacherUpsertWithoutCoursesInput {
@@ -3901,8 +4176,9 @@ input TeacherWhereInput {
   NOT: [TeacherWhereInput!]
   OR: [TeacherWhereInput!]
   courses: CourseListRelationFilter
-  grade: StringFilter
+  firstName: StringFilter
   id: IntFilter
+  lastName: StringFilter
   user: UserRelationFilter
   userId: IntFilter
 }
@@ -3914,65 +4190,59 @@ input TeacherWhereUniqueInput {
 
 type Topic {
   _count: TopicCount
-  classrooms(cursor: ClassroomWhereUniqueInput, distinct: [ClassroomScalarFieldEnum!], orderBy: [ClassroomOrderByWithRelationInput!], skip: Int, take: Int, where: ClassroomWhereInput): [Classroom!]!
   courses(cursor: CourseWhereUniqueInput, distinct: [CourseScalarFieldEnum!], orderBy: [CourseOrderByWithRelationInput!], skip: Int, take: Int, where: CourseWhereInput): [Course!]!
-  departmenet: Departement
-  departmenetId: Int
+  department: Department
+  departmentId: Int
   grades: Int!
   id: Int!
   name: String!
+  students(cursor: StudentWhereUniqueInput, distinct: [StudentScalarFieldEnum!], orderBy: [StudentOrderByWithRelationInput!], skip: Int, take: Int, where: StudentWhereInput): [Student!]!
 }
 
 type TopicAvgAggregate {
-  departmenetId: Float
+  departmentId: Float
   grades: Float
   id: Float
 }
 
 input TopicAvgOrderByAggregateInput {
-  departmenetId: SortOrder
+  departmentId: SortOrder
   grades: SortOrder
   id: SortOrder
 }
 
 type TopicCount {
-  classrooms: Int!
   courses: Int!
+  students: Int!
 }
 
 type TopicCountAggregate {
   _all: Int!
-  departmenetId: Int!
+  departmentId: Int!
   grades: Int!
   id: Int!
   name: Int!
 }
 
 input TopicCountOrderByAggregateInput {
-  departmenetId: SortOrder
+  departmentId: SortOrder
   grades: SortOrder
   id: SortOrder
   name: SortOrder
 }
 
 input TopicCreateInput {
-  classrooms: ClassroomCreateNestedManyWithoutTopicInput
   courses: CourseCreateNestedManyWithoutTopicInput
-  departmenet: DepartementCreateNestedOneWithoutTopicsInput
+  department: DepartmentCreateNestedOneWithoutTopicsInput
   grades: Int!
   name: String!
+  students: StudentCreateNestedManyWithoutTopicInput
 }
 
-input TopicCreateNestedManyWithoutDepartmenetInput {
+input TopicCreateNestedManyWithoutDepartmentInput {
   connect: [TopicWhereUniqueInput!]
-  connectOrCreate: [TopicCreateOrConnectWithoutDepartmenetInput!]
-  create: [TopicCreateWithoutDepartmenetInput!]
-}
-
-input TopicCreateNestedOneWithoutClassroomsInput {
-  connect: TopicWhereUniqueInput
-  connectOrCreate: TopicCreateOrConnectWithoutClassroomsInput
-  create: TopicCreateWithoutClassroomsInput
+  connectOrCreate: [TopicCreateOrConnectWithoutDepartmentInput!]
+  create: [TopicCreateWithoutDepartmentInput!]
 }
 
 input TopicCreateNestedOneWithoutCoursesInput {
@@ -3981,9 +4251,10 @@ input TopicCreateNestedOneWithoutCoursesInput {
   create: TopicCreateWithoutCoursesInput
 }
 
-input TopicCreateOrConnectWithoutClassroomsInput {
-  create: TopicCreateWithoutClassroomsInput!
-  where: TopicWhereUniqueInput!
+input TopicCreateNestedOneWithoutStudentsInput {
+  connect: TopicWhereUniqueInput
+  connectOrCreate: TopicCreateOrConnectWithoutStudentsInput
+  create: TopicCreateWithoutStudentsInput
 }
 
 input TopicCreateOrConnectWithoutCoursesInput {
@@ -3991,28 +4262,33 @@ input TopicCreateOrConnectWithoutCoursesInput {
   where: TopicWhereUniqueInput!
 }
 
-input TopicCreateOrConnectWithoutDepartmenetInput {
-  create: TopicCreateWithoutDepartmenetInput!
+input TopicCreateOrConnectWithoutDepartmentInput {
+  create: TopicCreateWithoutDepartmentInput!
   where: TopicWhereUniqueInput!
 }
 
-input TopicCreateWithoutClassroomsInput {
-  courses: CourseCreateNestedManyWithoutTopicInput
-  departmenet: DepartementCreateNestedOneWithoutTopicsInput
-  grades: Int!
-  name: String!
+input TopicCreateOrConnectWithoutStudentsInput {
+  create: TopicCreateWithoutStudentsInput!
+  where: TopicWhereUniqueInput!
 }
 
 input TopicCreateWithoutCoursesInput {
-  classrooms: ClassroomCreateNestedManyWithoutTopicInput
-  departmenet: DepartementCreateNestedOneWithoutTopicsInput
+  department: DepartmentCreateNestedOneWithoutTopicsInput
   grades: Int!
   name: String!
+  students: StudentCreateNestedManyWithoutTopicInput
 }
 
-input TopicCreateWithoutDepartmenetInput {
-  classrooms: ClassroomCreateNestedManyWithoutTopicInput
+input TopicCreateWithoutDepartmentInput {
   courses: CourseCreateNestedManyWithoutTopicInput
+  grades: Int!
+  name: String!
+  students: StudentCreateNestedManyWithoutTopicInput
+}
+
+input TopicCreateWithoutStudentsInput {
+  courses: CourseCreateNestedManyWithoutTopicInput
+  department: DepartmentCreateNestedOneWithoutTopicsInput
   grades: Int!
   name: String!
 }
@@ -4023,7 +4299,7 @@ type TopicGroupBy {
   _max: TopicMaxAggregate
   _min: TopicMinAggregate
   _sum: TopicSumAggregate
-  departmenetId: Int
+  departmentId: Int
   grades: Int!
   id: Int!
   name: String!
@@ -4036,28 +4312,28 @@ input TopicListRelationFilter {
 }
 
 type TopicMaxAggregate {
-  departmenetId: Int
+  departmentId: Int
   grades: Int
   id: Int
   name: String
 }
 
 input TopicMaxOrderByAggregateInput {
-  departmenetId: SortOrder
+  departmentId: SortOrder
   grades: SortOrder
   id: SortOrder
   name: SortOrder
 }
 
 type TopicMinAggregate {
-  departmenetId: Int
+  departmentId: Int
   grades: Int
   id: Int
   name: String
 }
 
 input TopicMinOrderByAggregateInput {
-  departmenetId: SortOrder
+  departmentId: SortOrder
   grades: SortOrder
   id: SortOrder
   name: SortOrder
@@ -4073,20 +4349,20 @@ input TopicOrderByWithAggregationInput {
   _max: TopicMaxOrderByAggregateInput
   _min: TopicMinOrderByAggregateInput
   _sum: TopicSumOrderByAggregateInput
-  departmenetId: SortOrder
+  departmentId: SortOrder
   grades: SortOrder
   id: SortOrder
   name: SortOrder
 }
 
 input TopicOrderByWithRelationInput {
-  classrooms: ClassroomOrderByRelationAggregateInput
   courses: CourseOrderByRelationAggregateInput
-  departmenet: DepartementOrderByWithRelationInput
-  departmenetId: SortOrder
+  department: DepartmentOrderByWithRelationInput
+  departmentId: SortOrder
   grades: SortOrder
   id: SortOrder
   name: SortOrder
+  students: StudentOrderByRelationAggregateInput
 }
 
 input TopicRelationFilter {
@@ -4095,7 +4371,7 @@ input TopicRelationFilter {
 }
 
 enum TopicScalarFieldEnum {
-  departmenetId
+  departmentId
   grades
   id
   name
@@ -4105,7 +4381,7 @@ input TopicScalarWhereInput {
   AND: [TopicScalarWhereInput!]
   NOT: [TopicScalarWhereInput!]
   OR: [TopicScalarWhereInput!]
-  departmenetId: IntNullableFilter
+  departmentId: IntNullableFilter
   grades: IntFilter
   id: IntFilter
   name: StringFilter
@@ -4115,30 +4391,30 @@ input TopicScalarWhereWithAggregatesInput {
   AND: [TopicScalarWhereWithAggregatesInput!]
   NOT: [TopicScalarWhereWithAggregatesInput!]
   OR: [TopicScalarWhereWithAggregatesInput!]
-  departmenetId: IntNullableWithAggregatesFilter
+  departmentId: IntNullableWithAggregatesFilter
   grades: IntWithAggregatesFilter
   id: IntWithAggregatesFilter
   name: StringWithAggregatesFilter
 }
 
 type TopicSumAggregate {
-  departmenetId: Int
+  departmentId: Int
   grades: Int
   id: Int
 }
 
 input TopicSumOrderByAggregateInput {
-  departmenetId: SortOrder
+  departmentId: SortOrder
   grades: SortOrder
   id: SortOrder
 }
 
 input TopicUpdateInput {
-  classrooms: ClassroomUpdateManyWithoutTopicInput
   courses: CourseUpdateManyWithoutTopicInput
-  departmenet: DepartementUpdateOneWithoutTopicsInput
+  department: DepartmentUpdateOneWithoutTopicsInput
   grades: IntFieldUpdateOperationsInput
   name: StringFieldUpdateOperationsInput
+  students: StudentUpdateManyWithoutTopicInput
 }
 
 input TopicUpdateManyMutationInput {
@@ -4146,32 +4422,22 @@ input TopicUpdateManyMutationInput {
   name: StringFieldUpdateOperationsInput
 }
 
-input TopicUpdateManyWithWhereWithoutDepartmenetInput {
+input TopicUpdateManyWithWhereWithoutDepartmentInput {
   data: TopicUpdateManyMutationInput!
   where: TopicScalarWhereInput!
 }
 
-input TopicUpdateManyWithoutDepartmenetInput {
+input TopicUpdateManyWithoutDepartmentInput {
   connect: [TopicWhereUniqueInput!]
-  connectOrCreate: [TopicCreateOrConnectWithoutDepartmenetInput!]
-  create: [TopicCreateWithoutDepartmenetInput!]
+  connectOrCreate: [TopicCreateOrConnectWithoutDepartmentInput!]
+  create: [TopicCreateWithoutDepartmentInput!]
   delete: [TopicWhereUniqueInput!]
   deleteMany: [TopicScalarWhereInput!]
   disconnect: [TopicWhereUniqueInput!]
   set: [TopicWhereUniqueInput!]
-  update: [TopicUpdateWithWhereUniqueWithoutDepartmenetInput!]
-  updateMany: [TopicUpdateManyWithWhereWithoutDepartmenetInput!]
-  upsert: [TopicUpsertWithWhereUniqueWithoutDepartmenetInput!]
-}
-
-input TopicUpdateOneWithoutClassroomsInput {
-  connect: TopicWhereUniqueInput
-  connectOrCreate: TopicCreateOrConnectWithoutClassroomsInput
-  create: TopicCreateWithoutClassroomsInput
-  delete: Boolean
-  disconnect: Boolean
-  update: TopicUpdateWithoutClassroomsInput
-  upsert: TopicUpsertWithoutClassroomsInput
+  update: [TopicUpdateWithWhereUniqueWithoutDepartmentInput!]
+  updateMany: [TopicUpdateManyWithWhereWithoutDepartmentInput!]
+  upsert: [TopicUpsertWithWhereUniqueWithoutDepartmentInput!]
 }
 
 input TopicUpdateOneWithoutCoursesInput {
@@ -4184,41 +4450,46 @@ input TopicUpdateOneWithoutCoursesInput {
   upsert: TopicUpsertWithoutCoursesInput
 }
 
-input TopicUpdateWithWhereUniqueWithoutDepartmenetInput {
-  data: TopicUpdateWithoutDepartmenetInput!
-  where: TopicWhereUniqueInput!
+input TopicUpdateOneWithoutStudentsInput {
+  connect: TopicWhereUniqueInput
+  connectOrCreate: TopicCreateOrConnectWithoutStudentsInput
+  create: TopicCreateWithoutStudentsInput
+  delete: Boolean
+  disconnect: Boolean
+  update: TopicUpdateWithoutStudentsInput
+  upsert: TopicUpsertWithoutStudentsInput
 }
 
-input TopicUpdateWithoutClassroomsInput {
-  courses: CourseUpdateManyWithoutTopicInput
-  departmenet: DepartementUpdateOneWithoutTopicsInput
-  grades: IntFieldUpdateOperationsInput
-  name: StringFieldUpdateOperationsInput
+input TopicUpdateWithWhereUniqueWithoutDepartmentInput {
+  data: TopicUpdateWithoutDepartmentInput!
+  where: TopicWhereUniqueInput!
 }
 
 input TopicUpdateWithoutCoursesInput {
-  classrooms: ClassroomUpdateManyWithoutTopicInput
-  departmenet: DepartementUpdateOneWithoutTopicsInput
+  department: DepartmentUpdateOneWithoutTopicsInput
   grades: IntFieldUpdateOperationsInput
   name: StringFieldUpdateOperationsInput
+  students: StudentUpdateManyWithoutTopicInput
 }
 
-input TopicUpdateWithoutDepartmenetInput {
-  classrooms: ClassroomUpdateManyWithoutTopicInput
+input TopicUpdateWithoutDepartmentInput {
   courses: CourseUpdateManyWithoutTopicInput
   grades: IntFieldUpdateOperationsInput
   name: StringFieldUpdateOperationsInput
+  students: StudentUpdateManyWithoutTopicInput
 }
 
-input TopicUpsertWithWhereUniqueWithoutDepartmenetInput {
-  create: TopicCreateWithoutDepartmenetInput!
-  update: TopicUpdateWithoutDepartmenetInput!
+input TopicUpdateWithoutStudentsInput {
+  courses: CourseUpdateManyWithoutTopicInput
+  department: DepartmentUpdateOneWithoutTopicsInput
+  grades: IntFieldUpdateOperationsInput
+  name: StringFieldUpdateOperationsInput
+}
+
+input TopicUpsertWithWhereUniqueWithoutDepartmentInput {
+  create: TopicCreateWithoutDepartmentInput!
+  update: TopicUpdateWithoutDepartmentInput!
   where: TopicWhereUniqueInput!
-}
-
-input TopicUpsertWithoutClassroomsInput {
-  create: TopicCreateWithoutClassroomsInput!
-  update: TopicUpdateWithoutClassroomsInput!
 }
 
 input TopicUpsertWithoutCoursesInput {
@@ -4226,17 +4497,22 @@ input TopicUpsertWithoutCoursesInput {
   update: TopicUpdateWithoutCoursesInput!
 }
 
+input TopicUpsertWithoutStudentsInput {
+  create: TopicCreateWithoutStudentsInput!
+  update: TopicUpdateWithoutStudentsInput!
+}
+
 input TopicWhereInput {
   AND: [TopicWhereInput!]
   NOT: [TopicWhereInput!]
   OR: [TopicWhereInput!]
-  classrooms: ClassroomListRelationFilter
   courses: CourseListRelationFilter
-  departmenet: DepartementRelationFilter
-  departmenetId: IntNullableFilter
+  department: DepartmentRelationFilter
+  departmentId: IntNullableFilter
   grades: IntFilter
   id: IntFilter
   name: StringFilter
+  students: StudentListRelationFilter
 }
 
 input TopicWhereUniqueInput {
@@ -4248,11 +4524,7 @@ type User {
   createdAt: DateTime!
   disabled: Boolean!
   email: String!
-  firstName: String!
   id: Int!
-  lastName: String!
-  phone: String!
-  pictureLink: String!
   role: String!
   student: Student
   teacher: Teacher
@@ -4273,12 +4545,8 @@ type UserCountAggregate {
   createdAt: Int!
   disabled: Int!
   email: Int!
-  firstName: Int!
   id: Int!
-  lastName: Int!
   password: Int!
-  phone: Int!
-  pictureLink: Int!
   role: Int!
   updatedAt: Int!
   username: Int!
@@ -4288,12 +4556,8 @@ input UserCountOrderByAggregateInput {
   createdAt: SortOrder
   disabled: SortOrder
   email: SortOrder
-  firstName: SortOrder
   id: SortOrder
-  lastName: SortOrder
   password: SortOrder
-  phone: SortOrder
-  pictureLink: SortOrder
   role: SortOrder
   updatedAt: SortOrder
   username: SortOrder
@@ -4304,11 +4568,7 @@ input UserCreateInput {
   createdAt: DateTime
   disabled: Boolean!
   email: String!
-  firstName: String!
-  lastName: String!
   password: String!
-  phone: String!
-  pictureLink: String!
   role: String!
   student: StudentCreateNestedOneWithoutUserInput
   teacher: TeacherCreateNestedOneWithoutUserInput
@@ -4353,11 +4613,7 @@ input UserCreateWithoutAdminInput {
   createdAt: DateTime
   disabled: Boolean!
   email: String!
-  firstName: String!
-  lastName: String!
   password: String!
-  phone: String!
-  pictureLink: String!
   role: String!
   student: StudentCreateNestedOneWithoutUserInput
   teacher: TeacherCreateNestedOneWithoutUserInput
@@ -4370,11 +4626,7 @@ input UserCreateWithoutStudentInput {
   createdAt: DateTime
   disabled: Boolean!
   email: String!
-  firstName: String!
-  lastName: String!
   password: String!
-  phone: String!
-  pictureLink: String!
   role: String!
   teacher: TeacherCreateNestedOneWithoutUserInput
   updatedAt: DateTime
@@ -4386,11 +4638,7 @@ input UserCreateWithoutTeacherInput {
   createdAt: DateTime
   disabled: Boolean!
   email: String!
-  firstName: String!
-  lastName: String!
   password: String!
-  phone: String!
-  pictureLink: String!
   role: String!
   student: StudentCreateNestedOneWithoutUserInput
   updatedAt: DateTime
@@ -4406,12 +4654,8 @@ type UserGroupBy {
   createdAt: DateTime!
   disabled: Boolean!
   email: String!
-  firstName: String!
   id: Int!
-  lastName: String!
   password: String!
-  phone: String!
-  pictureLink: String!
   role: String!
   updatedAt: DateTime!
   username: String!
@@ -4421,12 +4665,8 @@ type UserMaxAggregate {
   createdAt: DateTime
   disabled: Boolean
   email: String
-  firstName: String
   id: Int
-  lastName: String
   password: String
-  phone: String
-  pictureLink: String
   role: String
   updatedAt: DateTime
   username: String
@@ -4436,12 +4676,8 @@ input UserMaxOrderByAggregateInput {
   createdAt: SortOrder
   disabled: SortOrder
   email: SortOrder
-  firstName: SortOrder
   id: SortOrder
-  lastName: SortOrder
   password: SortOrder
-  phone: SortOrder
-  pictureLink: SortOrder
   role: SortOrder
   updatedAt: SortOrder
   username: SortOrder
@@ -4451,12 +4687,8 @@ type UserMinAggregate {
   createdAt: DateTime
   disabled: Boolean
   email: String
-  firstName: String
   id: Int
-  lastName: String
   password: String
-  phone: String
-  pictureLink: String
   role: String
   updatedAt: DateTime
   username: String
@@ -4466,12 +4698,8 @@ input UserMinOrderByAggregateInput {
   createdAt: SortOrder
   disabled: SortOrder
   email: SortOrder
-  firstName: SortOrder
   id: SortOrder
-  lastName: SortOrder
   password: SortOrder
-  phone: SortOrder
-  pictureLink: SortOrder
   role: SortOrder
   updatedAt: SortOrder
   username: SortOrder
@@ -4486,12 +4714,8 @@ input UserOrderByWithAggregationInput {
   createdAt: SortOrder
   disabled: SortOrder
   email: SortOrder
-  firstName: SortOrder
   id: SortOrder
-  lastName: SortOrder
   password: SortOrder
-  phone: SortOrder
-  pictureLink: SortOrder
   role: SortOrder
   updatedAt: SortOrder
   username: SortOrder
@@ -4502,12 +4726,8 @@ input UserOrderByWithRelationInput {
   createdAt: SortOrder
   disabled: SortOrder
   email: SortOrder
-  firstName: SortOrder
   id: SortOrder
-  lastName: SortOrder
   password: SortOrder
-  phone: SortOrder
-  pictureLink: SortOrder
   role: SortOrder
   student: StudentOrderByWithRelationInput
   teacher: TeacherOrderByWithRelationInput
@@ -4524,12 +4744,8 @@ enum UserScalarFieldEnum {
   createdAt
   disabled
   email
-  firstName
   id
-  lastName
   password
-  phone
-  pictureLink
   role
   updatedAt
   username
@@ -4542,12 +4758,8 @@ input UserScalarWhereWithAggregatesInput {
   createdAt: DateTimeWithAggregatesFilter
   disabled: BoolWithAggregatesFilter
   email: StringWithAggregatesFilter
-  firstName: StringWithAggregatesFilter
   id: IntWithAggregatesFilter
-  lastName: StringWithAggregatesFilter
   password: StringWithAggregatesFilter
-  phone: StringWithAggregatesFilter
-  pictureLink: StringWithAggregatesFilter
   role: StringWithAggregatesFilter
   updatedAt: DateTimeWithAggregatesFilter
   username: StringWithAggregatesFilter
@@ -4566,11 +4778,7 @@ input UserUpdateInput {
   createdAt: DateTimeFieldUpdateOperationsInput
   disabled: BoolFieldUpdateOperationsInput
   email: StringFieldUpdateOperationsInput
-  firstName: StringFieldUpdateOperationsInput
-  lastName: StringFieldUpdateOperationsInput
   password: StringFieldUpdateOperationsInput
-  phone: StringFieldUpdateOperationsInput
-  pictureLink: StringFieldUpdateOperationsInput
   role: StringFieldUpdateOperationsInput
   student: StudentUpdateOneWithoutUserInput
   teacher: TeacherUpdateOneWithoutUserInput
@@ -4582,11 +4790,7 @@ input UserUpdateManyMutationInput {
   createdAt: DateTimeFieldUpdateOperationsInput
   disabled: BoolFieldUpdateOperationsInput
   email: StringFieldUpdateOperationsInput
-  firstName: StringFieldUpdateOperationsInput
-  lastName: StringFieldUpdateOperationsInput
   password: StringFieldUpdateOperationsInput
-  phone: StringFieldUpdateOperationsInput
-  pictureLink: StringFieldUpdateOperationsInput
   role: StringFieldUpdateOperationsInput
   updatedAt: DateTimeFieldUpdateOperationsInput
   username: StringFieldUpdateOperationsInput
@@ -4620,11 +4824,7 @@ input UserUpdateWithoutAdminInput {
   createdAt: DateTimeFieldUpdateOperationsInput
   disabled: BoolFieldUpdateOperationsInput
   email: StringFieldUpdateOperationsInput
-  firstName: StringFieldUpdateOperationsInput
-  lastName: StringFieldUpdateOperationsInput
   password: StringFieldUpdateOperationsInput
-  phone: StringFieldUpdateOperationsInput
-  pictureLink: StringFieldUpdateOperationsInput
   role: StringFieldUpdateOperationsInput
   student: StudentUpdateOneWithoutUserInput
   teacher: TeacherUpdateOneWithoutUserInput
@@ -4637,11 +4837,7 @@ input UserUpdateWithoutStudentInput {
   createdAt: DateTimeFieldUpdateOperationsInput
   disabled: BoolFieldUpdateOperationsInput
   email: StringFieldUpdateOperationsInput
-  firstName: StringFieldUpdateOperationsInput
-  lastName: StringFieldUpdateOperationsInput
   password: StringFieldUpdateOperationsInput
-  phone: StringFieldUpdateOperationsInput
-  pictureLink: StringFieldUpdateOperationsInput
   role: StringFieldUpdateOperationsInput
   teacher: TeacherUpdateOneWithoutUserInput
   updatedAt: DateTimeFieldUpdateOperationsInput
@@ -4653,11 +4849,7 @@ input UserUpdateWithoutTeacherInput {
   createdAt: DateTimeFieldUpdateOperationsInput
   disabled: BoolFieldUpdateOperationsInput
   email: StringFieldUpdateOperationsInput
-  firstName: StringFieldUpdateOperationsInput
-  lastName: StringFieldUpdateOperationsInput
   password: StringFieldUpdateOperationsInput
-  phone: StringFieldUpdateOperationsInput
-  pictureLink: StringFieldUpdateOperationsInput
   role: StringFieldUpdateOperationsInput
   student: StudentUpdateOneWithoutUserInput
   updatedAt: DateTimeFieldUpdateOperationsInput
@@ -4687,12 +4879,8 @@ input UserWhereInput {
   createdAt: DateTimeFilter
   disabled: BoolFilter
   email: StringFilter
-  firstName: StringFilter
   id: IntFilter
-  lastName: StringFilter
   password: StringFilter
-  phone: StringFilter
-  pictureLink: StringFilter
   role: StringFilter
   student: StudentRelationFilter
   teacher: TeacherRelationFilter

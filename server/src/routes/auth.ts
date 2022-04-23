@@ -2,13 +2,34 @@ import { Handler } from "express";
 import { sign, verify } from "jsonwebtoken";
 import { getConnection } from "../db";
 
-export const register: Handler = (req, res) => {
+export const register: Handler = async (req, res) => {
   const prisma = getConnection();
 
-  prisma.student.create({
+  const { topic, grade, firstName, lastName, ...others } = req.body;
+  const user = await prisma.user.create({
     data: {
-      ...req.body,
+      disabled: true,
+      role: "student",
+      ...others,
     },
+  });
+
+  const student = await prisma.student.create({
+    data: {
+      firstName,
+      lastName,
+      grade: parseInt(grade),
+      topicId: parseInt(topic),
+      userId: user.id,
+    },
+  });
+
+  if (!student) {
+    return res.status(400).send();
+  }
+
+  return res.status(201).json({
+    message: "created",
   });
 };
 
@@ -29,6 +50,11 @@ export const login: Handler = async (req, res) => {
           },
         },
       ],
+    },
+    include: {
+      admin: true,
+      student: true,
+      teacher: true,
     },
   });
 
@@ -69,6 +95,11 @@ export const refresh: Handler = async (req, res) => {
   const user = await prisma.user.findUnique({
     where: {
       id: userId,
+    },
+    include: {
+      admin: true,
+      student: true,
+      teacher: true,
     },
   });
 

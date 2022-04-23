@@ -1,181 +1,159 @@
 datasource db {
-   url      = env("DATABASE_URL")
-   provider = "sqlite"
+	url = env("DATABASE_URL")
+	provider = "sqlite"
 }
 
 generator client {
-   provider = "prisma-client-js"
+	provider = "prisma-client-js"
 }
 
 generator typegraphql {
-   provider = "typegraphql-prisma"
-   output   = "../prisma/generated/type-graphql"
+	provider = "typegraphql-prisma"
+	output   = "../prisma/generated/type-graphql"
 }
 
 model User {
-   id          Int      @id @default(autoincrement())
-   firstName   String
-   lastName    String
-   username    String
-   phone       String
-   email       String
-   /// @TypeGraphQL.omit(output: true)
-   password    String
-   role        String
-   disabled    Boolean
-   createdAt   DateTime @default(now())
-   updatedAt   DateTime @updatedAt
-   pictureLink String
-   teacher     Teacher?
-   admin       Admin?
-   student     Student?
-
-   @@map("users")
+	id Int @id @default(autoincrement())
+	username String 
+	email String 
+	/// @TypeGraphQL.omit(output: true)
+	password String 
+	role String 
+	disabled Boolean 
+	createdAt DateTime @default(now())
+	updatedAt DateTime @updatedAt
+	teacher Teacher?
+	admin Admin?
+	student Student?
 }
 
 model Student {
-   id          Int          @id @default(autoincrement())
-   grade       Int
-   classroom   Classroom?   @relation(fields: [classroomId], references: [id])
-   classroomId Int?
-   user        User         @relation(fields: [userId], references: [id])
-   userId      Int          @unique
-   submissions Submission[]
-
-   @@map("students")
+	id Int @id @default(autoincrement())
+	grade Int 
+	firstName String 
+	lastName String 
+	user User @relation(fields:[userId], references:[id])
+	userId Int
+	submissions Submission[]
+	topic Topic? @relation(fields:[topicId], references:[id])
+	topicId Int?
 }
 
 model Teacher {
-   id      Int      @id @default(autoincrement())
-   grade   String
-   user    User     @relation(fields: [userId], references: [id])
-   userId  Int      @unique
-   courses Course[]
-
-   @@map("teachers")
+	id Int @id @default(autoincrement())
+	firstName String 
+	lastName String 
+	user User @relation(fields:[userId], references:[id])
+	userId Int
+	courses Course[]
 }
 
 model Admin {
-   id     Int    @id @default(autoincrement())
-   role   String
-   user   User   @relation(fields: [userId], references: [id])
-   userId Int    @unique
-
-   @@map("admins")
+	id Int @id @default(autoincrement())
+	lastName String 
+	firstName String 
+	user User @relation(fields:[userId], references:[id])
+	userId Int
 }
 
-model Departement {
-   id     Int     @id @default(autoincrement())
-   name   String
-   topics Topic[]
-
-   @@map("departements")
+model Department {
+	id Int @id @default(autoincrement())
+	name String 
+	topics Topic[]
 }
 
 model Topic {
-   id            Int          @id @default(autoincrement())
-   name          String
-   grades        Int
-   departmenet   Departement? @relation(fields: [departmenetId], references: [id])
-   departmenetId Int?
-   courses       Course[]
-   classrooms    Classroom[]
-
-   @@map("topics")
+	id Int @id @default(autoincrement())
+	name String 
+	grades Int 
+	department Department? @relation(fields:[departmentId], references:[id])
+	departmentId Int?
+	courses Course[]
+	students Student[]
 }
 
 model Course {
-   id          Int          @id @default(autoincrement())
-   title       String
-   enabled     Boolean
-   createdAt   DateTime     @default(now())
-   updatedAt   DateTime     @updatedAt
-   topic       Topic?       @relation(fields: [topicId], references: [id])
-   topicId     Int?
-   assignments Assignment[]
-   teacher     Teacher?     @relation(fields: [teacherId], references: [id])
-   teacherId   Int?
-   meetings    Meeting[]
-   content     Content      @relation(fields: [contentId], references: [id])
-   contentId   Int          @unique
-
-   @@map("courses")
+	id Int @id @default(autoincrement())
+	title String 
+	grade Int 
+	description String? 
+	published Boolean @default(false)
+	createdAt DateTime @default(now())
+	updatedAt DateTime @updatedAt
+	topic Topic? @relation(fields:[topicId], references:[id])
+	topicId Int?
+	assignments Assignment[]
+	teacher Teacher? @relation(fields:[teacherId], references:[id])
+	teacherId Int?
+	meetings Meeting[]
+	lessons Lesson[]
 }
 
 model Assignment {
-   id          Int          @id @default(autoincrement())
-   deadline    DateTime
-   createdAt   DateTime     @default(now())
-   updatedAt   DateTime     @updatedAt
-   course      Course?      @relation(fields: [courseId], references: [id])
-   courseId    Int?
-   submissions Submission[]
-   content     Content      @relation(fields: [contentId], references: [id])
-   contentId   Int          @unique
-
-   @@map("assignments")
-}
-
-model Classroom {
-   id        Int       @id @default(autoincrement())
-   name      String
-   createdAt DateTime  @default(now())
-   updatedAt DateTime  @updatedAt
-   students  Student[]
-   topic     Topic?    @relation(fields: [topicId], references: [id])
-   topicId   Int?
-
-   @@map("classrooms")
+	id Int @id @default(autoincrement())
+	deadline DateTime 
+	createdAt DateTime @default(now())
+	updatedAt DateTime @updatedAt
+	published Boolean? @default(false)
+	course Course? @relation(fields:[courseId], references:[id])
+	courseId Int?
+	submissions Submission[]
+	content Content @relation(fields:[contentId], references:[id])
+	contentId Int
 }
 
 model Meeting {
-   id        Int      @id @default(autoincrement())
-   title     String
-   start     DateTime
-   duration  DateTime
-   createdAt DateTime @default(now())
-   updatedAt DateTime @updatedAt
-   course    Course?  @relation(fields: [courseId], references: [id])
-   courseId  Int?
-
-   @@map("meetings")
+	id Int @id @default(autoincrement())
+	title String 
+	start DateTime 
+	duration DateTime 
+	createdAt DateTime @default(now())
+	link String? 
+	updatedAt DateTime @updatedAt
+	course Course? @relation(fields:[courseId], references:[id])
+	courseId Int?
 }
 
 model Submission {
-   id            Int         @id @default(autoincrement())
-   createdAt     DateTime    @default(now())
-   updatedAt     DateTime    @updatedAt
-   student       Student?    @relation(fields: [studentId], references: [id])
-   studentId     Int?
-   assignement   Assignment? @relation(fields: [assignementId], references: [id])
-   assignementId Int?
-   content       Content     @relation(fields: [contentId], references: [id])
-   contentId     Int         @unique
-
-   @@map("submissions")
+	id Int @id @default(autoincrement())
+	createdAt DateTime @default(now())
+	updatedAt DateTime @updatedAt
+	student Student? @relation(fields:[studentId], references:[id])
+	studentId Int?
+	assignment Assignment? @relation(fields:[assignmentId], references:[id])
+	assignmentId Int?
+	content Content @relation(fields:[contentId], references:[id])
+	contentId Int
 }
 
 model Content {
-   id          Int         @id @default(autoincrement())
-   createdAt   DateTime    @default(now())
-   updatedAt   DateTime    @updatedAt
-   content     String
-   files       File[]
-   assignments Assignment?
-   submissions Submission?
-   courses     Course?
-
-   @@map("contents")
+	id Int @id @default(autoincrement())
+	createdAt DateTime @default(now())
+	updatedAt DateTime @updatedAt
+	content String 
+	files File[]
+	assignment Assignment?
+	submission Submission?
+	lesson Lesson?
 }
 
 model File {
-   id        Int      @id @default(autoincrement())
-   createdAt DateTime @default(now())
-   updatedAt DateTime @updatedAt
-   type      String
-   link      String
-   content   Content? @relation(fields: [contentId], references: [id])
-   contentId Int?
+	id Int @id @default(autoincrement())
+	createdAt DateTime @default(now())
+	updatedAt DateTime @updatedAt
+	type String 
+	link String 
+	content Content? @relation(fields:[contentId], references:[id])
+	contentId Int?
+}
 
-   @@map("files")
+model Lesson {
+	id Int @id @default(autoincrement())
+	createdAt DateTime @default(now())
+	updatedAt DateTime @updatedAt
+	published Boolean @default(false)
+	content Content @relation(fields:[contentId], references:[id])
+	contentId Int
+	lessons Course? @relation(fields:[lessonsId], references:[id])
+	lessonsId Int?
 }

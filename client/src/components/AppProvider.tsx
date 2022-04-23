@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { NotificationsProvider } from "@mantine/notifications";
 import {
   ColorScheme,
   ColorSchemeProvider,
@@ -134,7 +135,9 @@ export function AppProvider({ children }: React.ComponentPropsWithRef<"div">) {
             }}
           >
             <GlobalStyles />
-            <TypographyStylesProvider>{children}</TypographyStylesProvider>
+            <NotificationsProvider>
+              <TypographyStylesProvider>{children}</TypographyStylesProvider>
+            </NotificationsProvider>
           </MantineProvider>
         </ColorSchemeProvider>
       </LangContext.Provider>

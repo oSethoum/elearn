@@ -17,6 +17,7 @@ import { UserContext } from "../context/user";
 const useStyles = createStyles((theme) => ({
   wrapper: {
     position: "relative",
+    height: "100vh",
     paddingTop: 220,
     paddingBottom: 130,
     backgroundImage:

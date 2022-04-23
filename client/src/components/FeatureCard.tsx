@@ -13,7 +13,7 @@ export interface IFeatureCardProps extends ComponentPropsWithRef<"div"> {
 }
 export const FeatureCard: FC<IFeatureCardProps> = ({ color, title, icon }) => {
   return (
-    <Paper withBorder>
+    <Paper withBorder shadow="xs">
       <Box
         style={{
           backgroundColor: color,

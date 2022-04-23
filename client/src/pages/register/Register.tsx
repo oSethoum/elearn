@@ -14,7 +14,8 @@ import {
   useMantineTheme,
   Title,
 } from "@mantine/core";
-import { Link, Navigate } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
+import { showNotification } from "@mantine/notifications";
 import {
   BackButton,
   ColorSchemeButton,
@@ -22,40 +23,12 @@ import {
   Header,
   Logo,
 } from "../../components";
+import {} from "react-icons/fa";
 import z from "zod";
 import { useTranslation } from "react-i18next";
 import { useForm, zodResolver } from "@mantine/form";
 import { useContext, useEffect, useState } from "react";
 import { UserContext } from "../../context/user";
-
-function signup(values) {
-  const { grade, ...user } = values;
-
-  const body = {
-    grade,
-    user: {
-      create: {
-        ...user,
-      },
-    },
-  };
-
-  return fetch("/api/signup", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(body),
-  })
-    .then((res) => {
-      if (res.status === 201) {
-        return true;
-      }
-    })
-    .catch((err) => {
-      return err;
-    });
-}
 
 export const Register = () => {
   const theme = useMantineTheme();
@@ -64,7 +37,40 @@ export const Register = () => {
   const [topics, setTopics] = useState<
     { value: string; label: string; grades: number }[]
   >([]);
-  const [isFetching, setIsFetching] = useState(true);
+
+  const navigate = useNavigate();
+
+  function register(values) {
+    fetch("/api/register", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(values),
+    })
+      .then((res) => {
+        if (res.status === 201) {
+          showNotification({
+            title: "Success",
+            message: "You have successfully registered",
+            color: "green",
+          });
+          navigate("/");
+        }
+
+        if (res.status === 400) {
+          showNotification({
+            title: "Failed",
+            message: "Something went wrong",
+            color: "green",
+          });
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
+
   const schema = z.object({
     firstName: z.string().min(4, "minimum 4"),
     lastName: z.string().min(4, "minimum 4"),
@@ -85,9 +91,9 @@ export const Register = () => {
             label: topic.name,
             value: topic.id.toString(),
             grades: topic.grades,
+            group: topic.department.name,
           }))
         );
-        setIsFetching(false);
       })
       .catch((err) => console.log(err));
   }, []);
@@ -106,11 +112,11 @@ export const Register = () => {
   });
 
   useEffect(() => {
-    const cuurentTopic = topics.find((t) => t.value === form.values.topic);
+    const currentTopic = topics.find((t) => t.value === form.values.topic);
     const computerGrades: string[] = [];
 
-    if (cuurentTopic) {
-      for (let i = 1; i <= cuurentTopic.grades; i++) {
+    if (currentTopic) {
+      for (let i = 1; i <= currentTopic.grades; i++) {
         computerGrades.push(i.toString());
       }
     }
@@ -141,7 +147,7 @@ export const Register = () => {
           <Space h={10} />
           <form
             onSubmit={form.onSubmit((values) => {
-              signup(values);
+              register(values);
             })}
             noValidate
           >

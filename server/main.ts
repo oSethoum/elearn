@@ -16,7 +16,7 @@ async function main() {
 
   publicRoutes(app);
   routes.setup(app);
-  //await graphql.setup(app);
+  await graphql.setup(app);
 
   app.use(express.static("public"));
   app.get("*", (req, res) => {

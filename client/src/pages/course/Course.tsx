@@ -1,5 +1,7 @@
-import { Box, Group } from "@mantine/core";
+import { Box, Center, Container, Group, Tabs } from "@mantine/core";
 import { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
+import { FaBook, FaBookOpen, FaVideo } from "react-icons/fa";
 import { useParams } from "react-router-dom";
 import {
   BackButton,
@@ -12,6 +14,7 @@ import {
 export const Course = () => {
   const params = useParams();
   const [course, setCourse] = useState(null);
+  const { t } = useTranslation();
 
   useEffect(() => {
     fetch(`/api/course/${params.id}`).then((res) => {
@@ -22,7 +25,13 @@ export const Course = () => {
   }, []);
 
   return (
-    <Box sx={{ display: "flex", height: "100vh", flexDirection: "column" }}>
+    <Box
+      sx={{
+        display: "flex",
+        height: "100vh",
+        flexDirection: "column",
+      }}
+    >
       <Header
         rightSide={
           <Group direction="row">
@@ -34,7 +43,25 @@ export const Course = () => {
         withBorder
         responsive
       />
-      <Box sx={{ flexGrow: 1 }}> </Box>
+      <Box sx={{ flexGrow: 1 }}>
+        <Tabs grow>
+          <Tabs.Tab
+            icon={<FaBook />}
+            label={t("lessons")}
+            color="red"
+          ></Tabs.Tab>
+          <Tabs.Tab
+            icon={<FaBookOpen />}
+            label={t("homeWorks")}
+            color="green"
+          ></Tabs.Tab>
+          <Tabs.Tab
+            icon={<FaVideo />}
+            label={t("zoomMeetings")}
+            color="blue"
+          ></Tabs.Tab>
+        </Tabs>
+      </Box>
       <Footer withBorder />
     </Box>
   );

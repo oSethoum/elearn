@@ -1,13 +1,6 @@
 import { createContext } from "react";
 
-export interface User {
-  id: number;
-  email: string;
-  username: string;
-  firstName: string;
-  lastName: string;
-  pictureLink: string;
-}
+import { User } from "../@types";
 
 interface IUserContext {
   user: User | null;

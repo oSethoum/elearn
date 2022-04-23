@@ -60,7 +60,6 @@ export function Home() {
         </Group>
       </Header>
       <HeroSection />
-      <Divider size="md" />
       {/* Features section */}
       <Box
         sx={{

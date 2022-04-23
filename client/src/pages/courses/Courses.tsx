@@ -1,21 +1,64 @@
-import { Text, ActionIcon, Box, Container, Group, Paper } from "@mantine/core";
+import { Text, Box, Container, Group, Paper } from "@mantine/core";
 import CourseCard from "../../components/CourseCard";
 import { useMantineTheme } from "@mantine/core";
 import { useMediaQuery } from "@mantine/hooks";
-import { FiFilter } from "react-icons/fi";
+import { gql, useQuery } from "@apollo/client";
+
 import {
   UserButton,
   ColorSchemeButton,
   Header,
   BackButton,
   Footer,
+  Loader,
 } from "../../components";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
+import { UserContext } from "../../context/user";
 
 export function Courses() {
   const theme = useMantineTheme();
   const tablet = useMediaQuery(`(max-width: ${theme.breakpoints.md}px)`);
+  const { user } = useContext(UserContext);
   const [opened, setOpened] = useState(false);
+
+  const { loading, data: courses } = useQuery(
+    gql`
+      query CoursesQuery($where: CourseWhereInput) {
+        courses(where: $where) {
+          id
+          title
+          description
+          teacher {
+            firstName
+            lastName
+          }
+          _count {
+            lessons
+            assignments
+            meetings
+          }
+        }
+      }
+    `,
+    {
+      variables: {
+        where: user?.student
+          ? {
+              AND: [
+                { topicId: { equals: user?.student?.topicId } },
+                { grade: { equals: user?.student?.grade } },
+              ],
+            }
+          : user?.teacher
+          ? {
+              teacherId: { equals: user?.teacher?.id },
+            }
+          : {},
+      },
+    }
+  );
+
+  console.log(user);
 
   useEffect(() => {
     if (!tablet) {
@@ -34,49 +77,33 @@ export function Courses() {
         }
         leftSide={<BackButton />}
         withBorder
-        responsive
       >
         <Text weight="bold" align="center" size="xl">
           Courses
         </Text>
       </Header>
-      <Container my={20} size="xl" sx={{ display: "flex", gap: 15 }}>
-        <Box>
-          <Paper
-            withBorder
-            p={10}
-            mb={10}
-            sx={{ position: "sticky", top: 65, zIndex: 2 }}
-          >
-            <Group position="apart">
-              <h2 style={{ marginTop: 0, marginBottom: 0 }}>Courses</h2>
-              {tablet && (
-                <ActionIcon
-                  onClick={() => setOpened(!opened)}
-                  size="xl"
-                  radius="xl"
-                >
-                  <FiFilter size={28} />
-                </ActionIcon>
-              )}
-            </Group>
-          </Paper>
-
-          <CourseCard
-            title="Artificial Intelligence"
-            description="
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-          Laudantium voluptatum dolorum quasi? Soluta ex nemo tempora
-          odit quas officia ullam, dolorum architecto. Ratione excepturi
-                  tenetur veniam iste exercitationem explicabo culpa.
-                "
-            video={true}
-            meeting={true}
-            author="Benkadour"
-            id="1"
-            src="https://cdnuploads.aa.com.tr/uploads/Contents/2020/12/02/thumbs_b_c_d964d85c0b58d7f3b08c1b17631787d9.jpg?v=220851"
-          />
-        </Box>
+      <Container
+        my={20}
+        size="xl"
+        sx={{ display: "flex", gap: 15, flexDirection: "column" }}
+      >
+        {loading ? (
+          <Loader />
+        ) : (
+          courses.courses.map((course) => (
+            <CourseCard
+              key={course.id}
+              title={course.title}
+              description={course.description}
+              meeting={course._count.meetings > 0}
+              author={
+                course.teacher &&
+                course.teacher?.firstName + " " + course.teacher?.lastName
+              }
+              id={course.id}
+            />
+          ))
+        )}
       </Container>
       <Footer withBorder />
     </>

@@ -19,7 +19,7 @@ import {
 } from "@mantine/core";
 import { useMediaQuery, useWindowScroll } from "@mantine/hooks";
 import { Logo } from "./Logo";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate, useNavigationType } from "react-router-dom";
 import { FaUniversity, FaBook, FaRocket } from "react-icons/fa";
 import { UserContext } from "../context/user";
 
@@ -93,6 +93,7 @@ export function Header({
   }, [tablet]);
 
   const { user } = useContext(UserContext);
+  const navigate = useNavigate();
 
   return (
     <Box className={classes.root}>
@@ -144,11 +145,19 @@ export function Header({
           </Button>
           <Space h={15} />
           <Button leftIcon={<FaUniversity />} size="lg" color="green" fullWidth>
-            Departements
+            Departments
           </Button>
           <Space h={15} />
           {user && (
-            <Button leftIcon={<FaBook />} size="lg" color="red" fullWidth>
+            <Button
+              leftIcon={<FaBook />}
+              size="lg"
+              color="red"
+              onClick={() => {
+                navigate("/courses");
+              }}
+              fullWidth
+            >
               Courses
             </Button>
           )}

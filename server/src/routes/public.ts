@@ -8,7 +8,7 @@ export const publicRoutes = (app: Application) => {
     prisma.topic
       .findMany({
         include: {
-          departmenet: {
+          department: {
             select: {
               name: true,
             },
@@ -28,7 +28,7 @@ export const publicRoutes = (app: Application) => {
           id: Number(id),
         },
         include: {
-          departmenet: {
+          department: {
             select: {
               name: true,
             },
