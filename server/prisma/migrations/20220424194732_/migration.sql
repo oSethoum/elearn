@@ -26,7 +26,7 @@ CREATE TABLE "Student" (
 CREATE TABLE "Teacher" (
     "id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
     "firstName" TEXT NOT NULL,
-    "lasrName" TEXT NOT NULL,
+    "lastName" TEXT NOT NULL,
     "userId" INTEGER NOT NULL,
     CONSTRAINT "Teacher_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User" ("id") ON DELETE RESTRICT ON UPDATE CASCADE
 );
@@ -102,10 +102,10 @@ CREATE TABLE "Submission" (
     "createdAt" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" DATETIME NOT NULL,
     "studentId" INTEGER,
-    "assignementId" INTEGER,
+    "assignmentId" INTEGER,
     "contentId" INTEGER NOT NULL,
     CONSTRAINT "Submission_studentId_fkey" FOREIGN KEY ("studentId") REFERENCES "Student" ("id") ON DELETE SET NULL ON UPDATE CASCADE,
-    CONSTRAINT "Submission_assignementId_fkey" FOREIGN KEY ("assignementId") REFERENCES "Assignment" ("id") ON DELETE SET NULL ON UPDATE CASCADE,
+    CONSTRAINT "Submission_assignmentId_fkey" FOREIGN KEY ("assignmentId") REFERENCES "Assignment" ("id") ON DELETE SET NULL ON UPDATE CASCADE,
     CONSTRAINT "Submission_contentId_fkey" FOREIGN KEY ("contentId") REFERENCES "Content" ("id") ON DELETE RESTRICT ON UPDATE CASCADE
 );
 
@@ -133,6 +133,7 @@ CREATE TABLE "Lesson" (
     "id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
     "createdAt" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" DATETIME NOT NULL,
+    "index" INTEGER NOT NULL,
     "published" BOOLEAN NOT NULL DEFAULT false,
     "contentId" INTEGER NOT NULL,
     "lessonsId" INTEGER,

@@ -2178,6 +2178,7 @@ type Lesson {
   contentId: Int!
   createdAt: DateTime!
   id: Int!
+  index: Int!
   lessons: Course
   lessonsId: Int
   published: Boolean!
@@ -2187,12 +2188,14 @@ type Lesson {
 type LessonAvgAggregate {
   contentId: Float
   id: Float
+  index: Float
   lessonsId: Float
 }
 
 input LessonAvgOrderByAggregateInput {
   contentId: SortOrder
   id: SortOrder
+  index: SortOrder
   lessonsId: SortOrder
 }
 
@@ -2201,6 +2204,7 @@ type LessonCountAggregate {
   contentId: Int!
   createdAt: Int!
   id: Int!
+  index: Int!
   lessonsId: Int!
   published: Int!
   updatedAt: Int!
@@ -2210,6 +2214,7 @@ input LessonCountOrderByAggregateInput {
   contentId: SortOrder
   createdAt: SortOrder
   id: SortOrder
+  index: SortOrder
   lessonsId: SortOrder
   published: SortOrder
   updatedAt: SortOrder
@@ -2218,6 +2223,7 @@ input LessonCountOrderByAggregateInput {
 input LessonCreateInput {
   content: ContentCreateNestedOneWithoutLessonInput!
   createdAt: DateTime
+  index: Int!
   lessons: CourseCreateNestedOneWithoutLessonsInput
   published: Boolean
   updatedAt: DateTime
@@ -2247,6 +2253,7 @@ input LessonCreateOrConnectWithoutLessonsInput {
 
 input LessonCreateWithoutContentInput {
   createdAt: DateTime
+  index: Int!
   lessons: CourseCreateNestedOneWithoutLessonsInput
   published: Boolean
   updatedAt: DateTime
@@ -2255,6 +2262,7 @@ input LessonCreateWithoutContentInput {
 input LessonCreateWithoutLessonsInput {
   content: ContentCreateNestedOneWithoutLessonInput!
   createdAt: DateTime
+  index: Int!
   published: Boolean
   updatedAt: DateTime
 }
@@ -2268,6 +2276,7 @@ type LessonGroupBy {
   contentId: Int!
   createdAt: DateTime!
   id: Int!
+  index: Int!
   lessonsId: Int
   published: Boolean!
   updatedAt: DateTime!
@@ -2283,6 +2292,7 @@ type LessonMaxAggregate {
   contentId: Int
   createdAt: DateTime
   id: Int
+  index: Int
   lessonsId: Int
   published: Boolean
   updatedAt: DateTime
@@ -2292,6 +2302,7 @@ input LessonMaxOrderByAggregateInput {
   contentId: SortOrder
   createdAt: SortOrder
   id: SortOrder
+  index: SortOrder
   lessonsId: SortOrder
   published: SortOrder
   updatedAt: SortOrder
@@ -2301,6 +2312,7 @@ type LessonMinAggregate {
   contentId: Int
   createdAt: DateTime
   id: Int
+  index: Int
   lessonsId: Int
   published: Boolean
   updatedAt: DateTime
@@ -2310,6 +2322,7 @@ input LessonMinOrderByAggregateInput {
   contentId: SortOrder
   createdAt: SortOrder
   id: SortOrder
+  index: SortOrder
   lessonsId: SortOrder
   published: SortOrder
   updatedAt: SortOrder
@@ -2328,6 +2341,7 @@ input LessonOrderByWithAggregationInput {
   contentId: SortOrder
   createdAt: SortOrder
   id: SortOrder
+  index: SortOrder
   lessonsId: SortOrder
   published: SortOrder
   updatedAt: SortOrder
@@ -2338,6 +2352,7 @@ input LessonOrderByWithRelationInput {
   contentId: SortOrder
   createdAt: SortOrder
   id: SortOrder
+  index: SortOrder
   lessons: CourseOrderByWithRelationInput
   lessonsId: SortOrder
   published: SortOrder
@@ -2353,6 +2368,7 @@ enum LessonScalarFieldEnum {
   contentId
   createdAt
   id
+  index
   lessonsId
   published
   updatedAt
@@ -2365,6 +2381,7 @@ input LessonScalarWhereInput {
   contentId: IntFilter
   createdAt: DateTimeFilter
   id: IntFilter
+  index: IntFilter
   lessonsId: IntNullableFilter
   published: BoolFilter
   updatedAt: DateTimeFilter
@@ -2377,6 +2394,7 @@ input LessonScalarWhereWithAggregatesInput {
   contentId: IntWithAggregatesFilter
   createdAt: DateTimeWithAggregatesFilter
   id: IntWithAggregatesFilter
+  index: IntWithAggregatesFilter
   lessonsId: IntNullableWithAggregatesFilter
   published: BoolWithAggregatesFilter
   updatedAt: DateTimeWithAggregatesFilter
@@ -2385,18 +2403,21 @@ input LessonScalarWhereWithAggregatesInput {
 type LessonSumAggregate {
   contentId: Int
   id: Int
+  index: Int
   lessonsId: Int
 }
 
 input LessonSumOrderByAggregateInput {
   contentId: SortOrder
   id: SortOrder
+  index: SortOrder
   lessonsId: SortOrder
 }
 
 input LessonUpdateInput {
   content: ContentUpdateOneRequiredWithoutLessonInput
   createdAt: DateTimeFieldUpdateOperationsInput
+  index: IntFieldUpdateOperationsInput
   lessons: CourseUpdateOneWithoutLessonsInput
   published: BoolFieldUpdateOperationsInput
   updatedAt: DateTimeFieldUpdateOperationsInput
@@ -2404,6 +2425,7 @@ input LessonUpdateInput {
 
 input LessonUpdateManyMutationInput {
   createdAt: DateTimeFieldUpdateOperationsInput
+  index: IntFieldUpdateOperationsInput
   published: BoolFieldUpdateOperationsInput
   updatedAt: DateTimeFieldUpdateOperationsInput
 }
@@ -2443,6 +2465,7 @@ input LessonUpdateWithWhereUniqueWithoutLessonsInput {
 
 input LessonUpdateWithoutContentInput {
   createdAt: DateTimeFieldUpdateOperationsInput
+  index: IntFieldUpdateOperationsInput
   lessons: CourseUpdateOneWithoutLessonsInput
   published: BoolFieldUpdateOperationsInput
   updatedAt: DateTimeFieldUpdateOperationsInput
@@ -2451,6 +2474,7 @@ input LessonUpdateWithoutContentInput {
 input LessonUpdateWithoutLessonsInput {
   content: ContentUpdateOneRequiredWithoutLessonInput
   createdAt: DateTimeFieldUpdateOperationsInput
+  index: IntFieldUpdateOperationsInput
   published: BoolFieldUpdateOperationsInput
   updatedAt: DateTimeFieldUpdateOperationsInput
 }
@@ -2474,6 +2498,7 @@ input LessonWhereInput {
   contentId: IntFilter
   createdAt: DateTimeFilter
   id: IntFilter
+  index: IntFilter
   lessons: CourseRelationFilter
   lessonsId: IntNullableFilter
   published: BoolFilter

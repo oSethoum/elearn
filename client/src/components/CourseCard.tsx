@@ -6,12 +6,9 @@ import {
   Box,
   Button,
   useMantineTheme,
-  Space,
-  Paper,
   Divider,
-  Title,
+  Tooltip,
 } from "@mantine/core";
-import { useMediaQuery } from "@mantine/hooks";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 
@@ -20,32 +17,62 @@ export interface ICourseCardProps {
   author: string;
   title: string;
   meeting: Boolean;
+  lessons: number;
+  assignments: number;
   description: string;
+  edit?: boolean;
 }
 
 export default function CourseCard({
   id,
   title,
   author,
-  meeting,
+  assignments,
+  lessons,
   description,
+  edit,
 }: ICourseCardProps) {
-  const theme = useMantineTheme();
+  const { colors, colorScheme } = useMantineTheme();
   const { t } = useTranslation();
-  const tablet = useMediaQuery(`(max-width: ${theme.breakpoints.md}px)`);
   return (
-    <Card shadow="xs">
-      <Text weight="bold" size="lg">
-        {title}
-      </Text>
-      <Divider my={5} />
-      <Box sx={{ minHeight: 50 }}>
+    <Card shadow="xs" p={0}>
+      <Box
+        sx={{
+          backgroundColor:
+            colorScheme === "dark" ? colors.dark[5] : colors.gray[2],
+        }}
+      >
+        <Text p={10} weight="bold" size="lg">
+          {title}
+        </Text>
+      </Box>
+      <Divider />
+      <Box p={10} sx={{ minHeight: 50 }}>
         <Text> {description || t("noDescription")} </Text>
-        <Group mt={20} position="apart">
+        <Group align="flex-end" mt={20} position="apart">
           <Text>{author || t("noAuthor")}</Text>
-          <Link to={`/courses/${id}`}>
-            <Button>{t("explore")}</Button>
-          </Link>
+          <Group>
+            <Tooltip label={t("lessons")}>
+              <Badge color="red" size="lg">
+                {lessons}
+              </Badge>
+            </Tooltip>
+            <Tooltip label={t("assignments")}>
+              <Badge color="green" size="lg">
+                {assignments}
+              </Badge>
+            </Tooltip>
+          </Group>
+          <Group>
+            {!!edit && (
+              <Link tabIndex={-1} to={`/courses/${id}`}>
+                <Button color="green">{t("edit")}</Button>
+              </Link>
+            )}
+            <Link tabIndex={-1} to={`/courses/${id}`}>
+              <Button>{t("explore")}</Button>
+            </Link>
+          </Group>
         </Group>
       </Box>
     </Card>

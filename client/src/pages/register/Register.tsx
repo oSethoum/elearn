@@ -51,8 +51,8 @@ export const Register = () => {
       .then((res) => {
         if (res.status === 201) {
           showNotification({
-            title: "Success",
-            message: "You have successfully registered",
+            title: t("success"),
+            message: t("registerSuccess"),
             color: "green",
           });
           navigate("/");
@@ -60,9 +60,9 @@ export const Register = () => {
 
         if (res.status === 400) {
           showNotification({
-            title: "Failed",
-            message: "Something went wrong",
-            color: "green",
+            title: t("failed"),
+            message: t("registerFailed"),
+            color: "red",
           });
         }
       })
@@ -72,12 +72,15 @@ export const Register = () => {
   }
 
   const schema = z.object({
-    firstName: z.string().min(4, "minimum 4"),
-    lastName: z.string().min(4, "minimum 4"),
-    topic: z.string().nonempty("not empty"),
-    username: z.string().min(6, "minimum 6"),
-    email: z.string().email("invalid email").min(8, "minimum 8"),
-    password: z.string().min(6, "minimum 6"),
+    firstName: z.string().min(4, t("minimumLength") + " 4"),
+    lastName: z.string().min(4, t("minimumLength") + " 4"),
+    topic: z.string().nonempty(t("notEmpty")),
+    username: z.string().min(6, t("minimumLength") + " 6"),
+    email: z
+      .string()
+      .email(t("invalidEmail"))
+      .min(8, t("minimumLength") + " 8"),
+    password: z.string().min(6, t("minimumLength") + " 6"),
   });
 
   const [grades, setGrades] = useState<string[]>([]);
@@ -212,7 +215,7 @@ export const Register = () => {
             {alert && (
               <Alert
                 onClose={() => setAlert(false)}
-                title={t("Errors")}
+                title={t("error")}
                 withCloseButton
                 variant="outline"
                 color="red"

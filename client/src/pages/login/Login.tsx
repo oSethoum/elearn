@@ -35,9 +35,9 @@ export function Login() {
   const schema = z.object({
     email: z
       .string()
-      .email({ message: "email is not valid" })
-      .min(12, { message: "email is too short" }),
-    password: z.string().min(6, { message: "password is too short" }),
+      .email({ message: t("invalidEmail") })
+      .min(12, { message: t("minimumLength") + " 12" }),
+    password: z.string().min(6, { message: t("minimumLength") + " 12" }),
     rememberMe: z.boolean(),
   });
 
@@ -113,7 +113,7 @@ export function Login() {
             </Group>
             <Checkbox
               mt={15}
-              label={"Remember me"}
+              label={t("rememberMe")}
               {...form.getInputProps("rememberMe")}
             />
             <Space h={30} />
@@ -123,10 +123,10 @@ export function Login() {
                 mb={20}
                 onClose={() => setAlert(false)}
                 withCloseButton
-                title="Invalid credentials"
+                title={t("invalidCredentials")}
                 variant="outline"
               >
-                Email or Password incorrect
+                {t("emailOrPasswordIncorrect")}
               </Alert>
             )}
             <Group position="apart" grow>

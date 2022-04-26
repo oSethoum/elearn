@@ -53,7 +53,11 @@ export const login: Handler = async (req, res) => {
     },
     include: {
       admin: true,
-      student: true,
+      student: {
+        include: {
+          topic: true,
+        },
+      },
       teacher: true,
     },
   });
@@ -98,7 +102,11 @@ export const refresh: Handler = async (req, res) => {
     },
     include: {
       admin: true,
-      student: true,
+      student: {
+        include: {
+          topic: true,
+        },
+      },
       teacher: true,
     },
   });
