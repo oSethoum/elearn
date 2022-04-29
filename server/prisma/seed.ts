@@ -968,6 +968,38 @@ async function main() {
       },
     });
   });
+
+  await prisma.admin.create({
+    data: {
+      firstName: "admin",
+      lastName: "admin",
+      user: {
+        create: {
+          username: "admin",
+          password: "admin",
+          email: "admin@gmail.com",
+          role: "admin",
+          disabled: false,
+        },
+      },
+    },
+  });
+
+  await prisma.teacher.create({
+    data: {
+      firstName: "teacher",
+      lastName: "teacher",
+      user: {
+        create: {
+          username: "teacher",
+          password: "teacher",
+          email: "teacher@gmail.com",
+          role: "teacher",
+          disabled: false,
+        },
+      },
+    },
+  });
 }
 
 main()

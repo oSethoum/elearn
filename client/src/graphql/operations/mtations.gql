@@ -1,0 +1,155 @@
+# Lesson CUD
+mutation createLesson($data: LessonCreateInput!) {
+  createLesson(data: $data) {
+    id
+  }
+}
+
+mutation updateLesson(
+  $data: LessonUpdateInput!
+  $where: LessonWhereUniqueInput!
+) {
+  updateLesson(data: $data, where: $where) {
+    id
+  }
+}
+
+mutation deleteLesson($where: LessonWhereUniqueInput!) {
+  deleteLesson(where: $where) {
+    id
+  }
+}
+
+# Course CUD
+
+mutation createCourse($data: CourseCreateInput!) {
+  createCourse(data: $data) {
+    id
+  }
+}
+
+mutation updateCourse(
+  $data: CourseUpdateInput!
+  $where: CourseWhereUniqueInput!
+) {
+  updateCourse(data: $data, where: $where) {
+    id
+  }
+}
+
+mutation deleteCourse($where: CourseWhereUniqueInput!) {
+  deleteCourse(where: $where) {
+    id
+  }
+}
+
+# Student CUD
+
+mutation createStudent($data: StudentCreateInput!) {
+  createStudent(data: $data) {
+    id
+  }
+}
+
+mutation updateStudent(
+  $data: StudentUpdateInput!
+  $where: StudentWhereUniqueInput!
+) {
+  updateStudent(data: $data, where: $where) {
+    id
+  }
+}
+
+mutation deleteStudent($where: StudentWhereUniqueInput!) {
+  deleteStudent(where: $where) {
+    id
+  }
+}
+
+# Teacher CUD
+
+mutation createTeacher($data: TeacherCreateInput!) {
+  createTeacher(data: $data) {
+    id
+  }
+}
+
+mutation updateTeacher(
+  $data: TeacherUpdateInput!
+  $where: TeacherWhereUniqueInput!
+) {
+  updateTeacher(data: $data, where: $where) {
+    id
+  }
+}
+
+mutation deleteTeacher($where: TeacherWhereUniqueInput!) {
+  deleteTeacher(where: $where) {
+    id
+  }
+}
+
+# Admin CUD
+
+mutation createAdmin($data: AdminCreateInput!) {
+  createAdmin(data: $data) {
+    id
+  }
+}
+
+mutation updateAdmin($data: AdminUpdateInput!, $where: AdminWhereUniqueInput!) {
+  updateAdmin(data: $data, where: $where) {
+    id
+  }
+}
+
+mutation deleteAdmin($where: AdminWhereUniqueInput!) {
+  deleteAdmin(where: $where) {
+    id
+  }
+}
+
+# Assignment CUD
+
+mutation createAssignment($data: AssignmentCreateInput!) {
+  createAssignment(data: $data) {
+    id
+  }
+}
+
+mutation updateAssignment(
+  $data: AssignmentUpdateInput!
+  $where: AssignmentWhereUniqueInput!
+) {
+  updateAssignment(data: $data, where: $where) {
+    id
+  }
+}
+
+mutation deleteAssignment($where: AssignmentWhereUniqueInput!) {
+  deleteAssignment(where: $where) {
+    id
+  }
+}
+# Meeting CUD
+
+mutation createMeeting($data: MeetingCreateInput!) {
+  createMeeting(data: $data) {
+    id
+  }
+}
+
+mutation updateMeeting(
+  $data: MeetingUpdateInput!
+  $where: MeetingWhereUniqueInput!
+) {
+  updateMeeting(data: $data, where: $where) {
+    id
+  }
+}
+
+mutation deleteMeeting($where: MeetingWhereUniqueInput!) {
+  deleteMeeting(where: $where) {
+    id
+  }
+}

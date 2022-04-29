@@ -1,7 +1,7 @@
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import { ScrollTop } from "./components/ScrollTop";
+import { ScrollTop } from "./ui/components/ScrollTop";
 import { lazy } from "react";
-import { Loader } from "./components";
+import { Loader } from "./ui/components";
 import {
   ApolloClient,
   HttpLink,
@@ -12,25 +12,27 @@ import {
 import { onError } from "@apollo/client/link/error";
 import { Suspense } from "react";
 
-const Course = lazy(() => import("./pages/courses/Course"));
-const Lesson = lazy(() => import("./pages/lesson/Lesson"));
-const Assignment = lazy(() => import("./pages/assignment/Assignment"));
-const CourseList = lazy(() => import("./pages/courses/CourseList"));
-const Home = lazy(() => import("./pages/home/Home"));
-const Courses = lazy(() => import("./pages/courses/Courses"));
-const Dashboard = lazy(() => import("./pages/dashboard/Dashboard"));
-const Login = lazy(() => import("./pages/login/Login"));
-const Register = lazy(() => import("./pages/register/Register"));
-const Reset = lazy(() => import("./pages/reset/Reset"));
-const NotFound = lazy(() => import("./pages/404/NotFound"));
-const NewAssignment = lazy(() => import("./forms/NewAssignment"));
-const EditAssignment = lazy(() => import("./forms/EditAssignment"));
-const NewLesson = lazy(() => import("./forms/NewLesson"));
-const EditLesson = lazy(() => import("./forms/EditLesson"));
-const NewTeacher = lazy(() => import("./forms/NewTeacher"));
-const EditTeacher = lazy(() => import("./forms/EditTeacher"));
-const NewAdmin = lazy(() => import("./forms/NewTeacher"));
-const EditAdmin = lazy(() => import("./forms/EditTeacher"));
+const NewMeeting = lazy(() => import("./ui/forms/NewMeeting"));
+const CourseContent = lazy(() => import("./ui/pages/courses/CourseContent"));
+const Course = lazy(() => import("./ui/pages/courses/Course"));
+const Lesson = lazy(() => import("./ui/pages/lesson/Lesson"));
+const Assignment = lazy(() => import("./ui/pages/assignment/Assignment"));
+const CourseList = lazy(() => import("./ui/pages/courses/CourseList"));
+const Home = lazy(() => import("./ui/pages/home/Home"));
+const Courses = lazy(() => import("./ui/pages/courses/Courses"));
+const Dashboard = lazy(() => import("./ui/pages/dashboard/Dashboard"));
+const Login = lazy(() => import("./ui/pages/login/Login"));
+const Register = lazy(() => import("./ui/pages/register/Register"));
+const Reset = lazy(() => import("./ui/pages/reset/Reset"));
+const NotFound = lazy(() => import("./ui/pages/404/NotFound"));
+const NewAssignment = lazy(() => import("./ui/forms/NewAssignment"));
+const EditAssignment = lazy(() => import("./ui/forms/EditAssignment"));
+const NewLesson = lazy(() => import("./ui/forms/NewLesson"));
+const EditLesson = lazy(() => import("./ui/forms/EditLesson"));
+const NewTeacher = lazy(() => import("./ui/forms/NewTeacher"));
+const EditTeacher = lazy(() => import("./ui/forms/EditTeacher"));
+const NewAdmin = lazy(() => import("./ui/forms/NewTeacher"));
+const EditAdmin = lazy(() => import("./ui/forms/EditTeacher"));
 
 function App() {
   const errorLink = onError(({ graphQLErrors, networkError }) => {
@@ -60,7 +62,7 @@ function App() {
       <ApolloProvider client={client}>
         <Router>
           <ScrollTop />
-          <Suspense fallback={<Loader />}>
+          <Suspense fallback={<Loader height="100vh" />}>
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/dashboard" element={<Dashboard />} />
@@ -68,21 +70,36 @@ function App() {
                 <Route path="/courses" element={<CourseList />} />
                 <Route path="/courses/:courseId" element={<Course />}>
                   <Route
-                    path="courses/:courseId/assignments/new"
-                    element={<NewAssignment />}
+                    path="/courses/:courseId/"
+                    element={<CourseContent />}
                   />
                   <Route
-                    path="courses/:courseId/assignments/:assignmentId"
-                    element={<Assignment />}
-                  />
-                  <Route path="courses/:courseId/assignments/new" />
-                  <Route
-                    path="courses/:courseId/lessons/:lessonId"
+                    path="/courses/:courseId/lessons/:lessonId"
                     element={<Lesson />}
                   />
                   <Route
-                    path="courses/:courseId/lessons/new"
+                    path="/courses/:courseId/lessons/new"
                     element={<NewLesson />}
+                  />
+                  <Route
+                    path="/courses/:courseId/lessons/:lessonId/edit"
+                    element={<EditLesson />}
+                  />
+                  <Route
+                    path="/courses/:courseId/assignments/new"
+                    element={<NewAssignment />}
+                  />
+                  <Route
+                    path="/courses/:courseId/assignments/:assignmentId"
+                    element={<Assignment />}
+                  />
+                  <Route
+                    path="/courses/:courseId/meetings/new"
+                    element={<NewMeeting />}
+                  />
+                  <Route
+                    path="/courses/:courseId/meetings/:meetingsId"
+                    element={<NewMeeting />}
                   />
                 </Route>
               </Route>

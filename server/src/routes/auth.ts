@@ -68,14 +68,17 @@ export const login: Handler = async (req, res) => {
     });
   }
 
-  const token = sign({ userId: user?.id }, "secret", { expiresIn: "16h" });
+  const token = sign({ userId: user?.id }, "secret", {
+    expiresIn: 3600 * 24 * 7,
+  });
+
+  const date = new Date();
+  date.setDate(date.getDate() + 7);
 
   res.cookie("access_token", token, {
     httpOnly: true,
     secure: true,
-    expires: req.body.rememberMe
-      ? new Date(Date.now() + 60 * 60 * 24 * 7)
-      : undefined,
+    expires: req.body.rememberMe ? date : undefined,
   });
 
   const { password, ...payload } = user;

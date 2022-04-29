@@ -28,7 +28,7 @@ export const en = {
     // new to translate
     noDescription: "No Description",
     noAuthor: "No Author",
-    explore: "Explore",
+    view: "View",
     lessons: "Lessons",
     assignments: "Assignments",
     zoomMeetings: "Zoom Meetings",
@@ -56,6 +56,8 @@ export const en = {
     registerSuccess: "You have successfully registered",
     failed: "Failed",
     registerFailed: "Registration Failed",
+    published: "Published",
+    content: "Content",
   },
 };
 

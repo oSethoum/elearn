@@ -94,21 +94,22 @@ model Assignment {
 	deadline DateTime 
 	createdAt DateTime @default(now())
 	updatedAt DateTime @updatedAt
-	published Boolean? @default(false)
+	published Boolean 
+	content String 
 	course Course? @relation(fields:[courseId], references:[id])
 	courseId Int?
 	submissions Submission[]
-	content Content @relation(fields:[contentId], references:[id])
-	contentId Int
+	assignmentFiles AssignmentFile[]
 }
 
 model Meeting {
 	id Int @id @default(autoincrement())
 	title String 
+	description String? 
 	start DateTime 
 	duration DateTime 
-	createdAt DateTime @default(now())
 	link String? 
+	createdAt DateTime @default(now())
 	updatedAt DateTime @updatedAt
 	course Course? @relation(fields:[courseId], references:[id])
 	courseId Int?
@@ -118,43 +119,57 @@ model Submission {
 	id Int @id @default(autoincrement())
 	createdAt DateTime @default(now())
 	updatedAt DateTime @updatedAt
+	content String 
 	student Student? @relation(fields:[studentId], references:[id])
 	studentId Int?
 	assignment Assignment? @relation(fields:[assignmentId], references:[id])
 	assignmentId Int?
-	content Content @relation(fields:[contentId], references:[id])
-	contentId Int
+	submissionFiles SubmissionFile[]
 }
 
-model Content {
+model AssignmentFile {
 	id Int @id @default(autoincrement())
-	createdAt DateTime @default(now())
-	updatedAt DateTime @updatedAt
-	content String 
-	files File[]
-	assignment Assignment?
-	submission Submission?
-	lesson Lesson?
-}
-
-model File {
-	id Int @id @default(autoincrement())
-	createdAt DateTime @default(now())
-	updatedAt DateTime @updatedAt
-	type String 
 	link String 
-	content Content? @relation(fields:[contentId], references:[id])
-	contentId Int?
+	type String 
+	createdAt DateTime @default(now())
+	updatedAt DateTime @updatedAt
+	name String 
+	assignment Assignment? @relation(fields:[assignmentId], references:[id])
+	assignmentId Int?
 }
 
 model Lesson {
 	id Int @id @default(autoincrement())
+	title String 
+	description String? 
+	index Int 
+	published Boolean 
 	createdAt DateTime @default(now())
 	updatedAt DateTime @updatedAt
-	index Int 
-	published Boolean @default(false)
-	content Content @relation(fields:[contentId], references:[id])
-	contentId Int
-	lessons Course? @relation(fields:[lessonsId], references:[id])
-	lessonsId Int?
+	content String 
+	lessonFiles LessonFile[]
+	course Course? @relation(fields:[courseId], references:[id])
+	courseId Int?
+}
+
+model LessonFile {
+	id Int @id @default(autoincrement())
+	createdAt DateTime @default(now())
+	updatedAt DateTime @updatedAt
+	type String 
+	name String 
+	link String 
+	lesson Lesson? @relation(fields:[lessonId], references:[id])
+	lessonId Int?
+}
+
+model SubmissionFile {
+	id Int @id @default(autoincrement())
+	createdAt DateTime @default(now())
+	updatedAt DateTime @updatedAt
+	link String 
+	name String 
+	type String 
+	submission Submission? @relation(fields:[submissionId], references:[id])
+	submissionId Int?
 }

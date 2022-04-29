@@ -1,0 +1,10 @@
+query Lessons($where: LessonWhereInput) {
+  lessons(where: $where) {
+    id
+    index
+    title
+    description
+    published
+    content
+  }
+}
