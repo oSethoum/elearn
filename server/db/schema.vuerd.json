@@ -3,9 +3,9 @@
     "version": "2.2.11",
     "width": 8000,
     "height": 8000,
-    "scrollTop": -4279.5,
-    "scrollLeft": -4634.5,
-    "zoomLevel": 0.7,
+    "scrollTop": -4841.833333333333,
+    "scrollLeft": -4536.833333333334,
+    "zoomLevel": 0.9,
     "show": {
       "tableComment": false,
       "columnComment": true,
@@ -1042,9 +1042,9 @@
             "id": "e9ec0b90-12eb-4997-b809-34be0187362c"
           },
           {
-            "name": "deadline",
+            "name": "title",
             "comment": "",
-            "dataType": "TIMESTAMP",
+            "dataType": "TINYTEXT",
             "default": "",
             "option": {
               "autoIncrement": false,
@@ -1059,10 +1059,10 @@
               "pfk": false,
               "widthName": 60,
               "widthComment": 60,
-              "widthDataType": 76.87060546875,
+              "widthDataType": 64.83544921875,
               "widthDefault": 60
             },
-            "id": "2b377122-5c2c-45f0-9acf-ea2cf9f8a0a5"
+            "id": "e82d8722-dd3e-49c7-9ed5-42f7817c1060"
           },
           {
             "name": "created_at",
@@ -1178,13 +1178,36 @@
               "widthDefault": 60
             },
             "id": "fb97fe64-8360-4822-acfe-5ece7ae1530d"
+          },
+          {
+            "name": "description",
+            "comment": "",
+            "dataType": "TINYTEXT",
+            "default": "",
+            "option": {
+              "autoIncrement": false,
+              "primaryKey": false,
+              "unique": false,
+              "notNull": false
+            },
+            "ui": {
+              "active": false,
+              "pk": false,
+              "fk": false,
+              "pfk": false,
+              "widthName": 64.8671875,
+              "widthComment": 60,
+              "widthDataType": 64.83544921875,
+              "widthDefault": 60
+            },
+            "id": "1aa466d7-4a4a-421a-99c4-ac633945d65a"
           }
         ],
         "ui": {
           "active": false,
-          "left": 5331.1493,
-          "top": 4122.6016,
-          "zIndex": 11,
+          "left": 5343.1493,
+          "top": 4112.6016,
+          "zIndex": 17,
           "widthName": 74.97900390625,
           "widthComment": 60,
           "color": "#03A9F4"
@@ -1266,7 +1289,30 @@
             "id": "58e35493-2271-4da9-b490-09132525123b"
           },
           {
-            "name": "start",
+            "name": "date",
+            "comment": "",
+            "dataType": "TIMESTAMP",
+            "default": "",
+            "option": {
+              "autoIncrement": false,
+              "primaryKey": false,
+              "unique": false,
+              "notNull": true
+            },
+            "ui": {
+              "active": false,
+              "pk": false,
+              "fk": false,
+              "pfk": false,
+              "widthName": 60,
+              "widthComment": 60,
+              "widthDataType": 76.87060546875,
+              "widthDefault": 60
+            },
+            "id": "1f5a6477-fdf8-4a8e-a913-fa3deda6444e"
+          },
+          {
+            "name": "start_time",
             "comment": "",
             "dataType": "TIMESTAMP",
             "default": "",
@@ -1408,7 +1454,7 @@
           "active": false,
           "left": 5135.8051,
           "top": 5090.0566,
-          "zIndex": 7,
+          "zIndex": 31,
           "widthName": 60,
           "widthComment": 60,
           "color": "#FFEB3B"
@@ -1563,7 +1609,7 @@
           "active": false,
           "left": 5329.8455,
           "top": 3282.5547,
-          "zIndex": 13,
+          "zIndex": 10,
           "widthName": 73.525390625,
           "widthComment": 60,
           "color": "#03A9F4"
@@ -1739,9 +1785,9 @@
         ],
         "ui": {
           "active": false,
-          "left": 6023.9809,
-          "top": 4124.1429,
-          "zIndex": 12,
+          "left": 6020.9809,
+          "top": 4122.1429,
+          "zIndex": 14,
           "widthName": 98.8271484375,
           "widthComment": 60,
           "color": "#03A9F4"
@@ -1821,29 +1867,6 @@
               "widthDefault": 60
             },
             "id": "c958031a-d18f-4ab5-af24-10ecf3a58b10"
-          },
-          {
-            "name": "index",
-            "comment": "",
-            "dataType": "int",
-            "default": "",
-            "option": {
-              "autoIncrement": false,
-              "primaryKey": false,
-              "unique": false,
-              "notNull": true
-            },
-            "ui": {
-              "active": false,
-              "pk": false,
-              "fk": false,
-              "pfk": false,
-              "widthName": 60,
-              "widthComment": 60,
-              "widthDataType": 60,
-              "widthDefault": 60
-            },
-            "id": "894548b7-d1a8-4b80-bd04-9a41fe136c0a"
           },
           {
             "name": "published",
@@ -1965,7 +1988,7 @@
           "active": false,
           "left": 5629.3885,
           "top": 4813.4992,
-          "zIndex": 26,
+          "zIndex": 12,
           "widthName": 60,
           "widthComment": 60,
           "color": "#03A9F4"
@@ -2143,7 +2166,7 @@
           "active": false,
           "left": 6022.8337,
           "top": 4504.8335,
-          "zIndex": 10,
+          "zIndex": 9,
           "widthName": 69.92626953125,
           "widthComment": 60,
           "color": "#03A9F4"
@@ -2321,7 +2344,7 @@
           "active": false,
           "left": 6024.3889,
           "top": 3273.1668,
-          "zIndex": 14,
+          "zIndex": 11,
           "widthName": 97.37353515625,
           "widthComment": 60,
           "color": "#03A9F4"
@@ -2459,8 +2482,8 @@
           "columnIds": [
             "ed1b2995-13d9-4f1f-a753-bd9c16aa755a"
           ],
-          "x": 5530.116341015625,
-          "y": 4335.1016,
+          "x": 5536.108284375,
+          "y": 4345.6016,
           "direction": "bottom"
         },
         "constraintName": "fk_courses_to_assignments",
@@ -2580,8 +2603,8 @@
           "columnIds": [
             "e9ec0b90-12eb-4997-b809-34be0187362c"
           ],
-          "x": 5530.116341015625,
-          "y": 4122.6016,
+          "x": 5536.108284375,
+          "y": 4112.6016,
           "direction": "top"
         },
         "end": {
@@ -2658,8 +2681,8 @@
           "columnIds": [
             "e9ec0b90-12eb-4997-b809-34be0187362c"
           ],
-          "x": 5729.08338203125,
-          "y": 4228.8516,
+          "x": 5729.06726875,
+          "y": 4229.1016,
           "direction": "right"
         },
         "end": {
@@ -2667,8 +2690,8 @@
           "columnIds": [
             "30dd258d-90ff-4ad1-b1dc-08e780b40a37"
           ],
-          "x": 6023.9809,
-          "y": 4230.3929,
+          "x": 6020.9809,
+          "y": 4228.3929,
           "direction": "left"
         },
         "constraintName": "fk_assignments_to_assignment_files",
@@ -2720,7 +2743,7 @@
             "c0cec777-0de7-4172-8a6c-afb06cbc1cab"
           ],
           "x": 5629.3885,
-          "y": 4940.2492,
+          "y": 4929.9992,
           "direction": "left"
         },
         "constraintName": "fk_courses_to_lessons",

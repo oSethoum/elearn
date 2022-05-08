@@ -1,3 +1,4 @@
+import { Assignment, useDeleteAssignmentMutation } from "@/graphql";
 import {
   Text,
   Card,
@@ -6,8 +7,8 @@ import {
   createStyles,
   Group,
   Button,
-  BoxProps,
 } from "@mantine/core";
+import { useModals } from "@mantine/modals";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 
@@ -20,52 +21,79 @@ const styles = createStyles((theme) => ({
   },
 }));
 
-export interface AssignmentCardProps extends BoxProps<"div"> {
-  id: string;
-  title: string;
-  description?: string;
+export interface AssignmentCardProps {
+  assignment: Assignment;
   canEdit?: boolean;
   canDelete?: boolean;
+  onDelete: () => void;
 }
 
 export const AssignmentCard = ({
-  id,
-  title,
-  description,
+  assignment,
+  canEdit,
   canDelete,
+  onDelete,
 }: AssignmentCardProps) => {
   const { classes } = styles();
   const { t } = useTranslation();
   const navigate = useNavigate();
+  const [deleteAssignment] = useDeleteAssignmentMutation();
 
-  const _delete = () => {
-    //TODO: show confirmation model
-    // show notification in case of deletion
+  const modals = useModals();
+
+  const _delete = () =>
+    modals.openConfirmModal({
+      title: t("confirmAction"),
+      children: <Text size="sm">{t("deleteMessage")}</Text>,
+      labels: { confirm: t("confirm"), cancel: t("cancel") },
+      confirmProps: { color: "red" },
+      centered: true,
+      onConfirm: () =>
+        deleteAssignment({
+          variables: {
+            where: {
+              id: assignment.id,
+            },
+          },
+          onCompleted() {
+            onDelete();
+          },
+        }),
+    });
+
+  const _edit = () => {
+    navigate(`${assignment.id}/edit`);
   };
+
   const _explore = () => {
-    navigate("assignments/" + id);
+    navigate(assignment.id.toString());
   };
 
   return (
-    <Card p={0}>
-      <Box className={classes.title} m={10}>
+    <Card p={0} m={10}>
+      <Box className={classes.title} p={10}>
         <Text size="xl" weight="bold">
-          {title}
+          {assignment.title}
         </Text>
       </Box>
       <Divider />
       <Box m={10}>
-        <Box>{description || t("noDescription")}</Box>
+        <Box>{assignment.description || t("noDescription")}</Box>
         <Group position="apart">
           <Text>Hello</Text>
           <Group>
             {!!canDelete && (
-              <Button color="red" onClick={_delete}>
+              <Button color="red" variant="light" onClick={_delete}>
                 {t("delete")}
               </Button>
             )}
+            {!!canEdit && (
+              <Button color="green" variant="light" onClick={_edit}>
+                {t("edit")}
+              </Button>
+            )}
             <Button color="blue" onClick={_explore}>
-              {t("explore")}
+              {t("view")}
             </Button>
           </Group>
         </Group>

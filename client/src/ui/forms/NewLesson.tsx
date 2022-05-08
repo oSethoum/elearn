@@ -2,8 +2,6 @@ import {
   Button,
   Container,
   Group,
-  LoadingOverlay,
-  NumberInput,
   Paper,
   Switch,
   Textarea,
@@ -19,7 +17,6 @@ import { showNotification } from "@mantine/notifications";
 
 export const NewLesson = () => {
   const schema = z.object({
-    index: z.number().positive(),
     title: z.string().nonempty(),
     description: z.string().nonempty(),
     content: z.string().min(20),
@@ -27,14 +24,13 @@ export const NewLesson = () => {
 
   const navigate = useNavigate();
 
-  const [createLesson, { loading, data, error }] = useCreateLessonMutation();
+  const [createLesson, { data, error }] = useCreateLessonMutation({});
 
   const { t } = useTranslation();
 
-  const form = useForm({
+  const { onSubmit, getInputProps } = useForm({
     schema: zodResolver(schema),
     initialValues: {
-      index: 0,
       title: "",
       description: "",
       published: false,
@@ -49,54 +45,51 @@ export const NewLesson = () => {
   }
 
   if (data) {
-    // success
     showNotification({
-      title: t("success"),
       color: "green",
-      message: t("lessonCreated"),
+      message: t("success"),
     });
+
+    navigate(`/courses/${params.courseId}/lessons`);
   }
 
   return (
     <Container my={20} size="xl">
-      <Paper sx={{ position: "relative" }} withBorder p={20}>
-        <LoadingOverlay visible={loading} />
+      <Paper withBorder p={20}>
         <form
-          onSubmit={form.onSubmit((values) => {
+          onSubmit={onSubmit((values) => {
+            console.log(values);
+            console.log(params?.courseId);
+
             createLesson({
               variables: {
                 data: {
                   ...values,
                   course: {
                     connect: {
-                      id: parseInt(params.courseId as string),
+                      id: parseInt(params?.courseId as string),
                     },
                   },
                 },
               },
             });
           })}
-          noValidate
         >
           <Group grow spacing="lg" direction="column">
-            <NumberInput {...form.getInputProps("index")} label={t("Index")} />
             <TextInput
               label={t("title")}
               placeholder={t("title")}
-              {...form.getInputProps("title")}
+              {...getInputProps("title")}
             />
             <Textarea
               label={t("description")}
               placeholder={t("description")}
-              {...form.getInputProps("description")}
+              {...getInputProps("description")}
             />
-            <Switch
-              label={t("published")}
-              {...form.getInputProps("published")}
-            />
+            <Switch label={t("published")} {...getInputProps("published")} />
             <RichTextEditorInput
               label={t("content")}
-              {...form.getInputProps("content")}
+              {...getInputProps("content")}
             />
             <Group position="right">
               <Button
@@ -107,10 +100,10 @@ export const NewLesson = () => {
                 sx={{ width: 100 }}
                 color="gray"
               >
-                Cancel
+                {t("cancel")}
               </Button>
               <Button type="submit" sx={{ width: 100 }}>
-                Add
+                {t("add")}
               </Button>
             </Group>
           </Group>

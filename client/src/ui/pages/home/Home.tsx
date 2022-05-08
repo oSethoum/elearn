@@ -2,12 +2,9 @@ import {
   Box,
   Button,
   Card,
-  Divider,
   Group,
-  Paper,
   SimpleGrid,
   Space,
-  Title,
   useMantineTheme,
 } from "@mantine/core";
 import { BsCameraVideoFill } from "react-icons/bs";
@@ -48,7 +45,7 @@ export function Home() {
             Features
           </Button>
           <Button leftIcon={<FaUniversity />} radius="xl" color="green">
-            Departements
+            Departments
           </Button>
           {user && (
             <Link to="courses">
@@ -133,7 +130,7 @@ export function Home() {
               color: theme.colors.green[5],
             }}
           >
-            Departements
+            Departments
           </h1>
         </Card>
       </Box>

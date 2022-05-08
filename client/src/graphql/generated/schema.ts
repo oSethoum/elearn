@@ -357,10 +357,11 @@ export type Assignment = {
   course?: Maybe<Course>;
   courseId?: Maybe<Scalars['Int']>;
   createdAt: Scalars['DateTime'];
-  deadline: Scalars['DateTime'];
+  description?: Maybe<Scalars['String']>;
   id: Scalars['Int'];
   published: Scalars['Boolean'];
   submissions: Array<Submission>;
+  title: Scalars['String'];
   updatedAt: Scalars['DateTime'];
 };
 
@@ -407,9 +408,10 @@ export type AssignmentCountAggregate = {
   content: Scalars['Int'];
   courseId: Scalars['Int'];
   createdAt: Scalars['Int'];
-  deadline: Scalars['Int'];
+  description: Scalars['Int'];
   id: Scalars['Int'];
   published: Scalars['Int'];
+  title: Scalars['Int'];
   updatedAt: Scalars['Int'];
 };
 
@@ -417,9 +419,10 @@ export type AssignmentCountOrderByAggregateInput = {
   content?: InputMaybe<SortOrder>;
   courseId?: InputMaybe<SortOrder>;
   createdAt?: InputMaybe<SortOrder>;
-  deadline?: InputMaybe<SortOrder>;
+  description?: InputMaybe<SortOrder>;
   id?: InputMaybe<SortOrder>;
   published?: InputMaybe<SortOrder>;
+  title?: InputMaybe<SortOrder>;
   updatedAt?: InputMaybe<SortOrder>;
 };
 
@@ -428,9 +431,10 @@ export type AssignmentCreateInput = {
   content: Scalars['String'];
   course?: InputMaybe<CourseCreateNestedOneWithoutAssignmentsInput>;
   createdAt?: InputMaybe<Scalars['DateTime']>;
-  deadline: Scalars['DateTime'];
+  description?: InputMaybe<Scalars['String']>;
   published: Scalars['Boolean'];
   submissions?: InputMaybe<SubmissionCreateNestedManyWithoutAssignmentInput>;
+  title: Scalars['String'];
   updatedAt?: InputMaybe<Scalars['DateTime']>;
 };
 
@@ -471,9 +475,10 @@ export type AssignmentCreateWithoutAssignmentFilesInput = {
   content: Scalars['String'];
   course?: InputMaybe<CourseCreateNestedOneWithoutAssignmentsInput>;
   createdAt?: InputMaybe<Scalars['DateTime']>;
-  deadline: Scalars['DateTime'];
+  description?: InputMaybe<Scalars['String']>;
   published: Scalars['Boolean'];
   submissions?: InputMaybe<SubmissionCreateNestedManyWithoutAssignmentInput>;
+  title: Scalars['String'];
   updatedAt?: InputMaybe<Scalars['DateTime']>;
 };
 
@@ -481,9 +486,10 @@ export type AssignmentCreateWithoutCourseInput = {
   assignmentFiles?: InputMaybe<AssignmentFileCreateNestedManyWithoutAssignmentInput>;
   content: Scalars['String'];
   createdAt?: InputMaybe<Scalars['DateTime']>;
-  deadline: Scalars['DateTime'];
+  description?: InputMaybe<Scalars['String']>;
   published: Scalars['Boolean'];
   submissions?: InputMaybe<SubmissionCreateNestedManyWithoutAssignmentInput>;
+  title: Scalars['String'];
   updatedAt?: InputMaybe<Scalars['DateTime']>;
 };
 
@@ -492,8 +498,9 @@ export type AssignmentCreateWithoutSubmissionsInput = {
   content: Scalars['String'];
   course?: InputMaybe<CourseCreateNestedOneWithoutAssignmentsInput>;
   createdAt?: InputMaybe<Scalars['DateTime']>;
-  deadline: Scalars['DateTime'];
+  description?: InputMaybe<Scalars['String']>;
   published: Scalars['Boolean'];
+  title: Scalars['String'];
   updatedAt?: InputMaybe<Scalars['DateTime']>;
 };
 
@@ -793,9 +800,10 @@ export type AssignmentGroupBy = {
   content: Scalars['String'];
   courseId?: Maybe<Scalars['Int']>;
   createdAt: Scalars['DateTime'];
-  deadline: Scalars['DateTime'];
+  description?: Maybe<Scalars['String']>;
   id: Scalars['Int'];
   published: Scalars['Boolean'];
+  title: Scalars['String'];
   updatedAt: Scalars['DateTime'];
 };
 
@@ -810,9 +818,10 @@ export type AssignmentMaxAggregate = {
   content?: Maybe<Scalars['String']>;
   courseId?: Maybe<Scalars['Int']>;
   createdAt?: Maybe<Scalars['DateTime']>;
-  deadline?: Maybe<Scalars['DateTime']>;
+  description?: Maybe<Scalars['String']>;
   id?: Maybe<Scalars['Int']>;
   published?: Maybe<Scalars['Boolean']>;
+  title?: Maybe<Scalars['String']>;
   updatedAt?: Maybe<Scalars['DateTime']>;
 };
 
@@ -820,9 +829,10 @@ export type AssignmentMaxOrderByAggregateInput = {
   content?: InputMaybe<SortOrder>;
   courseId?: InputMaybe<SortOrder>;
   createdAt?: InputMaybe<SortOrder>;
-  deadline?: InputMaybe<SortOrder>;
+  description?: InputMaybe<SortOrder>;
   id?: InputMaybe<SortOrder>;
   published?: InputMaybe<SortOrder>;
+  title?: InputMaybe<SortOrder>;
   updatedAt?: InputMaybe<SortOrder>;
 };
 
@@ -831,9 +841,10 @@ export type AssignmentMinAggregate = {
   content?: Maybe<Scalars['String']>;
   courseId?: Maybe<Scalars['Int']>;
   createdAt?: Maybe<Scalars['DateTime']>;
-  deadline?: Maybe<Scalars['DateTime']>;
+  description?: Maybe<Scalars['String']>;
   id?: Maybe<Scalars['Int']>;
   published?: Maybe<Scalars['Boolean']>;
+  title?: Maybe<Scalars['String']>;
   updatedAt?: Maybe<Scalars['DateTime']>;
 };
 
@@ -841,9 +852,10 @@ export type AssignmentMinOrderByAggregateInput = {
   content?: InputMaybe<SortOrder>;
   courseId?: InputMaybe<SortOrder>;
   createdAt?: InputMaybe<SortOrder>;
-  deadline?: InputMaybe<SortOrder>;
+  description?: InputMaybe<SortOrder>;
   id?: InputMaybe<SortOrder>;
   published?: InputMaybe<SortOrder>;
+  title?: InputMaybe<SortOrder>;
   updatedAt?: InputMaybe<SortOrder>;
 };
 
@@ -860,9 +872,10 @@ export type AssignmentOrderByWithAggregationInput = {
   content?: InputMaybe<SortOrder>;
   courseId?: InputMaybe<SortOrder>;
   createdAt?: InputMaybe<SortOrder>;
-  deadline?: InputMaybe<SortOrder>;
+  description?: InputMaybe<SortOrder>;
   id?: InputMaybe<SortOrder>;
   published?: InputMaybe<SortOrder>;
+  title?: InputMaybe<SortOrder>;
   updatedAt?: InputMaybe<SortOrder>;
 };
 
@@ -872,10 +885,11 @@ export type AssignmentOrderByWithRelationInput = {
   course?: InputMaybe<CourseOrderByWithRelationInput>;
   courseId?: InputMaybe<SortOrder>;
   createdAt?: InputMaybe<SortOrder>;
-  deadline?: InputMaybe<SortOrder>;
+  description?: InputMaybe<SortOrder>;
   id?: InputMaybe<SortOrder>;
   published?: InputMaybe<SortOrder>;
   submissions?: InputMaybe<SubmissionOrderByRelationAggregateInput>;
+  title?: InputMaybe<SortOrder>;
   updatedAt?: InputMaybe<SortOrder>;
 };
 
@@ -888,9 +902,10 @@ export enum AssignmentScalarFieldEnum {
   Content = 'content',
   CourseId = 'courseId',
   CreatedAt = 'createdAt',
-  Deadline = 'deadline',
+  Description = 'description',
   Id = 'id',
   Published = 'published',
+  Title = 'title',
   UpdatedAt = 'updatedAt'
 }
 
@@ -901,9 +916,10 @@ export type AssignmentScalarWhereInput = {
   content?: InputMaybe<StringFilter>;
   courseId?: InputMaybe<IntNullableFilter>;
   createdAt?: InputMaybe<DateTimeFilter>;
-  deadline?: InputMaybe<DateTimeFilter>;
+  description?: InputMaybe<StringNullableFilter>;
   id?: InputMaybe<IntFilter>;
   published?: InputMaybe<BoolFilter>;
+  title?: InputMaybe<StringFilter>;
   updatedAt?: InputMaybe<DateTimeFilter>;
 };
 
@@ -914,9 +930,10 @@ export type AssignmentScalarWhereWithAggregatesInput = {
   content?: InputMaybe<StringWithAggregatesFilter>;
   courseId?: InputMaybe<IntNullableWithAggregatesFilter>;
   createdAt?: InputMaybe<DateTimeWithAggregatesFilter>;
-  deadline?: InputMaybe<DateTimeWithAggregatesFilter>;
+  description?: InputMaybe<StringNullableWithAggregatesFilter>;
   id?: InputMaybe<IntWithAggregatesFilter>;
   published?: InputMaybe<BoolWithAggregatesFilter>;
+  title?: InputMaybe<StringWithAggregatesFilter>;
   updatedAt?: InputMaybe<DateTimeWithAggregatesFilter>;
 };
 
@@ -936,17 +953,19 @@ export type AssignmentUpdateInput = {
   content?: InputMaybe<StringFieldUpdateOperationsInput>;
   course?: InputMaybe<CourseUpdateOneWithoutAssignmentsInput>;
   createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
-  deadline?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+  description?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
   published?: InputMaybe<BoolFieldUpdateOperationsInput>;
   submissions?: InputMaybe<SubmissionUpdateManyWithoutAssignmentInput>;
+  title?: InputMaybe<StringFieldUpdateOperationsInput>;
   updatedAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
 };
 
 export type AssignmentUpdateManyMutationInput = {
   content?: InputMaybe<StringFieldUpdateOperationsInput>;
   createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
-  deadline?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+  description?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
   published?: InputMaybe<BoolFieldUpdateOperationsInput>;
+  title?: InputMaybe<StringFieldUpdateOperationsInput>;
   updatedAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
 };
 
@@ -997,9 +1016,10 @@ export type AssignmentUpdateWithoutAssignmentFilesInput = {
   content?: InputMaybe<StringFieldUpdateOperationsInput>;
   course?: InputMaybe<CourseUpdateOneWithoutAssignmentsInput>;
   createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
-  deadline?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+  description?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
   published?: InputMaybe<BoolFieldUpdateOperationsInput>;
   submissions?: InputMaybe<SubmissionUpdateManyWithoutAssignmentInput>;
+  title?: InputMaybe<StringFieldUpdateOperationsInput>;
   updatedAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
 };
 
@@ -1007,9 +1027,10 @@ export type AssignmentUpdateWithoutCourseInput = {
   assignmentFiles?: InputMaybe<AssignmentFileUpdateManyWithoutAssignmentInput>;
   content?: InputMaybe<StringFieldUpdateOperationsInput>;
   createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
-  deadline?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+  description?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
   published?: InputMaybe<BoolFieldUpdateOperationsInput>;
   submissions?: InputMaybe<SubmissionUpdateManyWithoutAssignmentInput>;
+  title?: InputMaybe<StringFieldUpdateOperationsInput>;
   updatedAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
 };
 
@@ -1018,8 +1039,9 @@ export type AssignmentUpdateWithoutSubmissionsInput = {
   content?: InputMaybe<StringFieldUpdateOperationsInput>;
   course?: InputMaybe<CourseUpdateOneWithoutAssignmentsInput>;
   createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
-  deadline?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+  description?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
   published?: InputMaybe<BoolFieldUpdateOperationsInput>;
+  title?: InputMaybe<StringFieldUpdateOperationsInput>;
   updatedAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
 };
 
@@ -1048,10 +1070,11 @@ export type AssignmentWhereInput = {
   course?: InputMaybe<CourseRelationFilter>;
   courseId?: InputMaybe<IntNullableFilter>;
   createdAt?: InputMaybe<DateTimeFilter>;
-  deadline?: InputMaybe<DateTimeFilter>;
+  description?: InputMaybe<StringNullableFilter>;
   id?: InputMaybe<IntFilter>;
   published?: InputMaybe<BoolFilter>;
   submissions?: InputMaybe<SubmissionListRelationFilter>;
+  title?: InputMaybe<StringFilter>;
   updatedAt?: InputMaybe<DateTimeFilter>;
 };
 
@@ -1977,7 +2000,6 @@ export type Lesson = {
   createdAt: Scalars['DateTime'];
   description?: Maybe<Scalars['String']>;
   id: Scalars['Int'];
-  index: Scalars['Int'];
   lessonFiles: Array<LessonFile>;
   published: Scalars['Boolean'];
   title: Scalars['String'];
@@ -1998,13 +2020,11 @@ export type LessonAvgAggregate = {
   __typename?: 'LessonAvgAggregate';
   courseId?: Maybe<Scalars['Float']>;
   id?: Maybe<Scalars['Float']>;
-  index?: Maybe<Scalars['Float']>;
 };
 
 export type LessonAvgOrderByAggregateInput = {
   courseId?: InputMaybe<SortOrder>;
   id?: InputMaybe<SortOrder>;
-  index?: InputMaybe<SortOrder>;
 };
 
 export type LessonCount = {
@@ -2020,7 +2040,6 @@ export type LessonCountAggregate = {
   createdAt: Scalars['Int'];
   description: Scalars['Int'];
   id: Scalars['Int'];
-  index: Scalars['Int'];
   published: Scalars['Int'];
   title: Scalars['Int'];
   updatedAt: Scalars['Int'];
@@ -2032,7 +2051,6 @@ export type LessonCountOrderByAggregateInput = {
   createdAt?: InputMaybe<SortOrder>;
   description?: InputMaybe<SortOrder>;
   id?: InputMaybe<SortOrder>;
-  index?: InputMaybe<SortOrder>;
   published?: InputMaybe<SortOrder>;
   title?: InputMaybe<SortOrder>;
   updatedAt?: InputMaybe<SortOrder>;
@@ -2043,7 +2061,6 @@ export type LessonCreateInput = {
   course?: InputMaybe<CourseCreateNestedOneWithoutLessonsInput>;
   createdAt?: InputMaybe<Scalars['DateTime']>;
   description?: InputMaybe<Scalars['String']>;
-  index: Scalars['Int'];
   lessonFiles?: InputMaybe<LessonFileCreateNestedManyWithoutLessonInput>;
   published: Scalars['Boolean'];
   title: Scalars['String'];
@@ -2076,7 +2093,6 @@ export type LessonCreateWithoutCourseInput = {
   content: Scalars['String'];
   createdAt?: InputMaybe<Scalars['DateTime']>;
   description?: InputMaybe<Scalars['String']>;
-  index: Scalars['Int'];
   lessonFiles?: InputMaybe<LessonFileCreateNestedManyWithoutLessonInput>;
   published: Scalars['Boolean'];
   title: Scalars['String'];
@@ -2088,7 +2104,6 @@ export type LessonCreateWithoutLessonFilesInput = {
   course?: InputMaybe<CourseCreateNestedOneWithoutLessonsInput>;
   createdAt?: InputMaybe<Scalars['DateTime']>;
   description?: InputMaybe<Scalars['String']>;
-  index: Scalars['Int'];
   published: Scalars['Boolean'];
   title: Scalars['String'];
   updatedAt?: InputMaybe<Scalars['DateTime']>;
@@ -2392,7 +2407,6 @@ export type LessonGroupBy = {
   createdAt: Scalars['DateTime'];
   description?: Maybe<Scalars['String']>;
   id: Scalars['Int'];
-  index: Scalars['Int'];
   published: Scalars['Boolean'];
   title: Scalars['String'];
   updatedAt: Scalars['DateTime'];
@@ -2411,7 +2425,6 @@ export type LessonMaxAggregate = {
   createdAt?: Maybe<Scalars['DateTime']>;
   description?: Maybe<Scalars['String']>;
   id?: Maybe<Scalars['Int']>;
-  index?: Maybe<Scalars['Int']>;
   published?: Maybe<Scalars['Boolean']>;
   title?: Maybe<Scalars['String']>;
   updatedAt?: Maybe<Scalars['DateTime']>;
@@ -2423,7 +2436,6 @@ export type LessonMaxOrderByAggregateInput = {
   createdAt?: InputMaybe<SortOrder>;
   description?: InputMaybe<SortOrder>;
   id?: InputMaybe<SortOrder>;
-  index?: InputMaybe<SortOrder>;
   published?: InputMaybe<SortOrder>;
   title?: InputMaybe<SortOrder>;
   updatedAt?: InputMaybe<SortOrder>;
@@ -2436,7 +2448,6 @@ export type LessonMinAggregate = {
   createdAt?: Maybe<Scalars['DateTime']>;
   description?: Maybe<Scalars['String']>;
   id?: Maybe<Scalars['Int']>;
-  index?: Maybe<Scalars['Int']>;
   published?: Maybe<Scalars['Boolean']>;
   title?: Maybe<Scalars['String']>;
   updatedAt?: Maybe<Scalars['DateTime']>;
@@ -2448,7 +2459,6 @@ export type LessonMinOrderByAggregateInput = {
   createdAt?: InputMaybe<SortOrder>;
   description?: InputMaybe<SortOrder>;
   id?: InputMaybe<SortOrder>;
-  index?: InputMaybe<SortOrder>;
   published?: InputMaybe<SortOrder>;
   title?: InputMaybe<SortOrder>;
   updatedAt?: InputMaybe<SortOrder>;
@@ -2469,7 +2479,6 @@ export type LessonOrderByWithAggregationInput = {
   createdAt?: InputMaybe<SortOrder>;
   description?: InputMaybe<SortOrder>;
   id?: InputMaybe<SortOrder>;
-  index?: InputMaybe<SortOrder>;
   published?: InputMaybe<SortOrder>;
   title?: InputMaybe<SortOrder>;
   updatedAt?: InputMaybe<SortOrder>;
@@ -2482,7 +2491,6 @@ export type LessonOrderByWithRelationInput = {
   createdAt?: InputMaybe<SortOrder>;
   description?: InputMaybe<SortOrder>;
   id?: InputMaybe<SortOrder>;
-  index?: InputMaybe<SortOrder>;
   lessonFiles?: InputMaybe<LessonFileOrderByRelationAggregateInput>;
   published?: InputMaybe<SortOrder>;
   title?: InputMaybe<SortOrder>;
@@ -2500,7 +2508,6 @@ export enum LessonScalarFieldEnum {
   CreatedAt = 'createdAt',
   Description = 'description',
   Id = 'id',
-  Index = 'index',
   Published = 'published',
   Title = 'title',
   UpdatedAt = 'updatedAt'
@@ -2515,7 +2522,6 @@ export type LessonScalarWhereInput = {
   createdAt?: InputMaybe<DateTimeFilter>;
   description?: InputMaybe<StringNullableFilter>;
   id?: InputMaybe<IntFilter>;
-  index?: InputMaybe<IntFilter>;
   published?: InputMaybe<BoolFilter>;
   title?: InputMaybe<StringFilter>;
   updatedAt?: InputMaybe<DateTimeFilter>;
@@ -2530,7 +2536,6 @@ export type LessonScalarWhereWithAggregatesInput = {
   createdAt?: InputMaybe<DateTimeWithAggregatesFilter>;
   description?: InputMaybe<StringNullableWithAggregatesFilter>;
   id?: InputMaybe<IntWithAggregatesFilter>;
-  index?: InputMaybe<IntWithAggregatesFilter>;
   published?: InputMaybe<BoolWithAggregatesFilter>;
   title?: InputMaybe<StringWithAggregatesFilter>;
   updatedAt?: InputMaybe<DateTimeWithAggregatesFilter>;
@@ -2540,13 +2545,11 @@ export type LessonSumAggregate = {
   __typename?: 'LessonSumAggregate';
   courseId?: Maybe<Scalars['Int']>;
   id?: Maybe<Scalars['Int']>;
-  index?: Maybe<Scalars['Int']>;
 };
 
 export type LessonSumOrderByAggregateInput = {
   courseId?: InputMaybe<SortOrder>;
   id?: InputMaybe<SortOrder>;
-  index?: InputMaybe<SortOrder>;
 };
 
 export type LessonUpdateInput = {
@@ -2554,7 +2557,6 @@ export type LessonUpdateInput = {
   course?: InputMaybe<CourseUpdateOneWithoutLessonsInput>;
   createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
   description?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
-  index?: InputMaybe<IntFieldUpdateOperationsInput>;
   lessonFiles?: InputMaybe<LessonFileUpdateManyWithoutLessonInput>;
   published?: InputMaybe<BoolFieldUpdateOperationsInput>;
   title?: InputMaybe<StringFieldUpdateOperationsInput>;
@@ -2565,7 +2567,6 @@ export type LessonUpdateManyMutationInput = {
   content?: InputMaybe<StringFieldUpdateOperationsInput>;
   createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
   description?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
-  index?: InputMaybe<IntFieldUpdateOperationsInput>;
   published?: InputMaybe<BoolFieldUpdateOperationsInput>;
   title?: InputMaybe<StringFieldUpdateOperationsInput>;
   updatedAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
@@ -2608,7 +2609,6 @@ export type LessonUpdateWithoutCourseInput = {
   content?: InputMaybe<StringFieldUpdateOperationsInput>;
   createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
   description?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
-  index?: InputMaybe<IntFieldUpdateOperationsInput>;
   lessonFiles?: InputMaybe<LessonFileUpdateManyWithoutLessonInput>;
   published?: InputMaybe<BoolFieldUpdateOperationsInput>;
   title?: InputMaybe<StringFieldUpdateOperationsInput>;
@@ -2620,7 +2620,6 @@ export type LessonUpdateWithoutLessonFilesInput = {
   course?: InputMaybe<CourseUpdateOneWithoutLessonsInput>;
   createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
   description?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
-  index?: InputMaybe<IntFieldUpdateOperationsInput>;
   published?: InputMaybe<BoolFieldUpdateOperationsInput>;
   title?: InputMaybe<StringFieldUpdateOperationsInput>;
   updatedAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
@@ -2647,7 +2646,6 @@ export type LessonWhereInput = {
   createdAt?: InputMaybe<DateTimeFilter>;
   description?: InputMaybe<StringNullableFilter>;
   id?: InputMaybe<IntFilter>;
-  index?: InputMaybe<IntFilter>;
   lessonFiles?: InputMaybe<LessonFileListRelationFilter>;
   published?: InputMaybe<BoolFilter>;
   title?: InputMaybe<StringFilter>;
@@ -2663,11 +2661,12 @@ export type Meeting = {
   course?: Maybe<Course>;
   courseId?: Maybe<Scalars['Int']>;
   createdAt: Scalars['DateTime'];
+  date: Scalars['DateTime'];
   description?: Maybe<Scalars['String']>;
   duration: Scalars['DateTime'];
   id: Scalars['Int'];
   link?: Maybe<Scalars['String']>;
-  start: Scalars['DateTime'];
+  startTime: Scalars['DateTime'];
   title: Scalars['String'];
   updatedAt: Scalars['DateTime'];
 };
@@ -2688,11 +2687,12 @@ export type MeetingCountAggregate = {
   _all: Scalars['Int'];
   courseId: Scalars['Int'];
   createdAt: Scalars['Int'];
+  date: Scalars['Int'];
   description: Scalars['Int'];
   duration: Scalars['Int'];
   id: Scalars['Int'];
   link: Scalars['Int'];
-  start: Scalars['Int'];
+  startTime: Scalars['Int'];
   title: Scalars['Int'];
   updatedAt: Scalars['Int'];
 };
@@ -2700,11 +2700,12 @@ export type MeetingCountAggregate = {
 export type MeetingCountOrderByAggregateInput = {
   courseId?: InputMaybe<SortOrder>;
   createdAt?: InputMaybe<SortOrder>;
+  date?: InputMaybe<SortOrder>;
   description?: InputMaybe<SortOrder>;
   duration?: InputMaybe<SortOrder>;
   id?: InputMaybe<SortOrder>;
   link?: InputMaybe<SortOrder>;
-  start?: InputMaybe<SortOrder>;
+  startTime?: InputMaybe<SortOrder>;
   title?: InputMaybe<SortOrder>;
   updatedAt?: InputMaybe<SortOrder>;
 };
@@ -2712,10 +2713,11 @@ export type MeetingCountOrderByAggregateInput = {
 export type MeetingCreateInput = {
   course?: InputMaybe<CourseCreateNestedOneWithoutMeetingsInput>;
   createdAt?: InputMaybe<Scalars['DateTime']>;
+  date: Scalars['DateTime'];
   description?: InputMaybe<Scalars['String']>;
   duration: Scalars['DateTime'];
   link?: InputMaybe<Scalars['String']>;
-  start: Scalars['DateTime'];
+  startTime: Scalars['DateTime'];
   title: Scalars['String'];
   updatedAt?: InputMaybe<Scalars['DateTime']>;
 };
@@ -2733,10 +2735,11 @@ export type MeetingCreateOrConnectWithoutCourseInput = {
 
 export type MeetingCreateWithoutCourseInput = {
   createdAt?: InputMaybe<Scalars['DateTime']>;
+  date: Scalars['DateTime'];
   description?: InputMaybe<Scalars['String']>;
   duration: Scalars['DateTime'];
   link?: InputMaybe<Scalars['String']>;
-  start: Scalars['DateTime'];
+  startTime: Scalars['DateTime'];
   title: Scalars['String'];
   updatedAt?: InputMaybe<Scalars['DateTime']>;
 };
@@ -2750,11 +2753,12 @@ export type MeetingGroupBy = {
   _sum?: Maybe<MeetingSumAggregate>;
   courseId?: Maybe<Scalars['Int']>;
   createdAt: Scalars['DateTime'];
+  date: Scalars['DateTime'];
   description?: Maybe<Scalars['String']>;
   duration: Scalars['DateTime'];
   id: Scalars['Int'];
   link?: Maybe<Scalars['String']>;
-  start: Scalars['DateTime'];
+  startTime: Scalars['DateTime'];
   title: Scalars['String'];
   updatedAt: Scalars['DateTime'];
 };
@@ -2769,11 +2773,12 @@ export type MeetingMaxAggregate = {
   __typename?: 'MeetingMaxAggregate';
   courseId?: Maybe<Scalars['Int']>;
   createdAt?: Maybe<Scalars['DateTime']>;
+  date?: Maybe<Scalars['DateTime']>;
   description?: Maybe<Scalars['String']>;
   duration?: Maybe<Scalars['DateTime']>;
   id?: Maybe<Scalars['Int']>;
   link?: Maybe<Scalars['String']>;
-  start?: Maybe<Scalars['DateTime']>;
+  startTime?: Maybe<Scalars['DateTime']>;
   title?: Maybe<Scalars['String']>;
   updatedAt?: Maybe<Scalars['DateTime']>;
 };
@@ -2781,11 +2786,12 @@ export type MeetingMaxAggregate = {
 export type MeetingMaxOrderByAggregateInput = {
   courseId?: InputMaybe<SortOrder>;
   createdAt?: InputMaybe<SortOrder>;
+  date?: InputMaybe<SortOrder>;
   description?: InputMaybe<SortOrder>;
   duration?: InputMaybe<SortOrder>;
   id?: InputMaybe<SortOrder>;
   link?: InputMaybe<SortOrder>;
-  start?: InputMaybe<SortOrder>;
+  startTime?: InputMaybe<SortOrder>;
   title?: InputMaybe<SortOrder>;
   updatedAt?: InputMaybe<SortOrder>;
 };
@@ -2794,11 +2800,12 @@ export type MeetingMinAggregate = {
   __typename?: 'MeetingMinAggregate';
   courseId?: Maybe<Scalars['Int']>;
   createdAt?: Maybe<Scalars['DateTime']>;
+  date?: Maybe<Scalars['DateTime']>;
   description?: Maybe<Scalars['String']>;
   duration?: Maybe<Scalars['DateTime']>;
   id?: Maybe<Scalars['Int']>;
   link?: Maybe<Scalars['String']>;
-  start?: Maybe<Scalars['DateTime']>;
+  startTime?: Maybe<Scalars['DateTime']>;
   title?: Maybe<Scalars['String']>;
   updatedAt?: Maybe<Scalars['DateTime']>;
 };
@@ -2806,11 +2813,12 @@ export type MeetingMinAggregate = {
 export type MeetingMinOrderByAggregateInput = {
   courseId?: InputMaybe<SortOrder>;
   createdAt?: InputMaybe<SortOrder>;
+  date?: InputMaybe<SortOrder>;
   description?: InputMaybe<SortOrder>;
   duration?: InputMaybe<SortOrder>;
   id?: InputMaybe<SortOrder>;
   link?: InputMaybe<SortOrder>;
-  start?: InputMaybe<SortOrder>;
+  startTime?: InputMaybe<SortOrder>;
   title?: InputMaybe<SortOrder>;
   updatedAt?: InputMaybe<SortOrder>;
 };
@@ -2827,11 +2835,12 @@ export type MeetingOrderByWithAggregationInput = {
   _sum?: InputMaybe<MeetingSumOrderByAggregateInput>;
   courseId?: InputMaybe<SortOrder>;
   createdAt?: InputMaybe<SortOrder>;
+  date?: InputMaybe<SortOrder>;
   description?: InputMaybe<SortOrder>;
   duration?: InputMaybe<SortOrder>;
   id?: InputMaybe<SortOrder>;
   link?: InputMaybe<SortOrder>;
-  start?: InputMaybe<SortOrder>;
+  startTime?: InputMaybe<SortOrder>;
   title?: InputMaybe<SortOrder>;
   updatedAt?: InputMaybe<SortOrder>;
 };
@@ -2840,11 +2849,12 @@ export type MeetingOrderByWithRelationInput = {
   course?: InputMaybe<CourseOrderByWithRelationInput>;
   courseId?: InputMaybe<SortOrder>;
   createdAt?: InputMaybe<SortOrder>;
+  date?: InputMaybe<SortOrder>;
   description?: InputMaybe<SortOrder>;
   duration?: InputMaybe<SortOrder>;
   id?: InputMaybe<SortOrder>;
   link?: InputMaybe<SortOrder>;
-  start?: InputMaybe<SortOrder>;
+  startTime?: InputMaybe<SortOrder>;
   title?: InputMaybe<SortOrder>;
   updatedAt?: InputMaybe<SortOrder>;
 };
@@ -2852,11 +2862,12 @@ export type MeetingOrderByWithRelationInput = {
 export enum MeetingScalarFieldEnum {
   CourseId = 'courseId',
   CreatedAt = 'createdAt',
+  Date = 'date',
   Description = 'description',
   Duration = 'duration',
   Id = 'id',
   Link = 'link',
-  Start = 'start',
+  StartTime = 'startTime',
   Title = 'title',
   UpdatedAt = 'updatedAt'
 }
@@ -2867,11 +2878,12 @@ export type MeetingScalarWhereInput = {
   OR?: InputMaybe<Array<MeetingScalarWhereInput>>;
   courseId?: InputMaybe<IntNullableFilter>;
   createdAt?: InputMaybe<DateTimeFilter>;
+  date?: InputMaybe<DateTimeFilter>;
   description?: InputMaybe<StringNullableFilter>;
   duration?: InputMaybe<DateTimeFilter>;
   id?: InputMaybe<IntFilter>;
   link?: InputMaybe<StringNullableFilter>;
-  start?: InputMaybe<DateTimeFilter>;
+  startTime?: InputMaybe<DateTimeFilter>;
   title?: InputMaybe<StringFilter>;
   updatedAt?: InputMaybe<DateTimeFilter>;
 };
@@ -2882,11 +2894,12 @@ export type MeetingScalarWhereWithAggregatesInput = {
   OR?: InputMaybe<Array<MeetingScalarWhereWithAggregatesInput>>;
   courseId?: InputMaybe<IntNullableWithAggregatesFilter>;
   createdAt?: InputMaybe<DateTimeWithAggregatesFilter>;
+  date?: InputMaybe<DateTimeWithAggregatesFilter>;
   description?: InputMaybe<StringNullableWithAggregatesFilter>;
   duration?: InputMaybe<DateTimeWithAggregatesFilter>;
   id?: InputMaybe<IntWithAggregatesFilter>;
   link?: InputMaybe<StringNullableWithAggregatesFilter>;
-  start?: InputMaybe<DateTimeWithAggregatesFilter>;
+  startTime?: InputMaybe<DateTimeWithAggregatesFilter>;
   title?: InputMaybe<StringWithAggregatesFilter>;
   updatedAt?: InputMaybe<DateTimeWithAggregatesFilter>;
 };
@@ -2905,20 +2918,22 @@ export type MeetingSumOrderByAggregateInput = {
 export type MeetingUpdateInput = {
   course?: InputMaybe<CourseUpdateOneWithoutMeetingsInput>;
   createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+  date?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
   description?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
   duration?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
   link?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
-  start?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+  startTime?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
   title?: InputMaybe<StringFieldUpdateOperationsInput>;
   updatedAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
 };
 
 export type MeetingUpdateManyMutationInput = {
   createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+  date?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
   description?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
   duration?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
   link?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
-  start?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+  startTime?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
   title?: InputMaybe<StringFieldUpdateOperationsInput>;
   updatedAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
 };
@@ -2948,10 +2963,11 @@ export type MeetingUpdateWithWhereUniqueWithoutCourseInput = {
 
 export type MeetingUpdateWithoutCourseInput = {
   createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+  date?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
   description?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
   duration?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
   link?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
-  start?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+  startTime?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
   title?: InputMaybe<StringFieldUpdateOperationsInput>;
   updatedAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
 };
@@ -2969,11 +2985,12 @@ export type MeetingWhereInput = {
   course?: InputMaybe<CourseRelationFilter>;
   courseId?: InputMaybe<IntNullableFilter>;
   createdAt?: InputMaybe<DateTimeFilter>;
+  date?: InputMaybe<DateTimeFilter>;
   description?: InputMaybe<StringNullableFilter>;
   duration?: InputMaybe<DateTimeFilter>;
   id?: InputMaybe<IntFilter>;
   link?: InputMaybe<StringNullableFilter>;
-  start?: InputMaybe<DateTimeFilter>;
+  startTime?: InputMaybe<DateTimeFilter>;
   title?: InputMaybe<StringFilter>;
   updatedAt?: InputMaybe<DateTimeFilter>;
 };
@@ -6722,7 +6739,44 @@ export type LessonsQueryVariables = Exact<{
 }>;
 
 
-export type LessonsQuery = { __typename?: 'Query', lessons: Array<{ __typename?: 'Lesson', id: number, index: number, title: string, description?: string | null, published: boolean, content: string }> };
+export type LessonsQuery = { __typename?: 'Query', lessons: Array<{ __typename?: 'Lesson', id: number, title: string, description?: string | null, published: boolean, content: string }> };
+
+export type LessonQueryVariables = Exact<{
+  where: LessonWhereUniqueInput;
+}>;
+
+
+export type LessonQuery = { __typename?: 'Query', lesson?: { __typename?: 'Lesson', id: number, title: string, description?: string | null, published: boolean, content: string } | null };
+
+export type AssignmentQueryVariables = Exact<{
+  where: AssignmentWhereUniqueInput;
+}>;
+
+
+export type AssignmentQuery = { __typename?: 'Query', assignment?: { __typename?: 'Assignment', id: number, courseId?: number | null, title: string, description?: string | null, published: boolean, content: string } | null };
+
+export type MeetingQueryVariables = Exact<{
+  where: MeetingWhereUniqueInput;
+}>;
+
+
+export type MeetingQuery = { __typename?: 'Query', meeting?: { __typename?: 'Meeting', id: number, title: string, description?: string | null, courseId?: number | null, createdAt: any, updatedAt: any, date: any, startTime: any, duration: any, link?: string | null } | null };
+
+export type CourseQueryVariables = Exact<{
+  where: CourseWhereUniqueInput;
+}>;
+
+
+export type CourseQuery = { __typename?: 'Query', course?: { __typename?: 'Course', id: number, title: string, lessons: Array<{ __typename?: 'Lesson', id: number, title: string, description?: string | null, published: boolean, courseId?: number | null }>, meetings: Array<{ __typename?: 'Meeting', id: number, link?: string | null, title: string, date: any, startTime: any, duration: any, courseId?: number | null }>, assignments: Array<{ __typename?: 'Assignment', id: number, published: boolean, courseId?: number | null }> } | null };
+
+export type CoursesQueryVariables = Exact<{
+  where?: InputMaybe<CourseWhereInput>;
+  orderBy?: InputMaybe<Array<CourseOrderByWithRelationInput> | CourseOrderByWithRelationInput>;
+  take?: InputMaybe<Scalars['Int']>;
+}>;
+
+
+export type CoursesQuery = { __typename?: 'Query', courses: Array<{ __typename?: 'Course', id: number, title: string, description?: string | null, teacher?: { __typename?: 'Teacher', firstName: string, lastName: string } | null, _count?: { __typename?: 'CourseCount', lessons: number, assignments: number, meetings: number } | null }> };
 
 
 export const CreateLessonDocument = gql`
@@ -7429,7 +7483,6 @@ export const LessonsDocument = gql`
     query Lessons($where: LessonWhereInput) {
   lessons(where: $where) {
     id
-    index
     title
     description
     published
@@ -7465,3 +7518,249 @@ export function useLessonsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<Le
 export type LessonsQueryHookResult = ReturnType<typeof useLessonsQuery>;
 export type LessonsLazyQueryHookResult = ReturnType<typeof useLessonsLazyQuery>;
 export type LessonsQueryResult = Apollo.QueryResult<LessonsQuery, LessonsQueryVariables>;
+export function refetchLessonsQuery(variables?: LessonsQueryVariables) {
+      return { query: LessonsDocument, variables: variables }
+    }
+export const LessonDocument = gql`
+    query Lesson($where: LessonWhereUniqueInput!) {
+  lesson(where: $where) {
+    id
+    title
+    description
+    published
+    content
+  }
+}
+    `;
+
+/**
+ * __useLessonQuery__
+ *
+ * To run a query within a React component, call `useLessonQuery` and pass it any options that fit your needs.
+ * When your component renders, `useLessonQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useLessonQuery({
+ *   variables: {
+ *      where: // value for 'where'
+ *   },
+ * });
+ */
+export function useLessonQuery(baseOptions: Apollo.QueryHookOptions<LessonQuery, LessonQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<LessonQuery, LessonQueryVariables>(LessonDocument, options);
+      }
+export function useLessonLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<LessonQuery, LessonQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<LessonQuery, LessonQueryVariables>(LessonDocument, options);
+        }
+export type LessonQueryHookResult = ReturnType<typeof useLessonQuery>;
+export type LessonLazyQueryHookResult = ReturnType<typeof useLessonLazyQuery>;
+export type LessonQueryResult = Apollo.QueryResult<LessonQuery, LessonQueryVariables>;
+export function refetchLessonQuery(variables: LessonQueryVariables) {
+      return { query: LessonDocument, variables: variables }
+    }
+export const AssignmentDocument = gql`
+    query Assignment($where: AssignmentWhereUniqueInput!) {
+  assignment(where: $where) {
+    id
+    courseId
+    title
+    description
+    published
+    content
+  }
+}
+    `;
+
+/**
+ * __useAssignmentQuery__
+ *
+ * To run a query within a React component, call `useAssignmentQuery` and pass it any options that fit your needs.
+ * When your component renders, `useAssignmentQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useAssignmentQuery({
+ *   variables: {
+ *      where: // value for 'where'
+ *   },
+ * });
+ */
+export function useAssignmentQuery(baseOptions: Apollo.QueryHookOptions<AssignmentQuery, AssignmentQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<AssignmentQuery, AssignmentQueryVariables>(AssignmentDocument, options);
+      }
+export function useAssignmentLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<AssignmentQuery, AssignmentQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<AssignmentQuery, AssignmentQueryVariables>(AssignmentDocument, options);
+        }
+export type AssignmentQueryHookResult = ReturnType<typeof useAssignmentQuery>;
+export type AssignmentLazyQueryHookResult = ReturnType<typeof useAssignmentLazyQuery>;
+export type AssignmentQueryResult = Apollo.QueryResult<AssignmentQuery, AssignmentQueryVariables>;
+export function refetchAssignmentQuery(variables: AssignmentQueryVariables) {
+      return { query: AssignmentDocument, variables: variables }
+    }
+export const MeetingDocument = gql`
+    query meeting($where: MeetingWhereUniqueInput!) {
+  meeting(where: $where) {
+    id
+    title
+    description
+    courseId
+    createdAt
+    updatedAt
+    date
+    startTime
+    duration
+    link
+  }
+}
+    `;
+
+/**
+ * __useMeetingQuery__
+ *
+ * To run a query within a React component, call `useMeetingQuery` and pass it any options that fit your needs.
+ * When your component renders, `useMeetingQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useMeetingQuery({
+ *   variables: {
+ *      where: // value for 'where'
+ *   },
+ * });
+ */
+export function useMeetingQuery(baseOptions: Apollo.QueryHookOptions<MeetingQuery, MeetingQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<MeetingQuery, MeetingQueryVariables>(MeetingDocument, options);
+      }
+export function useMeetingLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<MeetingQuery, MeetingQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<MeetingQuery, MeetingQueryVariables>(MeetingDocument, options);
+        }
+export type MeetingQueryHookResult = ReturnType<typeof useMeetingQuery>;
+export type MeetingLazyQueryHookResult = ReturnType<typeof useMeetingLazyQuery>;
+export type MeetingQueryResult = Apollo.QueryResult<MeetingQuery, MeetingQueryVariables>;
+export function refetchMeetingQuery(variables: MeetingQueryVariables) {
+      return { query: MeetingDocument, variables: variables }
+    }
+export const CourseDocument = gql`
+    query Course($where: CourseWhereUniqueInput!) {
+  course(where: $where) {
+    id
+    title
+    lessons {
+      id
+      title
+      description
+      published
+      courseId
+    }
+    meetings {
+      id
+      link
+      title
+      date
+      startTime
+      duration
+      courseId
+    }
+    assignments {
+      id
+      published
+      courseId
+    }
+  }
+}
+    `;
+
+/**
+ * __useCourseQuery__
+ *
+ * To run a query within a React component, call `useCourseQuery` and pass it any options that fit your needs.
+ * When your component renders, `useCourseQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useCourseQuery({
+ *   variables: {
+ *      where: // value for 'where'
+ *   },
+ * });
+ */
+export function useCourseQuery(baseOptions: Apollo.QueryHookOptions<CourseQuery, CourseQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<CourseQuery, CourseQueryVariables>(CourseDocument, options);
+      }
+export function useCourseLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<CourseQuery, CourseQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<CourseQuery, CourseQueryVariables>(CourseDocument, options);
+        }
+export type CourseQueryHookResult = ReturnType<typeof useCourseQuery>;
+export type CourseLazyQueryHookResult = ReturnType<typeof useCourseLazyQuery>;
+export type CourseQueryResult = Apollo.QueryResult<CourseQuery, CourseQueryVariables>;
+export function refetchCourseQuery(variables: CourseQueryVariables) {
+      return { query: CourseDocument, variables: variables }
+    }
+export const CoursesDocument = gql`
+    query Courses($where: CourseWhereInput, $orderBy: [CourseOrderByWithRelationInput!], $take: Int) {
+  courses(where: $where, orderBy: $orderBy, take: $take) {
+    id
+    title
+    description
+    teacher {
+      firstName
+      lastName
+    }
+    _count {
+      lessons
+      assignments
+      meetings
+    }
+  }
+}
+    `;
+
+/**
+ * __useCoursesQuery__
+ *
+ * To run a query within a React component, call `useCoursesQuery` and pass it any options that fit your needs.
+ * When your component renders, `useCoursesQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useCoursesQuery({
+ *   variables: {
+ *      where: // value for 'where'
+ *      orderBy: // value for 'orderBy'
+ *      take: // value for 'take'
+ *   },
+ * });
+ */
+export function useCoursesQuery(baseOptions?: Apollo.QueryHookOptions<CoursesQuery, CoursesQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<CoursesQuery, CoursesQueryVariables>(CoursesDocument, options);
+      }
+export function useCoursesLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<CoursesQuery, CoursesQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<CoursesQuery, CoursesQueryVariables>(CoursesDocument, options);
+        }
+export type CoursesQueryHookResult = ReturnType<typeof useCoursesQuery>;
+export type CoursesLazyQueryHookResult = ReturnType<typeof useCoursesLazyQuery>;
+export type CoursesQueryResult = Apollo.QueryResult<CoursesQuery, CoursesQueryVariables>;
+export function refetchCoursesQuery(variables?: CoursesQueryVariables) {
+      return { query: CoursesDocument, variables: variables }
+    }

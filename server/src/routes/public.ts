@@ -1,9 +1,7 @@
 import { Application } from "express";
-import { getConnection } from "../db";
+import prisma from "../db";
 
 export const publicRoutes = (app: Application) => {
-  const prisma = getConnection();
-
   app.get("/api/topics", (req, res) => {
     prisma.topic
       .findMany({

@@ -2960,17 +2960,13 @@
             "deprecationReason": null
           },
           {
-            "name": "deadline",
+            "name": "description",
             "description": null,
             "args": [],
             "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "SCALAR",
-                "name": "DateTime",
-                "ofType": null
-              }
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
             },
             "isDeprecated": false,
             "deprecationReason": null
@@ -3115,6 +3111,22 @@
                     "ofType": null
                   }
                 }
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "title",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
               }
             },
             "isDeprecated": false,
@@ -3325,7 +3337,7 @@
             "deprecationReason": null
           },
           {
-            "name": "deadline",
+            "name": "description",
             "description": null,
             "args": [],
             "type": {
@@ -3358,6 +3370,22 @@
           },
           {
             "name": "published",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "Int",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "title",
             "description": null,
             "args": [],
             "type": {
@@ -3437,7 +3465,7 @@
             "deprecationReason": null
           },
           {
-            "name": "deadline",
+            "name": "description",
             "description": null,
             "type": {
               "kind": "ENUM",
@@ -3462,6 +3490,18 @@
           },
           {
             "name": "published",
+            "description": null,
+            "type": {
+              "kind": "ENUM",
+              "name": "SortOrder",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "title",
             "description": null,
             "type": {
               "kind": "ENUM",
@@ -3548,16 +3588,12 @@
             "deprecationReason": null
           },
           {
-            "name": "deadline",
+            "name": "description",
             "description": null,
             "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "SCALAR",
-                "name": "DateTime",
-                "ofType": null
-              }
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
             },
             "defaultValue": null,
             "isDeprecated": false,
@@ -3586,6 +3622,22 @@
               "kind": "INPUT_OBJECT",
               "name": "SubmissionCreateNestedManyWithoutAssignmentInput",
               "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "title",
+            "description": null,
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              }
             },
             "defaultValue": null,
             "isDeprecated": false,
@@ -3949,16 +4001,12 @@
             "deprecationReason": null
           },
           {
-            "name": "deadline",
+            "name": "description",
             "description": null,
             "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "SCALAR",
-                "name": "DateTime",
-                "ofType": null
-              }
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
             },
             "defaultValue": null,
             "isDeprecated": false,
@@ -3987,6 +4035,22 @@
               "kind": "INPUT_OBJECT",
               "name": "SubmissionCreateNestedManyWithoutAssignmentInput",
               "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "title",
+            "description": null,
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              }
             },
             "defaultValue": null,
             "isDeprecated": false,
@@ -4056,16 +4120,12 @@
             "deprecationReason": null
           },
           {
-            "name": "deadline",
+            "name": "description",
             "description": null,
             "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "SCALAR",
-                "name": "DateTime",
-                "ofType": null
-              }
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
             },
             "defaultValue": null,
             "isDeprecated": false,
@@ -4094,6 +4154,22 @@
               "kind": "INPUT_OBJECT",
               "name": "SubmissionCreateNestedManyWithoutAssignmentInput",
               "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "title",
+            "description": null,
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              }
             },
             "defaultValue": null,
             "isDeprecated": false,
@@ -4175,16 +4251,12 @@
             "deprecationReason": null
           },
           {
-            "name": "deadline",
+            "name": "description",
             "description": null,
             "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "SCALAR",
-                "name": "DateTime",
-                "ofType": null
-              }
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
             },
             "defaultValue": null,
             "isDeprecated": false,
@@ -4199,6 +4271,22 @@
               "ofType": {
                 "kind": "SCALAR",
                 "name": "Boolean",
+                "ofType": null
+              }
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "title",
+            "description": null,
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "String",
                 "ofType": null
               }
             },
@@ -7155,17 +7243,13 @@
             "deprecationReason": null
           },
           {
-            "name": "deadline",
+            "name": "description",
             "description": null,
             "args": [],
             "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "SCALAR",
-                "name": "DateTime",
-                "ofType": null
-              }
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
             },
             "isDeprecated": false,
             "deprecationReason": null
@@ -7196,6 +7280,22 @@
               "ofType": {
                 "kind": "SCALAR",
                 "name": "Boolean",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "title",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "String",
                 "ofType": null
               }
             },
@@ -7313,12 +7413,12 @@
             "deprecationReason": null
           },
           {
-            "name": "deadline",
+            "name": "description",
             "description": null,
             "args": [],
             "type": {
               "kind": "SCALAR",
-              "name": "DateTime",
+              "name": "String",
               "ofType": null
             },
             "isDeprecated": false,
@@ -7343,6 +7443,18 @@
             "type": {
               "kind": "SCALAR",
               "name": "Boolean",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "title",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
               "ofType": null
             },
             "isDeprecated": false,
@@ -7409,7 +7521,7 @@
             "deprecationReason": null
           },
           {
-            "name": "deadline",
+            "name": "description",
             "description": null,
             "type": {
               "kind": "ENUM",
@@ -7434,6 +7546,18 @@
           },
           {
             "name": "published",
+            "description": null,
+            "type": {
+              "kind": "ENUM",
+              "name": "SortOrder",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "title",
             "description": null,
             "type": {
               "kind": "ENUM",
@@ -7503,12 +7627,12 @@
             "deprecationReason": null
           },
           {
-            "name": "deadline",
+            "name": "description",
             "description": null,
             "args": [],
             "type": {
               "kind": "SCALAR",
-              "name": "DateTime",
+              "name": "String",
               "ofType": null
             },
             "isDeprecated": false,
@@ -7533,6 +7657,18 @@
             "type": {
               "kind": "SCALAR",
               "name": "Boolean",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "title",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
               "ofType": null
             },
             "isDeprecated": false,
@@ -7599,7 +7735,7 @@
             "deprecationReason": null
           },
           {
-            "name": "deadline",
+            "name": "description",
             "description": null,
             "type": {
               "kind": "ENUM",
@@ -7624,6 +7760,18 @@
           },
           {
             "name": "published",
+            "description": null,
+            "type": {
+              "kind": "ENUM",
+              "name": "SortOrder",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "title",
             "description": null,
             "type": {
               "kind": "ENUM",
@@ -7777,7 +7925,7 @@
             "deprecationReason": null
           },
           {
-            "name": "deadline",
+            "name": "description",
             "description": null,
             "type": {
               "kind": "ENUM",
@@ -7802,6 +7950,18 @@
           },
           {
             "name": "published",
+            "description": null,
+            "type": {
+              "kind": "ENUM",
+              "name": "SortOrder",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "title",
             "description": null,
             "type": {
               "kind": "ENUM",
@@ -7896,7 +8056,7 @@
             "deprecationReason": null
           },
           {
-            "name": "deadline",
+            "name": "description",
             "description": null,
             "type": {
               "kind": "ENUM",
@@ -7937,6 +8097,18 @@
             "type": {
               "kind": "INPUT_OBJECT",
               "name": "SubmissionOrderByRelationAggregateInput",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "title",
+            "description": null,
+            "type": {
+              "kind": "ENUM",
+              "name": "SortOrder",
               "ofType": null
             },
             "defaultValue": null,
@@ -8022,7 +8194,7 @@
             "deprecationReason": null
           },
           {
-            "name": "deadline",
+            "name": "description",
             "description": null,
             "isDeprecated": false,
             "deprecationReason": null
@@ -8035,6 +8207,12 @@
           },
           {
             "name": "published",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "title",
             "description": null,
             "isDeprecated": false,
             "deprecationReason": null
@@ -8151,11 +8329,11 @@
             "deprecationReason": null
           },
           {
-            "name": "deadline",
+            "name": "description",
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",
-              "name": "DateTimeFilter",
+              "name": "StringNullableFilter",
               "ofType": null
             },
             "defaultValue": null,
@@ -8180,6 +8358,18 @@
             "type": {
               "kind": "INPUT_OBJECT",
               "name": "BoolFilter",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "title",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "StringFilter",
               "ofType": null
             },
             "defaultValue": null,
@@ -8306,11 +8496,11 @@
             "deprecationReason": null
           },
           {
-            "name": "deadline",
+            "name": "description",
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",
-              "name": "DateTimeWithAggregatesFilter",
+              "name": "StringNullableWithAggregatesFilter",
               "ofType": null
             },
             "defaultValue": null,
@@ -8335,6 +8525,18 @@
             "type": {
               "kind": "INPUT_OBJECT",
               "name": "BoolWithAggregatesFilter",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "title",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "StringWithAggregatesFilter",
               "ofType": null
             },
             "defaultValue": null,
@@ -8483,11 +8685,11 @@
             "deprecationReason": null
           },
           {
-            "name": "deadline",
+            "name": "description",
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",
-              "name": "DateTimeFieldUpdateOperationsInput",
+              "name": "NullableStringFieldUpdateOperationsInput",
               "ofType": null
             },
             "defaultValue": null,
@@ -8512,6 +8714,18 @@
             "type": {
               "kind": "INPUT_OBJECT",
               "name": "SubmissionUpdateManyWithoutAssignmentInput",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "title",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "StringFieldUpdateOperationsInput",
               "ofType": null
             },
             "defaultValue": null,
@@ -8566,11 +8780,11 @@
             "deprecationReason": null
           },
           {
-            "name": "deadline",
+            "name": "description",
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",
-              "name": "DateTimeFieldUpdateOperationsInput",
+              "name": "NullableStringFieldUpdateOperationsInput",
               "ofType": null
             },
             "defaultValue": null,
@@ -8583,6 +8797,18 @@
             "type": {
               "kind": "INPUT_OBJECT",
               "name": "BoolFieldUpdateOperationsInput",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "title",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "StringFieldUpdateOperationsInput",
               "ofType": null
             },
             "defaultValue": null,
@@ -9136,11 +9362,11 @@
             "deprecationReason": null
           },
           {
-            "name": "deadline",
+            "name": "description",
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",
-              "name": "DateTimeFieldUpdateOperationsInput",
+              "name": "NullableStringFieldUpdateOperationsInput",
               "ofType": null
             },
             "defaultValue": null,
@@ -9165,6 +9391,18 @@
             "type": {
               "kind": "INPUT_OBJECT",
               "name": "SubmissionUpdateManyWithoutAssignmentInput",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "title",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "StringFieldUpdateOperationsInput",
               "ofType": null
             },
             "defaultValue": null,
@@ -9231,11 +9469,11 @@
             "deprecationReason": null
           },
           {
-            "name": "deadline",
+            "name": "description",
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",
-              "name": "DateTimeFieldUpdateOperationsInput",
+              "name": "NullableStringFieldUpdateOperationsInput",
               "ofType": null
             },
             "defaultValue": null,
@@ -9260,6 +9498,18 @@
             "type": {
               "kind": "INPUT_OBJECT",
               "name": "SubmissionUpdateManyWithoutAssignmentInput",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "title",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "StringFieldUpdateOperationsInput",
               "ofType": null
             },
             "defaultValue": null,
@@ -9338,11 +9588,11 @@
             "deprecationReason": null
           },
           {
-            "name": "deadline",
+            "name": "description",
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",
-              "name": "DateTimeFieldUpdateOperationsInput",
+              "name": "NullableStringFieldUpdateOperationsInput",
               "ofType": null
             },
             "defaultValue": null,
@@ -9355,6 +9605,18 @@
             "type": {
               "kind": "INPUT_OBJECT",
               "name": "BoolFieldUpdateOperationsInput",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "title",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "StringFieldUpdateOperationsInput",
               "ofType": null
             },
             "defaultValue": null,
@@ -9650,11 +9912,11 @@
             "deprecationReason": null
           },
           {
-            "name": "deadline",
+            "name": "description",
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",
-              "name": "DateTimeFilter",
+              "name": "StringNullableFilter",
               "ofType": null
             },
             "defaultValue": null,
@@ -9691,6 +9953,18 @@
             "type": {
               "kind": "INPUT_OBJECT",
               "name": "SubmissionListRelationFilter",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "title",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "StringFilter",
               "ofType": null
             },
             "defaultValue": null,
@@ -18701,22 +18975,6 @@
             "deprecationReason": null
           },
           {
-            "name": "index",
-            "description": null,
-            "args": [],
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "SCALAR",
-                "name": "Int",
-                "ofType": null
-              }
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
             "name": "lessonFiles",
             "description": null,
             "args": [
@@ -18911,18 +19169,6 @@
             },
             "isDeprecated": false,
             "deprecationReason": null
-          },
-          {
-            "name": "index",
-            "description": null,
-            "args": [],
-            "type": {
-              "kind": "SCALAR",
-              "name": "Float",
-              "ofType": null
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
           }
         ],
         "inputFields": null,
@@ -18950,18 +19196,6 @@
           },
           {
             "name": "id",
-            "description": null,
-            "type": {
-              "kind": "ENUM",
-              "name": "SortOrder",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "index",
             "description": null,
             "type": {
               "kind": "ENUM",
@@ -19106,22 +19340,6 @@
             "deprecationReason": null
           },
           {
-            "name": "index",
-            "description": null,
-            "args": [],
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "SCALAR",
-                "name": "Int",
-                "ofType": null
-              }
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
             "name": "published",
             "description": null,
             "args": [],
@@ -19242,18 +19460,6 @@
             "deprecationReason": null
           },
           {
-            "name": "index",
-            "description": null,
-            "type": {
-              "kind": "ENUM",
-              "name": "SortOrder",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
             "name": "published",
             "description": null,
             "type": {
@@ -19347,22 +19553,6 @@
               "kind": "SCALAR",
               "name": "String",
               "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "index",
-            "description": null,
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "SCALAR",
-                "name": "Int",
-                "ofType": null
-              }
             },
             "defaultValue": null,
             "isDeprecated": false,
@@ -19680,22 +19870,6 @@
             "deprecationReason": null
           },
           {
-            "name": "index",
-            "description": null,
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "SCALAR",
-                "name": "Int",
-                "ofType": null
-              }
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
             "name": "lessonFiles",
             "description": null,
             "type": {
@@ -19809,22 +19983,6 @@
               "kind": "SCALAR",
               "name": "String",
               "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "index",
-            "description": null,
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "SCALAR",
-                "name": "Int",
-                "ofType": null
-              }
             },
             "defaultValue": null,
             "isDeprecated": false,
@@ -22839,22 +22997,6 @@
             "deprecationReason": null
           },
           {
-            "name": "index",
-            "description": null,
-            "args": [],
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "SCALAR",
-                "name": "Int",
-                "ofType": null
-              }
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
             "name": "published",
             "description": null,
             "args": [],
@@ -23021,18 +23163,6 @@
             "deprecationReason": null
           },
           {
-            "name": "index",
-            "description": null,
-            "args": [],
-            "type": {
-              "kind": "SCALAR",
-              "name": "Int",
-              "ofType": null
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
             "name": "published",
             "description": null,
             "args": [],
@@ -23130,18 +23260,6 @@
           },
           {
             "name": "id",
-            "description": null,
-            "type": {
-              "kind": "ENUM",
-              "name": "SortOrder",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "index",
             "description": null,
             "type": {
               "kind": "ENUM",
@@ -23259,18 +23377,6 @@
             "deprecationReason": null
           },
           {
-            "name": "index",
-            "description": null,
-            "args": [],
-            "type": {
-              "kind": "SCALAR",
-              "name": "Int",
-              "ofType": null
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
             "name": "published",
             "description": null,
             "args": [],
@@ -23368,18 +23474,6 @@
           },
           {
             "name": "id",
-            "description": null,
-            "type": {
-              "kind": "ENUM",
-              "name": "SortOrder",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "index",
             "description": null,
             "type": {
               "kind": "ENUM",
@@ -23581,18 +23675,6 @@
             "deprecationReason": null
           },
           {
-            "name": "index",
-            "description": null,
-            "type": {
-              "kind": "ENUM",
-              "name": "SortOrder",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
             "name": "published",
             "description": null,
             "type": {
@@ -23701,18 +23783,6 @@
           },
           {
             "name": "id",
-            "description": null,
-            "type": {
-              "kind": "ENUM",
-              "name": "SortOrder",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "index",
             "description": null,
             "type": {
               "kind": "ENUM",
@@ -23845,12 +23915,6 @@
           },
           {
             "name": "id",
-            "description": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "index",
             "description": null,
             "isDeprecated": false,
             "deprecationReason": null
@@ -23992,18 +24056,6 @@
           },
           {
             "name": "id",
-            "description": null,
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "IntFilter",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "index",
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",
@@ -24182,18 +24234,6 @@
             "deprecationReason": null
           },
           {
-            "name": "index",
-            "description": null,
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "IntWithAggregatesFilter",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
             "name": "published",
             "description": null,
             "type": {
@@ -24262,18 +24302,6 @@
             },
             "isDeprecated": false,
             "deprecationReason": null
-          },
-          {
-            "name": "index",
-            "description": null,
-            "args": [],
-            "type": {
-              "kind": "SCALAR",
-              "name": "Int",
-              "ofType": null
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
           }
         ],
         "inputFields": null,
@@ -24301,18 +24329,6 @@
           },
           {
             "name": "id",
-            "description": null,
-            "type": {
-              "kind": "ENUM",
-              "name": "SortOrder",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "index",
             "description": null,
             "type": {
               "kind": "ENUM",
@@ -24376,18 +24392,6 @@
             "type": {
               "kind": "INPUT_OBJECT",
               "name": "NullableStringFieldUpdateOperationsInput",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "index",
-            "description": null,
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "IntFieldUpdateOperationsInput",
               "ofType": null
             },
             "defaultValue": null,
@@ -24483,18 +24487,6 @@
             "type": {
               "kind": "INPUT_OBJECT",
               "name": "NullableStringFieldUpdateOperationsInput",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "index",
-            "description": null,
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "IntFieldUpdateOperationsInput",
               "ofType": null
             },
             "defaultValue": null,
@@ -24977,18 +24969,6 @@
             "deprecationReason": null
           },
           {
-            "name": "index",
-            "description": null,
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "IntFieldUpdateOperationsInput",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
             "name": "lessonFiles",
             "description": null,
             "type": {
@@ -25089,18 +25069,6 @@
             "type": {
               "kind": "INPUT_OBJECT",
               "name": "NullableStringFieldUpdateOperationsInput",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "index",
-            "description": null,
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "IntFieldUpdateOperationsInput",
               "ofType": null
             },
             "defaultValue": null,
@@ -25389,18 +25357,6 @@
             "deprecationReason": null
           },
           {
-            "name": "index",
-            "description": null,
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "IntFilter",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
             "name": "lessonFiles",
             "description": null,
             "type": {
@@ -25522,6 +25478,22 @@
             "deprecationReason": null
           },
           {
+            "name": "date",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "DateTime",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "description",
             "description": null,
             "args": [],
@@ -25578,7 +25550,7 @@
             "deprecationReason": null
           },
           {
-            "name": "start",
+            "name": "startTime",
             "description": null,
             "args": [],
             "type": {
@@ -25755,6 +25727,22 @@
             "deprecationReason": null
           },
           {
+            "name": "date",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "Int",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "description",
             "description": null,
             "args": [],
@@ -25819,7 +25807,7 @@
             "deprecationReason": null
           },
           {
-            "name": "start",
+            "name": "startTime",
             "description": null,
             "args": [],
             "type": {
@@ -25903,6 +25891,18 @@
             "deprecationReason": null
           },
           {
+            "name": "date",
+            "description": null,
+            "type": {
+              "kind": "ENUM",
+              "name": "SortOrder",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "description",
             "description": null,
             "type": {
@@ -25951,7 +25951,7 @@
             "deprecationReason": null
           },
           {
-            "name": "start",
+            "name": "startTime",
             "description": null,
             "type": {
               "kind": "ENUM",
@@ -26022,6 +26022,22 @@
             "deprecationReason": null
           },
           {
+            "name": "date",
+            "description": null,
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "DateTime",
+                "ofType": null
+              }
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "description",
             "description": null,
             "type": {
@@ -26062,7 +26078,7 @@
             "deprecationReason": null
           },
           {
-            "name": "start",
+            "name": "startTime",
             "description": null,
             "type": {
               "kind": "NON_NULL",
@@ -26243,6 +26259,22 @@
             "deprecationReason": null
           },
           {
+            "name": "date",
+            "description": null,
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "DateTime",
+                "ofType": null
+              }
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "description",
             "description": null,
             "type": {
@@ -26283,7 +26315,7 @@
             "deprecationReason": null
           },
           {
-            "name": "start",
+            "name": "startTime",
             "description": null,
             "type": {
               "kind": "NON_NULL",
@@ -26425,6 +26457,22 @@
             "deprecationReason": null
           },
           {
+            "name": "date",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "DateTime",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "description",
             "description": null,
             "args": [],
@@ -26481,7 +26529,7 @@
             "deprecationReason": null
           },
           {
-            "name": "start",
+            "name": "startTime",
             "description": null,
             "args": [],
             "type": {
@@ -26611,6 +26659,18 @@
             "deprecationReason": null
           },
           {
+            "name": "date",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "DateTime",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "description",
             "description": null,
             "args": [],
@@ -26659,7 +26719,7 @@
             "deprecationReason": null
           },
           {
-            "name": "start",
+            "name": "startTime",
             "description": null,
             "args": [],
             "type": {
@@ -26731,6 +26791,18 @@
             "deprecationReason": null
           },
           {
+            "name": "date",
+            "description": null,
+            "type": {
+              "kind": "ENUM",
+              "name": "SortOrder",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "description",
             "description": null,
             "type": {
@@ -26779,7 +26851,7 @@
             "deprecationReason": null
           },
           {
-            "name": "start",
+            "name": "startTime",
             "description": null,
             "type": {
               "kind": "ENUM",
@@ -26849,6 +26921,18 @@
             "deprecationReason": null
           },
           {
+            "name": "date",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "DateTime",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "description",
             "description": null,
             "args": [],
@@ -26897,7 +26981,7 @@
             "deprecationReason": null
           },
           {
-            "name": "start",
+            "name": "startTime",
             "description": null,
             "args": [],
             "type": {
@@ -26969,6 +27053,18 @@
             "deprecationReason": null
           },
           {
+            "name": "date",
+            "description": null,
+            "type": {
+              "kind": "ENUM",
+              "name": "SortOrder",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "description",
             "description": null,
             "type": {
@@ -27017,7 +27113,7 @@
             "deprecationReason": null
           },
           {
-            "name": "start",
+            "name": "startTime",
             "description": null,
             "type": {
               "kind": "ENUM",
@@ -27171,6 +27267,18 @@
             "deprecationReason": null
           },
           {
+            "name": "date",
+            "description": null,
+            "type": {
+              "kind": "ENUM",
+              "name": "SortOrder",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "description",
             "description": null,
             "type": {
@@ -27219,7 +27327,7 @@
             "deprecationReason": null
           },
           {
-            "name": "start",
+            "name": "startTime",
             "description": null,
             "type": {
               "kind": "ENUM",
@@ -27302,6 +27410,18 @@
             "deprecationReason": null
           },
           {
+            "name": "date",
+            "description": null,
+            "type": {
+              "kind": "ENUM",
+              "name": "SortOrder",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "description",
             "description": null,
             "type": {
@@ -27350,7 +27470,7 @@
             "deprecationReason": null
           },
           {
-            "name": "start",
+            "name": "startTime",
             "description": null,
             "type": {
               "kind": "ENUM",
@@ -27411,6 +27531,12 @@
             "deprecationReason": null
           },
           {
+            "name": "date",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "description",
             "description": null,
             "isDeprecated": false,
@@ -27435,7 +27561,7 @@
             "deprecationReason": null
           },
           {
-            "name": "start",
+            "name": "startTime",
             "description": null,
             "isDeprecated": false,
             "deprecationReason": null
@@ -27546,6 +27672,18 @@
             "deprecationReason": null
           },
           {
+            "name": "date",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "DateTimeFilter",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "description",
             "description": null,
             "type": {
@@ -27594,7 +27732,7 @@
             "deprecationReason": null
           },
           {
-            "name": "start",
+            "name": "startTime",
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",
@@ -27725,6 +27863,18 @@
             "deprecationReason": null
           },
           {
+            "name": "date",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "DateTimeWithAggregatesFilter",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "description",
             "description": null,
             "type": {
@@ -27773,7 +27923,7 @@
             "deprecationReason": null
           },
           {
-            "name": "start",
+            "name": "startTime",
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",
@@ -27914,6 +28064,18 @@
             "deprecationReason": null
           },
           {
+            "name": "date",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "DateTimeFieldUpdateOperationsInput",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "description",
             "description": null,
             "type": {
@@ -27950,7 +28112,7 @@
             "deprecationReason": null
           },
           {
-            "name": "start",
+            "name": "startTime",
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",
@@ -28009,6 +28171,18 @@
             "deprecationReason": null
           },
           {
+            "name": "date",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "DateTimeFieldUpdateOperationsInput",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "description",
             "description": null,
             "type": {
@@ -28045,7 +28219,7 @@
             "deprecationReason": null
           },
           {
-            "name": "start",
+            "name": "startTime",
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",
@@ -28401,6 +28575,18 @@
             "deprecationReason": null
           },
           {
+            "name": "date",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "DateTimeFieldUpdateOperationsInput",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "description",
             "description": null,
             "type": {
@@ -28437,7 +28623,7 @@
             "deprecationReason": null
           },
           {
-            "name": "start",
+            "name": "startTime",
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",
@@ -28639,6 +28825,18 @@
             "deprecationReason": null
           },
           {
+            "name": "date",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "DateTimeFilter",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "description",
             "description": null,
             "type": {
@@ -28687,7 +28885,7 @@
             "deprecationReason": null
           },
           {
-            "name": "start",
+            "name": "startTime",
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",

@@ -2,7 +2,6 @@ import {
   Button,
   Container,
   Group,
-  NumberInput,
   Paper,
   Switch,
   Text,
@@ -14,66 +13,50 @@ import { useForm, zodResolver } from "@mantine/form";
 import z from "zod";
 import { useTranslation } from "react-i18next";
 import { useNavigate, useParams } from "react-router-dom";
-import { gql, useQuery } from "@apollo/client";
 import { Loader } from "../components";
 import { useEffect } from "react";
-import {} from "../../graphql/";
+import { useLessonQuery, useUpdateLessonMutation } from "../../graphql/";
+import { useNotifications } from "@mantine/notifications";
 
 export const EditLesson = () => {
   const schema = z.object({
-    index: z.number().positive(),
     title: z.string().nonempty(),
     description: z.string().nonempty(),
     content: z.string().min(20),
   });
-
   const form = useForm({
     schema: zodResolver(schema),
     initialValues: {
-      index: 0,
       title: "",
       description: "",
-      published: "",
+      published: false,
       content: "",
     },
   });
   const params = useParams();
+  const [updateLesson] = useUpdateLessonMutation();
 
-  const { loading, data } = useQuery(
-    gql`
-      query ($where: LessonWhereUniqueInput!) {
-        lesson(where: $where) {
-          id
-          index
-          title
-          description
-          published
-          content
-        }
-      }
-    `,
-    {
-      variables: {
-        where: {
-          id: parseInt(params.lessonId as string),
-        },
+  const { loading, data } = useLessonQuery({
+    variables: {
+      where: {
+        id: parseInt(params.lessonId as string),
       },
-    }
-  );
+    },
+  });
 
   useEffect(() => {
     form.setValues({
-      content: data?.lesson.content,
-      description: data?.lesson.description,
-      index: data?.lesson.index,
-      published: data?.lesson.published,
-      title: data?.lesson.title,
+      content: data?.lesson?.content as string,
+      description: data?.lesson?.description as string,
+      published: data?.lesson?.published as boolean,
+      title: data?.lesson?.title as string,
     });
   }, [loading]);
 
   const navigate = useNavigate();
 
   const { t } = useTranslation();
+  const { showNotification } = useNotifications();
 
   if (loading) return <Loader height="80vh" />;
 
@@ -82,12 +65,38 @@ export const EditLesson = () => {
       <Paper withBorder p={20}>
         <form
           onSubmit={form.onSubmit((values) => {
-            console.log(values);
+            updateLesson({
+              variables: {
+                where: {
+                  id: parseInt(params.lessonId as string),
+                },
+                data: {
+                  title: {
+                    set: values.title,
+                  },
+                  content: {
+                    set: values.content,
+                  },
+                  description: {
+                    set: values.description,
+                  },
+                  published: {
+                    set: values.published,
+                  },
+                },
+              },
+              onCompleted() {
+                showNotification({
+                  message: t("success"),
+                  color: "green",
+                });
+                navigate("/courses/" + params.courseId);
+              },
+            });
           })}
           noValidate
         >
           <Group grow spacing="lg" direction="column">
-            <NumberInput {...form.getInputProps("index")} label={t("Index")} />
             <TextInput
               label={t("title")}
               placeholder={t("title")}
@@ -100,7 +109,7 @@ export const EditLesson = () => {
             />
             <Switch
               label={t("published")}
-              {...form.getInputProps("published")}
+              {...form.getInputProps("published", { type: "checkbox" })}
             />
             <Text sx={{ fontSize: 14 }} mb={-15} weight={500}>
               {t("Content")}
@@ -137,7 +146,7 @@ export const EditLesson = () => {
                 Cancel
               </Button>
               <Button type="submit" color="green" sx={{ width: 100 }}>
-                Apply
+                t({"apply"})
               </Button>
             </Group>
           </Group>

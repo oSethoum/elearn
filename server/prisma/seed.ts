@@ -1000,6 +1000,27 @@ async function main() {
       },
     },
   });
+  await prisma.student.create({
+    data: {
+      grade: 1,
+      topic: {
+        connect: {
+          id: 1,
+        },
+      },
+      firstName: "student",
+      lastName: "student",
+      user: {
+        create: {
+          username: "student",
+          password: "student",
+          email: "student@gmail.com",
+          role: "student",
+          disabled: false,
+        },
+      },
+    },
+  });
 }
 
 main()

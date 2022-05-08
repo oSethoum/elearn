@@ -12,17 +12,24 @@ import { useTranslation } from "react-i18next";
 import z from "zod";
 import "dayjs/locale/fr";
 import "dayjs/locale/ar-dz";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { LangContext } from "@/context";
-import { useCreateMeetingMutation } from "@/graphql";
+import { useMeetingQuery, useUpdateMeetingMutation } from "@/graphql";
 import { useNotifications } from "@mantine/notifications";
 import { useNavigate, useParams } from "react-router-dom";
 
-export const NewMeeting = () => {
-  const [create] = useCreateMeetingMutation();
+export const EditMeeting = () => {
+  const [update] = useUpdateMeetingMutation();
+  const { t } = useTranslation();
+  const params = useParams();
+
+  const { data, loading } = useMeetingQuery({
+    variables: {
+      where: { id: parseInt(params?.meetingId as string) },
+    },
+  });
   const navigate = useNavigate();
   const { showNotification } = useNotifications();
-  const { t } = useTranslation();
 
   const schema = z.object({
     title: z.string().nonempty(t("notEmpty")),
@@ -33,21 +40,32 @@ export const NewMeeting = () => {
     link: z.string().url(t("invalid")),
   });
 
-  const params = useParams();
-
-  const { lang } = useContext(LangContext);
-
   const form = useForm({
     schema: zodResolver(schema),
     initialValues: {
       title: "",
       description: "",
-      date: "",
-      startTime: "",
-      duration: "",
+      date: new Date(),
+      startTime: new Date(),
+      duration: new Date(),
       link: "",
     },
   });
+
+  useEffect(() => {
+    if (data) {
+      form.setValues({
+        title: data?.meeting?.title as string,
+        description: data?.meeting?.description as string,
+        date: new Date(data?.meeting?.date as string),
+        startTime: new Date(data?.meeting?.startTime as string),
+        duration: new Date(data?.meeting?.duration as string),
+        link: data?.meeting?.link as string,
+      });
+    }
+  }, [loading]);
+
+  const { lang } = useContext(LangContext);
 
   return (
     <Container size="xl">
@@ -55,10 +73,30 @@ export const NewMeeting = () => {
         <form
           onSubmit={form.onSubmit((values) => {
             console.log(values);
-            create({
+            update({
               variables: {
+                where: {
+                  id: parseInt(params?.meetingId as string),
+                },
                 data: {
-                  ...values,
+                  title: {
+                    set: values.title,
+                  },
+                  description: {
+                    set: values.description,
+                  },
+                  date: {
+                    set: values.date,
+                  },
+                  startTime: {
+                    set: values.startTime,
+                  },
+                  duration: {
+                    set: values.duration,
+                  },
+                  link: {
+                    set: values.link,
+                  },
                   course: {
                     connect: {
                       id: parseInt(params?.courseId as string),
@@ -69,6 +107,7 @@ export const NewMeeting = () => {
               onCompleted() {
                 showNotification({
                   message: t("success"),
+                  color: "green",
                 });
 
                 navigate(-1);
@@ -112,10 +151,15 @@ export const NewMeeting = () => {
           </Group>
           <Space h={20} />
           <Group position="right">
-            <Button variant="default" onClick={() => navigate(-1)}>
+            <Button
+              variant="default"
+              onClick={() => {
+                navigate(-1);
+              }}
+            >
               {t("cancel")}
             </Button>
-            <Button type="submit">{t("add")}</Button>
+            <Button type="submit">{t("apply")}</Button>
           </Group>
         </form>
       </Paper>
@@ -123,4 +167,4 @@ export const NewMeeting = () => {
   );
 };
 
-export default NewMeeting;
+export default EditMeeting;

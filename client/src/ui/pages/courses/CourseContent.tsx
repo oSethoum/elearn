@@ -2,6 +2,7 @@ import {
   Box,
   Button,
   Center,
+  Container,
   Divider,
   Group,
   Paper,
@@ -11,71 +12,67 @@ import {
 
 import { useTranslation } from "react-i18next";
 import { FaBook, FaBookOpen, FaVideo } from "react-icons/fa";
-import { gql, useQuery } from "@apollo/client";
+import { useQuery } from "@apollo/client";
 import { useNavigate, useParams } from "react-router-dom";
 import { Loader } from "../../components";
 import { LessonCard } from "../../components/LessonCard";
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import { UserContext } from "../../../context/user";
 import { AssignmentCard } from "../../components/AssignmentCard";
 import { MeetingCard } from "../../components/MeetingCard";
+import { Course, GET_COURSE, useDeleteAssignmentMutation } from "@/graphql";
 
 export const CourseContent = () => {
   const params = useParams();
   const { t } = useTranslation();
-
+  const [course, setCourse] = useState<Course>();
   const { user } = useContext(UserContext);
   const navigate = useNavigate();
-
-  const { loading, data } = useQuery(
-    gql`
-      query ($courseWhere: CourseWhereUniqueInput!) {
-        course(where: $courseWhere) {
-          id
-          title
-          lessons {
-            id
-            index
-            title
-            description
-            published
-          }
-          meetings {
-            id
-            link
-            title
-            start
-            duration
-          }
-          assignments {
-            id
-            deadline
-            published
-          }
-        }
-      }
-    `,
-
-    {
-      variables: {
-        courseWhere: {
-          id: parseInt(params?.courseId as string),
-        },
+  const [selectedTab, setSelectedTab] = useState(0);
+  const { loading, data } = useQuery<{ course: Course }>(GET_COURSE, {
+    variables: {
+      courseWhere: {
+        id: parseInt(params?.courseId as string),
       },
+    },
+  });
+
+  useEffect(() => {
+    setCourse(data?.course);
+  }, [loading]);
+
+  useEffect(() => {
+    if (params?.tab?.toLowerCase() === "lessons") {
+      setSelectedTab(0);
     }
-  );
+    if (params?.tab?.toLowerCase() === "assignments") {
+      setSelectedTab(1);
+    }
+    if (params?.tab?.toLowerCase() === "meetings") {
+      setSelectedTab(2);
+    }
+  }, [params?.tab]);
+
+  const onChange = (active: number) => {
+    setSelectedTab(active);
+    navigate(
+      `/courses/${params?.courseId}/${
+        active === 0 ? "lessons" : active === 1 ? "assignments" : "meetings"
+      }`
+    );
+  };
 
   if (loading) return <Loader height="80vh" />;
 
   return (
-    <>
-      <Paper shadow="xs" withBorder p={10} m={10} mx={20}>
+    <Container size="xl">
+      <Paper shadow="xs" withBorder p={10} my={20}>
         <Text align="center" size="xl" weight="bold">
-          {data?.course?.title}
+          {course?.title}
         </Text>
       </Paper>
-      <Paper shadow="xs" withBorder m={10} mx={20}>
-        <Tabs grow>
+      <Paper shadow="xs" withBorder>
+        <Tabs onTabChange={onChange} active={selectedTab} grow>
           <Tabs.Tab icon={<FaBook />} label={t("lessons")} color="red">
             <Box sx={{ minHeight: "80vh" }}>
               {user?.role === "teacher" && (
@@ -83,7 +80,7 @@ export const CourseContent = () => {
                   <Group mx={10} mb={10} position="apart">
                     <Button
                       onClick={() => {
-                        navigate("lessons/new");
+                        navigate("new");
                       }}
                     >
                       {t("add")}
@@ -92,17 +89,23 @@ export const CourseContent = () => {
                   <Divider />
                 </>
               )}
-              {data?.course?.lessons?.length == 0 ? (
+              {course?.lessons?.length == 0 ? (
                 <Center sx={{ height: "80vh" }}>
                   <Text>No Data </Text>
                 </Center>
               ) : (
-                data?.course?.lessons?.map((lesson) => (
+                course?.lessons?.map((lesson) => (
                   <LessonCard
                     key={lesson.title}
-                    id={lesson.id}
-                    title={lesson.title}
-                    description={lesson.description}
+                    onDelete={() => {
+                      setCourse({
+                        ...course,
+                        lessons: course.lessons.filter(
+                          (l) => lesson.id != l.id
+                        ),
+                      });
+                    }}
+                    lesson={lesson}
                     canEdit={user?.role === "teacher"}
                     canDelete={user?.role === "teacher"}
                   />
@@ -121,7 +124,7 @@ export const CourseContent = () => {
                   <Group mx={10} mb={10} position="apart">
                     <Button
                       onClick={() => {
-                        navigate("assignments/new");
+                        navigate("new");
                       }}
                     >
                       {t("add")}
@@ -130,16 +133,23 @@ export const CourseContent = () => {
                   <Divider />
                 </>
               )}
-              {data?.course?.assignments?.length == 0 ? (
+              {course?.assignments?.length == 0 ? (
                 <Center sx={{ height: "80vh" }}>
-                  <Text>No Data </Text>
+                  <Text>No Data</Text>
                 </Center>
               ) : (
-                data?.course?.assignments?.map((assignment) => (
+                course?.assignments?.map((assignment) => (
                   <AssignmentCard
-                    id={assignment.id}
-                    title={assignment.title}
-                    description={assignment.description}
+                    key={assignment.title}
+                    onDelete={() => {
+                      setCourse({
+                        ...course,
+                        assignments: course.assignments.filter(
+                          (a) => assignment.id != a.id
+                        ),
+                      });
+                    }}
+                    assignment={assignment}
                     canEdit={user?.role === "teacher"}
                     canDelete={user?.role === "teacher"}
                   />
@@ -154,7 +164,7 @@ export const CourseContent = () => {
                   <Group mx={10} mb={10} position="apart">
                     <Button
                       onClick={() => {
-                        navigate("meetings/new");
+                        navigate("new");
                       }}
                     >
                       {t("add")}
@@ -163,16 +173,23 @@ export const CourseContent = () => {
                   <Divider />
                 </>
               )}
-              {data?.course?.meetings?.length == 0 ? (
+              {course?.meetings?.length == 0 ? (
                 <Center sx={{ height: "80vh" }}>
                   <Text>No Data </Text>
                 </Center>
               ) : (
-                data?.course?.meetings?.map((meeting) => (
+                course?.meetings?.map((meeting) => (
                   <MeetingCard
-                    id={meeting.id}
-                    title={meeting.title}
-                    description={meeting.description}
+                    key={meeting.id}
+                    meeting={meeting}
+                    onDelete={() => {
+                      setCourse({
+                        ...course,
+                        meetings: course.meetings.filter(
+                          (m) => meeting.id != m.id
+                        ),
+                      });
+                    }}
                     canEdit={user?.role === "teacher"}
                     canDelete={user?.role === "teacher"}
                   />
@@ -182,7 +199,7 @@ export const CourseContent = () => {
           </Tabs.Tab>
         </Tabs>
       </Paper>
-    </>
+    </Container>
   );
 };
 

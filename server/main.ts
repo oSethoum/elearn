@@ -11,7 +11,7 @@ async function main() {
 
   // middleware
   app.use(morgan("dev"));
-  app.use(json());
+  app.use(json({ limit: "50mb" }));
   app.use(cookieParser());
 
   publicRoutes(app);

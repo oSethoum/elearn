@@ -1,10 +1,94 @@
 query Lessons($where: LessonWhereInput) {
   lessons(where: $where) {
     id
-    index
     title
     description
     published
     content
+  }
+}
+
+query Lesson($where: LessonWhereUniqueInput!) {
+  lesson(where: $where) {
+    id
+    title
+    description
+    published
+    content
+  }
+}
+
+query Assignment($where: AssignmentWhereUniqueInput!) {
+  assignment(where: $where) {
+    id
+    courseId
+    title
+    description
+    published
+    content
+  }
+}
+
+query meeting($where: MeetingWhereUniqueInput!) {
+  meeting(where: $where) {
+    id
+    title
+    description
+    courseId
+    createdAt
+    updatedAt
+    date
+    startTime
+    duration
+    link
+  }
+}
+
+query Course($where: CourseWhereUniqueInput!) {
+  course(where: $where) {
+    id
+    title
+    lessons {
+      id
+      title
+      description
+      published
+      courseId
+    }
+    meetings {
+      id
+      link
+      title
+      date
+      startTime
+      duration
+      courseId
+    }
+    assignments {
+      id
+      published
+      courseId
+    }
+  }
+}
+
+query Courses(
+  $where: CourseWhereInput
+  $orderBy: [CourseOrderByWithRelationInput!]
+  $take: Int
+) {
+  courses(where: $where, orderBy: $orderBy, take: $take) {
+    id
+    title
+    description
+    teacher {
+      firstName
+      lastName
+    }
+    _count {
+      lessons
+      assignments
+      meetings
+    }
   }
 }

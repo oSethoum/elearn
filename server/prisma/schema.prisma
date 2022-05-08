@@ -91,11 +91,12 @@ model Course {
 
 model Assignment {
 	id Int @id @default(autoincrement())
-	deadline DateTime 
+	title String 
 	createdAt DateTime @default(now())
 	updatedAt DateTime @updatedAt
 	published Boolean 
 	content String 
+	description String? 
 	course Course? @relation(fields:[courseId], references:[id])
 	courseId Int?
 	submissions Submission[]
@@ -106,7 +107,8 @@ model Meeting {
 	id Int @id @default(autoincrement())
 	title String 
 	description String? 
-	start DateTime 
+	date DateTime 
+	startTime DateTime 
 	duration DateTime 
 	link String? 
 	createdAt DateTime @default(now())
@@ -142,7 +144,6 @@ model Lesson {
 	id Int @id @default(autoincrement())
 	title String 
 	description String? 
-	index Int 
 	published Boolean 
 	createdAt DateTime @default(now())
 	updatedAt DateTime @updatedAt

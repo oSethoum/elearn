@@ -32,7 +32,7 @@ export const EditCourse = ({ onSuccess }: Props) => {
     }
   `);
 
-  if (loading) return <Loader />;
+  if (loading) return <Loader height={"80vh"} />;
 
   const schema = z.object({
     title: z.string(),

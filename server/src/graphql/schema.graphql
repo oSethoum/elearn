@@ -320,10 +320,11 @@ type Assignment {
   course: Course
   courseId: Int
   createdAt: DateTime!
-  deadline: DateTime!
+  description: String
   id: Int!
   published: Boolean!
   submissions(cursor: SubmissionWhereUniqueInput, distinct: [SubmissionScalarFieldEnum!], orderBy: [SubmissionOrderByWithRelationInput!], skip: Int, take: Int, where: SubmissionWhereInput): [Submission!]!
+  title: String!
   updatedAt: DateTime!
 }
 
@@ -347,9 +348,10 @@ type AssignmentCountAggregate {
   content: Int!
   courseId: Int!
   createdAt: Int!
-  deadline: Int!
+  description: Int!
   id: Int!
   published: Int!
+  title: Int!
   updatedAt: Int!
 }
 
@@ -357,9 +359,10 @@ input AssignmentCountOrderByAggregateInput {
   content: SortOrder
   courseId: SortOrder
   createdAt: SortOrder
-  deadline: SortOrder
+  description: SortOrder
   id: SortOrder
   published: SortOrder
+  title: SortOrder
   updatedAt: SortOrder
 }
 
@@ -368,9 +371,10 @@ input AssignmentCreateInput {
   content: String!
   course: CourseCreateNestedOneWithoutAssignmentsInput
   createdAt: DateTime
-  deadline: DateTime!
+  description: String
   published: Boolean!
   submissions: SubmissionCreateNestedManyWithoutAssignmentInput
+  title: String!
   updatedAt: DateTime
 }
 
@@ -411,9 +415,10 @@ input AssignmentCreateWithoutAssignmentFilesInput {
   content: String!
   course: CourseCreateNestedOneWithoutAssignmentsInput
   createdAt: DateTime
-  deadline: DateTime!
+  description: String
   published: Boolean!
   submissions: SubmissionCreateNestedManyWithoutAssignmentInput
+  title: String!
   updatedAt: DateTime
 }
 
@@ -421,9 +426,10 @@ input AssignmentCreateWithoutCourseInput {
   assignmentFiles: AssignmentFileCreateNestedManyWithoutAssignmentInput
   content: String!
   createdAt: DateTime
-  deadline: DateTime!
+  description: String
   published: Boolean!
   submissions: SubmissionCreateNestedManyWithoutAssignmentInput
+  title: String!
   updatedAt: DateTime
 }
 
@@ -432,8 +438,9 @@ input AssignmentCreateWithoutSubmissionsInput {
   content: String!
   course: CourseCreateNestedOneWithoutAssignmentsInput
   createdAt: DateTime
-  deadline: DateTime!
+  description: String
   published: Boolean!
+  title: String!
   updatedAt: DateTime
 }
 
@@ -725,9 +732,10 @@ type AssignmentGroupBy {
   content: String!
   courseId: Int
   createdAt: DateTime!
-  deadline: DateTime!
+  description: String
   id: Int!
   published: Boolean!
+  title: String!
   updatedAt: DateTime!
 }
 
@@ -741,9 +749,10 @@ type AssignmentMaxAggregate {
   content: String
   courseId: Int
   createdAt: DateTime
-  deadline: DateTime
+  description: String
   id: Int
   published: Boolean
+  title: String
   updatedAt: DateTime
 }
 
@@ -751,9 +760,10 @@ input AssignmentMaxOrderByAggregateInput {
   content: SortOrder
   courseId: SortOrder
   createdAt: SortOrder
-  deadline: SortOrder
+  description: SortOrder
   id: SortOrder
   published: SortOrder
+  title: SortOrder
   updatedAt: SortOrder
 }
 
@@ -761,9 +771,10 @@ type AssignmentMinAggregate {
   content: String
   courseId: Int
   createdAt: DateTime
-  deadline: DateTime
+  description: String
   id: Int
   published: Boolean
+  title: String
   updatedAt: DateTime
 }
 
@@ -771,9 +782,10 @@ input AssignmentMinOrderByAggregateInput {
   content: SortOrder
   courseId: SortOrder
   createdAt: SortOrder
-  deadline: SortOrder
+  description: SortOrder
   id: SortOrder
   published: SortOrder
+  title: SortOrder
   updatedAt: SortOrder
 }
 
@@ -790,9 +802,10 @@ input AssignmentOrderByWithAggregationInput {
   content: SortOrder
   courseId: SortOrder
   createdAt: SortOrder
-  deadline: SortOrder
+  description: SortOrder
   id: SortOrder
   published: SortOrder
+  title: SortOrder
   updatedAt: SortOrder
 }
 
@@ -802,10 +815,11 @@ input AssignmentOrderByWithRelationInput {
   course: CourseOrderByWithRelationInput
   courseId: SortOrder
   createdAt: SortOrder
-  deadline: SortOrder
+  description: SortOrder
   id: SortOrder
   published: SortOrder
   submissions: SubmissionOrderByRelationAggregateInput
+  title: SortOrder
   updatedAt: SortOrder
 }
 
@@ -818,9 +832,10 @@ enum AssignmentScalarFieldEnum {
   content
   courseId
   createdAt
-  deadline
+  description
   id
   published
+  title
   updatedAt
 }
 
@@ -831,9 +846,10 @@ input AssignmentScalarWhereInput {
   content: StringFilter
   courseId: IntNullableFilter
   createdAt: DateTimeFilter
-  deadline: DateTimeFilter
+  description: StringNullableFilter
   id: IntFilter
   published: BoolFilter
+  title: StringFilter
   updatedAt: DateTimeFilter
 }
 
@@ -844,9 +860,10 @@ input AssignmentScalarWhereWithAggregatesInput {
   content: StringWithAggregatesFilter
   courseId: IntNullableWithAggregatesFilter
   createdAt: DateTimeWithAggregatesFilter
-  deadline: DateTimeWithAggregatesFilter
+  description: StringNullableWithAggregatesFilter
   id: IntWithAggregatesFilter
   published: BoolWithAggregatesFilter
+  title: StringWithAggregatesFilter
   updatedAt: DateTimeWithAggregatesFilter
 }
 
@@ -865,17 +882,19 @@ input AssignmentUpdateInput {
   content: StringFieldUpdateOperationsInput
   course: CourseUpdateOneWithoutAssignmentsInput
   createdAt: DateTimeFieldUpdateOperationsInput
-  deadline: DateTimeFieldUpdateOperationsInput
+  description: NullableStringFieldUpdateOperationsInput
   published: BoolFieldUpdateOperationsInput
   submissions: SubmissionUpdateManyWithoutAssignmentInput
+  title: StringFieldUpdateOperationsInput
   updatedAt: DateTimeFieldUpdateOperationsInput
 }
 
 input AssignmentUpdateManyMutationInput {
   content: StringFieldUpdateOperationsInput
   createdAt: DateTimeFieldUpdateOperationsInput
-  deadline: DateTimeFieldUpdateOperationsInput
+  description: NullableStringFieldUpdateOperationsInput
   published: BoolFieldUpdateOperationsInput
+  title: StringFieldUpdateOperationsInput
   updatedAt: DateTimeFieldUpdateOperationsInput
 }
 
@@ -926,9 +945,10 @@ input AssignmentUpdateWithoutAssignmentFilesInput {
   content: StringFieldUpdateOperationsInput
   course: CourseUpdateOneWithoutAssignmentsInput
   createdAt: DateTimeFieldUpdateOperationsInput
-  deadline: DateTimeFieldUpdateOperationsInput
+  description: NullableStringFieldUpdateOperationsInput
   published: BoolFieldUpdateOperationsInput
   submissions: SubmissionUpdateManyWithoutAssignmentInput
+  title: StringFieldUpdateOperationsInput
   updatedAt: DateTimeFieldUpdateOperationsInput
 }
 
@@ -936,9 +956,10 @@ input AssignmentUpdateWithoutCourseInput {
   assignmentFiles: AssignmentFileUpdateManyWithoutAssignmentInput
   content: StringFieldUpdateOperationsInput
   createdAt: DateTimeFieldUpdateOperationsInput
-  deadline: DateTimeFieldUpdateOperationsInput
+  description: NullableStringFieldUpdateOperationsInput
   published: BoolFieldUpdateOperationsInput
   submissions: SubmissionUpdateManyWithoutAssignmentInput
+  title: StringFieldUpdateOperationsInput
   updatedAt: DateTimeFieldUpdateOperationsInput
 }
 
@@ -947,8 +968,9 @@ input AssignmentUpdateWithoutSubmissionsInput {
   content: StringFieldUpdateOperationsInput
   course: CourseUpdateOneWithoutAssignmentsInput
   createdAt: DateTimeFieldUpdateOperationsInput
-  deadline: DateTimeFieldUpdateOperationsInput
+  description: NullableStringFieldUpdateOperationsInput
   published: BoolFieldUpdateOperationsInput
+  title: StringFieldUpdateOperationsInput
   updatedAt: DateTimeFieldUpdateOperationsInput
 }
 
@@ -977,10 +999,11 @@ input AssignmentWhereInput {
   course: CourseRelationFilter
   courseId: IntNullableFilter
   createdAt: DateTimeFilter
-  deadline: DateTimeFilter
+  description: StringNullableFilter
   id: IntFilter
   published: BoolFilter
   submissions: SubmissionListRelationFilter
+  title: StringFilter
   updatedAt: DateTimeFilter
 }
 
@@ -1854,7 +1877,6 @@ type Lesson {
   createdAt: DateTime!
   description: String
   id: Int!
-  index: Int!
   lessonFiles(cursor: LessonFileWhereUniqueInput, distinct: [LessonFileScalarFieldEnum!], orderBy: [LessonFileOrderByWithRelationInput!], skip: Int, take: Int, where: LessonFileWhereInput): [LessonFile!]!
   published: Boolean!
   title: String!
@@ -1864,13 +1886,11 @@ type Lesson {
 type LessonAvgAggregate {
   courseId: Float
   id: Float
-  index: Float
 }
 
 input LessonAvgOrderByAggregateInput {
   courseId: SortOrder
   id: SortOrder
-  index: SortOrder
 }
 
 type LessonCount {
@@ -1884,7 +1904,6 @@ type LessonCountAggregate {
   createdAt: Int!
   description: Int!
   id: Int!
-  index: Int!
   published: Int!
   title: Int!
   updatedAt: Int!
@@ -1896,7 +1915,6 @@ input LessonCountOrderByAggregateInput {
   createdAt: SortOrder
   description: SortOrder
   id: SortOrder
-  index: SortOrder
   published: SortOrder
   title: SortOrder
   updatedAt: SortOrder
@@ -1907,7 +1925,6 @@ input LessonCreateInput {
   course: CourseCreateNestedOneWithoutLessonsInput
   createdAt: DateTime
   description: String
-  index: Int!
   lessonFiles: LessonFileCreateNestedManyWithoutLessonInput
   published: Boolean!
   title: String!
@@ -1940,7 +1957,6 @@ input LessonCreateWithoutCourseInput {
   content: String!
   createdAt: DateTime
   description: String
-  index: Int!
   lessonFiles: LessonFileCreateNestedManyWithoutLessonInput
   published: Boolean!
   title: String!
@@ -1952,7 +1968,6 @@ input LessonCreateWithoutLessonFilesInput {
   course: CourseCreateNestedOneWithoutLessonsInput
   createdAt: DateTime
   description: String
-  index: Int!
   published: Boolean!
   title: String!
   updatedAt: DateTime
@@ -2248,7 +2263,6 @@ type LessonGroupBy {
   createdAt: DateTime!
   description: String
   id: Int!
-  index: Int!
   published: Boolean!
   title: String!
   updatedAt: DateTime!
@@ -2266,7 +2280,6 @@ type LessonMaxAggregate {
   createdAt: DateTime
   description: String
   id: Int
-  index: Int
   published: Boolean
   title: String
   updatedAt: DateTime
@@ -2278,7 +2291,6 @@ input LessonMaxOrderByAggregateInput {
   createdAt: SortOrder
   description: SortOrder
   id: SortOrder
-  index: SortOrder
   published: SortOrder
   title: SortOrder
   updatedAt: SortOrder
@@ -2290,7 +2302,6 @@ type LessonMinAggregate {
   createdAt: DateTime
   description: String
   id: Int
-  index: Int
   published: Boolean
   title: String
   updatedAt: DateTime
@@ -2302,7 +2313,6 @@ input LessonMinOrderByAggregateInput {
   createdAt: SortOrder
   description: SortOrder
   id: SortOrder
-  index: SortOrder
   published: SortOrder
   title: SortOrder
   updatedAt: SortOrder
@@ -2323,7 +2333,6 @@ input LessonOrderByWithAggregationInput {
   createdAt: SortOrder
   description: SortOrder
   id: SortOrder
-  index: SortOrder
   published: SortOrder
   title: SortOrder
   updatedAt: SortOrder
@@ -2336,7 +2345,6 @@ input LessonOrderByWithRelationInput {
   createdAt: SortOrder
   description: SortOrder
   id: SortOrder
-  index: SortOrder
   lessonFiles: LessonFileOrderByRelationAggregateInput
   published: SortOrder
   title: SortOrder
@@ -2354,7 +2362,6 @@ enum LessonScalarFieldEnum {
   createdAt
   description
   id
-  index
   published
   title
   updatedAt
@@ -2369,7 +2376,6 @@ input LessonScalarWhereInput {
   createdAt: DateTimeFilter
   description: StringNullableFilter
   id: IntFilter
-  index: IntFilter
   published: BoolFilter
   title: StringFilter
   updatedAt: DateTimeFilter
@@ -2384,7 +2390,6 @@ input LessonScalarWhereWithAggregatesInput {
   createdAt: DateTimeWithAggregatesFilter
   description: StringNullableWithAggregatesFilter
   id: IntWithAggregatesFilter
-  index: IntWithAggregatesFilter
   published: BoolWithAggregatesFilter
   title: StringWithAggregatesFilter
   updatedAt: DateTimeWithAggregatesFilter
@@ -2393,13 +2398,11 @@ input LessonScalarWhereWithAggregatesInput {
 type LessonSumAggregate {
   courseId: Int
   id: Int
-  index: Int
 }
 
 input LessonSumOrderByAggregateInput {
   courseId: SortOrder
   id: SortOrder
-  index: SortOrder
 }
 
 input LessonUpdateInput {
@@ -2407,7 +2410,6 @@ input LessonUpdateInput {
   course: CourseUpdateOneWithoutLessonsInput
   createdAt: DateTimeFieldUpdateOperationsInput
   description: NullableStringFieldUpdateOperationsInput
-  index: IntFieldUpdateOperationsInput
   lessonFiles: LessonFileUpdateManyWithoutLessonInput
   published: BoolFieldUpdateOperationsInput
   title: StringFieldUpdateOperationsInput
@@ -2418,7 +2420,6 @@ input LessonUpdateManyMutationInput {
   content: StringFieldUpdateOperationsInput
   createdAt: DateTimeFieldUpdateOperationsInput
   description: NullableStringFieldUpdateOperationsInput
-  index: IntFieldUpdateOperationsInput
   published: BoolFieldUpdateOperationsInput
   title: StringFieldUpdateOperationsInput
   updatedAt: DateTimeFieldUpdateOperationsInput
@@ -2461,7 +2462,6 @@ input LessonUpdateWithoutCourseInput {
   content: StringFieldUpdateOperationsInput
   createdAt: DateTimeFieldUpdateOperationsInput
   description: NullableStringFieldUpdateOperationsInput
-  index: IntFieldUpdateOperationsInput
   lessonFiles: LessonFileUpdateManyWithoutLessonInput
   published: BoolFieldUpdateOperationsInput
   title: StringFieldUpdateOperationsInput
@@ -2473,7 +2473,6 @@ input LessonUpdateWithoutLessonFilesInput {
   course: CourseUpdateOneWithoutLessonsInput
   createdAt: DateTimeFieldUpdateOperationsInput
   description: NullableStringFieldUpdateOperationsInput
-  index: IntFieldUpdateOperationsInput
   published: BoolFieldUpdateOperationsInput
   title: StringFieldUpdateOperationsInput
   updatedAt: DateTimeFieldUpdateOperationsInput
@@ -2500,7 +2499,6 @@ input LessonWhereInput {
   createdAt: DateTimeFilter
   description: StringNullableFilter
   id: IntFilter
-  index: IntFilter
   lessonFiles: LessonFileListRelationFilter
   published: BoolFilter
   title: StringFilter
@@ -2515,11 +2513,12 @@ type Meeting {
   course: Course
   courseId: Int
   createdAt: DateTime!
+  date: DateTime!
   description: String
   duration: DateTime!
   id: Int!
   link: String
-  start: DateTime!
+  startTime: DateTime!
   title: String!
   updatedAt: DateTime!
 }
@@ -2538,11 +2537,12 @@ type MeetingCountAggregate {
   _all: Int!
   courseId: Int!
   createdAt: Int!
+  date: Int!
   description: Int!
   duration: Int!
   id: Int!
   link: Int!
-  start: Int!
+  startTime: Int!
   title: Int!
   updatedAt: Int!
 }
@@ -2550,11 +2550,12 @@ type MeetingCountAggregate {
 input MeetingCountOrderByAggregateInput {
   courseId: SortOrder
   createdAt: SortOrder
+  date: SortOrder
   description: SortOrder
   duration: SortOrder
   id: SortOrder
   link: SortOrder
-  start: SortOrder
+  startTime: SortOrder
   title: SortOrder
   updatedAt: SortOrder
 }
@@ -2562,10 +2563,11 @@ input MeetingCountOrderByAggregateInput {
 input MeetingCreateInput {
   course: CourseCreateNestedOneWithoutMeetingsInput
   createdAt: DateTime
+  date: DateTime!
   description: String
   duration: DateTime!
   link: String
-  start: DateTime!
+  startTime: DateTime!
   title: String!
   updatedAt: DateTime
 }
@@ -2583,10 +2585,11 @@ input MeetingCreateOrConnectWithoutCourseInput {
 
 input MeetingCreateWithoutCourseInput {
   createdAt: DateTime
+  date: DateTime!
   description: String
   duration: DateTime!
   link: String
-  start: DateTime!
+  startTime: DateTime!
   title: String!
   updatedAt: DateTime
 }
@@ -2599,11 +2602,12 @@ type MeetingGroupBy {
   _sum: MeetingSumAggregate
   courseId: Int
   createdAt: DateTime!
+  date: DateTime!
   description: String
   duration: DateTime!
   id: Int!
   link: String
-  start: DateTime!
+  startTime: DateTime!
   title: String!
   updatedAt: DateTime!
 }
@@ -2617,11 +2621,12 @@ input MeetingListRelationFilter {
 type MeetingMaxAggregate {
   courseId: Int
   createdAt: DateTime
+  date: DateTime
   description: String
   duration: DateTime
   id: Int
   link: String
-  start: DateTime
+  startTime: DateTime
   title: String
   updatedAt: DateTime
 }
@@ -2629,11 +2634,12 @@ type MeetingMaxAggregate {
 input MeetingMaxOrderByAggregateInput {
   courseId: SortOrder
   createdAt: SortOrder
+  date: SortOrder
   description: SortOrder
   duration: SortOrder
   id: SortOrder
   link: SortOrder
-  start: SortOrder
+  startTime: SortOrder
   title: SortOrder
   updatedAt: SortOrder
 }
@@ -2641,11 +2647,12 @@ input MeetingMaxOrderByAggregateInput {
 type MeetingMinAggregate {
   courseId: Int
   createdAt: DateTime
+  date: DateTime
   description: String
   duration: DateTime
   id: Int
   link: String
-  start: DateTime
+  startTime: DateTime
   title: String
   updatedAt: DateTime
 }
@@ -2653,11 +2660,12 @@ type MeetingMinAggregate {
 input MeetingMinOrderByAggregateInput {
   courseId: SortOrder
   createdAt: SortOrder
+  date: SortOrder
   description: SortOrder
   duration: SortOrder
   id: SortOrder
   link: SortOrder
-  start: SortOrder
+  startTime: SortOrder
   title: SortOrder
   updatedAt: SortOrder
 }
@@ -2674,11 +2682,12 @@ input MeetingOrderByWithAggregationInput {
   _sum: MeetingSumOrderByAggregateInput
   courseId: SortOrder
   createdAt: SortOrder
+  date: SortOrder
   description: SortOrder
   duration: SortOrder
   id: SortOrder
   link: SortOrder
-  start: SortOrder
+  startTime: SortOrder
   title: SortOrder
   updatedAt: SortOrder
 }
@@ -2687,11 +2696,12 @@ input MeetingOrderByWithRelationInput {
   course: CourseOrderByWithRelationInput
   courseId: SortOrder
   createdAt: SortOrder
+  date: SortOrder
   description: SortOrder
   duration: SortOrder
   id: SortOrder
   link: SortOrder
-  start: SortOrder
+  startTime: SortOrder
   title: SortOrder
   updatedAt: SortOrder
 }
@@ -2699,11 +2709,12 @@ input MeetingOrderByWithRelationInput {
 enum MeetingScalarFieldEnum {
   courseId
   createdAt
+  date
   description
   duration
   id
   link
-  start
+  startTime
   title
   updatedAt
 }
@@ -2714,11 +2725,12 @@ input MeetingScalarWhereInput {
   OR: [MeetingScalarWhereInput!]
   courseId: IntNullableFilter
   createdAt: DateTimeFilter
+  date: DateTimeFilter
   description: StringNullableFilter
   duration: DateTimeFilter
   id: IntFilter
   link: StringNullableFilter
-  start: DateTimeFilter
+  startTime: DateTimeFilter
   title: StringFilter
   updatedAt: DateTimeFilter
 }
@@ -2729,11 +2741,12 @@ input MeetingScalarWhereWithAggregatesInput {
   OR: [MeetingScalarWhereWithAggregatesInput!]
   courseId: IntNullableWithAggregatesFilter
   createdAt: DateTimeWithAggregatesFilter
+  date: DateTimeWithAggregatesFilter
   description: StringNullableWithAggregatesFilter
   duration: DateTimeWithAggregatesFilter
   id: IntWithAggregatesFilter
   link: StringNullableWithAggregatesFilter
-  start: DateTimeWithAggregatesFilter
+  startTime: DateTimeWithAggregatesFilter
   title: StringWithAggregatesFilter
   updatedAt: DateTimeWithAggregatesFilter
 }
@@ -2751,20 +2764,22 @@ input MeetingSumOrderByAggregateInput {
 input MeetingUpdateInput {
   course: CourseUpdateOneWithoutMeetingsInput
   createdAt: DateTimeFieldUpdateOperationsInput
+  date: DateTimeFieldUpdateOperationsInput
   description: NullableStringFieldUpdateOperationsInput
   duration: DateTimeFieldUpdateOperationsInput
   link: NullableStringFieldUpdateOperationsInput
-  start: DateTimeFieldUpdateOperationsInput
+  startTime: DateTimeFieldUpdateOperationsInput
   title: StringFieldUpdateOperationsInput
   updatedAt: DateTimeFieldUpdateOperationsInput
 }
 
 input MeetingUpdateManyMutationInput {
   createdAt: DateTimeFieldUpdateOperationsInput
+  date: DateTimeFieldUpdateOperationsInput
   description: NullableStringFieldUpdateOperationsInput
   duration: DateTimeFieldUpdateOperationsInput
   link: NullableStringFieldUpdateOperationsInput
-  start: DateTimeFieldUpdateOperationsInput
+  startTime: DateTimeFieldUpdateOperationsInput
   title: StringFieldUpdateOperationsInput
   updatedAt: DateTimeFieldUpdateOperationsInput
 }
@@ -2794,10 +2809,11 @@ input MeetingUpdateWithWhereUniqueWithoutCourseInput {
 
 input MeetingUpdateWithoutCourseInput {
   createdAt: DateTimeFieldUpdateOperationsInput
+  date: DateTimeFieldUpdateOperationsInput
   description: NullableStringFieldUpdateOperationsInput
   duration: DateTimeFieldUpdateOperationsInput
   link: NullableStringFieldUpdateOperationsInput
-  start: DateTimeFieldUpdateOperationsInput
+  startTime: DateTimeFieldUpdateOperationsInput
   title: StringFieldUpdateOperationsInput
   updatedAt: DateTimeFieldUpdateOperationsInput
 }
@@ -2815,11 +2831,12 @@ input MeetingWhereInput {
   course: CourseRelationFilter
   courseId: IntNullableFilter
   createdAt: DateTimeFilter
+  date: DateTimeFilter
   description: StringNullableFilter
   duration: DateTimeFilter
   id: IntFilter
   link: StringNullableFilter
-  start: DateTimeFilter
+  startTime: DateTimeFilter
   title: StringFilter
   updatedAt: DateTimeFilter
 }

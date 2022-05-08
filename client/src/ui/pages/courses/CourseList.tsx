@@ -2,9 +2,9 @@ import { useQuery, gql } from "@apollo/client";
 import { Badge, Button, Container, Group } from "@mantine/core";
 import { useContext } from "react";
 import { useTranslation } from "react-i18next";
-import CourseCard from "../../components/CourseCard";
-import { Loader } from "../../components/Loader";
-import { UserContext } from "../../../context/user";
+import CourseCard from "@/ui/components/CourseCard";
+import { Loader } from "@/ui/components/Loader";
+import { UserContext } from "@/context/user";
 import { MdAdd } from "react-icons/md";
 
 export const CourseList = () => {

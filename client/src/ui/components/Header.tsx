@@ -31,7 +31,7 @@ interface stylesProps {
 const useStyles = createStyles((theme, { y, height }: stylesProps) => ({
   root: {
     position: "sticky",
-    zIndex: 1000,
+    zIndex: 50,
     top: 0,
     left: 0,
     right: 0,

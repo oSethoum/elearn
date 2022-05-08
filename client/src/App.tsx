@@ -8,11 +8,13 @@ import {
   InMemoryCache,
   ApolloProvider,
   from,
+  DefaultOptions,
 } from "@apollo/client";
 import { onError } from "@apollo/client/link/error";
 import { Suspense } from "react";
 
 const NewMeeting = lazy(() => import("./ui/forms/NewMeeting"));
+const EditMeeting = lazy(() => import("./ui/forms/EditMeeting"));
 const CourseContent = lazy(() => import("./ui/pages/courses/CourseContent"));
 const Course = lazy(() => import("./ui/pages/courses/Course"));
 const Lesson = lazy(() => import("./ui/pages/lesson/Lesson"));
@@ -52,9 +54,25 @@ function App() {
     }),
   ]);
 
+  const defaultOptions: DefaultOptions = {
+    watchQuery: {
+      fetchPolicy: "no-cache",
+      errorPolicy: "ignore",
+    },
+    query: {
+      fetchPolicy: "no-cache",
+      errorPolicy: "all",
+    },
+    mutate: {
+      fetchPolicy: "no-cache",
+      errorPolicy: "all",
+    },
+  };
+
   const client = new ApolloClient({
     link,
     cache: new InMemoryCache(),
+    defaultOptions,
   });
 
   return (
@@ -70,7 +88,7 @@ function App() {
                 <Route path="/courses" element={<CourseList />} />
                 <Route path="/courses/:courseId" element={<Course />}>
                   <Route
-                    path="/courses/:courseId/"
+                    path="/courses/:courseId"
                     element={<CourseContent />}
                   />
                   <Route
@@ -94,12 +112,16 @@ function App() {
                     element={<Assignment />}
                   />
                   <Route
+                    path="/courses/:courseId/assignments/:assignmentId/edit"
+                    element={<EditAssignment />}
+                  />
+                  <Route
                     path="/courses/:courseId/meetings/new"
                     element={<NewMeeting />}
                   />
                   <Route
-                    path="/courses/:courseId/meetings/:meetingsId"
-                    element={<NewMeeting />}
+                    path="/courses/:courseId/meetings/:meetingId/edit"
+                    element={<EditMeeting />}
                   />
                 </Route>
               </Route>

@@ -13,7 +13,7 @@ import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 
 export interface ICourseCardProps {
-  id: string;
+  id: number;
   author: string;
   title: string;
   meeting: Boolean;

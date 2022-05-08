@@ -1,3 +1,4 @@
+import { Meeting, useDeleteMeetingMutation } from "@/graphql";
 import {
   Text,
   Card,
@@ -6,10 +7,10 @@ import {
   createStyles,
   Group,
   Button,
-  BoxProps,
 } from "@mantine/core";
+import { useModals } from "@mantine/modals";
 import { useTranslation } from "react-i18next";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const styles = createStyles((theme) => ({
   title: {
@@ -20,50 +21,75 @@ const styles = createStyles((theme) => ({
   },
 }));
 
-export interface MeetingCardProps extends BoxProps<"div"> {
-  id: string;
-  title: string;
-  description?: string;
+export interface MeetingCardProps {
+  meeting: Meeting;
   canEdit?: boolean;
   canDelete?: boolean;
+  onDelete: () => void;
 }
 
 export const MeetingCard = ({
-  id,
-  title,
-  description,
+  meeting,
+  canEdit,
   canDelete,
+  onDelete,
 }: MeetingCardProps) => {
   const { classes } = styles();
   const { t } = useTranslation();
   const navigate = useNavigate();
+  const modals = useModals();
+  const [deleteMeeting] = useDeleteMeetingMutation();
 
-  const _delete = () => {};
-  const _explore = () => {
-    navigate("meetings/" + id);
+  const _delete = () => {
+    modals.openConfirmModal({
+      title: t("confirmAction"),
+      children: <Text size="sm">{t("deleteMessage")}</Text>,
+      labels: { confirm: t("confirm"), cancel: t("cancel") },
+      confirmProps: { color: "red" },
+      centered: true,
+      onConfirm: () =>
+        deleteMeeting({
+          variables: {
+            where: {
+              id: meeting.id,
+            },
+          },
+          onCompleted() {
+            onDelete();
+          },
+        }),
+    });
+  };
+  const _edit = () => {
+    navigate(`${meeting.id}/edit`);
   };
 
   return (
-    <Card p={0}>
-      <Box className={classes.title} m={10}>
+    <Card m={10} p={0}>
+      <Box className={classes.title} p={10}>
         <Text size="xl" weight="bold">
-          {title}
+          {meeting.title}
         </Text>
       </Box>
       <Divider />
       <Box m={10}>
-        <Box>{description || t("noDescription")}</Box>
+        <Box>{meeting.description || t("noDescription")}</Box>
         <Group position="apart">
           <Text>Hello</Text>
           <Group>
             {!!canDelete && (
-              <Button color="red" onClick={_delete}>
+              <Button color="red" variant="light" onClick={_delete}>
                 {t("delete")}
               </Button>
             )}
-            <Button color="blue" onClick={_explore}>
-              {t("explore")}
-            </Button>
+            {!!canEdit && (
+              <Button color="green" variant="light" onClick={_edit}>
+                {t("edit")}
+              </Button>
+            )}
+            <Link target="_blank" to={meeting.link as string}>
+              <Button color="blue">{t("join")}</Button>
+            </Link>
           </Group>
         </Group>
       </Box>

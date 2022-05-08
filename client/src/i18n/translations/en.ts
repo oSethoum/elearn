@@ -25,7 +25,6 @@ export const en = {
     dark: "Dark",
     light: "Light",
     anonymous: "Anonymous",
-    // new to translate
     noDescription: "No Description",
     noAuthor: "No Author",
     view: "View",
@@ -58,6 +57,18 @@ export const en = {
     registerFailed: "Registration Failed",
     published: "Published",
     content: "Content",
+    // new to translate
+    confirmAction: "Please confirm your action",
+    deleteMessage: "Are you sure you want to delete this?",
+    confirm: "Confirm",
+    cancel: "Cancel",
+    apply: "Apply",
+    date: "Date",
+    invalid: "Invalid",
+    startTime: "Start Time",
+    duration: "Duration",
+    link: "Link",
+    join: "Join",
   },
 };
 

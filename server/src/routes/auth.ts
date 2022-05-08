@@ -1,10 +1,8 @@
 import { Handler } from "express";
 import { sign, verify } from "jsonwebtoken";
-import { getConnection } from "../db";
+import prisma from "../db";
 
 export const register: Handler = async (req, res) => {
-  const prisma = getConnection();
-
   const { topic, grade, firstName, lastName, ...others } = req.body;
   const user = await prisma.user.create({
     data: {
@@ -34,7 +32,7 @@ export const register: Handler = async (req, res) => {
 };
 
 export const login: Handler = async (req, res) => {
-  const prisma = getConnection();
+  console.log("Login hit");
 
   const user = await prisma.user.findFirst({
     where: {
@@ -94,8 +92,6 @@ export const refresh: Handler = async (req, res) => {
       message: "No token provided",
     });
   }
-
-  const prisma = getConnection();
 
   const { userId } = verify(token, "secret") as { userId: number };
 

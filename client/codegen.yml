@@ -9,6 +9,7 @@ generates:
       - "typescript-react-apollo"
     config:
       withHooks: true
+      withRefetchFn: true
   ./graphql.schema.json:
     plugins:
       - "introspection"

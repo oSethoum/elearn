@@ -1,12 +1,11 @@
 import { PrismaClient } from "@prisma/client";
 
-let client: any;
+const DBClient = {
+  instance: new PrismaClient(),
+};
 
-export function getConnection() {
-  if (!client) {
-    client = new PrismaClient();
-    client.$connect();
-  }
+export type IDBClient = typeof DBClient;
 
-  return client as PrismaClient;
-}
+Object.freeze(DBClient);
+
+export default DBClient.instance;

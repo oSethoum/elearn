@@ -6,11 +6,11 @@ import {
   createStyles,
   Group,
   Button,
-  BoxProps,
 } from "@mantine/core";
 import { useModals } from "@mantine/modals";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
+import { Lesson, useDeleteLessonMutation } from "@/graphql";
 
 const styles = createStyles((theme) => ({
   title: {
@@ -21,66 +21,73 @@ const styles = createStyles((theme) => ({
   },
 }));
 
-export interface LessonCardProps extends BoxProps<"div"> {
-  id: string;
-  title: string;
-  description?: string;
+export interface LessonCardProps {
+  lesson: Lesson;
   canEdit?: boolean;
   canDelete?: boolean;
+  onDelete: () => void;
 }
 
 export const LessonCard = ({
-  id,
-  title,
-  description,
+  lesson,
   canEdit,
   canDelete,
+  onDelete,
 }: LessonCardProps) => {
   const { classes } = styles();
   const { t } = useTranslation();
   const navigate = useNavigate();
 
   const modals = useModals();
+  const [deleteLesson] = useDeleteLessonMutation();
 
   const _delete = () =>
     modals.openConfirmModal({
-      title: "Please confirm your action",
-      children: (
-        <Text size="sm">Are you sure you want to delete this lesson ?</Text>
-      ),
-      labels: { confirm: "Confirm", cancel: "Cancel" },
+      title: t("confirmAction"),
+      children: <Text size="sm">{t("deleteMessage")}</Text>,
+      labels: { confirm: t("confirm"), cancel: t("cancel") },
       confirmProps: { color: "red" },
       centered: true,
-      onConfirm: () => console.log("Confirmed"),
+      onConfirm: () =>
+        deleteLesson({
+          variables: {
+            where: {
+              id: lesson.id,
+            },
+          },
+          onCompleted() {
+            onDelete();
+          },
+        }),
     });
 
   const _edit = () => {
-    navigate(`lessons/${id}/edit`);
+    navigate(`${lesson.id}/edit`);
   };
 
   const _explore = () => {
-    navigate("lessons/" + id);
+    navigate(`${lesson.id}`);
   };
 
   return (
     <Card shadow="xs" m={10} p={0}>
       <Box className={classes.title} p={10}>
         <Text size="xl" weight="bold">
-          {title}
+          {lesson.title}
         </Text>
       </Box>
       <Divider />
       <Box m={10}>
-        <Box>{description || t("noDescription")}</Box>
+        <Box>{lesson.description || t("noDescription")}</Box>
         <Group position="right">
           <Group>
             {!!canDelete && (
-              <Button color="red" variant="outline" onClick={_delete}>
+              <Button color="red" variant="light" onClick={_delete}>
                 {t("delete")}
               </Button>
             )}
             {!!canEdit && (
-              <Button color="green" variant="outline" onClick={_edit}>
+              <Button color="green" variant="light" onClick={_edit}>
                 {t("edit")}
               </Button>
             )}

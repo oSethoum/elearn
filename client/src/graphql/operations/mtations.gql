@@ -1,4 +1,3 @@
-# Lesson CUD
 mutation createLesson($data: LessonCreateInput!) {
   createLesson(data: $data) {
     id
