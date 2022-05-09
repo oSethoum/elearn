@@ -19,7 +19,7 @@ import {
 import z from "zod";
 import { zodResolver } from "@mantine/form";
 import { useContext } from "react";
-import { UserContext } from "../../../context/user";
+import { useAppContext } from "@/context/";
 import { Navigate } from "react-router-dom";
 
 export function Reset() {
@@ -31,7 +31,7 @@ export function Reset() {
     initialValues: { email: "" },
   });
 
-  const { user } = useContext(UserContext);
+  const { user } = useAppContext();
 
   return user ? (
     <Navigate to="/404" />

@@ -62,11 +62,11 @@ export const LessonCard = ({
     });
 
   const _edit = () => {
-    navigate(`${lesson.id}/edit`);
+    navigate(`lessons/${lesson.id}/edit`);
   };
 
   const _explore = () => {
-    navigate(`${lesson.id}`);
+    navigate(`lessons/${lesson.id}`);
   };
 
   return (

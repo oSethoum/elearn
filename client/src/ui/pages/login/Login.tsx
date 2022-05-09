@@ -19,17 +19,17 @@ import {
   ForgotPasswordInput,
   Header,
   Logo,
-} from "../../components";
+} from "@/ui/components";
 import z from "zod";
 import { zodResolver, useForm } from "@mantine/form";
 import { useTranslation } from "react-i18next";
 import { useContext, useState } from "react";
-import { UserContext } from "../../../context/user";
+import { useAppContext } from "@/context/";
 
 export function Login() {
   const theme = useMantineTheme();
   const { t } = useTranslation();
-  const { user, setUser } = useContext(UserContext);
+  const { user, setUser } = useAppContext();
   const [alert, setAlert] = useState(false);
 
   const schema = z.object({

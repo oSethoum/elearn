@@ -2,14 +2,14 @@ import { ActionIcon, useMantineTheme } from "@mantine/core";
 import { BsArrow90DegLeft, BsArrow90DegRight } from "react-icons/bs";
 import { Link, To, useNavigate } from "react-router-dom";
 
-export function BackButton({ to }: { to?: To }) {
+export function BackButton({ to }: { to?: string }) {
   const theme = useMantineTheme();
   const navigate = useNavigate();
 
   return (
     <ActionIcon
       onClick={() => {
-        navigate(-1);
+        to ? navigate(to) : navigate(-1);
       }}
       radius="xl"
       size="xl"

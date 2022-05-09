@@ -13,7 +13,7 @@ import { useWindowScroll } from "@mantine/hooks";
 import { ComponentPropsWithoutRef, useContext } from "react";
 import { useTranslation } from "react-i18next";
 import { FacebookLogo, InstagramLogo, Logo, YoutubeLogo } from ".";
-import { LangContext, TLang } from "../../context";
+import { useAppContext, ILanguage } from "@/context";
 
 interface FooterProps extends ComponentPropsWithoutRef<"div"> {
   withBorder?: boolean;
@@ -42,7 +42,7 @@ export function Footer({
   const [{ y }] = useWindowScroll();
   const { t } = useTranslation();
   const { classes } = useStyles({ y, height });
-  const { lang, setLang } = useContext(LangContext);
+  const { language, setLanguage } = useAppContext();
   return (
     <Paper component="div" className={classes.root} {...others}>
       {!!withBorder && <Divider size={borderSize || "xs"} />}
@@ -93,8 +93,8 @@ export function Footer({
             <Select
               variant="filled"
               style={{ width: 200 }}
-              onChange={(value: TLang) => setLang(value)}
-              value={lang}
+              onChange={(value: ILanguage) => setLanguage(value)}
+              value={language}
               data={[
                 { label: t("french"), value: "fr" },
                 { label: t("english"), value: "en" },

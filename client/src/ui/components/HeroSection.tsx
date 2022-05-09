@@ -12,7 +12,7 @@ import {
 } from "@mantine/core";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import { UserContext } from "../../context/user";
+import { useAppContext } from "@/context";
 
 const useStyles = createStyles((theme) => ({
   wrapper: {
@@ -107,7 +107,7 @@ const useStyles = createStyles((theme) => ({
 export function HeroSection() {
   const { classes, cx } = useStyles();
   const { t } = useTranslation();
-  const { user } = useContext(UserContext);
+  const { user } = useAppContext();
 
   return (
     <div className={classes.wrapper}>
@@ -115,16 +115,15 @@ export function HeroSection() {
 
       <div className={classes.inner}>
         <Title className={classes.title}>
-          Enhance your learning experience{" "}
+          {t("heroLine")}{" "}
           <Text component="span" inherit className={classes.highlight}>
-            Online
+            {t("online")}
           </Text>
         </Title>
 
         <Container size={640}>
           <Text size="lg" className={classes.description}>
-            Learn better with our platform at your own pace, with the help of
-            your teacher and student community.
+            {t("subHeroLine")}
           </Text>
         </Container>
 

@@ -28,12 +28,12 @@ import z from "zod";
 import { useTranslation } from "react-i18next";
 import { useForm, zodResolver } from "@mantine/form";
 import { useContext, useEffect, useState } from "react";
-import { UserContext } from "../../../context/user";
+import { useAppContext } from "@/context/";
 
 export const Register = () => {
   const theme = useMantineTheme();
   const { t } = useTranslation();
-  const { user } = useContext(UserContext);
+  const { user } = useAppContext();
   const [topics, setTopics] = useState<
     { value: string; label: string; grades: number }[]
   >([]);

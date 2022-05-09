@@ -35,6 +35,11 @@ const NewTeacher = lazy(() => import("./ui/forms/NewTeacher"));
 const EditTeacher = lazy(() => import("./ui/forms/EditTeacher"));
 const NewAdmin = lazy(() => import("./ui/forms/NewTeacher"));
 const EditAdmin = lazy(() => import("./ui/forms/EditTeacher"));
+const Users = lazy(() => import("./ui/pages/dashboard/Users"));
+const Departments = lazy(() => import("./ui/pages/dashboard/Departments"));
+const AboutUs = lazy(() => import("./ui/pages/about-us/AboutUs"));
+
+const Stats = lazy(() => import("./ui/pages/dashboard/Stats"));
 
 function App() {
   const errorLink = onError(({ graphQLErrors, networkError }) => {
@@ -83,7 +88,15 @@ function App() {
           <Suspense fallback={<Loader height="100vh" />}>
             <Routes>
               <Route path="/" element={<Home />} />
-              <Route path="/dashboard" element={<Dashboard />} />
+              <Route path="/about-us" element={<AboutUs />} />
+              <Route path="/dashboard" element={<Dashboard />}>
+                <Route path="/dashboard/" element={<Stats />} />
+                <Route path="/dashboard/users" element={<Users />} />
+                <Route
+                  path="/dashboard/departments"
+                  element={<Departments />}
+                />
+              </Route>
               <Route path="/courses" element={<Courses />}>
                 <Route path="/courses" element={<CourseList />} />
                 <Route path="/courses/:courseId" element={<Course />}>

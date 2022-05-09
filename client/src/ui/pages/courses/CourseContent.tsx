@@ -16,17 +16,19 @@ import { useQuery } from "@apollo/client";
 import { useNavigate, useParams } from "react-router-dom";
 import { Loader } from "../../components";
 import { LessonCard } from "../../components/LessonCard";
-import { useContext, useEffect, useState } from "react";
-import { UserContext } from "../../../context/user";
+import { useEffect, useState } from "react";
+import { useAppContext } from "@/context";
 import { AssignmentCard } from "../../components/AssignmentCard";
 import { MeetingCard } from "../../components/MeetingCard";
-import { Course, GET_COURSE, useDeleteAssignmentMutation } from "@/graphql";
+import { Course, GET_COURSE } from "@/graphql";
+import { useUrlQuery } from "@/hooks";
 
 export const CourseContent = () => {
   const params = useParams();
+  const query = useUrlQuery();
   const { t } = useTranslation();
   const [course, setCourse] = useState<Course>();
-  const { user } = useContext(UserContext);
+  const { user } = useAppContext();
   const navigate = useNavigate();
   const [selectedTab, setSelectedTab] = useState(0);
   const { loading, data } = useQuery<{ course: Course }>(GET_COURSE, {
@@ -42,22 +44,24 @@ export const CourseContent = () => {
   }, [loading]);
 
   useEffect(() => {
-    if (params?.tab?.toLowerCase() === "lessons") {
+    if (query.get("tab") === "assignments") {
+      setSelectedTab(1);
+    } else if (query.get("tab") === "meetings") {
+      setSelectedTab(2);
+    } else {
       setSelectedTab(0);
     }
-    if (params?.tab?.toLowerCase() === "assignments") {
-      setSelectedTab(1);
-    }
-    if (params?.tab?.toLowerCase() === "meetings") {
-      setSelectedTab(2);
-    }
-  }, [params?.tab]);
+  }, [query]);
 
   const onChange = (active: number) => {
     setSelectedTab(active);
     navigate(
       `/courses/${params?.courseId}/${
-        active === 0 ? "lessons" : active === 1 ? "assignments" : "meetings"
+        active === 0
+          ? "?tab=lessons"
+          : active === 1
+          ? "?tab=assignments"
+          : "?tab=meetings"
       }`
     );
   };
@@ -80,7 +84,7 @@ export const CourseContent = () => {
                   <Group mx={10} mb={10} position="apart">
                     <Button
                       onClick={() => {
-                        navigate("new");
+                        navigate("lessons/new");
                       }}
                     >
                       {t("add")}
@@ -124,7 +128,7 @@ export const CourseContent = () => {
                   <Group mx={10} mb={10} position="apart">
                     <Button
                       onClick={() => {
-                        navigate("new");
+                        navigate("assignments/new");
                       }}
                     >
                       {t("add")}
@@ -164,7 +168,7 @@ export const CourseContent = () => {
                   <Group mx={10} mb={10} position="apart">
                     <Button
                       onClick={() => {
-                        navigate("new");
+                        navigate("meetings/new");
                       }}
                     >
                       {t("add")}

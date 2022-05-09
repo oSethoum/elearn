@@ -13,7 +13,7 @@ import z from "zod";
 import "dayjs/locale/fr";
 import "dayjs/locale/ar-dz";
 import { useContext, useEffect } from "react";
-import { LangContext } from "@/context";
+import { useAppContext } from "@/context";
 import { useMeetingQuery, useUpdateMeetingMutation } from "@/graphql";
 import { useNotifications } from "@mantine/notifications";
 import { useNavigate, useParams } from "react-router-dom";
@@ -65,7 +65,7 @@ export const EditMeeting = () => {
     }
   }, [loading]);
 
-  const { lang } = useContext(LangContext);
+  const { language } = useAppContext();
 
   return (
     <Container size="xl">
@@ -128,7 +128,7 @@ export const EditMeeting = () => {
               {...form.getInputProps("description")}
             />
             <DatePicker
-              locale={lang === "ar" ? "ar-dz" : lang}
+              locale={language === "ar" ? "ar-dz" : language}
               label={t("date")}
               placeholder={t("date")}
               {...form.getInputProps("date")}

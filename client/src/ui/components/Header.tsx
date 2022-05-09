@@ -20,8 +20,10 @@ import {
 import { useMediaQuery, useWindowScroll } from "@mantine/hooks";
 import { Logo } from "./Logo";
 import { useLocation, useNavigate, useNavigationType } from "react-router-dom";
-import { FaUniversity, FaBook, FaRocket } from "react-icons/fa";
-import { UserContext } from "../../context/user";
+import { FaUniversity, FaBook, FaRocket, FaQuestion } from "react-icons/fa";
+import { useAppContext } from "@/context";
+import { useTranslation } from "react-i18next";
+import { MdDashboard } from "react-icons/md";
 
 interface stylesProps {
   y: number;
@@ -87,12 +89,13 @@ export function Header({
   const tablet = useMediaQuery(`(max-width:${breakpoints.sm}px)`);
   const [opened, setOpened] = useState(false);
   const { pathname } = useLocation();
+  const { t } = useTranslation();
 
   useEffect(() => {
     setOpened(false);
   }, [tablet]);
 
-  const { user } = useContext(UserContext);
+  const { user } = useAppContext();
   const navigate = useNavigate();
 
   return (
@@ -141,11 +144,23 @@ export function Header({
         </Center>
         <Box px={20}>
           <Button leftIcon={<FaRocket />} size="lg" color="blue" fullWidth>
-            Features
+            {t("features")}
           </Button>
           <Space h={15} />
           <Button leftIcon={<FaUniversity />} size="lg" color="green" fullWidth>
-            Departments
+            {t("departments")}
+          </Button>
+          <Space h={15} />
+          <Button
+            onClick={() => {
+              navigate("/about-us");
+            }}
+            leftIcon={<FaQuestion />}
+            size="lg"
+            color="orange"
+            fullWidth
+          >
+            {t("aboutUs")}
           </Button>
           <Space h={15} />
           {user && (
@@ -158,7 +173,21 @@ export function Header({
               }}
               fullWidth
             >
-              Courses
+              {t("courses")}
+            </Button>
+          )}
+          <Space h={15} />
+          {user?.role === "admin" && (
+            <Button
+              leftIcon={<MdDashboard />}
+              size="lg"
+              color="violet"
+              onClick={() => {
+                navigate("/dashboard");
+              }}
+              fullWidth
+            >
+              {t("dashboard")}
             </Button>
           )}
         </Box>

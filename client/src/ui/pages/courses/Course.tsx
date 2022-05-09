@@ -1,10 +1,9 @@
 import { Box } from "@mantine/core";
-import { useContext } from "react";
 import { Navigate, Outlet } from "react-router-dom";
-import { UserContext } from "../../../context/user";
+import { useAppContext } from "@/context";
 
 export const Course = () => {
-  const { user } = useContext(UserContext);
+  const { user } = useAppContext();
 
   if (!user) return <Navigate to="/404" />;
 

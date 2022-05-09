@@ -1,8 +1,10 @@
 import {
   ActionIcon,
   Avatar,
+  Badge,
   Button,
   Group,
+  MediaQuery,
   Modal,
   Text,
   useMantineTheme,
@@ -10,13 +12,13 @@ import {
 import { useContext, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
-import { UserContext } from "../../context/user";
+import { useAppContext } from "@/context/";
 
 export function UserButton() {
   const { t } = useTranslation();
   const theme = useMantineTheme();
   const navigate = useNavigate();
-  const { user, setUser } = useContext(UserContext);
+  const { user, setUser } = useAppContext();
   const [opened, setOpened] = useState(false);
   const firstName =
     user?.student?.firstName ||
@@ -35,9 +37,11 @@ export function UserButton() {
       >
         <Group mx={8} direction="row" spacing="xs">
           <Avatar color={theme.primaryColor} size={34} radius={50} />
-          <Text color={theme.primaryColor} weight="bold">
-            {user ? firstName + " " + lastName : t("anonymous")}
-          </Text>
+          <MediaQuery smallerThan="md" styles={{ display: "none" }}>
+            <Text color={theme.primaryColor} weight="bold">
+              {user ? firstName + " " + lastName : t("anonymous")}
+            </Text>
+          </MediaQuery>
         </Group>
       </ActionIcon>
       {user && (
@@ -49,6 +53,15 @@ export function UserButton() {
           withCloseButton={false}
         >
           <Group grow direction="column">
+            <MediaQuery largerThan="md" styles={{ display: "none" }}>
+              <Badge
+                sx={{ fontSize: 15, backgroundColor: "transparent" }}
+                color={theme.primaryColor}
+                py={20}
+              >
+                {user ? firstName + " " + lastName : t("anonymous")}
+              </Badge>
+            </MediaQuery>
             <Button
               color="red"
               onClick={() => {
@@ -61,7 +74,7 @@ export function UserButton() {
                 navigate("/");
               }}
             >
-              Logout
+              {t("logout")}
             </Button>
           </Group>
         </Modal>

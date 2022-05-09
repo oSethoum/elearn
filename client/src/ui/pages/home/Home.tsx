@@ -9,7 +9,7 @@ import {
 } from "@mantine/core";
 import { BsCameraVideoFill } from "react-icons/bs";
 import { GiProgression } from "react-icons/gi";
-import { MdOutlineAssignmentTurnedIn } from "react-icons/md";
+import { MdOutlineAssignmentTurnedIn, MdDashboard } from "react-icons/md";
 import { Link } from "react-router-dom";
 import {
   ColorSchemeButton,
@@ -20,13 +20,16 @@ import {
 } from "../../components";
 import { FeatureCard } from "../../components/FeatureCard";
 import { HeroSection } from "../../components/HeroSection";
-import { FaBook, FaUniversity, FaRocket } from "react-icons/fa";
+import { FaBook, FaUniversity, FaRocket, FaQuestion } from "react-icons/fa";
+
 import { useContext } from "react";
-import { UserContext } from "../../../context/user";
+import { useAppContext } from "@/context/";
+import { useTranslation } from "react-i18next";
 
 export function Home() {
   const theme = useMantineTheme();
-  const { user } = useContext(UserContext);
+  const { t } = useTranslation();
+  const { user } = useAppContext();
   return (
     <>
       <Header
@@ -42,15 +45,27 @@ export function Home() {
         <Group>
           <Logo width={100} />
           <Button leftIcon={<FaRocket />} ml={20} radius="xl">
-            Features
+            {t("features")}
           </Button>
           <Button leftIcon={<FaUniversity />} radius="xl" color="green">
-            Departments
+            {t("departments")}
           </Button>
+          <Link to="about-us">
+            <Button leftIcon={<FaQuestion />} radius="xl" color="orange">
+              {t("aboutUs")}
+            </Button>
+          </Link>
           {user && (
             <Link to="courses">
               <Button leftIcon={<FaBook />} radius="xl" color="red">
-                Courses
+                {t("courses")}
+              </Button>
+            </Link>
+          )}
+          {user?.role === "admin" && (
+            <Link to="/dashboard">
+              <Button color="violet" leftIcon={<MdDashboard />} radius="xl">
+                {t("dashboard")}
               </Button>
             </Link>
           )}
@@ -82,7 +97,7 @@ export function Home() {
                 color: theme.colors.blue[5],
               }}
             >
-              Features
+              {t("features")}
             </h1>
           </Card>
         </Box>
@@ -95,17 +110,17 @@ export function Home() {
           breakpoints={[{ maxWidth: theme.breakpoints.sm, cols: 1 }]}
         >
           <FeatureCard
-            title="Progressive learning"
+            title={t("progressiveLearning")}
             color={theme.colors.indigo[5]}
             icon={<GiProgression size={120} />}
           />
           <FeatureCard
-            title="Homeworks Submission"
+            title={t("homeWorkSubmissions")}
             color={theme.colors.teal[7]}
             icon={<MdOutlineAssignmentTurnedIn size={120} />}
           />
           <FeatureCard
-            title="Zoom meetings"
+            title={t("zoomMeetings")}
             color={theme.colors.blue[5]}
             icon={<BsCameraVideoFill size={120} />}
           />
@@ -130,7 +145,7 @@ export function Home() {
               color: theme.colors.green[5],
             }}
           >
-            Departments
+            {t("departments")}
           </h1>
         </Card>
       </Box>

@@ -13,7 +13,7 @@ import z from "zod";
 import "dayjs/locale/fr";
 import "dayjs/locale/ar-dz";
 import { useContext } from "react";
-import { LangContext } from "@/context";
+import { useAppContext } from "@/context";
 import { useCreateMeetingMutation } from "@/graphql";
 import { useNotifications } from "@mantine/notifications";
 import { useNavigate, useParams } from "react-router-dom";
@@ -35,7 +35,7 @@ export const NewMeeting = () => {
 
   const params = useParams();
 
-  const { lang } = useContext(LangContext);
+  const { language } = useAppContext();
 
   const form = useForm({
     schema: zodResolver(schema),
@@ -89,7 +89,7 @@ export const NewMeeting = () => {
               {...form.getInputProps("description")}
             />
             <DatePicker
-              locale={lang === "ar" ? "ar-dz" : lang}
+              locale={language === "ar" ? "ar-dz" : language}
               label={t("date")}
               placeholder={t("date")}
               {...form.getInputProps("date")}

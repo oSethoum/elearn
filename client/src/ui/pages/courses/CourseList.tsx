@@ -1,14 +1,14 @@
 import { useQuery, gql } from "@apollo/client";
 import { Badge, Button, Container, Group } from "@mantine/core";
-import { useContext } from "react";
+
 import { useTranslation } from "react-i18next";
 import CourseCard from "@/ui/components/CourseCard";
 import { Loader } from "@/ui/components/Loader";
-import { UserContext } from "@/context/user";
+import { useAppContext } from "@/context/";
 import { MdAdd } from "react-icons/md";
 
 export const CourseList = () => {
-  const { user } = useContext(UserContext);
+  const { user } = useAppContext();
   const { t } = useTranslation();
 
   const { loading, data: courses } = useQuery(

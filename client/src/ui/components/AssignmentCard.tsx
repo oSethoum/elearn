@@ -62,11 +62,11 @@ export const AssignmentCard = ({
     });
 
   const _edit = () => {
-    navigate(`${assignment.id}/edit`);
+    navigate(`assignments/${assignment.id}/edit`);
   };
 
   const _explore = () => {
-    navigate(assignment.id.toString());
+    navigate(`assignments/${assignment.id}`);
   };
 
   return (

@@ -61,7 +61,7 @@ export const MeetingCard = ({
     });
   };
   const _edit = () => {
-    navigate(`${meeting.id}/edit`);
+    navigate(`meetings/${meeting.id}/edit`);
   };
 
   return (

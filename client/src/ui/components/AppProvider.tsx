@@ -11,10 +11,10 @@ import {
 import { useLocalStorageValue } from "@mantine/hooks";
 import rtlPlugin from "stylis-plugin-rtl";
 import i18n from "../../i18n";
-import { LangContext, TLang } from "../../context";
-import { UserContext } from "../../context/user";
+import { AppContextProvider, ILanguage } from "@/context";
 import { ModalsProvider } from "@mantine/modals";
 import { User } from "../../graphql";
+
 const GlobalStyles = () => {
   return (
     <Global
@@ -45,10 +45,12 @@ export function AppProvider({ children }: React.ComponentPropsWithRef<"div">) {
     defaultValue: "light",
   });
 
-  const [lang, setLang] = useLocalStorageValue<TLang>({
-    key: "lang",
+  const [language, setLanguage] = useLocalStorageValue<ILanguage>({
+    key: "language",
     defaultValue: "en",
   });
+
+  const [header, setHeader] = useState<string>("");
 
   const [dir, setDir] = useState<"ltr" | "rtl">("ltr");
 
@@ -66,10 +68,10 @@ export function AppProvider({ children }: React.ComponentPropsWithRef<"div">) {
   }, [dir]);
 
   useEffect(() => {
-    document.documentElement.setAttribute("lang", lang);
-    lang === "ar" ? setDir("rtl") : setDir("ltr");
-    i18n.changeLanguage(lang);
-  }, [lang]);
+    document.documentElement.setAttribute("language", language);
+    language === "ar" ? setDir("rtl") : setDir("ltr");
+    i18n.changeLanguage(language);
+  }, [language]);
 
   const theme: MantineThemeOverride = {
     colorScheme,
@@ -89,46 +91,46 @@ export function AppProvider({ children }: React.ComponentPropsWithRef<"div">) {
   }, []);
 
   return (
-    <UserContext.Provider value={{ user, setUser }}>
-      <LangContext.Provider value={{ lang, setLang }}>
-        <ColorSchemeProvider
-          colorScheme={colorScheme}
-          toggleColorScheme={toggleColorScheme}
-        >
-          <MantineProvider
-            theme={theme}
-            withNormalizeCSS
-            emotionOptions={
-              dir === "rtl"
-                ? { key: "mantine-rtl", stylisPlugins: [rtlPlugin] }
-                : { key: "mantine" }
-            }
-            styles={{
-              ActionIcon: (theme) => ({
-                root: {
+    <AppContextProvider
+      value={{ user, setUser, language, setLanguage, header, setHeader }}
+    >
+      <ColorSchemeProvider
+        colorScheme={colorScheme}
+        toggleColorScheme={toggleColorScheme}
+      >
+        <MantineProvider
+          theme={theme}
+          withNormalizeCSS
+          emotionOptions={
+            dir === "rtl"
+              ? { key: "mantine-rtl", stylisPlugins: [rtlPlugin] }
+              : { key: "mantine" }
+          }
+          styles={{
+            ActionIcon: (theme) => ({
+              root: {
+                backgroundColor:
+                  theme.colorScheme === "dark"
+                    ? theme.colors.dark[9]
+                    : theme.colors.gray[2],
+                "&:hover": {
                   backgroundColor:
                     theme.colorScheme === "dark"
-                      ? theme.colors.dark[9]
-                      : theme.colors.gray[2],
-                  "&:hover": {
-                    backgroundColor:
-                      theme.colorScheme === "dark"
-                        ? theme.colors.dark[6]
-                        : theme.colors.gray[4],
-                  },
+                      ? theme.colors.dark[6]
+                      : theme.colors.gray[4],
                 },
-              }),
-            }}
-          >
-            <ModalsProvider>
-              <GlobalStyles />
-              <NotificationsProvider>
-                <TypographyStylesProvider>{children}</TypographyStylesProvider>
-              </NotificationsProvider>
-            </ModalsProvider>
-          </MantineProvider>
-        </ColorSchemeProvider>
-      </LangContext.Provider>
-    </UserContext.Provider>
+              },
+            }),
+          }}
+        >
+          <ModalsProvider>
+            <GlobalStyles />
+            <NotificationsProvider>
+              <TypographyStylesProvider>{children}</TypographyStylesProvider>
+            </NotificationsProvider>
+          </ModalsProvider>
+        </MantineProvider>
+      </ColorSchemeProvider>
+    </AppContextProvider>
   );
 }
