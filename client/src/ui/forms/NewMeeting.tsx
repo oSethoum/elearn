@@ -71,7 +71,7 @@ export const NewMeeting = () => {
                   message: t("success"),
                 });
 
-                navigate(-1);
+                navigate(`/courses/${params.courseId}?tab=meetings`);
               },
             });
           })}

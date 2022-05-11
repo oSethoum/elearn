@@ -110,7 +110,7 @@ export const EditMeeting = () => {
                   color: "green",
                 });
 
-                navigate(-1);
+                navigate(`/courses/${params.courseId}?tab=meetings`);
               },
             });
           })}

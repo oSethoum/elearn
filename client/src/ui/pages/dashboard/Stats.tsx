@@ -1,3 +1,4 @@
+import { DataGrid } from "@/ui/components";
 import {
   Box,
   Text,
@@ -5,9 +6,10 @@ import {
   Group,
   SimpleGrid,
   Space,
-  Table,
   createStyles,
+  Button,
 } from "@mantine/core";
+import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { MdPersonOutline, MdBook } from "react-icons/md";
 
@@ -43,7 +45,7 @@ const styles = createStyles((theme) => ({
   cardHeader: {
     backgroundColor:
       theme.colorScheme === "dark"
-        ? theme.colors.dark[7]
+        ? theme.colors.dark[9]
         : theme.colors.gray[1],
   },
 }));
@@ -51,11 +53,13 @@ const styles = createStyles((theme) => ({
 export const Stats = () => {
   const { classes } = styles();
   const { t } = useTranslation();
+  const [approveStudents, setApproveStudents] = useState(false);
+  const [approveTeachers, setApproveTeachers] = useState(false);
   return (
     <Box>
       <SimpleGrid
         cols={4}
-        breakpoints={[{ maxWidth: "sm", cols: 1 }]}
+        breakpoints={[{ maxWidth: "sm", cols: 2 }]}
         spacing="md"
       >
         <Card shadow="sm" className={classes.students}>
@@ -100,14 +104,65 @@ export const Stats = () => {
         </Card>
       </SimpleGrid>
       <Space h="xl" />
-      <Card withBorder shadow="sm">
+      <Card p={0} withBorder shadow="sm">
         <Card.Section>
-          <Text className={classes.cardHeader} p={10}>
-            New Students
-          </Text>
+          <Group p={10} position="apart">
+            <Text size="xl" weight="bold">
+              {t("newStudents")}
+            </Text>
+            <Button disabled>{t("approve")}</Button>
+          </Group>
         </Card.Section>
-        <Table></Table>
+        <DataGrid
+          height={250}
+          headerModifier={t}
+          onSelectionChanged={(selected) => {
+            console.log(selected);
+          }}
+          data={[
+            { name: "John Doe", age: "20", course: "math", grade: "A", id: 1 },
+            { name: "John Doe", age: "20", course: "math", grade: "A", id: 1 },
+            { name: "John Doe", age: "20", course: "math", grade: "A", id: 1 },
+            { name: "John Doe", age: "20", course: "math", grade: "A", id: 1 },
+            { name: "John Doe", age: "20", course: "math", grade: "A", id: 1 },
+            { name: "John Doe", age: "20", course: "math", grade: "A", id: 1 },
+            { name: "John Doe", age: "20", course: "math", grade: "A", id: 1 },
+            { name: "John Doe", age: "20", course: "math", grade: "A", id: 1 },
+            { name: "John Doe", age: "20", course: "math", grade: "A", id: 1 },
+          ]}
+          highlightOnHover
+          verticalSpacing="sm"
+        />
       </Card>
+      <Space h={50} />
+      <Card p={0} withBorder shadow="sm">
+        <Card.Section>
+          <Group p={10} position="apart">
+            <Text size="xl" weight="bold">
+              {t("newTeachers")}
+            </Text>
+            <Button disabled>{t("approve")}</Button>
+          </Group>
+        </Card.Section>
+        <DataGrid
+          height={250}
+          headerModifier={t}
+          data={[
+            { name: "John Doe", age: "20", course: "math", grade: "A", id: 1 },
+            { name: "John Doe", age: "20", course: "math", grade: "A", id: 1 },
+            { name: "John Doe", age: "20", course: "math", grade: "A", id: 1 },
+            { name: "John Doe", age: "20", course: "math", grade: "A", id: 1 },
+            { name: "John Doe", age: "20", course: "math", grade: "A", id: 1 },
+            { name: "John Doe", age: "20", course: "math", grade: "A", id: 1 },
+            { name: "John Doe", age: "20", course: "math", grade: "A", id: 1 },
+            { name: "John Doe", age: "20", course: "math", grade: "A", id: 1 },
+            { name: "John Doe", age: "20", course: "math", grade: "A", id: 1 },
+          ]}
+          highlightOnHover
+          verticalSpacing="sm"
+        />
+      </Card>
+      <Space h={50} />
     </Box>
   );
 };

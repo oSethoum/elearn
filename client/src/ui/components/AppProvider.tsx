@@ -8,7 +8,7 @@ import {
   MantineThemeOverride,
   TypographyStylesProvider,
 } from "@mantine/core";
-import { useLocalStorageValue } from "@mantine/hooks";
+import { useLocalStorageValue, useScrollIntoView } from "@mantine/hooks";
 import rtlPlugin from "stylis-plugin-rtl";
 import i18n from "../../i18n";
 import { AppContextProvider, ILanguage } from "@/context";
@@ -90,9 +90,25 @@ export function AppProvider({ children }: React.ComponentPropsWithRef<"div">) {
     });
   }, []);
 
+  const { scrollIntoView: scrollToFeatures, targetRef: featuresRef } =
+    useScrollIntoView();
+  const { scrollIntoView: scrollToDepartments, targetRef: departmentsRef } =
+    useScrollIntoView();
+
   return (
     <AppContextProvider
-      value={{ user, setUser, language, setLanguage, header, setHeader }}
+      value={{
+        user,
+        setUser,
+        language,
+        setLanguage,
+        header,
+        setHeader,
+        featuresRef,
+        departmentsRef,
+        scrollToFeatures,
+        scrollToDepartments,
+      }}
     >
       <ColorSchemeProvider
         colorScheme={colorScheme}

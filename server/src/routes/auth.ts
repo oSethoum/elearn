@@ -3,27 +3,52 @@ import { sign, verify } from "jsonwebtoken";
 import prisma from "../db";
 
 export const register: Handler = async (req, res) => {
-  const { topic, grade, firstName, lastName, ...others } = req.body;
+  const { topic, grade, firstName, lastName, role, ...others } = req.body;
+
+  console.log("route hit register");
+
+  if (role != "student" && role != "teacher") {
+    return res.status(400).json({
+      message: "Invalid role",
+    });
+  }
+
   const user = await prisma.user.create({
     data: {
       disabled: true,
-      role: "student",
+      role,
       ...others,
     },
   });
 
-  const student = await prisma.student.create({
-    data: {
-      firstName,
-      lastName,
-      grade: parseInt(grade),
-      topicId: parseInt(topic),
-      userId: user.id,
-    },
-  });
+  if (role === "student") {
+    const student = await prisma.student.create({
+      data: {
+        firstName,
+        lastName,
+        grade: parseInt(grade),
+        topicId: parseInt(topic),
+        userId: user.id,
+      },
+    });
 
-  if (!student) {
-    return res.status(400).send();
+    if (!student) {
+      return res.status(400).send();
+    }
+  } else {
+    const teacher = await prisma.teacher.create({
+      data: {
+        firstName,
+        lastName,
+        userId: user.id,
+      },
+    });
+
+    if (!teacher) {
+      return res.status(400).json({
+        message: "Failed to create teacher",
+      });
+    }
   }
 
   return res.status(201).json({
@@ -32,8 +57,6 @@ export const register: Handler = async (req, res) => {
 };
 
 export const login: Handler = async (req, res) => {
-  console.log("Login hit");
-
   const user = await prisma.user.findFirst({
     where: {
       AND: [

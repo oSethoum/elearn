@@ -161,7 +161,11 @@ export const CourseContent = () => {
               )}
             </Box>
           </Tabs.Tab>
-          <Tabs.Tab icon={<FaVideo />} label={t("zoomMeetings")} color="blue">
+          <Tabs.Tab
+            icon={<FaVideo />}
+            label={t("videoConferences")}
+            color="blue"
+          >
             <Box sx={{ minHeight: "80vh" }}>
               {user?.role === "teacher" && (
                 <>

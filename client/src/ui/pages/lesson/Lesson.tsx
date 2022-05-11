@@ -5,6 +5,7 @@ import {
   Container,
   createStyles,
   Divider,
+  Space,
   Text,
   Title,
 } from "@mantine/core";
@@ -36,7 +37,9 @@ export const Lesson = () => {
     <Container size="xl" sx={{ minHeight: "60vh" }}>
       <Card withBorder p={0} my={20}>
         <Box p={5} px={15} className={classes.title}>
-          <Title>{data?.lesson?.title}</Title>
+          <Text size="xl" sx={{ fontSize: 28 }} weight="bold">
+            {data?.lesson?.title}
+          </Text>
         </Box>
         <Divider />
         <Box
@@ -58,6 +61,7 @@ export const Lesson = () => {
           dangerouslySetInnerHTML={{ __html: data?.lesson?.content as string }}
         ></Box>
       </Card>
+      <Space h={10} />
     </Container>
   );
 };

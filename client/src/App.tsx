@@ -13,6 +13,7 @@ import {
 import { onError } from "@apollo/client/link/error";
 import { Suspense } from "react";
 
+const DashboardCourses = lazy(() => import("./ui/pages/dashboard/Courses"));
 const NewMeeting = lazy(() => import("./ui/forms/NewMeeting"));
 const EditMeeting = lazy(() => import("./ui/forms/EditMeeting"));
 const CourseContent = lazy(() => import("./ui/pages/courses/CourseContent"));
@@ -95,6 +96,10 @@ function App() {
                 <Route
                   path="/dashboard/departments"
                   element={<Departments />}
+                />
+                <Route
+                  path="/dashboard/courses"
+                  element={<DashboardCourses />}
                 />
               </Route>
               <Route path="/courses" element={<Courses />}>

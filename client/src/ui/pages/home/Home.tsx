@@ -2,13 +2,13 @@ import {
   Box,
   Button,
   Card,
+  Container,
   Group,
   SimpleGrid,
   Space,
   useMantineTheme,
 } from "@mantine/core";
 import { BsCameraVideoFill } from "react-icons/bs";
-import { GiProgression } from "react-icons/gi";
 import { MdOutlineAssignmentTurnedIn, MdDashboard } from "react-icons/md";
 import { Link } from "react-router-dom";
 import {
@@ -22,14 +22,19 @@ import { FeatureCard } from "../../components/FeatureCard";
 import { HeroSection } from "../../components/HeroSection";
 import { FaBook, FaUniversity, FaRocket, FaQuestion } from "react-icons/fa";
 
-import { useContext } from "react";
 import { useAppContext } from "@/context/";
 import { useTranslation } from "react-i18next";
 
 export function Home() {
   const theme = useMantineTheme();
   const { t } = useTranslation();
-  const { user } = useAppContext();
+  const {
+    user,
+    departmentsRef,
+    featuresRef,
+    scrollToDepartments,
+    scrollToFeatures,
+  } = useAppContext();
   return (
     <>
       <Header
@@ -44,10 +49,24 @@ export function Home() {
       >
         <Group>
           <Logo width={100} />
-          <Button leftIcon={<FaRocket />} ml={20} radius="xl">
+          <Button
+            leftIcon={<FaRocket />}
+            onClick={() => {
+              scrollToFeatures();
+            }}
+            ml={20}
+            radius="xl"
+          >
             {t("features")}
           </Button>
-          <Button leftIcon={<FaUniversity />} radius="xl" color="green">
+          <Button
+            leftIcon={<FaUniversity />}
+            onClick={() => {
+              scrollToDepartments();
+            }}
+            radius="xl"
+            color="green"
+          >
             {t("departments")}
           </Button>
           <Link to="about-us">
@@ -73,71 +92,54 @@ export function Home() {
       </Header>
       <HeroSection />
       {/* Features section */}
-      <Box
+      <Container
+        size="xl"
         sx={{
           display: "flex",
           flexDirection: "column",
         }}
       >
-        <Box
-          sx={{
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-          }}
-        >
-          <Card
-            sx={{ width: "70%", border: `2px solid ${theme.colors.blue[7]}` }}
-            my={40}
+        {/* @ts-ignore */}
+        <Space h={90} ref={featuresRef} />
+        <Card withBorder>
+          <h1
+            style={{
+              textAlign: "center",
+              margin: 0,
+              color: theme.colors.blue[5],
+            }}
           >
-            <h1
-              style={{
-                textAlign: "center",
-                margin: 0,
-                color: theme.colors.blue[5],
-              }}
-            >
-              {t("features")}
-            </h1>
-          </Card>
-        </Box>
+            {t("features")}
+          </h1>
+        </Card>
+
+        <Space h={50} />
         <SimpleGrid
-          px={20}
-          mt={20}
           cols={3}
           spacing="lg"
           sx={{ textAlign: "center" }}
           breakpoints={[{ maxWidth: theme.breakpoints.sm, cols: 1 }]}
         >
           <FeatureCard
-            title={t("progressiveLearning")}
+            title={t("lessons")}
             color={theme.colors.indigo[5]}
-            icon={<GiProgression size={120} />}
+            icon={<FaBook size={120} />}
           />
           <FeatureCard
-            title={t("homeWorkSubmissions")}
+            title={t("homeWorks")}
             color={theme.colors.teal[7]}
             icon={<MdOutlineAssignmentTurnedIn size={120} />}
           />
           <FeatureCard
-            title={t("zoomMeetings")}
+            title={t("videoConference")}
             color={theme.colors.blue[5]}
             icon={<BsCameraVideoFill size={120} />}
           />
         </SimpleGrid>
-      </Box>
-      <Space h={120} />
-      <Box
-        sx={{
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-        }}
-      >
-        <Card
-          sx={{ width: "70%", border: `2px solid ${theme.colors.green[7]}` }}
-          my={40}
-        >
+        <Space h={75} />
+        {/* @ts-ignore */}
+        <Space h={75} ref={departmentsRef} />
+        <Card>
           <h1
             style={{
               textAlign: "center",
@@ -148,7 +150,7 @@ export function Home() {
             {t("departments")}
           </h1>
         </Card>
-      </Box>
+      </Container>
       <Footer withBorder />
     </>
   );

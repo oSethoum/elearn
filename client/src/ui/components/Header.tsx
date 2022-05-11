@@ -1,7 +1,6 @@
 import {
   ComponentPropsWithoutRef,
   ReactNode,
-  useContext,
   useEffect,
   useState,
 } from "react";
@@ -90,6 +89,7 @@ export function Header({
   const [opened, setOpened] = useState(false);
   const { pathname } = useLocation();
   const { t } = useTranslation();
+  const { scrollToFeatures, scrollToDepartments } = useAppContext();
 
   useEffect(() => {
     setOpened(false);
@@ -143,11 +143,29 @@ export function Header({
           <Logo width={300} />
         </Center>
         <Box px={20}>
-          <Button leftIcon={<FaRocket />} size="lg" color="blue" fullWidth>
+          <Button
+            leftIcon={<FaRocket />}
+            onClick={() => {
+              setOpened(false);
+              scrollToFeatures();
+            }}
+            size="lg"
+            color="blue"
+            fullWidth
+          >
             {t("features")}
           </Button>
           <Space h={15} />
-          <Button leftIcon={<FaUniversity />} size="lg" color="green" fullWidth>
+          <Button
+            leftIcon={<FaUniversity />}
+            onClick={() => {
+              setOpened(false);
+              scrollToDepartments();
+            }}
+            size="lg"
+            color="green"
+            fullWidth
+          >
             {t("departments")}
           </Button>
           <Space h={15} />

@@ -149,8 +149,13 @@ export const Dashboard: FC<IDashboardProps> = () => {
       >
         <Group sx={{ flexGrow: 1 }} position="apart" direction="row">
           <Group>
-            <ActionIcon radius="xl" size="xl">
-              <Burger opened={opened} onClick={() => setOpened(true)} />
+            <ActionIcon
+              component="div"
+              onClick={() => setOpened(true)}
+              radius="xl"
+              size="xl"
+            >
+              <Burger opened={opened} />
             </ActionIcon>
             <MediaQuery smallerThan="md" styles={{ display: "none" }}>
               <Box>
@@ -172,7 +177,6 @@ export const Dashboard: FC<IDashboardProps> = () => {
           m={20}
           sx={{
             flexGrow: 1,
-            height: "100vh",
           }}
         >
           <Outlet />

@@ -10,6 +10,10 @@ export interface IAppContext {
   setLanguage: (language: ILanguage) => void;
   header: string;
   setHeader: (header: string) => void;
+  featuresRef: React.MutableRefObject<HTMLElement> | null;
+  scrollToFeatures: () => void;
+  departmentsRef: React.MutableRefObject<HTMLElement> | null;
+  scrollToDepartments: () => void;
 }
 
 const AppContext = createContext<IAppContext>({
@@ -19,6 +23,10 @@ const AppContext = createContext<IAppContext>({
   setLanguage: () => {},
   header: "",
   setHeader: () => {},
+  featuresRef: null,
+  departmentsRef: null,
+  scrollToFeatures: () => {},
+  scrollToDepartments: () => {},
 });
 
 export const AppContextProvider = AppContext.Provider;

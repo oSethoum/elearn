@@ -117,7 +117,7 @@ export const NewAssignment = () => {
             <Button
               variant="default"
               onClick={() => {
-                navigate(-1);
+                navigate(`/courses/${params?.courseId}?tab=assignments`);
               }}
             >
               {t("cancel")}

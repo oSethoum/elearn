@@ -6,11 +6,29 @@ import {
   BackButton,
   Footer,
 } from "../../components";
-import { Outlet } from "react-router-dom";
+import { Outlet, useLocation } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import { useEffect, useState } from "react";
+import { useUrlQuery } from "@/hooks";
 
 export function Courses() {
   const { t } = useTranslation();
+  const { pathname } = useLocation();
+  const query = useUrlQuery();
+  const [to, setTo] = useState<string | undefined>("");
+
+  useEffect(() => {
+    console.log(pathname);
+
+    if (pathname.endsWith("/courses") || pathname.endsWith("/courses/")) {
+      setTo("/");
+    } else if (!!query.get("tab")) {
+      setTo("/courses");
+    } else {
+      setTo(undefined);
+    }
+  }, [pathname]);
+
   return (
     <>
       <Header
@@ -20,7 +38,7 @@ export function Courses() {
             <ColorSchemeButton />
           </Group>
         }
-        leftSide={<BackButton />}
+        leftSide={<BackButton to={to} />}
         withBorder
       >
         <Text weight="bold" align="center" size="xl">

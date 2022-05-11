@@ -1,4 +1,4 @@
-import { Box } from "@mantine/core";
+import { Box, Space } from "@mantine/core";
 import { Navigate, Outlet } from "react-router-dom";
 import { useAppContext } from "@/context";
 
@@ -9,7 +9,9 @@ export const Course = () => {
 
   return (
     <Box>
+      <Space h={20} />
       <Outlet />
+      <Space h={20} />
     </Box>
   );
 };

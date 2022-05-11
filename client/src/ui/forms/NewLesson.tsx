@@ -50,7 +50,7 @@ export const NewLesson = () => {
       message: t("success"),
     });
 
-    navigate(`/courses/${params.courseId}/lessons`);
+    navigate(`/courses/${params.courseId}?tab=lessons`);
   }
 
   return (
@@ -58,9 +58,6 @@ export const NewLesson = () => {
       <Paper withBorder p={20}>
         <form
           onSubmit={onSubmit((values) => {
-            console.log(values);
-            console.log(params?.courseId);
-
             createLesson({
               variables: {
                 data: {

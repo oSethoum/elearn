@@ -90,7 +90,7 @@ export const EditLesson = () => {
                   message: t("success"),
                   color: "green",
                 });
-                navigate("/courses/" + params.courseId);
+                navigate("/courses/" + params.courseId + "?tab=lessons");
               },
             });
           })}
@@ -146,7 +146,7 @@ export const EditLesson = () => {
                 Cancel
               </Button>
               <Button type="submit" color="green" sx={{ width: 100 }}>
-                t({"apply"})
+                {t("apply")}
               </Button>
             </Group>
           </Group>

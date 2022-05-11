@@ -74,12 +74,8 @@ export const Register = () => {
   const schema = z.object({
     firstName: z.string().min(4, t("minimumLength") + " 4"),
     lastName: z.string().min(4, t("minimumLength") + " 4"),
-    topic: z.string().nonempty(t("notEmpty")),
     username: z.string().min(6, t("minimumLength") + " 6"),
-    email: z
-      .string()
-      .email(t("invalidEmail"))
-      .min(8, t("minimumLength") + " 8"),
+    email: z.string().min(8, t("minimumLength") + " 8"),
     password: z.string().min(6, t("minimumLength") + " 6"),
   });
 
@@ -109,6 +105,7 @@ export const Register = () => {
       topic: "",
       grade: "",
       username: "",
+      role: "",
       email: "",
       password: "",
     },
@@ -169,7 +166,23 @@ export const Register = () => {
                   required
                   {...form.getInputProps("lastName")}
                 />
-                {topics.length > 0 && (
+                <Select
+                  label={t("role")}
+                  placeholder={t("role")}
+                  required
+                  data={[
+                    {
+                      label: t("teacher"),
+                      value: "teacher",
+                    },
+                    {
+                      label: t("student"),
+                      value: "student",
+                    },
+                  ]}
+                  {...form.getInputProps("role")}
+                />
+                {topics.length > 0 && form.values.role === "student" && (
                   <Select
                     label={t("topic")}
                     placeholder={t("topic")}
@@ -178,7 +191,7 @@ export const Register = () => {
                     {...form.getInputProps("topic")}
                   />
                 )}
-                {grades.length > 0 && (
+                {grades.length > 0 && form.values.role === "student" && (
                   <Select
                     label={t("grade")}
                     placeholder={t("grade")}
@@ -230,14 +243,7 @@ export const Register = () => {
                   {t("login")}
                 </Link>
               </div>
-              <Button
-                type="submit"
-                onClick={() => {
-                  const { hasErrors } = form.validate();
-                  setAlert(hasErrors);
-                }}
-                style={{ width: 150 }}
-              >
+              <Button type="submit" style={{ width: 150 }}>
                 {t("register")}
               </Button>
             </Group>

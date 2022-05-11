@@ -3,8 +3,8 @@
     "version": "2.2.11",
     "width": 8000,
     "height": 8000,
-    "scrollTop": -4646.833333333333,
-    "scrollLeft": -4783.833333333334,
+    "scrollTop": -3159.833333333333,
+    "scrollLeft": -4300.833333333334,
     "zoomLevel": 0.9,
     "show": {
       "tableComment": false,
@@ -608,9 +608,9 @@
         ],
         "ui": {
           "active": false,
-          "left": 3101.6645,
-          "top": 3304.5626,
-          "zIndex": 2,
+          "left": 2997.2199,
+          "top": 3295.6738,
+          "zIndex": 15,
           "widthName": 60,
           "widthComment": 60,
           "color": "#03A9F4"
@@ -673,7 +673,7 @@
           "active": false,
           "left": 4533.2337,
           "top": 4532.7723,
-          "zIndex": 8,
+          "zIndex": 7,
           "widthName": 74.26171875,
           "widthComment": 60,
           "color": "#03A9F4"
@@ -1205,9 +1205,9 @@
         ],
         "ui": {
           "active": false,
-          "left": 5343.1493,
-          "top": 4112.6016,
-          "zIndex": 17,
+          "left": 5137.5938,
+          "top": 4301.4896,
+          "zIndex": 12,
           "widthName": 74.97900390625,
           "widthComment": 60,
           "color": "#03A9F4"
@@ -1452,9 +1452,9 @@
         ],
         "ui": {
           "active": false,
-          "left": 5135.8051,
-          "top": 5090.0566,
-          "zIndex": 31,
+          "left": 5601.3603,
+          "top": 4838.9453,
+          "zIndex": 14,
           "widthName": 60,
           "widthComment": 60,
           "color": "#FFEB3B"
@@ -1609,7 +1609,7 @@
           "active": false,
           "left": 5329.8455,
           "top": 3282.5547,
-          "zIndex": 10,
+          "zIndex": 9,
           "widthName": 73.525390625,
           "widthComment": 60,
           "color": "#03A9F4"
@@ -1787,7 +1787,7 @@
           "active": false,
           "left": 6020.9809,
           "top": 4122.1429,
-          "zIndex": 14,
+          "zIndex": 11,
           "widthName": 98.8271484375,
           "widthComment": 60,
           "color": "#03A9F4"
@@ -1986,9 +1986,9 @@
         ],
         "ui": {
           "active": false,
-          "left": 5629.3885,
-          "top": 4813.4992,
-          "zIndex": 12,
+          "left": 5599.3889,
+          "top": 4485.7231,
+          "zIndex": 13,
           "widthName": 60,
           "widthComment": 60,
           "color": "#03A9F4"
@@ -2166,7 +2166,7 @@
           "active": false,
           "left": 6022.8337,
           "top": 4504.8335,
-          "zIndex": 9,
+          "zIndex": 8,
           "widthName": 69.92626953125,
           "widthComment": 60,
           "color": "#03A9F4"
@@ -2344,7 +2344,7 @@
           "active": false,
           "left": 6024.3889,
           "top": 3273.1668,
-          "zIndex": 11,
+          "zIndex": 10,
           "widthName": 97.37353515625,
           "widthComment": 60,
           "color": "#03A9F4"
@@ -2456,8 +2456,8 @@
           "columnIds": [
             "7972830b-b3b1-4830-865d-a5f6d862ebf4"
           ],
-          "x": 3483.189890625,
-          "y": 3380.0626,
+          "x": 3378.745290625,
+          "y": 3371.1738,
           "direction": "right"
         },
         "constraintName": "fk_users_to_admins",
@@ -2482,8 +2482,8 @@
           "columnIds": [
             "ed1b2995-13d9-4f1f-a753-bd9c16aa755a"
           ],
-          "x": 5536.108284375,
-          "y": 4345.6016,
+          "x": 5330.552784375,
+          "y": 4534.4896,
           "direction": "bottom"
         },
         "constraintName": "fk_courses_to_assignments",
@@ -2551,18 +2551,18 @@
           "columnIds": [
             "fda0144c-b56b-4fdf-b404-9a297bf9f85a"
           ],
-          "x": 5334.581884375,
-          "y": 4874.2913,
-          "direction": "bottom"
+          "x": 5527.54086875,
+          "y": 4810.9163,
+          "direction": "right"
         },
         "end": {
           "tableId": "a446aea0-5ed1-4b2a-8add-df825e2d4dcf",
           "columnIds": [
             "fd818504-ce3e-48eb-9f92-d1f605fab282"
           ],
-          "x": 5334.772141015625,
-          "y": 5090.0566,
-          "direction": "top"
+          "x": 5601.3603,
+          "y": 4975.9453,
+          "direction": "left"
         },
         "constraintName": "fk_courses_to_meetings",
         "visible": true,
@@ -2603,8 +2603,8 @@
           "columnIds": [
             "e9ec0b90-12eb-4997-b809-34be0187362c"
           ],
-          "x": 5536.108284375,
-          "y": 4112.6016,
+          "x": 5330.552784375,
+          "y": 4301.4896,
           "direction": "top"
         },
         "end": {
@@ -2655,9 +2655,9 @@
           "columnIds": [
             "c8536865-fc4c-4d15-9005-c56ec7ad8af0"
           ],
-          "x": 5822.347484375,
-          "y": 4813.4992,
-          "direction": "top"
+          "x": 5985.30686875,
+          "y": 4602.2231,
+          "direction": "right"
         },
         "end": {
           "tableId": "22323ec6-a1a3-48a6-aa6d-673c0ced4019",
@@ -2681,8 +2681,8 @@
           "columnIds": [
             "e9ec0b90-12eb-4997-b809-34be0187362c"
           ],
-          "x": 5729.06726875,
-          "y": 4229.1016,
+          "x": 5523.51176875,
+          "y": 4417.9896,
           "direction": "right"
         },
         "end": {
@@ -2734,7 +2734,7 @@
             "fda0144c-b56b-4fdf-b404-9a297bf9f85a"
           ],
           "x": 5527.54086875,
-          "y": 4747.5413,
+          "y": 4684.1663,
           "direction": "right"
         },
         "end": {
@@ -2742,8 +2742,8 @@
           "columnIds": [
             "c0cec777-0de7-4172-8a6c-afb06cbc1cab"
           ],
-          "x": 5629.3885,
-          "y": 4929.9992,
+          "x": 5599.3889,
+          "y": 4602.2231,
           "direction": "left"
         },
         "constraintName": "fk_courses_to_lessons",
