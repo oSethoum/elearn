@@ -80,7 +80,7 @@ export const Dashboard: FC<IDashboardProps> = () => {
   const Links = () => (
     <Group m={15} direction="column" grow>
       {data.map((item, index) => (
-        <Link tabIndex={-1} to={item.link}>
+        <Link key={item.link} tabIndex={-1} to={item.link}>
           <UnstyledButton
             onClick={closeDrawer}
             sx={(theme) => ({

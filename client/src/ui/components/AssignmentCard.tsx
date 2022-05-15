@@ -1,4 +1,4 @@
-import { Assignment, useDeleteAssignmentMutation } from "@/graphql";
+import { Assignment } from "@/graphql";
 import {
   Text,
   Card,
@@ -8,7 +8,6 @@ import {
   Group,
   Button,
 } from "@mantine/core";
-import { useModals } from "@mantine/modals";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 
@@ -37,29 +36,8 @@ export const AssignmentCard = ({
   const { classes } = styles();
   const { t } = useTranslation();
   const navigate = useNavigate();
-  const [deleteAssignment] = useDeleteAssignmentMutation();
 
-  const modals = useModals();
-
-  const _delete = () =>
-    modals.openConfirmModal({
-      title: t("confirmAction"),
-      children: <Text size="sm">{t("deleteMessage")}</Text>,
-      labels: { confirm: t("confirm"), cancel: t("cancel") },
-      confirmProps: { color: "red" },
-      centered: true,
-      onConfirm: () =>
-        deleteAssignment({
-          variables: {
-            where: {
-              id: assignment.id,
-            },
-          },
-          onCompleted() {
-            onDelete();
-          },
-        }),
-    });
+  const _delete = () => onDelete();
 
   const _edit = () => {
     navigate(`assignments/${assignment.id}/edit`);
@@ -79,8 +57,7 @@ export const AssignmentCard = ({
       <Divider />
       <Box m={10}>
         <Box>{assignment.description || t("noDescription")}</Box>
-        <Group position="apart">
-          <Text>Hello</Text>
+        <Group position="right">
           <Group>
             {!!canDelete && (
               <Button color="red" variant="light" onClick={_delete}>

@@ -59,7 +59,7 @@ export function Footer({
             </Text>
             <Group spacing={5} direction="column">
               <Box>
-                <b>{t("phone")}:</b> 024950505
+                <b>{t("phone")}:</b> 041240580
               </Box>
               <Box>
                 <b>{t("email")}:</b> heirechemohamed@yahoo.fr
@@ -73,13 +73,16 @@ export function Footer({
               {t("followUs")}
             </Text>
             <Group direction="row">
-              <a href="http://www.facebook.com" target="_blank">
+              <a
+                href="https://www.facebook.com/Ecole-Normale-Sup%C3%A9rieure-dOran-Ammour-Ahmed-342827356302109/"
+                target="_blank"
+              >
                 <FacebookLogo width={40} />
               </a>
-              <a href="http://www.instagram.com" target="_blank">
-                <InstagramLogo width={40} />
-              </a>
-              <a href="http://www.youtube.com" target="_blank">
+              <a
+                href="https://www.youtube.com/channel/UCo02virlJ8a8nd8dLKl6NmQ"
+                target="_blank"
+              >
                 <YoutubeLogo width={40} />
               </a>
             </Group>

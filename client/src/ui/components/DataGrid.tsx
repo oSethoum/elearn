@@ -1,22 +1,28 @@
 import {
   Box,
+  Center,
   Checkbox,
   createStyles,
   Paper,
   ScrollArea,
   Table,
+  Text,
   TableProps,
 } from "@mantine/core";
-import { useEffect, useState } from "react";
 
 interface DataGridProps extends TableProps {
-  data: object[];
-  onSelectionChanged?: (selectedIndexes: Number[]) => void;
+  data?: object[];
+  withSelection?: boolean;
+  selectedIndexes?: number[];
+  setSelectedIndexes?: (selectedIndexes: number[]) => void;
   headerModifier?: (text: string) => string;
   height?: number | string;
+  width?: number | string;
+  actions?: (index: number) => React.ReactNode;
+  actionsLabel?: string;
 }
 
-const useStyles = createStyles((theme, params) => ({
+const useStyles = createStyles((theme) => ({
   thead: {
     backgroundColor:
       theme.colorScheme === "dark"
@@ -31,11 +37,6 @@ const useStyles = createStyles((theme, params) => ({
     }`,
   },
 
-  td: {
-    ...theme.fn.focusStyles(),
-    margin: 5,
-  },
-
   rowSelected: {
     backgroundColor: theme.fn.rgba(theme.colors.blue[7], 0.2),
   },
@@ -43,74 +44,99 @@ const useStyles = createStyles((theme, params) => ({
 
 export function DataGrid({
   data,
-  onSelectionChanged,
+  selectedIndexes,
+  withSelection,
+  setSelectedIndexes,
   headerModifier,
   height,
+  width,
+  actionsLabel,
+  actions,
   ...others
 }: DataGridProps) {
-  const { classes, cx, theme } = useStyles();
-  const [selected, setSelected] = useState<Number[]>([]);
+  const { classes, cx } = useStyles();
+
+  const t = headerModifier ? headerModifier : (text: string) => text;
+
+  if (!data || data?.length == 0)
+    return (
+      <Paper sx={{ minHeight: 300 }}>
+        <Center sx={{ minHeight: 300 }}>
+          <Text>{t("empty")}</Text>
+        </Center>
+      </Paper>
+    );
+
   const keys = Object.keys(data[0]);
 
-  const ths = keys.map((key) => (
-    <th key={key}>{headerModifier ? headerModifier(key) : key}</th>
-  ));
+  const ths = keys.map((key) => <th key={key}>{t(key)}</th>);
 
-  useEffect(() => {
-    onSelectionChanged && onSelectionChanged(selected);
-  }, [selected]);
-
-  const updateChecked = (index: number) => {
-    if (selected.includes(index)) {
-      setSelected(selected.filter((i) => i !== index));
+  const onChangeHandler = (index: number, op: boolean) => {
+    if (op) {
+      setSelectedIndexes &&
+        selectedIndexes &&
+        setSelectedIndexes([...selectedIndexes, index]);
     } else {
-      setSelected([...selected, index]);
+      setSelectedIndexes &&
+        selectedIndexes &&
+        setSelectedIndexes(selectedIndexes.filter((i) => i !== index));
     }
   };
 
-  const toggleSelectAll = () => {
-    if (selected.length === data.length) {
-      setSelected([]);
+  const toggleSelectedAll = () => {
+    if (selectedIndexes && selectedIndexes.length === data.length) {
+      setSelectedIndexes && setSelectedIndexes([]);
     } else {
-      setSelected(data.map((_, i) => i));
+      setSelectedIndexes && setSelectedIndexes(data.map((_, index) => index));
     }
   };
 
   const rows = data.map((d, index) => (
     <tr
       key={index}
-      className={cx(selected.includes(index) ? classes.rowSelected : null)}
-      onClick={() => updateChecked(index)}
+      className={cx(
+        selectedIndexes?.includes(index) ? classes.rowSelected : null
+      )}
     >
-      <td>
-        <Checkbox
-          checked={selected.includes(index)}
-          onChange={() => updateChecked(index)}
-        />
-      </td>
-      {keys.map((k, i) => (
-        <td className={cx(classes.td)} tabIndex={1} key={i}>
-          {d[k]}
+      {!!withSelection && (
+        <td>
+          <Checkbox
+            checked={selectedIndexes?.includes(index)}
+            onChange={(e) =>
+              e.currentTarget.checked
+                ? onChangeHandler(index, true)
+                : onChangeHandler(index, false)
+            }
+          />
         </td>
+      )}
+      {keys.map((k, i) => (
+        <td key={i}>{d[k]}</td>
       ))}
+      {actions && <td>{actions(index)}</td>}
     </tr>
   ));
 
   return (
-    <Paper withBorder sx={{ height }} component={ScrollArea}>
-      <Table sx={{ borderCollapse: "separate" }} {...others}>
+    <Paper withBorder sx={{ height, width }} component={ScrollArea}>
+      <Table {...others}>
         <thead className={classes.thead}>
           <tr>
-            <th style={{ width: 20 }}>
-              <Checkbox
-                checked={selected.length === data.length}
-                indeterminate={
-                  selected.length > 0 && selected.length < data.length
-                }
-                onChange={toggleSelectAll}
-              />
-            </th>
+            {!!withSelection && (
+              <th style={{ width: 20 }}>
+                <Checkbox
+                  checked={selectedIndexes?.length === data.length}
+                  indeterminate={
+                    selectedIndexes &&
+                    selectedIndexes?.length > 0 &&
+                    selectedIndexes?.length < data.length
+                  }
+                  onChange={toggleSelectedAll}
+                />
+              </th>
+            )}
             {ths}
+            {actionsLabel && <th style={{ width: 100 }}>{t(actionsLabel)}</th>}
           </tr>
         </thead>
         <Box component="tbody">{rows}</Box>

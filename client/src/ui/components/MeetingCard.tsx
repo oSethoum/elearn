@@ -37,29 +37,7 @@ export const MeetingCard = ({
   const { classes } = styles();
   const { t } = useTranslation();
   const navigate = useNavigate();
-  const modals = useModals();
-  const [deleteMeeting] = useDeleteMeetingMutation();
-
-  const _delete = () => {
-    modals.openConfirmModal({
-      title: t("confirmAction"),
-      children: <Text size="sm">{t("deleteMessage")}</Text>,
-      labels: { confirm: t("confirm"), cancel: t("cancel") },
-      confirmProps: { color: "red" },
-      centered: true,
-      onConfirm: () =>
-        deleteMeeting({
-          variables: {
-            where: {
-              id: meeting.id,
-            },
-          },
-          onCompleted() {
-            onDelete();
-          },
-        }),
-    });
-  };
+  const _delete = () => onDelete();
   const _edit = () => {
     navigate(`meetings/${meeting.id}/edit`);
   };

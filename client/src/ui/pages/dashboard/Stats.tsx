@@ -1,4 +1,9 @@
-import { DataGrid } from "@/ui/components";
+import {
+  useStatePageDataQuery,
+  useUpdateManyUserMutation,
+  namedOperations,
+} from "@/graphql";
+import { DataGrid, Loader } from "@/ui/components";
 import {
   Box,
   Text,
@@ -53,8 +58,35 @@ const styles = createStyles((theme) => ({
 export const Stats = () => {
   const { classes } = styles();
   const { t } = useTranslation();
-  const [approveStudents, setApproveStudents] = useState(false);
-  const [approveTeachers, setApproveTeachers] = useState(false);
+  const [selectedStudents, setSelectedStudents] = useState<number[]>([]);
+  const [selectedTeachers, setSelectedTeachers] = useState<number[]>([]);
+  const [updateUsers] = useUpdateManyUserMutation();
+
+  let { data, loading } = useStatePageDataQuery({
+    variables: {
+      swhere: {
+        user: {
+          is: {
+            disabled: {
+              equals: true,
+            },
+          },
+        },
+      },
+      twhere: {
+        user: {
+          is: {
+            disabled: {
+              equals: true,
+            },
+          },
+        },
+      },
+    },
+  });
+
+  if (loading) return <Loader height={"85vh"} />;
+
   return (
     <Box>
       <SimpleGrid
@@ -62,46 +94,48 @@ export const Stats = () => {
         breakpoints={[{ maxWidth: "sm", cols: 2 }]}
         spacing="md"
       >
-        <Card shadow="sm" className={classes.students}>
-          <Group position="apart">
-            <Text size="xl">{t("students")}</Text>
-            <MdPersonOutline size={25} />
-          </Group>
-          <Space h={20} />
-          <Text size="xl" weight="bold">
-            30
-          </Text>
-        </Card>
-        <Card shadow="sm" className={classes.teachers}>
-          <Group position="apart">
-            <Text size="xl">{t("teachers")}</Text>
-            <MdPersonOutline size={25} />
-          </Group>
-          <Space h={20} />
-          <Text size="xl" weight="bold">
-            36
-          </Text>
-        </Card>
-        <Card shadow="sm" className={classes.courses}>
-          <Group position="apart">
-            <Text size="xl">{t("courses")}</Text>
-            <MdBook size={25} />
-          </Group>
-          <Space h={20} />
-          <Text size="xl" weight="bold">
-            36
-          </Text>
-        </Card>
-        <Card shadow="sm" className={classes.topics}>
-          <Group position="apart">
-            <Text size="xl">{t("topics")}</Text>
-            <MdBook size={25} />
-          </Group>
-          <Space h={20} />
-          <Text size="xl" weight="bold">
-            36
-          </Text>
-        </Card>
+        <>
+          <Card shadow="sm" className={classes.students}>
+            <Group position="apart">
+              <Text size="xl">{t("students")}</Text>
+              <MdPersonOutline size={25} />
+            </Group>
+            <Space h={20} />
+            <Text size="xl" weight="bold">
+              {data?.aggregateStudent._count?._all}
+            </Text>
+          </Card>
+          <Card shadow="sm" className={classes.teachers}>
+            <Group position="apart">
+              <Text size="xl">{t("teachers")}</Text>
+              <MdPersonOutline size={25} />
+            </Group>
+            <Space h={20} />
+            <Text size="xl" weight="bold">
+              {data?.aggregateTeacher._count?._all}
+            </Text>
+          </Card>
+          <Card shadow="sm" className={classes.courses}>
+            <Group position="apart">
+              <Text size="xl">{t("courses")}</Text>
+              <MdBook size={25} />
+            </Group>
+            <Space h={20} />
+            <Text size="xl" weight="bold">
+              {data?.aggregateCourse._count?._all}
+            </Text>
+          </Card>
+          <Card shadow="sm" className={classes.topics}>
+            <Group position="apart">
+              <Text size="xl">{t("topics")}</Text>
+              <MdBook size={25} />
+            </Group>
+            <Space h={20} />
+            <Text size="xl" weight="bold">
+              {data?.aggregateTopic._count?._all}
+            </Text>
+          </Card>
+        </>
       </SimpleGrid>
       <Space h="xl" />
       <Card p={0} withBorder shadow="sm">
@@ -110,26 +144,54 @@ export const Stats = () => {
             <Text size="xl" weight="bold">
               {t("newStudents")}
             </Text>
-            <Button disabled>{t("approve")}</Button>
+            <Button
+              disabled={selectedStudents.length == 0}
+              onClick={() => {
+                const ids = selectedStudents.map(
+                  (index: number) => data?.students[index].user.id
+                ) as number[];
+                updateUsers({
+                  variables: {
+                    where: {
+                      id: {
+                        in: ids,
+                      },
+                    },
+                    data: {
+                      disabled: {
+                        set: false,
+                      },
+                    },
+                  },
+                  refetchQueries: [namedOperations.Query.statePageData],
+                });
+                setSelectedStudents([]);
+              }}
+            >
+              {t("approve")}
+            </Button>
           </Group>
         </Card.Section>
         <DataGrid
           height={250}
+          withSelection
           headerModifier={t}
-          onSelectionChanged={(selected) => {
-            console.log(selected);
-          }}
-          data={[
-            { name: "John Doe", age: "20", course: "math", grade: "A", id: 1 },
-            { name: "John Doe", age: "20", course: "math", grade: "A", id: 1 },
-            { name: "John Doe", age: "20", course: "math", grade: "A", id: 1 },
-            { name: "John Doe", age: "20", course: "math", grade: "A", id: 1 },
-            { name: "John Doe", age: "20", course: "math", grade: "A", id: 1 },
-            { name: "John Doe", age: "20", course: "math", grade: "A", id: 1 },
-            { name: "John Doe", age: "20", course: "math", grade: "A", id: 1 },
-            { name: "John Doe", age: "20", course: "math", grade: "A", id: 1 },
-            { name: "John Doe", age: "20", course: "math", grade: "A", id: 1 },
-          ]}
+          selectedIndexes={selectedStudents}
+          setSelectedIndexes={setSelectedStudents}
+          data={
+            data?.students.map(
+              (student) =>
+                ({
+                  username: student.user.username,
+                  firstName: student.lastName,
+                  lastName: student.lastName,
+                  email: student.user.email,
+                  grade: student.grade,
+                  topic: student.topic?.name,
+                  createdAt: student.user.createdAt,
+                } as object)
+            ) as object[]
+          }
           highlightOnHover
           verticalSpacing="sm"
         />
@@ -141,23 +203,52 @@ export const Stats = () => {
             <Text size="xl" weight="bold">
               {t("newTeachers")}
             </Text>
-            <Button disabled>{t("approve")}</Button>
+            <Button
+              disabled={selectedTeachers.length == 0}
+              onClick={() => {
+                const ids = selectedTeachers.map(
+                  (index: number) => data?.teachers[index].user.id
+                ) as number[];
+                updateUsers({
+                  variables: {
+                    where: {
+                      id: {
+                        in: ids,
+                      },
+                    },
+                    data: {
+                      disabled: {
+                        set: false,
+                      },
+                    },
+                  },
+                  refetchQueries: [namedOperations.Query.statePageData],
+                });
+                setSelectedTeachers([]);
+              }}
+            >
+              {t("approve")}
+            </Button>
           </Group>
         </Card.Section>
         <DataGrid
           height={250}
           headerModifier={t}
-          data={[
-            { name: "John Doe", age: "20", course: "math", grade: "A", id: 1 },
-            { name: "John Doe", age: "20", course: "math", grade: "A", id: 1 },
-            { name: "John Doe", age: "20", course: "math", grade: "A", id: 1 },
-            { name: "John Doe", age: "20", course: "math", grade: "A", id: 1 },
-            { name: "John Doe", age: "20", course: "math", grade: "A", id: 1 },
-            { name: "John Doe", age: "20", course: "math", grade: "A", id: 1 },
-            { name: "John Doe", age: "20", course: "math", grade: "A", id: 1 },
-            { name: "John Doe", age: "20", course: "math", grade: "A", id: 1 },
-            { name: "John Doe", age: "20", course: "math", grade: "A", id: 1 },
-          ]}
+          withSelection
+          selectedIndexes={selectedTeachers}
+          setSelectedIndexes={setSelectedTeachers}
+          data={
+            data?.teachers.map(
+              (teacher) =>
+                ({
+                  firstName: teacher.firstName,
+                  lastName: teacher.lastName,
+                  username: teacher.user.username,
+                  email: teacher.user.email,
+                  createdAt: teacher.user.createdAt,
+                } as object)
+            ) as object[]
+          }
           highlightOnHover
           verticalSpacing="sm"
         />

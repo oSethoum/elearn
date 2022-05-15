@@ -14,6 +14,15 @@ import i18n from "../../i18n";
 import { AppContextProvider, ILanguage } from "@/context";
 import { ModalsProvider } from "@mantine/modals";
 import { User } from "../../graphql";
+import { onError } from "@apollo/client/link/error";
+import {
+  ApolloClient,
+  ApolloProvider,
+  DefaultOptions,
+  from,
+  HttpLink,
+  InMemoryCache,
+} from "@apollo/client";
 
 const GlobalStyles = () => {
   return (
@@ -58,6 +67,44 @@ export function AppProvider({ children }: React.ComponentPropsWithRef<"div">) {
     const scheme = value || colorScheme === "dark" ? "light" : "dark";
     setColorScheme(scheme);
   };
+
+  const errorLink = onError(({ graphQLErrors, networkError }) => {
+    if (graphQLErrors)
+      graphQLErrors.map(({ message, locations, path }) =>
+        console.log(
+          `[GraphQL error]: Message: ${message}, Location: ${locations}, Path: ${path}`
+        )
+      );
+    if (networkError) console.log(`[Network error]: ${networkError}`);
+  });
+
+  const link = from([
+    errorLink,
+    new HttpLink({
+      uri: "/graphql",
+    }),
+  ]);
+
+  const defaultOptions: DefaultOptions = {
+    watchQuery: {
+      fetchPolicy: "no-cache",
+      errorPolicy: "ignore",
+    },
+    query: {
+      fetchPolicy: "no-cache",
+      errorPolicy: "all",
+    },
+    mutate: {
+      fetchPolicy: "no-cache",
+      errorPolicy: "all",
+    },
+  };
+
+  const client = new ApolloClient({
+    link,
+    cache: new InMemoryCache(),
+    defaultOptions,
+  });
 
   useEffect(() => {
     document.documentElement.style.colorScheme = colorScheme;
@@ -139,12 +186,14 @@ export function AppProvider({ children }: React.ComponentPropsWithRef<"div">) {
             }),
           }}
         >
-          <ModalsProvider>
-            <GlobalStyles />
-            <NotificationsProvider>
-              <TypographyStylesProvider>{children}</TypographyStylesProvider>
-            </NotificationsProvider>
-          </ModalsProvider>
+          <GlobalStyles />
+          <ApolloProvider client={client}>
+            <ModalsProvider>
+              <NotificationsProvider>
+                <TypographyStylesProvider>{children}</TypographyStylesProvider>
+              </NotificationsProvider>
+            </ModalsProvider>
+          </ApolloProvider>
         </MantineProvider>
       </ColorSchemeProvider>
     </AppContextProvider>

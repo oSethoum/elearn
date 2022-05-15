@@ -21,7 +21,7 @@ const useStyles = createStyles((theme) => ({
     paddingTop: 220,
     paddingBottom: 130,
     backgroundImage:
-      "url(https://images.unsplash.com/photo-1519389950473-47ba0277781c?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80)",
+      "url(https://images.pexels.com/photos/4065876/pexels-photo-4065876.jpeg?cs=srgb&dl=pexels-cottonbro-4065876.jpg&fm=jpg)",
     backgroundSize: "cover",
     backgroundPosition: "center",
     "@media (max-width: 520px)": {

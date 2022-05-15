@@ -41,6 +41,34 @@ mutation deleteCourse($where: CourseWhereUniqueInput!) {
     id
   }
 }
+# User CUD
+
+mutation createUser($data: UserCreateInput!) {
+  createUser(data: $data) {
+    id
+  }
+}
+
+mutation updateManyUser(
+  $data: UserUpdateManyMutationInput!
+  $where: UserWhereInput
+) {
+  updateManyUser(data: $data, where: $where) {
+    count
+  }
+}
+
+mutation updateUser($data: UserUpdateInput!, $where: UserWhereUniqueInput!) {
+  updateUser(data: $data, where: $where) {
+    id
+  }
+}
+
+mutation deleteUser($where: UserWhereUniqueInput!) {
+  deleteUser(where: $where) {
+    id
+  }
+}
 
 # Student CUD
 

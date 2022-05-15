@@ -6624,6 +6624,36 @@ export type DeleteCourseMutationVariables = Exact<{
 
 export type DeleteCourseMutation = { __typename?: 'Mutation', deleteCourse?: { __typename?: 'Course', id: number } | null };
 
+export type CreateUserMutationVariables = Exact<{
+  data: UserCreateInput;
+}>;
+
+
+export type CreateUserMutation = { __typename?: 'Mutation', createUser: { __typename?: 'User', id: number } };
+
+export type UpdateManyUserMutationVariables = Exact<{
+  data: UserUpdateManyMutationInput;
+  where?: InputMaybe<UserWhereInput>;
+}>;
+
+
+export type UpdateManyUserMutation = { __typename?: 'Mutation', updateManyUser: { __typename?: 'AffectedRowsOutput', count: number } };
+
+export type UpdateUserMutationVariables = Exact<{
+  data: UserUpdateInput;
+  where: UserWhereUniqueInput;
+}>;
+
+
+export type UpdateUserMutation = { __typename?: 'Mutation', updateUser?: { __typename?: 'User', id: number } | null };
+
+export type DeleteUserMutationVariables = Exact<{
+  where: UserWhereUniqueInput;
+}>;
+
+
+export type DeleteUserMutation = { __typename?: 'Mutation', deleteUser?: { __typename?: 'User', id: number } | null };
+
 export type CreateStudentMutationVariables = Exact<{
   data: StudentCreateInput;
 }>;
@@ -6748,6 +6778,13 @@ export type LessonQueryVariables = Exact<{
 
 export type LessonQuery = { __typename?: 'Query', lesson?: { __typename?: 'Lesson', id: number, title: string, description?: string | null, published: boolean, content: string } | null };
 
+export type TeacherQueryVariables = Exact<{
+  where: TeacherWhereUniqueInput;
+}>;
+
+
+export type TeacherQuery = { __typename?: 'Query', teacher?: { __typename?: 'Teacher', id: number, firstName: string, lastName: string, userId: number, user: { __typename?: 'User', id: number, email: string, username: string, disabled: boolean } } | null };
+
 export type AssignmentQueryVariables = Exact<{
   where: AssignmentWhereUniqueInput;
 }>;
@@ -6762,12 +6799,48 @@ export type MeetingQueryVariables = Exact<{
 
 export type MeetingQuery = { __typename?: 'Query', meeting?: { __typename?: 'Meeting', id: number, title: string, description?: string | null, courseId?: number | null, createdAt: any, updatedAt: any, date: any, startTime: any, duration: any, link?: string | null } | null };
 
+export type StatePageDataQueryVariables = Exact<{
+  swhere?: InputMaybe<StudentWhereInput>;
+  twhere?: InputMaybe<TeacherWhereInput>;
+}>;
+
+
+export type StatePageDataQuery = { __typename?: 'Query', aggregateCourse: { __typename?: 'AggregateCourse', _count?: { __typename?: 'CourseCountAggregate', _all: number } | null }, aggregateStudent: { __typename?: 'AggregateStudent', _count?: { __typename?: 'StudentCountAggregate', _all: number } | null }, aggregateTeacher: { __typename?: 'AggregateTeacher', _count?: { __typename?: 'TeacherCountAggregate', _all: number } | null }, aggregateTopic: { __typename?: 'AggregateTopic', _count?: { __typename?: 'TopicCountAggregate', _all: number } | null }, students: Array<{ __typename?: 'Student', id: number, firstName: string, lastName: string, grade: number, topic?: { __typename?: 'Topic', name: string } | null, user: { __typename?: 'User', id: number, role: string, username: string, createdAt: any, disabled: boolean, email: string } }>, teachers: Array<{ __typename?: 'Teacher', id: number, firstName: string, lastName: string, user: { __typename?: 'User', id: number, username: string, disabled: boolean, createdAt: any, role: string, email: string } }> };
+
+export type AdminsQueryVariables = Exact<{
+  where?: InputMaybe<AdminWhereInput>;
+}>;
+
+
+export type AdminsQuery = { __typename?: 'Query', admins: Array<{ __typename?: 'Admin', id: number, firstName: string, lastName: string, user: { __typename?: 'User', id: number, username: string, createdAt: any, disabled: boolean, email: string } }> };
+
+export type TeachersQueryVariables = Exact<{
+  where?: InputMaybe<TeacherWhereInput>;
+}>;
+
+
+export type TeachersQuery = { __typename?: 'Query', teachers: Array<{ __typename?: 'Teacher', id: number, firstName: string, lastName: string, user: { __typename?: 'User', id: number, email: string, createdAt: any, disabled: boolean, username: string } }> };
+
+export type StudentsQueryVariables = Exact<{
+  where?: InputMaybe<StudentWhereInput>;
+}>;
+
+
+export type StudentsQuery = { __typename?: 'Query', students: Array<{ __typename?: 'Student', id: number, firstName: string, lastName: string, grade: number, topic?: { __typename?: 'Topic', name: string } | null, user: { __typename?: 'User', id: number, email: string, createdAt: any, disabled: boolean, username: string } }> };
+
 export type CourseQueryVariables = Exact<{
   where: CourseWhereUniqueInput;
 }>;
 
 
-export type CourseQuery = { __typename?: 'Query', course?: { __typename?: 'Course', id: number, title: string, lessons: Array<{ __typename?: 'Lesson', id: number, title: string, description?: string | null, published: boolean, courseId?: number | null }>, meetings: Array<{ __typename?: 'Meeting', id: number, link?: string | null, title: string, date: any, startTime: any, duration: any, courseId?: number | null }>, assignments: Array<{ __typename?: 'Assignment', id: number, published: boolean, courseId?: number | null }> } | null };
+export type CourseQuery = { __typename?: 'Query', course?: { __typename?: 'Course', id: number, title: string, lessons: Array<{ __typename?: 'Lesson', id: number, title: string, description?: string | null, published: boolean, courseId?: number | null }>, meetings: Array<{ __typename?: 'Meeting', id: number, link?: string | null, title: string, date: any, startTime: any, duration: any, courseId?: number | null }>, assignments: Array<{ __typename?: 'Assignment', id: number, title: string, description?: string | null, published: boolean, courseId?: number | null }> } | null };
+
+export type StudentQueryVariables = Exact<{
+  where: StudentWhereUniqueInput;
+}>;
+
+
+export type StudentQuery = { __typename?: 'Query', student?: { __typename?: 'Student', firstName: string, lastName: string, grade: number, topicId?: number | null, user: { __typename?: 'User', username: string, email: string, disabled: boolean, id: number, role: string } } | null };
 
 export type CoursesQueryVariables = Exact<{
   where?: InputMaybe<CourseWhereInput>;
@@ -6777,6 +6850,22 @@ export type CoursesQueryVariables = Exact<{
 
 
 export type CoursesQuery = { __typename?: 'Query', courses: Array<{ __typename?: 'Course', id: number, title: string, description?: string | null, teacher?: { __typename?: 'Teacher', firstName: string, lastName: string } | null, _count?: { __typename?: 'CourseCount', lessons: number, assignments: number, meetings: number } | null }> };
+
+export type TopicsQueryVariables = Exact<{
+  where?: InputMaybe<TopicWhereInput>;
+}>;
+
+
+export type TopicsQuery = { __typename?: 'Query', topics: Array<{ __typename?: 'Topic', id: number, name: string, grades: number, department?: { __typename?: 'Department', name: string } | null }> };
+
+export type DashboardUsersQueryVariables = Exact<{
+  awhere?: InputMaybe<AdminWhereInput>;
+  twhere?: InputMaybe<TeacherWhereInput>;
+  swhere?: InputMaybe<StudentWhereInput>;
+}>;
+
+
+export type DashboardUsersQuery = { __typename?: 'Query', admins: Array<{ __typename?: 'Admin', id: number, firstName: string, lastName: string, user: { __typename?: 'User', id: number, username: string, createdAt: any, disabled: boolean, email: string } }>, teachers: Array<{ __typename?: 'Teacher', id: number, firstName: string, lastName: string, user: { __typename?: 'User', id: number, email: string, createdAt: any, disabled: boolean, username: string } }>, students: Array<{ __typename?: 'Student', id: number, firstName: string, lastName: string, grade: number, topicId?: number | null, topic?: { __typename?: 'Topic', name: string } | null, user: { __typename?: 'User', id: number, email: string, createdAt: any, disabled: boolean, username: string } }> };
 
 
 export const CreateLessonDocument = gql`
@@ -6979,6 +7068,140 @@ export function useDeleteCourseMutation(baseOptions?: Apollo.MutationHookOptions
 export type DeleteCourseMutationHookResult = ReturnType<typeof useDeleteCourseMutation>;
 export type DeleteCourseMutationResult = Apollo.MutationResult<DeleteCourseMutation>;
 export type DeleteCourseMutationOptions = Apollo.BaseMutationOptions<DeleteCourseMutation, DeleteCourseMutationVariables>;
+export const CreateUserDocument = gql`
+    mutation createUser($data: UserCreateInput!) {
+  createUser(data: $data) {
+    id
+  }
+}
+    `;
+export type CreateUserMutationFn = Apollo.MutationFunction<CreateUserMutation, CreateUserMutationVariables>;
+
+/**
+ * __useCreateUserMutation__
+ *
+ * To run a mutation, you first call `useCreateUserMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useCreateUserMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [createUserMutation, { data, loading, error }] = useCreateUserMutation({
+ *   variables: {
+ *      data: // value for 'data'
+ *   },
+ * });
+ */
+export function useCreateUserMutation(baseOptions?: Apollo.MutationHookOptions<CreateUserMutation, CreateUserMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<CreateUserMutation, CreateUserMutationVariables>(CreateUserDocument, options);
+      }
+export type CreateUserMutationHookResult = ReturnType<typeof useCreateUserMutation>;
+export type CreateUserMutationResult = Apollo.MutationResult<CreateUserMutation>;
+export type CreateUserMutationOptions = Apollo.BaseMutationOptions<CreateUserMutation, CreateUserMutationVariables>;
+export const UpdateManyUserDocument = gql`
+    mutation updateManyUser($data: UserUpdateManyMutationInput!, $where: UserWhereInput) {
+  updateManyUser(data: $data, where: $where) {
+    count
+  }
+}
+    `;
+export type UpdateManyUserMutationFn = Apollo.MutationFunction<UpdateManyUserMutation, UpdateManyUserMutationVariables>;
+
+/**
+ * __useUpdateManyUserMutation__
+ *
+ * To run a mutation, you first call `useUpdateManyUserMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useUpdateManyUserMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [updateManyUserMutation, { data, loading, error }] = useUpdateManyUserMutation({
+ *   variables: {
+ *      data: // value for 'data'
+ *      where: // value for 'where'
+ *   },
+ * });
+ */
+export function useUpdateManyUserMutation(baseOptions?: Apollo.MutationHookOptions<UpdateManyUserMutation, UpdateManyUserMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<UpdateManyUserMutation, UpdateManyUserMutationVariables>(UpdateManyUserDocument, options);
+      }
+export type UpdateManyUserMutationHookResult = ReturnType<typeof useUpdateManyUserMutation>;
+export type UpdateManyUserMutationResult = Apollo.MutationResult<UpdateManyUserMutation>;
+export type UpdateManyUserMutationOptions = Apollo.BaseMutationOptions<UpdateManyUserMutation, UpdateManyUserMutationVariables>;
+export const UpdateUserDocument = gql`
+    mutation updateUser($data: UserUpdateInput!, $where: UserWhereUniqueInput!) {
+  updateUser(data: $data, where: $where) {
+    id
+  }
+}
+    `;
+export type UpdateUserMutationFn = Apollo.MutationFunction<UpdateUserMutation, UpdateUserMutationVariables>;
+
+/**
+ * __useUpdateUserMutation__
+ *
+ * To run a mutation, you first call `useUpdateUserMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useUpdateUserMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [updateUserMutation, { data, loading, error }] = useUpdateUserMutation({
+ *   variables: {
+ *      data: // value for 'data'
+ *      where: // value for 'where'
+ *   },
+ * });
+ */
+export function useUpdateUserMutation(baseOptions?: Apollo.MutationHookOptions<UpdateUserMutation, UpdateUserMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<UpdateUserMutation, UpdateUserMutationVariables>(UpdateUserDocument, options);
+      }
+export type UpdateUserMutationHookResult = ReturnType<typeof useUpdateUserMutation>;
+export type UpdateUserMutationResult = Apollo.MutationResult<UpdateUserMutation>;
+export type UpdateUserMutationOptions = Apollo.BaseMutationOptions<UpdateUserMutation, UpdateUserMutationVariables>;
+export const DeleteUserDocument = gql`
+    mutation deleteUser($where: UserWhereUniqueInput!) {
+  deleteUser(where: $where) {
+    id
+  }
+}
+    `;
+export type DeleteUserMutationFn = Apollo.MutationFunction<DeleteUserMutation, DeleteUserMutationVariables>;
+
+/**
+ * __useDeleteUserMutation__
+ *
+ * To run a mutation, you first call `useDeleteUserMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useDeleteUserMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [deleteUserMutation, { data, loading, error }] = useDeleteUserMutation({
+ *   variables: {
+ *      where: // value for 'where'
+ *   },
+ * });
+ */
+export function useDeleteUserMutation(baseOptions?: Apollo.MutationHookOptions<DeleteUserMutation, DeleteUserMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<DeleteUserMutation, DeleteUserMutationVariables>(DeleteUserDocument, options);
+      }
+export type DeleteUserMutationHookResult = ReturnType<typeof useDeleteUserMutation>;
+export type DeleteUserMutationResult = Apollo.MutationResult<DeleteUserMutation>;
+export type DeleteUserMutationOptions = Apollo.BaseMutationOptions<DeleteUserMutation, DeleteUserMutationVariables>;
 export const CreateStudentDocument = gql`
     mutation createStudent($data: StudentCreateInput!) {
   createStudent(data: $data) {
@@ -7563,6 +7786,53 @@ export type LessonQueryResult = Apollo.QueryResult<LessonQuery, LessonQueryVaria
 export function refetchLessonQuery(variables: LessonQueryVariables) {
       return { query: LessonDocument, variables: variables }
     }
+export const TeacherDocument = gql`
+    query Teacher($where: TeacherWhereUniqueInput!) {
+  teacher(where: $where) {
+    id
+    firstName
+    lastName
+    userId
+    user {
+      id
+      email
+      username
+      disabled
+    }
+  }
+}
+    `;
+
+/**
+ * __useTeacherQuery__
+ *
+ * To run a query within a React component, call `useTeacherQuery` and pass it any options that fit your needs.
+ * When your component renders, `useTeacherQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useTeacherQuery({
+ *   variables: {
+ *      where: // value for 'where'
+ *   },
+ * });
+ */
+export function useTeacherQuery(baseOptions: Apollo.QueryHookOptions<TeacherQuery, TeacherQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<TeacherQuery, TeacherQueryVariables>(TeacherDocument, options);
+      }
+export function useTeacherLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<TeacherQuery, TeacherQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<TeacherQuery, TeacherQueryVariables>(TeacherDocument, options);
+        }
+export type TeacherQueryHookResult = ReturnType<typeof useTeacherQuery>;
+export type TeacherLazyQueryHookResult = ReturnType<typeof useTeacherLazyQuery>;
+export type TeacherQueryResult = Apollo.QueryResult<TeacherQuery, TeacherQueryVariables>;
+export function refetchTeacherQuery(variables: TeacherQueryVariables) {
+      return { query: TeacherDocument, variables: variables }
+    }
 export const AssignmentDocument = gql`
     query Assignment($where: AssignmentWhereUniqueInput!) {
   assignment(where: $where) {
@@ -7653,6 +7923,237 @@ export type MeetingQueryResult = Apollo.QueryResult<MeetingQuery, MeetingQueryVa
 export function refetchMeetingQuery(variables: MeetingQueryVariables) {
       return { query: MeetingDocument, variables: variables }
     }
+export const StatePageDataDocument = gql`
+    query statePageData($swhere: StudentWhereInput, $twhere: TeacherWhereInput) {
+  aggregateCourse {
+    _count {
+      _all
+    }
+  }
+  aggregateStudent {
+    _count {
+      _all
+    }
+  }
+  aggregateTeacher {
+    _count {
+      _all
+    }
+  }
+  aggregateTopic {
+    _count {
+      _all
+    }
+  }
+  students(where: $swhere) {
+    id
+    firstName
+    lastName
+    grade
+    topic {
+      name
+    }
+    user {
+      id
+      role
+      username
+      createdAt
+      disabled
+      email
+    }
+  }
+  teachers(where: $twhere) {
+    id
+    firstName
+    lastName
+    user {
+      id
+      username
+      disabled
+      createdAt
+      role
+      email
+    }
+  }
+}
+    `;
+
+/**
+ * __useStatePageDataQuery__
+ *
+ * To run a query within a React component, call `useStatePageDataQuery` and pass it any options that fit your needs.
+ * When your component renders, `useStatePageDataQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useStatePageDataQuery({
+ *   variables: {
+ *      swhere: // value for 'swhere'
+ *      twhere: // value for 'twhere'
+ *   },
+ * });
+ */
+export function useStatePageDataQuery(baseOptions?: Apollo.QueryHookOptions<StatePageDataQuery, StatePageDataQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<StatePageDataQuery, StatePageDataQueryVariables>(StatePageDataDocument, options);
+      }
+export function useStatePageDataLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<StatePageDataQuery, StatePageDataQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<StatePageDataQuery, StatePageDataQueryVariables>(StatePageDataDocument, options);
+        }
+export type StatePageDataQueryHookResult = ReturnType<typeof useStatePageDataQuery>;
+export type StatePageDataLazyQueryHookResult = ReturnType<typeof useStatePageDataLazyQuery>;
+export type StatePageDataQueryResult = Apollo.QueryResult<StatePageDataQuery, StatePageDataQueryVariables>;
+export function refetchStatePageDataQuery(variables?: StatePageDataQueryVariables) {
+      return { query: StatePageDataDocument, variables: variables }
+    }
+export const AdminsDocument = gql`
+    query Admins($where: AdminWhereInput) {
+  admins(where: $where) {
+    id
+    firstName
+    lastName
+    user {
+      id
+      username
+      createdAt
+      disabled
+      email
+    }
+  }
+}
+    `;
+
+/**
+ * __useAdminsQuery__
+ *
+ * To run a query within a React component, call `useAdminsQuery` and pass it any options that fit your needs.
+ * When your component renders, `useAdminsQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useAdminsQuery({
+ *   variables: {
+ *      where: // value for 'where'
+ *   },
+ * });
+ */
+export function useAdminsQuery(baseOptions?: Apollo.QueryHookOptions<AdminsQuery, AdminsQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<AdminsQuery, AdminsQueryVariables>(AdminsDocument, options);
+      }
+export function useAdminsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<AdminsQuery, AdminsQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<AdminsQuery, AdminsQueryVariables>(AdminsDocument, options);
+        }
+export type AdminsQueryHookResult = ReturnType<typeof useAdminsQuery>;
+export type AdminsLazyQueryHookResult = ReturnType<typeof useAdminsLazyQuery>;
+export type AdminsQueryResult = Apollo.QueryResult<AdminsQuery, AdminsQueryVariables>;
+export function refetchAdminsQuery(variables?: AdminsQueryVariables) {
+      return { query: AdminsDocument, variables: variables }
+    }
+export const TeachersDocument = gql`
+    query Teachers($where: TeacherWhereInput) {
+  teachers(where: $where) {
+    id
+    firstName
+    lastName
+    user {
+      id
+      email
+      createdAt
+      disabled
+      username
+    }
+  }
+}
+    `;
+
+/**
+ * __useTeachersQuery__
+ *
+ * To run a query within a React component, call `useTeachersQuery` and pass it any options that fit your needs.
+ * When your component renders, `useTeachersQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useTeachersQuery({
+ *   variables: {
+ *      where: // value for 'where'
+ *   },
+ * });
+ */
+export function useTeachersQuery(baseOptions?: Apollo.QueryHookOptions<TeachersQuery, TeachersQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<TeachersQuery, TeachersQueryVariables>(TeachersDocument, options);
+      }
+export function useTeachersLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<TeachersQuery, TeachersQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<TeachersQuery, TeachersQueryVariables>(TeachersDocument, options);
+        }
+export type TeachersQueryHookResult = ReturnType<typeof useTeachersQuery>;
+export type TeachersLazyQueryHookResult = ReturnType<typeof useTeachersLazyQuery>;
+export type TeachersQueryResult = Apollo.QueryResult<TeachersQuery, TeachersQueryVariables>;
+export function refetchTeachersQuery(variables?: TeachersQueryVariables) {
+      return { query: TeachersDocument, variables: variables }
+    }
+export const StudentsDocument = gql`
+    query Students($where: StudentWhereInput) {
+  students(where: $where) {
+    id
+    firstName
+    lastName
+    grade
+    topic {
+      name
+    }
+    user {
+      id
+      email
+      createdAt
+      disabled
+      username
+    }
+  }
+}
+    `;
+
+/**
+ * __useStudentsQuery__
+ *
+ * To run a query within a React component, call `useStudentsQuery` and pass it any options that fit your needs.
+ * When your component renders, `useStudentsQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useStudentsQuery({
+ *   variables: {
+ *      where: // value for 'where'
+ *   },
+ * });
+ */
+export function useStudentsQuery(baseOptions?: Apollo.QueryHookOptions<StudentsQuery, StudentsQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<StudentsQuery, StudentsQueryVariables>(StudentsDocument, options);
+      }
+export function useStudentsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<StudentsQuery, StudentsQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<StudentsQuery, StudentsQueryVariables>(StudentsDocument, options);
+        }
+export type StudentsQueryHookResult = ReturnType<typeof useStudentsQuery>;
+export type StudentsLazyQueryHookResult = ReturnType<typeof useStudentsLazyQuery>;
+export type StudentsQueryResult = Apollo.QueryResult<StudentsQuery, StudentsQueryVariables>;
+export function refetchStudentsQuery(variables?: StudentsQueryVariables) {
+      return { query: StudentsDocument, variables: variables }
+    }
 export const CourseDocument = gql`
     query Course($where: CourseWhereUniqueInput!) {
   course(where: $where) {
@@ -7676,6 +8177,8 @@ export const CourseDocument = gql`
     }
     assignments {
       id
+      title
+      description
       published
       courseId
     }
@@ -7712,6 +8215,55 @@ export type CourseLazyQueryHookResult = ReturnType<typeof useCourseLazyQuery>;
 export type CourseQueryResult = Apollo.QueryResult<CourseQuery, CourseQueryVariables>;
 export function refetchCourseQuery(variables: CourseQueryVariables) {
       return { query: CourseDocument, variables: variables }
+    }
+export const StudentDocument = gql`
+    query Student($where: StudentWhereUniqueInput!) {
+  student(where: $where) {
+    firstName
+    lastName
+    grade
+    lastName
+    topicId
+    user {
+      username
+      email
+      disabled
+      id
+      role
+    }
+  }
+}
+    `;
+
+/**
+ * __useStudentQuery__
+ *
+ * To run a query within a React component, call `useStudentQuery` and pass it any options that fit your needs.
+ * When your component renders, `useStudentQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useStudentQuery({
+ *   variables: {
+ *      where: // value for 'where'
+ *   },
+ * });
+ */
+export function useStudentQuery(baseOptions: Apollo.QueryHookOptions<StudentQuery, StudentQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<StudentQuery, StudentQueryVariables>(StudentDocument, options);
+      }
+export function useStudentLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<StudentQuery, StudentQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<StudentQuery, StudentQueryVariables>(StudentDocument, options);
+        }
+export type StudentQueryHookResult = ReturnType<typeof useStudentQuery>;
+export type StudentLazyQueryHookResult = ReturnType<typeof useStudentLazyQuery>;
+export type StudentQueryResult = Apollo.QueryResult<StudentQuery, StudentQueryVariables>;
+export function refetchStudentQuery(variables: StudentQueryVariables) {
+      return { query: StudentDocument, variables: variables }
     }
 export const CoursesDocument = gql`
     query Courses($where: CourseWhereInput, $orderBy: [CourseOrderByWithRelationInput!], $take: Int) {
@@ -7764,3 +8316,169 @@ export type CoursesQueryResult = Apollo.QueryResult<CoursesQuery, CoursesQueryVa
 export function refetchCoursesQuery(variables?: CoursesQueryVariables) {
       return { query: CoursesDocument, variables: variables }
     }
+export const TopicsDocument = gql`
+    query Topics($where: TopicWhereInput) {
+  topics(where: $where) {
+    id
+    name
+    grades
+    department {
+      name
+    }
+  }
+}
+    `;
+
+/**
+ * __useTopicsQuery__
+ *
+ * To run a query within a React component, call `useTopicsQuery` and pass it any options that fit your needs.
+ * When your component renders, `useTopicsQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useTopicsQuery({
+ *   variables: {
+ *      where: // value for 'where'
+ *   },
+ * });
+ */
+export function useTopicsQuery(baseOptions?: Apollo.QueryHookOptions<TopicsQuery, TopicsQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<TopicsQuery, TopicsQueryVariables>(TopicsDocument, options);
+      }
+export function useTopicsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<TopicsQuery, TopicsQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<TopicsQuery, TopicsQueryVariables>(TopicsDocument, options);
+        }
+export type TopicsQueryHookResult = ReturnType<typeof useTopicsQuery>;
+export type TopicsLazyQueryHookResult = ReturnType<typeof useTopicsLazyQuery>;
+export type TopicsQueryResult = Apollo.QueryResult<TopicsQuery, TopicsQueryVariables>;
+export function refetchTopicsQuery(variables?: TopicsQueryVariables) {
+      return { query: TopicsDocument, variables: variables }
+    }
+export const DashboardUsersDocument = gql`
+    query DashboardUsers($awhere: AdminWhereInput, $twhere: TeacherWhereInput, $swhere: StudentWhereInput) {
+  admins(where: $awhere) {
+    id
+    firstName
+    lastName
+    user {
+      id
+      username
+      createdAt
+      disabled
+      email
+    }
+  }
+  teachers(where: $twhere) {
+    id
+    firstName
+    lastName
+    user {
+      id
+      email
+      createdAt
+      disabled
+      username
+    }
+  }
+  students(where: $swhere) {
+    id
+    firstName
+    lastName
+    grade
+    topicId
+    topic {
+      name
+    }
+    user {
+      id
+      email
+      createdAt
+      disabled
+      username
+    }
+  }
+}
+    `;
+
+/**
+ * __useDashboardUsersQuery__
+ *
+ * To run a query within a React component, call `useDashboardUsersQuery` and pass it any options that fit your needs.
+ * When your component renders, `useDashboardUsersQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useDashboardUsersQuery({
+ *   variables: {
+ *      awhere: // value for 'awhere'
+ *      twhere: // value for 'twhere'
+ *      swhere: // value for 'swhere'
+ *   },
+ * });
+ */
+export function useDashboardUsersQuery(baseOptions?: Apollo.QueryHookOptions<DashboardUsersQuery, DashboardUsersQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<DashboardUsersQuery, DashboardUsersQueryVariables>(DashboardUsersDocument, options);
+      }
+export function useDashboardUsersLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<DashboardUsersQuery, DashboardUsersQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<DashboardUsersQuery, DashboardUsersQueryVariables>(DashboardUsersDocument, options);
+        }
+export type DashboardUsersQueryHookResult = ReturnType<typeof useDashboardUsersQuery>;
+export type DashboardUsersLazyQueryHookResult = ReturnType<typeof useDashboardUsersLazyQuery>;
+export type DashboardUsersQueryResult = Apollo.QueryResult<DashboardUsersQuery, DashboardUsersQueryVariables>;
+export function refetchDashboardUsersQuery(variables?: DashboardUsersQueryVariables) {
+      return { query: DashboardUsersDocument, variables: variables }
+    }
+export const namedOperations = {
+  Query: {
+    Lessons: 'Lessons',
+    Lesson: 'Lesson',
+    Teacher: 'Teacher',
+    Assignment: 'Assignment',
+    meeting: 'meeting',
+    statePageData: 'statePageData',
+    Admins: 'Admins',
+    Teachers: 'Teachers',
+    Students: 'Students',
+    Course: 'Course',
+    Student: 'Student',
+    Courses: 'Courses',
+    Topics: 'Topics',
+    DashboardUsers: 'DashboardUsers'
+  },
+  Mutation: {
+    createLesson: 'createLesson',
+    updateLesson: 'updateLesson',
+    deleteLesson: 'deleteLesson',
+    createCourse: 'createCourse',
+    updateCourse: 'updateCourse',
+    deleteCourse: 'deleteCourse',
+    createUser: 'createUser',
+    updateManyUser: 'updateManyUser',
+    updateUser: 'updateUser',
+    deleteUser: 'deleteUser',
+    createStudent: 'createStudent',
+    updateStudent: 'updateStudent',
+    deleteStudent: 'deleteStudent',
+    createTeacher: 'createTeacher',
+    updateTeacher: 'updateTeacher',
+    deleteTeacher: 'deleteTeacher',
+    createAdmin: 'createAdmin',
+    updateAdmin: 'updateAdmin',
+    deleteAdmin: 'deleteAdmin',
+    createAssignment: 'createAssignment',
+    updateAssignment: 'updateAssignment',
+    deleteAssignment: 'deleteAssignment',
+    createMeeting: 'createMeeting',
+    updateMeeting: 'updateMeeting',
+    deleteMeeting: 'deleteMeeting'
+  }
+}

@@ -27,7 +27,7 @@ import {} from "react-icons/fa";
 import z from "zod";
 import { useTranslation } from "react-i18next";
 import { useForm, zodResolver } from "@mantine/form";
-import { useContext, useEffect, useState } from "react";
+import {  useEffect, useState } from "react";
 import { useAppContext } from "@/context/";
 
 export const Register = () => {

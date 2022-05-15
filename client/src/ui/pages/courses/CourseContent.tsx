@@ -12,7 +12,6 @@ import {
 
 import { useTranslation } from "react-i18next";
 import { FaBook, FaBookOpen, FaVideo } from "react-icons/fa";
-import { useQuery } from "@apollo/client";
 import { useNavigate, useParams } from "react-router-dom";
 import { Loader } from "../../components";
 import { LessonCard } from "../../components/LessonCard";
@@ -20,28 +19,37 @@ import { useEffect, useState } from "react";
 import { useAppContext } from "@/context";
 import { AssignmentCard } from "../../components/AssignmentCard";
 import { MeetingCard } from "../../components/MeetingCard";
-import { Course, GET_COURSE } from "@/graphql";
+import {
+  Assignment,
+  Lesson,
+  Meeting,
+  namedOperations,
+  useCourseQuery,
+  useDeleteAssignmentMutation,
+  useDeleteLessonMutation,
+  useDeleteMeetingMutation,
+} from "@/graphql";
 import { useUrlQuery } from "@/hooks";
+import { useModals } from "@mantine/modals";
 
 export const CourseContent = () => {
+  const modals = useModals();
+  const [deleteLesson] = useDeleteLessonMutation();
   const params = useParams();
   const query = useUrlQuery();
   const { t } = useTranslation();
-  const [course, setCourse] = useState<Course>();
   const { user } = useAppContext();
   const navigate = useNavigate();
   const [selectedTab, setSelectedTab] = useState(0);
-  const { loading, data } = useQuery<{ course: Course }>(GET_COURSE, {
+  const [deleteAssignment] = useDeleteAssignmentMutation();
+  const [deleteMeeting] = useDeleteMeetingMutation();
+  const { loading, data } = useCourseQuery({
     variables: {
-      courseWhere: {
+      where: {
         id: parseInt(params?.courseId as string),
       },
     },
   });
-
-  useEffect(() => {
-    setCourse(data?.course);
-  }, [loading]);
 
   useEffect(() => {
     if (query.get("tab") === "assignments") {
@@ -52,6 +60,8 @@ export const CourseContent = () => {
       setSelectedTab(0);
     }
   }, [query]);
+
+  if (loading) return <Loader height="80vh" />;
 
   const onChange = (active: number) => {
     setSelectedTab(active);
@@ -66,13 +76,11 @@ export const CourseContent = () => {
     );
   };
 
-  if (loading) return <Loader height="80vh" />;
-
   return (
     <Container size="xl">
       <Paper shadow="xs" withBorder p={10} my={20}>
         <Text align="center" size="xl" weight="bold">
-          {course?.title}
+          {data?.course?.title}
         </Text>
       </Paper>
       <Paper shadow="xs" withBorder>
@@ -93,25 +101,35 @@ export const CourseContent = () => {
                   <Divider />
                 </>
               )}
-              {course?.lessons?.length == 0 ? (
+              {data?.course?.lessons?.length == 0 ? (
                 <Center sx={{ height: "80vh" }}>
                   <Text>No Data </Text>
                 </Center>
               ) : (
-                course?.lessons?.map((lesson) => (
+                data?.course?.lessons?.map((lesson) => (
                   <LessonCard
                     key={lesson.title}
-                    onDelete={() => {
-                      setCourse({
-                        ...course,
-                        lessons: course.lessons.filter(
-                          (l) => lesson.id != l.id
-                        ),
-                      });
-                    }}
-                    lesson={lesson}
+                    lesson={lesson as Lesson}
                     canEdit={user?.role === "teacher"}
                     canDelete={user?.role === "teacher"}
+                    onDelete={() => {
+                      modals.openConfirmModal({
+                        title: t("confirmAction"),
+                        children: <Text size="sm">{t("deleteMessage")}</Text>,
+                        labels: { confirm: t("confirm"), cancel: t("cancel") },
+                        confirmProps: { color: "red" },
+                        centered: true,
+                        onConfirm: () =>
+                          deleteLesson({
+                            variables: {
+                              where: {
+                                id: lesson.id,
+                              },
+                            },
+                            refetchQueries: [namedOperations.Query.Course],
+                          }),
+                      });
+                    }}
                   />
                 ))
               )}
@@ -137,23 +155,33 @@ export const CourseContent = () => {
                   <Divider />
                 </>
               )}
-              {course?.assignments?.length == 0 ? (
+              {data?.course?.assignments?.length == 0 ? (
                 <Center sx={{ height: "80vh" }}>
                   <Text>No Data</Text>
                 </Center>
               ) : (
-                course?.assignments?.map((assignment) => (
+                data?.course?.assignments?.map((assignment) => (
                   <AssignmentCard
-                    key={assignment.title}
+                    key={assignment.id}
                     onDelete={() => {
-                      setCourse({
-                        ...course,
-                        assignments: course.assignments.filter(
-                          (a) => assignment.id != a.id
-                        ),
+                      modals.openConfirmModal({
+                        title: t("confirmAction"),
+                        children: <Text size="sm">{t("deleteMessage")}</Text>,
+                        labels: { confirm: t("confirm"), cancel: t("cancel") },
+                        confirmProps: { color: "red" },
+                        centered: true,
+                        onConfirm: () =>
+                          deleteAssignment({
+                            variables: {
+                              where: {
+                                id: assignment.id,
+                              },
+                            },
+                            refetchQueries: [namedOperations.Query.Course],
+                          }),
                       });
                     }}
-                    assignment={assignment}
+                    assignment={assignment as Assignment}
                     canEdit={user?.role === "teacher"}
                     canDelete={user?.role === "teacher"}
                   />
@@ -181,21 +209,31 @@ export const CourseContent = () => {
                   <Divider />
                 </>
               )}
-              {course?.meetings?.length == 0 ? (
+              {data?.course?.meetings?.length == 0 ? (
                 <Center sx={{ height: "80vh" }}>
                   <Text>No Data </Text>
                 </Center>
               ) : (
-                course?.meetings?.map((meeting) => (
+                data?.course?.meetings?.map((meeting) => (
                   <MeetingCard
                     key={meeting.id}
-                    meeting={meeting}
+                    meeting={meeting as Meeting}
                     onDelete={() => {
-                      setCourse({
-                        ...course,
-                        meetings: course.meetings.filter(
-                          (m) => meeting.id != m.id
-                        ),
+                      modals.openConfirmModal({
+                        title: t("confirmAction"),
+                        children: <Text size="sm">{t("deleteMessage")}</Text>,
+                        labels: { confirm: t("confirm"), cancel: t("cancel") },
+                        confirmProps: { color: "red" },
+                        centered: true,
+                        onConfirm: () =>
+                          deleteMeeting({
+                            variables: {
+                              where: {
+                                id: meeting.id,
+                              },
+                            },
+                            refetchQueries: [namedOperations.Query.Course],
+                          }),
                       });
                     }}
                     canEdit={user?.role === "teacher"}

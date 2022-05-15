@@ -18,6 +18,21 @@ query Lesson($where: LessonWhereUniqueInput!) {
   }
 }
 
+query Teacher($where: TeacherWhereUniqueInput!) {
+  teacher(where: $where) {
+    id
+    firstName
+    lastName
+    userId
+    user {
+      id
+      email
+      username
+      disabled
+    }
+  }
+}
+
 query Assignment($where: AssignmentWhereUniqueInput!) {
   assignment(where: $where) {
     id
@@ -44,6 +59,113 @@ query meeting($where: MeetingWhereUniqueInput!) {
   }
 }
 
+query statePageData($swhere: StudentWhereInput, $twhere: TeacherWhereInput) {
+  aggregateCourse {
+    _count {
+      _all
+    }
+  }
+
+  aggregateStudent {
+    _count {
+      _all
+    }
+  }
+
+  aggregateTeacher {
+    _count {
+      _all
+    }
+  }
+
+  aggregateTopic {
+    _count {
+      _all
+    }
+  }
+
+  students(where: $swhere) {
+    id
+    firstName
+    lastName
+    grade
+    topic {
+      name
+    }
+    user {
+      id
+      role
+      username
+      createdAt
+      disabled
+      email
+    }
+  }
+
+  teachers(where: $twhere) {
+    id
+    firstName
+    lastName
+    user {
+      id
+      username
+      disabled
+      createdAt
+      role
+      email
+    }
+  }
+}
+
+query Admins($where: AdminWhereInput) {
+  admins(where: $where) {
+    id
+    firstName
+    lastName
+    user {
+      id
+      username
+      createdAt
+      disabled
+      email
+    }
+  }
+}
+
+query Teachers($where: TeacherWhereInput) {
+  teachers(where: $where) {
+    id
+    firstName
+    lastName
+    user {
+      id
+      email
+      createdAt
+      disabled
+      username
+    }
+  }
+}
+
+query Students($where: StudentWhereInput) {
+  students(where: $where) {
+    id
+    firstName
+    lastName
+    grade
+    topic {
+      name
+    }
+    user {
+      id
+      email
+      createdAt
+      disabled
+      username
+    }
+  }
+}
+
 query Course($where: CourseWhereUniqueInput!) {
   course(where: $where) {
     id
@@ -66,8 +188,27 @@ query Course($where: CourseWhereUniqueInput!) {
     }
     assignments {
       id
+      title
+      description
       published
       courseId
+    }
+  }
+}
+
+query Student($where: StudentWhereUniqueInput!) {
+  student(where: $where) {
+    firstName
+    lastName
+    grade
+    lastName
+    topicId
+    user {
+      username
+      email
+      disabled
+      id
+      role
     }
   }
 }
@@ -89,6 +230,67 @@ query Courses(
       lessons
       assignments
       meetings
+    }
+  }
+}
+
+query Topics($where: TopicWhereInput) {
+  topics(where: $where) {
+    id
+    name
+    grades
+    department {
+      name
+    }
+  }
+}
+
+query DashboardUsers(
+  $awhere: AdminWhereInput
+  $twhere: TeacherWhereInput
+  $swhere: StudentWhereInput
+) {
+  admins(where: $awhere) {
+    id
+    firstName
+    lastName
+    user {
+      id
+      username
+      createdAt
+      disabled
+      email
+    }
+  }
+
+  teachers(where: $twhere) {
+    id
+    firstName
+    lastName
+    user {
+      id
+      email
+      createdAt
+      disabled
+      username
+    }
+  }
+
+  students(where: $swhere) {
+    id
+    firstName
+    lastName
+    grade
+    topicId
+    topic {
+      name
+    }
+    user {
+      id
+      email
+      createdAt
+      disabled
+      username
     }
   }
 }

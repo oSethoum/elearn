@@ -7,10 +7,9 @@ import {
   Group,
   Button,
 } from "@mantine/core";
-import { useModals } from "@mantine/modals";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
-import { Lesson, useDeleteLessonMutation } from "@/graphql";
+import { Lesson } from "@/graphql";
 
 const styles = createStyles((theme) => ({
   title: {
@@ -38,28 +37,7 @@ export const LessonCard = ({
   const { t } = useTranslation();
   const navigate = useNavigate();
 
-  const modals = useModals();
-  const [deleteLesson] = useDeleteLessonMutation();
-
-  const _delete = () =>
-    modals.openConfirmModal({
-      title: t("confirmAction"),
-      children: <Text size="sm">{t("deleteMessage")}</Text>,
-      labels: { confirm: t("confirm"), cancel: t("cancel") },
-      confirmProps: { color: "red" },
-      centered: true,
-      onConfirm: () =>
-        deleteLesson({
-          variables: {
-            where: {
-              id: lesson.id,
-            },
-          },
-          onCompleted() {
-            onDelete();
-          },
-        }),
-    });
+  const _delete = () => onDelete();
 
   const _edit = () => {
     navigate(`lessons/${lesson.id}/edit`);

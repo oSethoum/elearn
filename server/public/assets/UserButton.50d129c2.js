@@ -1,1 +1,0 @@
-import{w as o,J as r,j as s,U as t,c as n,d as i,a2 as c,e as u}from"./vendor.665d6fa4.js";function x(){const{t:a}=o(),e=r();return s(t,{sx:d=>({width:"auto"}),radius:"xl",size:"xl",children:n(i,{mx:8,direction:"row",spacing:"xs",children:[s(c,{size:34,radius:50}),s(u,{color:e.primaryColor,weight:"bold",children:a("anonymous")})]})})}export{x as U};
