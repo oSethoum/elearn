@@ -19,7 +19,6 @@ import {
   Card,
   Group,
   Menu,
-  Modal,
   Tabs,
 } from "@mantine/core";
 import { useModals } from "@mantine/modals";
@@ -30,7 +29,7 @@ import { MdEdit } from "react-icons/md";
 
 export const DashboardUsers = () => {
   const { t } = useTranslation();
-  const { data, loading } = useDashboardUsersQuery();
+  const { data } = useDashboardUsersQuery();
   const [selectedTeachers, setSelectedTeachers] = useState<number[]>([]);
   const [selectedStudents, setSelectedStudents] = useState<number[]>([]);
   const modals = useModals();
@@ -77,8 +76,8 @@ export const DashboardUsers = () => {
       });
   };
 
-  if (loading) {
-    return <Loader height={"80vh"} />;
+  if (!data) {
+    return <Loader height="80vh" />;
   }
 
   const addStudent = () => {
@@ -183,8 +182,8 @@ export const DashboardUsers = () => {
     );
   };
 
-  const addTeacher = () =>
-    modals.openModal({
+  const addTeacher = () => {
+    const id = modals.openModal({
       title: t("addTeacher"),
       size: "xl",
       children: (
@@ -194,10 +193,15 @@ export const DashboardUsers = () => {
               message: t("success"),
               color: "green",
             });
+            modals.closeModal(id);
+          }}
+          onCancel={() => {
+            modals.closeModal(id);
           }}
         />
       ),
     });
+  };
   const editTeacher = (index: number) => {
     const id = modals.openModal({
       title: t("addTeacher"),
@@ -231,14 +235,14 @@ export const DashboardUsers = () => {
           headerModifier={t}
           height="80vh"
           data={
-            data?.teachers.map((student) => ({
-              id: student.id,
-              firstName: student.firstName,
-              lastName: student.lastName,
-              email: student.user.email,
+            data?.teachers.map((teacher) => ({
+              id: teacher.id,
+              firstName: teacher.firstName,
+              lastName: teacher.lastName,
+              email: teacher.user.email,
               status: (
-                <Badge color={student.user.disabled ? "blue" : "green"}>
-                  {student.user.disabled ? t("disabled") : t("enabled")}
+                <Badge color={teacher.user.disabled ? "blue" : "green"}>
+                  {teacher.user.disabled ? t("disabled") : t("enabled")}
                 </Badge>
               ),
             })) as object[]

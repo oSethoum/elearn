@@ -102,6 +102,15 @@ export const ar = {
     enabled: "مفعل",
     disabled: "معطل",
     addStudent: "إضافة طالب",
+    editStudent: "تعديل طالب",
+    addTeacher: "إضافة مدرس",
+    editTeacher: "تعديل مدرس",
+    addCourse: "إضافة درس",
+    editCourse: "تعديل درس",
+    addDepartment: "إضافة قسم",
+    editDepartment: "تعديل قسم",
+    addTopic: "إضافة تخصص",
+    editTopic: "تعديل تخصص",
   },
 };
 

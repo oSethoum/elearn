@@ -4,11 +4,12 @@ import {
   Checkbox,
   createStyles,
   Paper,
-  ScrollArea,
   Table,
   Text,
   TableProps,
+  Pagination,
 } from "@mantine/core";
+import { useEffect, useState } from "react";
 
 interface DataGridProps extends TableProps {
   data?: object[];
@@ -57,6 +58,15 @@ export function DataGrid({
   const { classes, cx } = useStyles();
 
   const t = headerModifier ? headerModifier : (text: string) => text;
+  const [page, setPage] = useState(1);
+
+  const [elements, setElements] = useState<Object[]>([]);
+
+  useEffect(() => {
+    if (data) {
+      setElements([...data.slice((page - 1) * 10, page * 10)]);
+    }
+  }, [page]);
 
   if (!data || data?.length == 0)
     return (
@@ -91,7 +101,7 @@ export function DataGrid({
     }
   };
 
-  const rows = data.map((d, index) => (
+  const rows = elements.map((element, index) => (
     <tr
       key={index}
       className={cx(
@@ -111,37 +121,57 @@ export function DataGrid({
         </td>
       )}
       {keys.map((k, i) => (
-        <td key={i}>{d[k]}</td>
+        <td key={i}>{element[k]}</td>
       ))}
       {actions && <td>{actions(index)}</td>}
     </tr>
   ));
 
+  const calculateTotal = () => {
+    let rest = data.length % 10 > 0 ? 1 : 0;
+    return Math.floor(data.length / 10) + rest;
+  };
+
   return (
-    <Paper withBorder sx={{ height, width }} component={ScrollArea}>
-      <Table {...others}>
-        <thead className={classes.thead}>
-          <tr>
-            {!!withSelection && (
-              <th style={{ width: 20 }}>
-                <Checkbox
-                  checked={selectedIndexes?.length === data.length}
-                  indeterminate={
-                    selectedIndexes &&
-                    selectedIndexes?.length > 0 &&
-                    selectedIndexes?.length < data.length
-                  }
-                  onChange={toggleSelectedAll}
-                />
-              </th>
-            )}
-            {ths}
-            {actionsLabel && <th style={{ width: 100 }}>{t(actionsLabel)}</th>}
-          </tr>
-        </thead>
-        <Box component="tbody">{rows}</Box>
-      </Table>
-    </Paper>
+    <>
+      <Paper withBorder sx={{ width, minHeight: 490 }}>
+        <Table {...others}>
+          <thead className={classes.thead}>
+            <tr>
+              {!!withSelection && (
+                <th style={{ width: 20 }}>
+                  <Checkbox
+                    checked={selectedIndexes?.length === data.length}
+                    indeterminate={
+                      selectedIndexes &&
+                      selectedIndexes?.length > 0 &&
+                      selectedIndexes?.length < data.length
+                    }
+                    onChange={toggleSelectedAll}
+                  />
+                </th>
+              )}
+              {ths}
+              {actionsLabel && (
+                <th style={{ width: 100 }}>{t(actionsLabel)}</th>
+              )}
+            </tr>
+          </thead>
+          <Box component="tbody">{rows}</Box>
+        </Table>
+      </Paper>
+
+      {data.length > 10 && (
+        <Pagination
+          initialPage={1}
+          my={20}
+          total={calculateTotal()}
+          sx={{ float: "right" }}
+          page={page}
+          onChange={setPage}
+        />
+      )}
+    </>
   );
 }
 

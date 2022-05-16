@@ -14,7 +14,6 @@ import {
   ColorSchemeButton,
   Footer,
   Header,
-  Logo,
   UserButton,
 } from "../../components";
 import { FeatureCard } from "../../components/FeatureCard";
@@ -47,14 +46,11 @@ export function Home() {
         responsive
       >
         <Group>
-          <Logo width={100} />
           <Button
             leftIcon={<FaRocket />}
             onClick={() => {
               scrollToFeatures();
             }}
-            ml={20}
-            radius="xl"
           >
             {t("features")}
           </Button>
@@ -63,26 +59,25 @@ export function Home() {
             onClick={() => {
               scrollToDepartments();
             }}
-            radius="xl"
             color="green"
           >
             {t("departments")}
           </Button>
           <Link to="about-us">
-            <Button leftIcon={<FaQuestion />} radius="xl" color="orange">
+            <Button leftIcon={<FaQuestion />} color="orange">
               {t("aboutUs")}
             </Button>
           </Link>
           {user && (
             <Link to="courses">
-              <Button leftIcon={<FaBook />} radius="xl" color="red">
+              <Button leftIcon={<FaBook />} color="red">
                 {t("courses")}
               </Button>
             </Link>
           )}
           {user?.role === "admin" && (
             <Link to="/dashboard">
-              <Button color="violet" leftIcon={<MdDashboard />} radius="xl">
+              <Button color="violet" leftIcon={<MdDashboard />}>
                 {t("dashboard")}
               </Button>
             </Link>
@@ -121,12 +116,12 @@ export function Home() {
         >
           <FeatureCard
             title={t("lessons")}
-            color={theme.colors.indigo[5]}
+            color={theme.colors.teal[5]}
             icon={<FaBook size={120} />}
           />
           <FeatureCard
             title={t("homeWorks")}
-            color={theme.colors.teal[7]}
+            color={theme.colors.orange[7]}
             icon={<MdOutlineAssignmentTurnedIn size={120} />}
           />
           <FeatureCard
@@ -138,17 +133,6 @@ export function Home() {
         <Space h={75} />
         {/* @ts-ignore */}
         <Space h={75} ref={departmentsRef} />
-        <Card>
-          <h1
-            style={{
-              textAlign: "center",
-              margin: 0,
-              color: theme.colors.green[5],
-            }}
-          >
-            {t("departments")}
-          </h1>
-        </Card>
       </Container>
       <Footer withBorder />
     </>

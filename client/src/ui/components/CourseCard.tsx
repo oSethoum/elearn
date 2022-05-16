@@ -1,3 +1,4 @@
+import { Course } from "@/graphql";
 import {
   Card,
   Badge,
@@ -13,24 +14,13 @@ import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 
 export interface ICourseCardProps {
-  id: number;
-  author: string;
-  title: string;
-  meeting: Boolean;
-  lessons: number;
-  assignments: number;
-  description: string;
+  course: Course;
   canEdit?: boolean;
   canDelete?: boolean;
 }
 
 export default function CourseCard({
-  id,
-  title,
-  author,
-  assignments,
-  lessons,
-  description,
+  course: { id, description, title, teacher, _count, topic, grade },
   canEdit,
   canDelete,
 }: ICourseCardProps) {
@@ -38,7 +28,9 @@ export default function CourseCard({
   const { t } = useTranslation();
   return (
     <Card shadow="xs" p={0}>
-      <Box
+      <Group
+        position="apart"
+        pr={10}
         sx={{
           backgroundColor:
             colorScheme === "dark" ? colors.dark[5] : colors.gray[2],
@@ -47,21 +39,25 @@ export default function CourseCard({
         <Text p={10} weight="bold" size="lg">
           {title}
         </Text>
-      </Box>
+        <Badge size="lg">{topic?.name + " " + grade}</Badge>
+      </Group>
       <Divider />
       <Box p={10} sx={{ minHeight: 50 }}>
         <Text> {description || t("noDescription")} </Text>
         <Group align="flex-end" mt={20} position="apart">
-          <Text>{author || t("noAuthor")}</Text>
+          <Text>
+            {(teacher && teacher?.firstName + " " + teacher?.lastName) ||
+              t("noAuthor")}
+          </Text>
           <Group>
             <Tooltip label={t("lessons")}>
               <Badge color="red" size="lg">
-                {lessons}
+                {_count?.lessons}
               </Badge>
             </Tooltip>
             <Tooltip label={t("assignments")}>
               <Badge color="green" size="lg">
-                {assignments}
+                {_count?.lessons}
               </Badge>
             </Tooltip>
           </Group>

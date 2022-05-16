@@ -102,6 +102,15 @@ export const en = {
     enabled: "Enabled",
     disabled: "Disabled",
     addStudent: "Add Student",
+    editStudent: "Edit Student",
+    addTeacher: "Add Teacher",
+    editTeacher: "Edit Teacher",
+    addTopic: "Add Topic",
+    editTopic: "Edit Topic",
+    addCourse: "Add Course",
+    editCourse: "Edit Course",
+    addDepartment: "Add Department",
+    editDepartment: "Edit Department",
   },
 };
 

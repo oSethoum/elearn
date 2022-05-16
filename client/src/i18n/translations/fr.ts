@@ -102,6 +102,15 @@ export const fr = {
     enabled: "Activé",
     disabled: "Désactivé",
     addStudent: "Ajouter un étudiant",
+    editStudent: "Modifier un étudiant",
+    addTeacher: "Ajouter un enseignant",
+    editTeacher: "Modifier un enseignant",
+    addTopic: "Ajouter une spécialité",
+    editTopic: "Modifier une spécialité",
+    addCourse: "Ajouter un cours",
+    editCourse: "Modifier un cours",
+    addDepartment: "Ajouter un département",
+    editDepartment: "Modifier un département",
   },
 };
 

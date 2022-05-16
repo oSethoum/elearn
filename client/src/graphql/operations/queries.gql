@@ -18,6 +18,16 @@ query Lesson($where: LessonWhereUniqueInput!) {
   }
 }
 
+query Departments($where: DepartmentWhereInput) {
+  departments(where: $where) {
+    id
+    name
+    _count {
+      topics
+    }
+  }
+}
+
 query Teacher($where: TeacherWhereUniqueInput!) {
   teacher(where: $where) {
     id
@@ -222,6 +232,12 @@ query Courses(
     id
     title
     description
+    topic {
+      id
+      name
+    }
+    topicId
+    grade
     teacher {
       firstName
       lastName

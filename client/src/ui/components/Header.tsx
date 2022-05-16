@@ -9,10 +9,10 @@ import {
   Burger,
   Button,
   Center,
-  Container,
   createStyles,
   Divider,
   Drawer,
+  Paper,
   Space,
   useMantineTheme,
 } from "@mantine/core";
@@ -68,6 +68,7 @@ export interface HeaderProps extends ComponentPropsWithoutRef<"div"> {
   withBorder?: boolean;
   leftSide?: ReactNode;
   rightSide?: ReactNode;
+  withLogo?: boolean;
   responsive?: boolean;
   borderSize?: "xs" | "sm" | "md" | "lg" | "xl";
 }
@@ -79,6 +80,7 @@ export function Header({
   leftSide,
   rightSide,
   responsive,
+  withLogo,
   borderSize,
   ...others
 }: HeaderProps) {
@@ -101,7 +103,7 @@ export function Header({
   return (
     <Box className={classes.root}>
       <Box className={classes.inner}>
-        <Container size="xl" className={classes.container} {...others}>
+        <Box px={20} className={classes.container} {...others}>
           {!!responsive && tablet && !pathname.startsWith("/courses") ? (
             <Burger
               sx={(theme) => ({
@@ -129,7 +131,7 @@ export function Header({
             <div className={classes.children}>{children}</div>
           )}
           <div className={classes.rightSide}>{rightSide}</div>
-        </Container>
+        </Box>
         {!!withBorder && <Divider size={borderSize || "xs"} />}
       </Box>
       <Drawer
@@ -210,6 +212,43 @@ export function Header({
           )}
         </Box>
       </Drawer>
+      {!!withLogo && (
+        <Box
+          sx={{
+            position: "absolute",
+            display: "flex",
+            justifyContent: "center",
+            width: "100%",
+            zIndex: 20,
+          }}
+        >
+          <Paper
+            mt={-2}
+            shadow="sm"
+            sx={(theme) => ({
+              borderTopLeftRadius: 0,
+              borderTopRightRadius: 0,
+              borderBottom: `1px solid ${
+                theme.colorScheme === "dark"
+                  ? theme.colors.gray[7]
+                  : theme.colors.gray[4]
+              }`,
+              borderLeft: `1px solid ${
+                theme.colorScheme === "dark"
+                  ? theme.colors.gray[7]
+                  : theme.colors.gray[4]
+              }`,
+              borderRight: `1px solid ${
+                theme.colorScheme === "dark"
+                  ? theme.colors.gray[7]
+                  : theme.colors.gray[4]
+              }`,
+            })}
+          >
+            <Logo width={250} />
+          </Paper>
+        </Box>
+      )}
     </Box>
   );
 }

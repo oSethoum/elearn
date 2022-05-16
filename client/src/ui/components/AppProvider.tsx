@@ -18,7 +18,6 @@ import { onError } from "@apollo/client/link/error";
 import {
   ApolloClient,
   ApolloProvider,
-  DefaultOptions,
   from,
   HttpLink,
   InMemoryCache,
@@ -48,6 +47,28 @@ const GlobalStyles = () => {
   );
 };
 
+const errorLink = onError(({ graphQLErrors, networkError }) => {
+  if (graphQLErrors)
+    graphQLErrors.map(({ message, locations, path }) =>
+      console.log(
+        `[GraphQL error]: Message: ${message}, Location: ${locations}, Path: ${path}`
+      )
+    );
+  if (networkError) console.log(`[Network error]: ${networkError}`);
+});
+
+const link = from([
+  errorLink,
+  new HttpLink({
+    uri: "/graphql",
+  }),
+]);
+
+const client = new ApolloClient({
+  link,
+  cache: new InMemoryCache(),
+});
+
 export function AppProvider({ children }: React.ComponentPropsWithRef<"div">) {
   const [colorScheme, setColorScheme] = useLocalStorageValue<ColorScheme>({
     key: "mantine-color-scheme",
@@ -67,44 +88,6 @@ export function AppProvider({ children }: React.ComponentPropsWithRef<"div">) {
     const scheme = value || colorScheme === "dark" ? "light" : "dark";
     setColorScheme(scheme);
   };
-
-  const errorLink = onError(({ graphQLErrors, networkError }) => {
-    if (graphQLErrors)
-      graphQLErrors.map(({ message, locations, path }) =>
-        console.log(
-          `[GraphQL error]: Message: ${message}, Location: ${locations}, Path: ${path}`
-        )
-      );
-    if (networkError) console.log(`[Network error]: ${networkError}`);
-  });
-
-  const link = from([
-    errorLink,
-    new HttpLink({
-      uri: "/graphql",
-    }),
-  ]);
-
-  const defaultOptions: DefaultOptions = {
-    watchQuery: {
-      fetchPolicy: "no-cache",
-      errorPolicy: "ignore",
-    },
-    query: {
-      fetchPolicy: "no-cache",
-      errorPolicy: "all",
-    },
-    mutate: {
-      fetchPolicy: "no-cache",
-      errorPolicy: "all",
-    },
-  };
-
-  const client = new ApolloClient({
-    link,
-    cache: new InMemoryCache(),
-    defaultOptions,
-  });
 
   useEffect(() => {
     document.documentElement.style.colorScheme = colorScheme;

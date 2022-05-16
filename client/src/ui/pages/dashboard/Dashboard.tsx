@@ -12,13 +12,7 @@ import {
   ActionIcon,
 } from "@mantine/core";
 import { useAppContext } from "@/context/";
-import {
-  Link,
-  Navigate,
-  Outlet,
-  useLocation,
-  useParams,
-} from "react-router-dom";
+import { Link, Navigate, Outlet, useLocation } from "react-router-dom";
 import {
   BackButton,
   ColorSchemeButton,

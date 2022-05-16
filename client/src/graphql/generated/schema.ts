@@ -6778,6 +6778,13 @@ export type LessonQueryVariables = Exact<{
 
 export type LessonQuery = { __typename?: 'Query', lesson?: { __typename?: 'Lesson', id: number, title: string, description?: string | null, published: boolean, content: string } | null };
 
+export type DepartmentsQueryVariables = Exact<{
+  where?: InputMaybe<DepartmentWhereInput>;
+}>;
+
+
+export type DepartmentsQuery = { __typename?: 'Query', departments: Array<{ __typename?: 'Department', id: number, name: string, _count?: { __typename?: 'DepartmentCount', topics: number } | null }> };
+
 export type TeacherQueryVariables = Exact<{
   where: TeacherWhereUniqueInput;
 }>;
@@ -6849,7 +6856,7 @@ export type CoursesQueryVariables = Exact<{
 }>;
 
 
-export type CoursesQuery = { __typename?: 'Query', courses: Array<{ __typename?: 'Course', id: number, title: string, description?: string | null, teacher?: { __typename?: 'Teacher', firstName: string, lastName: string } | null, _count?: { __typename?: 'CourseCount', lessons: number, assignments: number, meetings: number } | null }> };
+export type CoursesQuery = { __typename?: 'Query', courses: Array<{ __typename?: 'Course', id: number, title: string, description?: string | null, topicId?: number | null, grade: number, topic?: { __typename?: 'Topic', id: number, name: string } | null, teacher?: { __typename?: 'Teacher', firstName: string, lastName: string } | null, _count?: { __typename?: 'CourseCount', lessons: number, assignments: number, meetings: number } | null }> };
 
 export type TopicsQueryVariables = Exact<{
   where?: InputMaybe<TopicWhereInput>;
@@ -7786,6 +7793,48 @@ export type LessonQueryResult = Apollo.QueryResult<LessonQuery, LessonQueryVaria
 export function refetchLessonQuery(variables: LessonQueryVariables) {
       return { query: LessonDocument, variables: variables }
     }
+export const DepartmentsDocument = gql`
+    query Departments($where: DepartmentWhereInput) {
+  departments(where: $where) {
+    id
+    name
+    _count {
+      topics
+    }
+  }
+}
+    `;
+
+/**
+ * __useDepartmentsQuery__
+ *
+ * To run a query within a React component, call `useDepartmentsQuery` and pass it any options that fit your needs.
+ * When your component renders, `useDepartmentsQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useDepartmentsQuery({
+ *   variables: {
+ *      where: // value for 'where'
+ *   },
+ * });
+ */
+export function useDepartmentsQuery(baseOptions?: Apollo.QueryHookOptions<DepartmentsQuery, DepartmentsQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<DepartmentsQuery, DepartmentsQueryVariables>(DepartmentsDocument, options);
+      }
+export function useDepartmentsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<DepartmentsQuery, DepartmentsQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<DepartmentsQuery, DepartmentsQueryVariables>(DepartmentsDocument, options);
+        }
+export type DepartmentsQueryHookResult = ReturnType<typeof useDepartmentsQuery>;
+export type DepartmentsLazyQueryHookResult = ReturnType<typeof useDepartmentsLazyQuery>;
+export type DepartmentsQueryResult = Apollo.QueryResult<DepartmentsQuery, DepartmentsQueryVariables>;
+export function refetchDepartmentsQuery(variables?: DepartmentsQueryVariables) {
+      return { query: DepartmentsDocument, variables: variables }
+    }
 export const TeacherDocument = gql`
     query Teacher($where: TeacherWhereUniqueInput!) {
   teacher(where: $where) {
@@ -8271,6 +8320,12 @@ export const CoursesDocument = gql`
     id
     title
     description
+    topic {
+      id
+      name
+    }
+    topicId
+    grade
     teacher {
       firstName
       lastName
@@ -8441,6 +8496,7 @@ export const namedOperations = {
   Query: {
     Lessons: 'Lessons',
     Lesson: 'Lesson',
+    Departments: 'Departments',
     Teacher: 'Teacher',
     Assignment: 'Assignment',
     meeting: 'meeting',
