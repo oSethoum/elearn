@@ -56,6 +56,12 @@ export const Dashboard: FC<IDashboardProps> = () => {
       icon: MdAccountBalance,
     },
     {
+      link: "topics",
+      label: t("topics"),
+      color: "teal",
+      icon: MdAccountBalance,
+    },
+    {
       link: "courses",
       label: t("courses"),
       color: "red",

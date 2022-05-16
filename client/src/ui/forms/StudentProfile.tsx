@@ -1,7 +1,5 @@
 import { Box } from "@mantine/core";
 
-export const EditAdmin = () => {
+export const StudentProfile = () => {
   return <Box></Box>;
 };
-
-export default EditAdmin;

@@ -98,7 +98,7 @@ query statePageData($swhere: StudentWhereInput, $twhere: TeacherWhereInput) {
     id
     firstName
     lastName
-    grade
+    year
     topic {
       name
     }
@@ -162,7 +162,7 @@ query Students($where: StudentWhereInput) {
     id
     firstName
     lastName
-    grade
+    year
     topic {
       name
     }
@@ -210,7 +210,7 @@ query Student($where: StudentWhereUniqueInput!) {
   student(where: $where) {
     firstName
     lastName
-    grade
+    year
     lastName
     topicId
     user {
@@ -237,7 +237,7 @@ query Courses(
       name
     }
     topicId
-    grade
+    year
     teacher {
       firstName
       lastName
@@ -254,9 +254,14 @@ query Topics($where: TopicWhereInput) {
   topics(where: $where) {
     id
     name
-    grades
+    years
     department {
+      id
       name
+    }
+    _count {
+      courses
+      students
     }
   }
 }
@@ -296,7 +301,7 @@ query DashboardUsers(
     id
     firstName
     lastName
-    grade
+    year
     topicId
     topic {
       name

@@ -20,7 +20,7 @@ export interface ICourseCardProps {
 }
 
 export default function CourseCard({
-  course: { id, description, title, teacher, _count, topic, grade },
+  course: { id, description, title, teacher, _count, topic, year },
   canEdit,
   canDelete,
 }: ICourseCardProps) {
@@ -39,7 +39,7 @@ export default function CourseCard({
         <Text p={10} weight="bold" size="lg">
           {title}
         </Text>
-        <Badge size="lg">{topic?.name + " " + grade}</Badge>
+        <Badge size="lg">{topic?.name + " " + year}</Badge>
       </Group>
       <Divider />
       <Box p={10} sx={{ minHeight: 50 }}>

@@ -2,18 +2,12 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { ScrollTop } from "./ui/components/ScrollTop";
 import { lazy } from "react";
 import { Loader } from "./ui/components";
-import {
-  ApolloClient,
-  HttpLink,
-  InMemoryCache,
-  ApolloProvider,
-  from,
-  DefaultOptions,
-} from "@apollo/client";
-import { onError } from "@apollo/client/link/error";
 import { Suspense } from "react";
 
+// lazy
+
 const DashboardCourses = lazy(() => import("./ui/pages/dashboard/Courses"));
+const DashboardTopics = lazy(() => import("./ui/pages/dashboard/Topics"));
 const NewMeeting = lazy(() => import("./ui/forms/NewMeeting"));
 const EditMeeting = lazy(() => import("./ui/forms/EditMeeting"));
 const CourseContent = lazy(() => import("./ui/pages/courses/CourseContent"));
@@ -51,6 +45,7 @@ function App() {
               <Route path="/dashboard/" element={<Stats />} />
               <Route path="/dashboard/users" element={<Users />} />
               <Route path="/dashboard/departments" element={<Departments />} />
+              <Route path="/dashboard/topics" element={<DashboardTopics />} />
               <Route path="/dashboard/courses" element={<DashboardCourses />} />
             </Route>
             <Route path="/courses" element={<Courses />}>

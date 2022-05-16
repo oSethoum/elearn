@@ -186,7 +186,7 @@ export const Stats = () => {
                   firstName: student.lastName,
                   lastName: student.lastName,
                   email: student.user.email,
-                  grade: student.grade,
+                  year: student.year,
                   topic: student.topic?.name,
                   createdAt: student.user.createdAt,
                 } as object)

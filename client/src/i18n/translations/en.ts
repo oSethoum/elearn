@@ -111,6 +111,8 @@ export const en = {
     editCourse: "Edit Course",
     addDepartment: "Add Department",
     editDepartment: "Edit Department",
+    years: "Years",
+    name: "Name",
   },
 };
 

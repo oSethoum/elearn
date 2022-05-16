@@ -26,7 +26,7 @@ interface NewStudentProps {
 export const NewStudent = ({ onSubmit, onCancel }: NewStudentProps) => {
   const { t } = useTranslation();
   const [createStudent] = useCreateStudentMutation();
-  const { data, loading } = useTopicsQuery();
+  const { data } = useTopicsQuery();
 
   const schema = useMemo(
     () =>
@@ -38,7 +38,7 @@ export const NewStudent = ({ onSubmit, onCancel }: NewStudentProps) => {
           username: z.string().nonempty(t("notEmpty")),
           password: z.string().nonempty(t("notEmpty")),
           confirmPassword: z.string().nonempty(t("notEmpty")),
-          grade: z.string().nonempty(t("notEmpty")),
+          year: z.string().nonempty(t("notEmpty")),
           topic: z.string().nonempty(t("notEmpty")),
         })
         .refine((data) => data.password === data.confirmPassword, {
@@ -57,13 +57,13 @@ export const NewStudent = ({ onSubmit, onCancel }: NewStudentProps) => {
       password: "",
       confirmPassword: "",
       email: "",
-      grade: "",
+      year: "",
       topic: "",
     },
   });
 
   useEffect(() => {
-    form.setFieldValue("grade", "1");
+    form.setFieldValue("year", "1");
   }, [form.values.topic]);
 
   const makeArray = (max?: number) => {
@@ -85,7 +85,7 @@ export const NewStudent = ({ onSubmit, onCancel }: NewStudentProps) => {
               data: {
                 firstName: values.firstName,
                 lastName: values.lastName,
-                grade: parseInt(values.grade),
+                year: parseInt(values.year),
                 topic: {
                   connect: {
                     id: parseInt(values.topic),
@@ -129,7 +129,6 @@ export const NewStudent = ({ onSubmit, onCancel }: NewStudentProps) => {
 
           <Select
             label={t("topic")}
-            // @ts-ignore
             data={
               data?.topics.map((topic) => ({
                 label: topic.name,
@@ -140,15 +139,15 @@ export const NewStudent = ({ onSubmit, onCancel }: NewStudentProps) => {
             {...form.getInputProps("topic")}
           />
           <Select
-            label={t("grade")}
+            label={t("year")}
             data={
               makeArray(
                 data?.topics.find(
                   (topic) => topic.id === parseInt(form.values.topic)
-                )?.grades
+                )?.years
               ) || []
             }
-            {...form.getInputProps("grade")}
+            {...form.getInputProps("year")}
           />
 
           <TextInput

@@ -136,7 +136,7 @@ export const DashboardUsers = () => {
               lastName: student.lastName,
               email: student.user.email,
               topic: student.topic?.name,
-              grade: student.grade,
+              year: student.year,
               status: (
                 <Badge color={student.user.disabled ? "blue" : "green"}>
                   {student.user.disabled ? t("disabled") : t("enabled")}

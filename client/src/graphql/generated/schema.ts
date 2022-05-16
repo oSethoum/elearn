@@ -1105,7 +1105,6 @@ export type Course = {
   assignments: Array<Assignment>;
   createdAt: Scalars['DateTime'];
   description?: Maybe<Scalars['String']>;
-  grade: Scalars['Int'];
   id: Scalars['Int'];
   lessons: Array<Lesson>;
   meetings: Array<Meeting>;
@@ -1116,6 +1115,7 @@ export type Course = {
   topic?: Maybe<Topic>;
   topicId?: Maybe<Scalars['Int']>;
   updatedAt: Scalars['DateTime'];
+  year: Scalars['Int'];
 };
 
 
@@ -1150,17 +1150,17 @@ export type CourseMeetingsArgs = {
 
 export type CourseAvgAggregate = {
   __typename?: 'CourseAvgAggregate';
-  grade?: Maybe<Scalars['Float']>;
   id?: Maybe<Scalars['Float']>;
   teacherId?: Maybe<Scalars['Float']>;
   topicId?: Maybe<Scalars['Float']>;
+  year?: Maybe<Scalars['Float']>;
 };
 
 export type CourseAvgOrderByAggregateInput = {
-  grade?: InputMaybe<SortOrder>;
   id?: InputMaybe<SortOrder>;
   teacherId?: InputMaybe<SortOrder>;
   topicId?: InputMaybe<SortOrder>;
+  year?: InputMaybe<SortOrder>;
 };
 
 export type CourseCount = {
@@ -1175,32 +1175,31 @@ export type CourseCountAggregate = {
   _all: Scalars['Int'];
   createdAt: Scalars['Int'];
   description: Scalars['Int'];
-  grade: Scalars['Int'];
   id: Scalars['Int'];
   published: Scalars['Int'];
   teacherId: Scalars['Int'];
   title: Scalars['Int'];
   topicId: Scalars['Int'];
   updatedAt: Scalars['Int'];
+  year: Scalars['Int'];
 };
 
 export type CourseCountOrderByAggregateInput = {
   createdAt?: InputMaybe<SortOrder>;
   description?: InputMaybe<SortOrder>;
-  grade?: InputMaybe<SortOrder>;
   id?: InputMaybe<SortOrder>;
   published?: InputMaybe<SortOrder>;
   teacherId?: InputMaybe<SortOrder>;
   title?: InputMaybe<SortOrder>;
   topicId?: InputMaybe<SortOrder>;
   updatedAt?: InputMaybe<SortOrder>;
+  year?: InputMaybe<SortOrder>;
 };
 
 export type CourseCreateInput = {
   assignments?: InputMaybe<AssignmentCreateNestedManyWithoutCourseInput>;
   createdAt?: InputMaybe<Scalars['DateTime']>;
   description?: InputMaybe<Scalars['String']>;
-  grade: Scalars['Int'];
   lessons?: InputMaybe<LessonCreateNestedManyWithoutCourseInput>;
   meetings?: InputMaybe<MeetingCreateNestedManyWithoutCourseInput>;
   published?: InputMaybe<Scalars['Boolean']>;
@@ -1208,6 +1207,7 @@ export type CourseCreateInput = {
   title: Scalars['String'];
   topic?: InputMaybe<TopicCreateNestedOneWithoutCoursesInput>;
   updatedAt?: InputMaybe<Scalars['DateTime']>;
+  year: Scalars['Int'];
 };
 
 export type CourseCreateNestedManyWithoutTeacherInput = {
@@ -1268,7 +1268,6 @@ export type CourseCreateOrConnectWithoutTopicInput = {
 export type CourseCreateWithoutAssignmentsInput = {
   createdAt?: InputMaybe<Scalars['DateTime']>;
   description?: InputMaybe<Scalars['String']>;
-  grade: Scalars['Int'];
   lessons?: InputMaybe<LessonCreateNestedManyWithoutCourseInput>;
   meetings?: InputMaybe<MeetingCreateNestedManyWithoutCourseInput>;
   published?: InputMaybe<Scalars['Boolean']>;
@@ -1276,58 +1275,59 @@ export type CourseCreateWithoutAssignmentsInput = {
   title: Scalars['String'];
   topic?: InputMaybe<TopicCreateNestedOneWithoutCoursesInput>;
   updatedAt?: InputMaybe<Scalars['DateTime']>;
+  year: Scalars['Int'];
 };
 
 export type CourseCreateWithoutLessonsInput = {
   assignments?: InputMaybe<AssignmentCreateNestedManyWithoutCourseInput>;
   createdAt?: InputMaybe<Scalars['DateTime']>;
   description?: InputMaybe<Scalars['String']>;
-  grade: Scalars['Int'];
   meetings?: InputMaybe<MeetingCreateNestedManyWithoutCourseInput>;
   published?: InputMaybe<Scalars['Boolean']>;
   teacher?: InputMaybe<TeacherCreateNestedOneWithoutCoursesInput>;
   title: Scalars['String'];
   topic?: InputMaybe<TopicCreateNestedOneWithoutCoursesInput>;
   updatedAt?: InputMaybe<Scalars['DateTime']>;
+  year: Scalars['Int'];
 };
 
 export type CourseCreateWithoutMeetingsInput = {
   assignments?: InputMaybe<AssignmentCreateNestedManyWithoutCourseInput>;
   createdAt?: InputMaybe<Scalars['DateTime']>;
   description?: InputMaybe<Scalars['String']>;
-  grade: Scalars['Int'];
   lessons?: InputMaybe<LessonCreateNestedManyWithoutCourseInput>;
   published?: InputMaybe<Scalars['Boolean']>;
   teacher?: InputMaybe<TeacherCreateNestedOneWithoutCoursesInput>;
   title: Scalars['String'];
   topic?: InputMaybe<TopicCreateNestedOneWithoutCoursesInput>;
   updatedAt?: InputMaybe<Scalars['DateTime']>;
+  year: Scalars['Int'];
 };
 
 export type CourseCreateWithoutTeacherInput = {
   assignments?: InputMaybe<AssignmentCreateNestedManyWithoutCourseInput>;
   createdAt?: InputMaybe<Scalars['DateTime']>;
   description?: InputMaybe<Scalars['String']>;
-  grade: Scalars['Int'];
   lessons?: InputMaybe<LessonCreateNestedManyWithoutCourseInput>;
   meetings?: InputMaybe<MeetingCreateNestedManyWithoutCourseInput>;
   published?: InputMaybe<Scalars['Boolean']>;
   title: Scalars['String'];
   topic?: InputMaybe<TopicCreateNestedOneWithoutCoursesInput>;
   updatedAt?: InputMaybe<Scalars['DateTime']>;
+  year: Scalars['Int'];
 };
 
 export type CourseCreateWithoutTopicInput = {
   assignments?: InputMaybe<AssignmentCreateNestedManyWithoutCourseInput>;
   createdAt?: InputMaybe<Scalars['DateTime']>;
   description?: InputMaybe<Scalars['String']>;
-  grade: Scalars['Int'];
   lessons?: InputMaybe<LessonCreateNestedManyWithoutCourseInput>;
   meetings?: InputMaybe<MeetingCreateNestedManyWithoutCourseInput>;
   published?: InputMaybe<Scalars['Boolean']>;
   teacher?: InputMaybe<TeacherCreateNestedOneWithoutCoursesInput>;
   title: Scalars['String'];
   updatedAt?: InputMaybe<Scalars['DateTime']>;
+  year: Scalars['Int'];
 };
 
 export type CourseGroupBy = {
@@ -1339,13 +1339,13 @@ export type CourseGroupBy = {
   _sum?: Maybe<CourseSumAggregate>;
   createdAt: Scalars['DateTime'];
   description?: Maybe<Scalars['String']>;
-  grade: Scalars['Int'];
   id: Scalars['Int'];
   published: Scalars['Boolean'];
   teacherId?: Maybe<Scalars['Int']>;
   title: Scalars['String'];
   topicId?: Maybe<Scalars['Int']>;
   updatedAt: Scalars['DateTime'];
+  year: Scalars['Int'];
 };
 
 export type CourseListRelationFilter = {
@@ -1358,50 +1358,50 @@ export type CourseMaxAggregate = {
   __typename?: 'CourseMaxAggregate';
   createdAt?: Maybe<Scalars['DateTime']>;
   description?: Maybe<Scalars['String']>;
-  grade?: Maybe<Scalars['Int']>;
   id?: Maybe<Scalars['Int']>;
   published?: Maybe<Scalars['Boolean']>;
   teacherId?: Maybe<Scalars['Int']>;
   title?: Maybe<Scalars['String']>;
   topicId?: Maybe<Scalars['Int']>;
   updatedAt?: Maybe<Scalars['DateTime']>;
+  year?: Maybe<Scalars['Int']>;
 };
 
 export type CourseMaxOrderByAggregateInput = {
   createdAt?: InputMaybe<SortOrder>;
   description?: InputMaybe<SortOrder>;
-  grade?: InputMaybe<SortOrder>;
   id?: InputMaybe<SortOrder>;
   published?: InputMaybe<SortOrder>;
   teacherId?: InputMaybe<SortOrder>;
   title?: InputMaybe<SortOrder>;
   topicId?: InputMaybe<SortOrder>;
   updatedAt?: InputMaybe<SortOrder>;
+  year?: InputMaybe<SortOrder>;
 };
 
 export type CourseMinAggregate = {
   __typename?: 'CourseMinAggregate';
   createdAt?: Maybe<Scalars['DateTime']>;
   description?: Maybe<Scalars['String']>;
-  grade?: Maybe<Scalars['Int']>;
   id?: Maybe<Scalars['Int']>;
   published?: Maybe<Scalars['Boolean']>;
   teacherId?: Maybe<Scalars['Int']>;
   title?: Maybe<Scalars['String']>;
   topicId?: Maybe<Scalars['Int']>;
   updatedAt?: Maybe<Scalars['DateTime']>;
+  year?: Maybe<Scalars['Int']>;
 };
 
 export type CourseMinOrderByAggregateInput = {
   createdAt?: InputMaybe<SortOrder>;
   description?: InputMaybe<SortOrder>;
-  grade?: InputMaybe<SortOrder>;
   id?: InputMaybe<SortOrder>;
   published?: InputMaybe<SortOrder>;
   teacherId?: InputMaybe<SortOrder>;
   title?: InputMaybe<SortOrder>;
   topicId?: InputMaybe<SortOrder>;
   updatedAt?: InputMaybe<SortOrder>;
+  year?: InputMaybe<SortOrder>;
 };
 
 export type CourseOrderByRelationAggregateInput = {
@@ -1416,20 +1416,19 @@ export type CourseOrderByWithAggregationInput = {
   _sum?: InputMaybe<CourseSumOrderByAggregateInput>;
   createdAt?: InputMaybe<SortOrder>;
   description?: InputMaybe<SortOrder>;
-  grade?: InputMaybe<SortOrder>;
   id?: InputMaybe<SortOrder>;
   published?: InputMaybe<SortOrder>;
   teacherId?: InputMaybe<SortOrder>;
   title?: InputMaybe<SortOrder>;
   topicId?: InputMaybe<SortOrder>;
   updatedAt?: InputMaybe<SortOrder>;
+  year?: InputMaybe<SortOrder>;
 };
 
 export type CourseOrderByWithRelationInput = {
   assignments?: InputMaybe<AssignmentOrderByRelationAggregateInput>;
   createdAt?: InputMaybe<SortOrder>;
   description?: InputMaybe<SortOrder>;
-  grade?: InputMaybe<SortOrder>;
   id?: InputMaybe<SortOrder>;
   lessons?: InputMaybe<LessonOrderByRelationAggregateInput>;
   meetings?: InputMaybe<MeetingOrderByRelationAggregateInput>;
@@ -1440,6 +1439,7 @@ export type CourseOrderByWithRelationInput = {
   topic?: InputMaybe<TopicOrderByWithRelationInput>;
   topicId?: InputMaybe<SortOrder>;
   updatedAt?: InputMaybe<SortOrder>;
+  year?: InputMaybe<SortOrder>;
 };
 
 export type CourseRelationFilter = {
@@ -1450,13 +1450,13 @@ export type CourseRelationFilter = {
 export enum CourseScalarFieldEnum {
   CreatedAt = 'createdAt',
   Description = 'description',
-  Grade = 'grade',
   Id = 'id',
   Published = 'published',
   TeacherId = 'teacherId',
   Title = 'title',
   TopicId = 'topicId',
-  UpdatedAt = 'updatedAt'
+  UpdatedAt = 'updatedAt',
+  Year = 'year'
 }
 
 export type CourseScalarWhereInput = {
@@ -1465,13 +1465,13 @@ export type CourseScalarWhereInput = {
   OR?: InputMaybe<Array<CourseScalarWhereInput>>;
   createdAt?: InputMaybe<DateTimeFilter>;
   description?: InputMaybe<StringNullableFilter>;
-  grade?: InputMaybe<IntFilter>;
   id?: InputMaybe<IntFilter>;
   published?: InputMaybe<BoolFilter>;
   teacherId?: InputMaybe<IntNullableFilter>;
   title?: InputMaybe<StringFilter>;
   topicId?: InputMaybe<IntNullableFilter>;
   updatedAt?: InputMaybe<DateTimeFilter>;
+  year?: InputMaybe<IntFilter>;
 };
 
 export type CourseScalarWhereWithAggregatesInput = {
@@ -1480,35 +1480,34 @@ export type CourseScalarWhereWithAggregatesInput = {
   OR?: InputMaybe<Array<CourseScalarWhereWithAggregatesInput>>;
   createdAt?: InputMaybe<DateTimeWithAggregatesFilter>;
   description?: InputMaybe<StringNullableWithAggregatesFilter>;
-  grade?: InputMaybe<IntWithAggregatesFilter>;
   id?: InputMaybe<IntWithAggregatesFilter>;
   published?: InputMaybe<BoolWithAggregatesFilter>;
   teacherId?: InputMaybe<IntNullableWithAggregatesFilter>;
   title?: InputMaybe<StringWithAggregatesFilter>;
   topicId?: InputMaybe<IntNullableWithAggregatesFilter>;
   updatedAt?: InputMaybe<DateTimeWithAggregatesFilter>;
+  year?: InputMaybe<IntWithAggregatesFilter>;
 };
 
 export type CourseSumAggregate = {
   __typename?: 'CourseSumAggregate';
-  grade?: Maybe<Scalars['Int']>;
   id?: Maybe<Scalars['Int']>;
   teacherId?: Maybe<Scalars['Int']>;
   topicId?: Maybe<Scalars['Int']>;
+  year?: Maybe<Scalars['Int']>;
 };
 
 export type CourseSumOrderByAggregateInput = {
-  grade?: InputMaybe<SortOrder>;
   id?: InputMaybe<SortOrder>;
   teacherId?: InputMaybe<SortOrder>;
   topicId?: InputMaybe<SortOrder>;
+  year?: InputMaybe<SortOrder>;
 };
 
 export type CourseUpdateInput = {
   assignments?: InputMaybe<AssignmentUpdateManyWithoutCourseInput>;
   createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
   description?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
-  grade?: InputMaybe<IntFieldUpdateOperationsInput>;
   lessons?: InputMaybe<LessonUpdateManyWithoutCourseInput>;
   meetings?: InputMaybe<MeetingUpdateManyWithoutCourseInput>;
   published?: InputMaybe<BoolFieldUpdateOperationsInput>;
@@ -1516,15 +1515,16 @@ export type CourseUpdateInput = {
   title?: InputMaybe<StringFieldUpdateOperationsInput>;
   topic?: InputMaybe<TopicUpdateOneWithoutCoursesInput>;
   updatedAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+  year?: InputMaybe<IntFieldUpdateOperationsInput>;
 };
 
 export type CourseUpdateManyMutationInput = {
   createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
   description?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
-  grade?: InputMaybe<IntFieldUpdateOperationsInput>;
   published?: InputMaybe<BoolFieldUpdateOperationsInput>;
   title?: InputMaybe<StringFieldUpdateOperationsInput>;
   updatedAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+  year?: InputMaybe<IntFieldUpdateOperationsInput>;
 };
 
 export type CourseUpdateManyWithWhereWithoutTeacherInput = {
@@ -1606,7 +1606,6 @@ export type CourseUpdateWithWhereUniqueWithoutTopicInput = {
 export type CourseUpdateWithoutAssignmentsInput = {
   createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
   description?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
-  grade?: InputMaybe<IntFieldUpdateOperationsInput>;
   lessons?: InputMaybe<LessonUpdateManyWithoutCourseInput>;
   meetings?: InputMaybe<MeetingUpdateManyWithoutCourseInput>;
   published?: InputMaybe<BoolFieldUpdateOperationsInput>;
@@ -1614,58 +1613,59 @@ export type CourseUpdateWithoutAssignmentsInput = {
   title?: InputMaybe<StringFieldUpdateOperationsInput>;
   topic?: InputMaybe<TopicUpdateOneWithoutCoursesInput>;
   updatedAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+  year?: InputMaybe<IntFieldUpdateOperationsInput>;
 };
 
 export type CourseUpdateWithoutLessonsInput = {
   assignments?: InputMaybe<AssignmentUpdateManyWithoutCourseInput>;
   createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
   description?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
-  grade?: InputMaybe<IntFieldUpdateOperationsInput>;
   meetings?: InputMaybe<MeetingUpdateManyWithoutCourseInput>;
   published?: InputMaybe<BoolFieldUpdateOperationsInput>;
   teacher?: InputMaybe<TeacherUpdateOneWithoutCoursesInput>;
   title?: InputMaybe<StringFieldUpdateOperationsInput>;
   topic?: InputMaybe<TopicUpdateOneWithoutCoursesInput>;
   updatedAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+  year?: InputMaybe<IntFieldUpdateOperationsInput>;
 };
 
 export type CourseUpdateWithoutMeetingsInput = {
   assignments?: InputMaybe<AssignmentUpdateManyWithoutCourseInput>;
   createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
   description?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
-  grade?: InputMaybe<IntFieldUpdateOperationsInput>;
   lessons?: InputMaybe<LessonUpdateManyWithoutCourseInput>;
   published?: InputMaybe<BoolFieldUpdateOperationsInput>;
   teacher?: InputMaybe<TeacherUpdateOneWithoutCoursesInput>;
   title?: InputMaybe<StringFieldUpdateOperationsInput>;
   topic?: InputMaybe<TopicUpdateOneWithoutCoursesInput>;
   updatedAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+  year?: InputMaybe<IntFieldUpdateOperationsInput>;
 };
 
 export type CourseUpdateWithoutTeacherInput = {
   assignments?: InputMaybe<AssignmentUpdateManyWithoutCourseInput>;
   createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
   description?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
-  grade?: InputMaybe<IntFieldUpdateOperationsInput>;
   lessons?: InputMaybe<LessonUpdateManyWithoutCourseInput>;
   meetings?: InputMaybe<MeetingUpdateManyWithoutCourseInput>;
   published?: InputMaybe<BoolFieldUpdateOperationsInput>;
   title?: InputMaybe<StringFieldUpdateOperationsInput>;
   topic?: InputMaybe<TopicUpdateOneWithoutCoursesInput>;
   updatedAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+  year?: InputMaybe<IntFieldUpdateOperationsInput>;
 };
 
 export type CourseUpdateWithoutTopicInput = {
   assignments?: InputMaybe<AssignmentUpdateManyWithoutCourseInput>;
   createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
   description?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
-  grade?: InputMaybe<IntFieldUpdateOperationsInput>;
   lessons?: InputMaybe<LessonUpdateManyWithoutCourseInput>;
   meetings?: InputMaybe<MeetingUpdateManyWithoutCourseInput>;
   published?: InputMaybe<BoolFieldUpdateOperationsInput>;
   teacher?: InputMaybe<TeacherUpdateOneWithoutCoursesInput>;
   title?: InputMaybe<StringFieldUpdateOperationsInput>;
   updatedAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+  year?: InputMaybe<IntFieldUpdateOperationsInput>;
 };
 
 export type CourseUpsertWithWhereUniqueWithoutTeacherInput = {
@@ -1702,7 +1702,6 @@ export type CourseWhereInput = {
   assignments?: InputMaybe<AssignmentListRelationFilter>;
   createdAt?: InputMaybe<DateTimeFilter>;
   description?: InputMaybe<StringNullableFilter>;
-  grade?: InputMaybe<IntFilter>;
   id?: InputMaybe<IntFilter>;
   lessons?: InputMaybe<LessonListRelationFilter>;
   meetings?: InputMaybe<MeetingListRelationFilter>;
@@ -1713,6 +1712,7 @@ export type CourseWhereInput = {
   topic?: InputMaybe<TopicRelationFilter>;
   topicId?: InputMaybe<IntNullableFilter>;
   updatedAt?: InputMaybe<DateTimeFilter>;
+  year?: InputMaybe<IntFilter>;
 };
 
 export type CourseWhereUniqueInput = {
@@ -4508,7 +4508,6 @@ export type Student = {
   __typename?: 'Student';
   _count?: Maybe<StudentCount>;
   firstName: Scalars['String'];
-  grade: Scalars['Int'];
   id: Scalars['Int'];
   lastName: Scalars['String'];
   submissions: Array<Submission>;
@@ -4516,6 +4515,7 @@ export type Student = {
   topicId?: Maybe<Scalars['Int']>;
   user: User;
   userId: Scalars['Int'];
+  year: Scalars['Int'];
 };
 
 
@@ -4530,17 +4530,17 @@ export type StudentSubmissionsArgs = {
 
 export type StudentAvgAggregate = {
   __typename?: 'StudentAvgAggregate';
-  grade?: Maybe<Scalars['Float']>;
   id?: Maybe<Scalars['Float']>;
   topicId?: Maybe<Scalars['Float']>;
   userId?: Maybe<Scalars['Float']>;
+  year?: Maybe<Scalars['Float']>;
 };
 
 export type StudentAvgOrderByAggregateInput = {
-  grade?: InputMaybe<SortOrder>;
   id?: InputMaybe<SortOrder>;
   topicId?: InputMaybe<SortOrder>;
   userId?: InputMaybe<SortOrder>;
+  year?: InputMaybe<SortOrder>;
 };
 
 export type StudentCount = {
@@ -4552,29 +4552,29 @@ export type StudentCountAggregate = {
   __typename?: 'StudentCountAggregate';
   _all: Scalars['Int'];
   firstName: Scalars['Int'];
-  grade: Scalars['Int'];
   id: Scalars['Int'];
   lastName: Scalars['Int'];
   topicId: Scalars['Int'];
   userId: Scalars['Int'];
+  year: Scalars['Int'];
 };
 
 export type StudentCountOrderByAggregateInput = {
   firstName?: InputMaybe<SortOrder>;
-  grade?: InputMaybe<SortOrder>;
   id?: InputMaybe<SortOrder>;
   lastName?: InputMaybe<SortOrder>;
   topicId?: InputMaybe<SortOrder>;
   userId?: InputMaybe<SortOrder>;
+  year?: InputMaybe<SortOrder>;
 };
 
 export type StudentCreateInput = {
   firstName: Scalars['String'];
-  grade: Scalars['Int'];
   lastName: Scalars['String'];
   submissions?: InputMaybe<SubmissionCreateNestedManyWithoutStudentInput>;
   topic?: InputMaybe<TopicCreateNestedOneWithoutStudentsInput>;
   user: UserCreateNestedOneWithoutStudentInput;
+  year: Scalars['Int'];
 };
 
 export type StudentCreateNestedManyWithoutTopicInput = {
@@ -4612,26 +4612,26 @@ export type StudentCreateOrConnectWithoutUserInput = {
 
 export type StudentCreateWithoutSubmissionsInput = {
   firstName: Scalars['String'];
-  grade: Scalars['Int'];
   lastName: Scalars['String'];
   topic?: InputMaybe<TopicCreateNestedOneWithoutStudentsInput>;
   user: UserCreateNestedOneWithoutStudentInput;
+  year: Scalars['Int'];
 };
 
 export type StudentCreateWithoutTopicInput = {
   firstName: Scalars['String'];
-  grade: Scalars['Int'];
   lastName: Scalars['String'];
   submissions?: InputMaybe<SubmissionCreateNestedManyWithoutStudentInput>;
   user: UserCreateNestedOneWithoutStudentInput;
+  year: Scalars['Int'];
 };
 
 export type StudentCreateWithoutUserInput = {
   firstName: Scalars['String'];
-  grade: Scalars['Int'];
   lastName: Scalars['String'];
   submissions?: InputMaybe<SubmissionCreateNestedManyWithoutStudentInput>;
   topic?: InputMaybe<TopicCreateNestedOneWithoutStudentsInput>;
+  year: Scalars['Int'];
 };
 
 export type StudentGroupBy = {
@@ -4642,11 +4642,11 @@ export type StudentGroupBy = {
   _min?: Maybe<StudentMinAggregate>;
   _sum?: Maybe<StudentSumAggregate>;
   firstName: Scalars['String'];
-  grade: Scalars['Int'];
   id: Scalars['Int'];
   lastName: Scalars['String'];
   topicId?: Maybe<Scalars['Int']>;
   userId: Scalars['Int'];
+  year: Scalars['Int'];
 };
 
 export type StudentListRelationFilter = {
@@ -4658,39 +4658,39 @@ export type StudentListRelationFilter = {
 export type StudentMaxAggregate = {
   __typename?: 'StudentMaxAggregate';
   firstName?: Maybe<Scalars['String']>;
-  grade?: Maybe<Scalars['Int']>;
   id?: Maybe<Scalars['Int']>;
   lastName?: Maybe<Scalars['String']>;
   topicId?: Maybe<Scalars['Int']>;
   userId?: Maybe<Scalars['Int']>;
+  year?: Maybe<Scalars['Int']>;
 };
 
 export type StudentMaxOrderByAggregateInput = {
   firstName?: InputMaybe<SortOrder>;
-  grade?: InputMaybe<SortOrder>;
   id?: InputMaybe<SortOrder>;
   lastName?: InputMaybe<SortOrder>;
   topicId?: InputMaybe<SortOrder>;
   userId?: InputMaybe<SortOrder>;
+  year?: InputMaybe<SortOrder>;
 };
 
 export type StudentMinAggregate = {
   __typename?: 'StudentMinAggregate';
   firstName?: Maybe<Scalars['String']>;
-  grade?: Maybe<Scalars['Int']>;
   id?: Maybe<Scalars['Int']>;
   lastName?: Maybe<Scalars['String']>;
   topicId?: Maybe<Scalars['Int']>;
   userId?: Maybe<Scalars['Int']>;
+  year?: Maybe<Scalars['Int']>;
 };
 
 export type StudentMinOrderByAggregateInput = {
   firstName?: InputMaybe<SortOrder>;
-  grade?: InputMaybe<SortOrder>;
   id?: InputMaybe<SortOrder>;
   lastName?: InputMaybe<SortOrder>;
   topicId?: InputMaybe<SortOrder>;
   userId?: InputMaybe<SortOrder>;
+  year?: InputMaybe<SortOrder>;
 };
 
 export type StudentOrderByRelationAggregateInput = {
@@ -4704,16 +4704,15 @@ export type StudentOrderByWithAggregationInput = {
   _min?: InputMaybe<StudentMinOrderByAggregateInput>;
   _sum?: InputMaybe<StudentSumOrderByAggregateInput>;
   firstName?: InputMaybe<SortOrder>;
-  grade?: InputMaybe<SortOrder>;
   id?: InputMaybe<SortOrder>;
   lastName?: InputMaybe<SortOrder>;
   topicId?: InputMaybe<SortOrder>;
   userId?: InputMaybe<SortOrder>;
+  year?: InputMaybe<SortOrder>;
 };
 
 export type StudentOrderByWithRelationInput = {
   firstName?: InputMaybe<SortOrder>;
-  grade?: InputMaybe<SortOrder>;
   id?: InputMaybe<SortOrder>;
   lastName?: InputMaybe<SortOrder>;
   submissions?: InputMaybe<SubmissionOrderByRelationAggregateInput>;
@@ -4721,6 +4720,7 @@ export type StudentOrderByWithRelationInput = {
   topicId?: InputMaybe<SortOrder>;
   user?: InputMaybe<UserOrderByWithRelationInput>;
   userId?: InputMaybe<SortOrder>;
+  year?: InputMaybe<SortOrder>;
 };
 
 export type StudentRelationFilter = {
@@ -4730,11 +4730,11 @@ export type StudentRelationFilter = {
 
 export enum StudentScalarFieldEnum {
   FirstName = 'firstName',
-  Grade = 'grade',
   Id = 'id',
   LastName = 'lastName',
   TopicId = 'topicId',
-  UserId = 'userId'
+  UserId = 'userId',
+  Year = 'year'
 }
 
 export type StudentScalarWhereInput = {
@@ -4742,11 +4742,11 @@ export type StudentScalarWhereInput = {
   NOT?: InputMaybe<Array<StudentScalarWhereInput>>;
   OR?: InputMaybe<Array<StudentScalarWhereInput>>;
   firstName?: InputMaybe<StringFilter>;
-  grade?: InputMaybe<IntFilter>;
   id?: InputMaybe<IntFilter>;
   lastName?: InputMaybe<StringFilter>;
   topicId?: InputMaybe<IntNullableFilter>;
   userId?: InputMaybe<IntFilter>;
+  year?: InputMaybe<IntFilter>;
 };
 
 export type StudentScalarWhereWithAggregatesInput = {
@@ -4754,41 +4754,41 @@ export type StudentScalarWhereWithAggregatesInput = {
   NOT?: InputMaybe<Array<StudentScalarWhereWithAggregatesInput>>;
   OR?: InputMaybe<Array<StudentScalarWhereWithAggregatesInput>>;
   firstName?: InputMaybe<StringWithAggregatesFilter>;
-  grade?: InputMaybe<IntWithAggregatesFilter>;
   id?: InputMaybe<IntWithAggregatesFilter>;
   lastName?: InputMaybe<StringWithAggregatesFilter>;
   topicId?: InputMaybe<IntNullableWithAggregatesFilter>;
   userId?: InputMaybe<IntWithAggregatesFilter>;
+  year?: InputMaybe<IntWithAggregatesFilter>;
 };
 
 export type StudentSumAggregate = {
   __typename?: 'StudentSumAggregate';
-  grade?: Maybe<Scalars['Int']>;
   id?: Maybe<Scalars['Int']>;
   topicId?: Maybe<Scalars['Int']>;
   userId?: Maybe<Scalars['Int']>;
+  year?: Maybe<Scalars['Int']>;
 };
 
 export type StudentSumOrderByAggregateInput = {
-  grade?: InputMaybe<SortOrder>;
   id?: InputMaybe<SortOrder>;
   topicId?: InputMaybe<SortOrder>;
   userId?: InputMaybe<SortOrder>;
+  year?: InputMaybe<SortOrder>;
 };
 
 export type StudentUpdateInput = {
   firstName?: InputMaybe<StringFieldUpdateOperationsInput>;
-  grade?: InputMaybe<IntFieldUpdateOperationsInput>;
   lastName?: InputMaybe<StringFieldUpdateOperationsInput>;
   submissions?: InputMaybe<SubmissionUpdateManyWithoutStudentInput>;
   topic?: InputMaybe<TopicUpdateOneWithoutStudentsInput>;
   user?: InputMaybe<UserUpdateOneRequiredWithoutStudentInput>;
+  year?: InputMaybe<IntFieldUpdateOperationsInput>;
 };
 
 export type StudentUpdateManyMutationInput = {
   firstName?: InputMaybe<StringFieldUpdateOperationsInput>;
-  grade?: InputMaybe<IntFieldUpdateOperationsInput>;
   lastName?: InputMaybe<StringFieldUpdateOperationsInput>;
+  year?: InputMaybe<IntFieldUpdateOperationsInput>;
 };
 
 export type StudentUpdateManyWithWhereWithoutTopicInput = {
@@ -4836,26 +4836,26 @@ export type StudentUpdateWithWhereUniqueWithoutTopicInput = {
 
 export type StudentUpdateWithoutSubmissionsInput = {
   firstName?: InputMaybe<StringFieldUpdateOperationsInput>;
-  grade?: InputMaybe<IntFieldUpdateOperationsInput>;
   lastName?: InputMaybe<StringFieldUpdateOperationsInput>;
   topic?: InputMaybe<TopicUpdateOneWithoutStudentsInput>;
   user?: InputMaybe<UserUpdateOneRequiredWithoutStudentInput>;
+  year?: InputMaybe<IntFieldUpdateOperationsInput>;
 };
 
 export type StudentUpdateWithoutTopicInput = {
   firstName?: InputMaybe<StringFieldUpdateOperationsInput>;
-  grade?: InputMaybe<IntFieldUpdateOperationsInput>;
   lastName?: InputMaybe<StringFieldUpdateOperationsInput>;
   submissions?: InputMaybe<SubmissionUpdateManyWithoutStudentInput>;
   user?: InputMaybe<UserUpdateOneRequiredWithoutStudentInput>;
+  year?: InputMaybe<IntFieldUpdateOperationsInput>;
 };
 
 export type StudentUpdateWithoutUserInput = {
   firstName?: InputMaybe<StringFieldUpdateOperationsInput>;
-  grade?: InputMaybe<IntFieldUpdateOperationsInput>;
   lastName?: InputMaybe<StringFieldUpdateOperationsInput>;
   submissions?: InputMaybe<SubmissionUpdateManyWithoutStudentInput>;
   topic?: InputMaybe<TopicUpdateOneWithoutStudentsInput>;
+  year?: InputMaybe<IntFieldUpdateOperationsInput>;
 };
 
 export type StudentUpsertWithWhereUniqueWithoutTopicInput = {
@@ -4879,7 +4879,6 @@ export type StudentWhereInput = {
   NOT?: InputMaybe<Array<StudentWhereInput>>;
   OR?: InputMaybe<Array<StudentWhereInput>>;
   firstName?: InputMaybe<StringFilter>;
-  grade?: InputMaybe<IntFilter>;
   id?: InputMaybe<IntFilter>;
   lastName?: InputMaybe<StringFilter>;
   submissions?: InputMaybe<SubmissionListRelationFilter>;
@@ -4887,6 +4886,7 @@ export type StudentWhereInput = {
   topicId?: InputMaybe<IntNullableFilter>;
   user?: InputMaybe<UserRelationFilter>;
   userId?: InputMaybe<IntFilter>;
+  year?: InputMaybe<IntFilter>;
 };
 
 export type StudentWhereUniqueInput = {
@@ -5847,10 +5847,10 @@ export type Topic = {
   courses: Array<Course>;
   department?: Maybe<Department>;
   departmentId?: Maybe<Scalars['Int']>;
-  grades: Scalars['Int'];
   id: Scalars['Int'];
   name: Scalars['String'];
   students: Array<Student>;
+  years: Scalars['Int'];
 };
 
 
@@ -5876,14 +5876,14 @@ export type TopicStudentsArgs = {
 export type TopicAvgAggregate = {
   __typename?: 'TopicAvgAggregate';
   departmentId?: Maybe<Scalars['Float']>;
-  grades?: Maybe<Scalars['Float']>;
   id?: Maybe<Scalars['Float']>;
+  years?: Maybe<Scalars['Float']>;
 };
 
 export type TopicAvgOrderByAggregateInput = {
   departmentId?: InputMaybe<SortOrder>;
-  grades?: InputMaybe<SortOrder>;
   id?: InputMaybe<SortOrder>;
+  years?: InputMaybe<SortOrder>;
 };
 
 export type TopicCount = {
@@ -5896,24 +5896,24 @@ export type TopicCountAggregate = {
   __typename?: 'TopicCountAggregate';
   _all: Scalars['Int'];
   departmentId: Scalars['Int'];
-  grades: Scalars['Int'];
   id: Scalars['Int'];
   name: Scalars['Int'];
+  years: Scalars['Int'];
 };
 
 export type TopicCountOrderByAggregateInput = {
   departmentId?: InputMaybe<SortOrder>;
-  grades?: InputMaybe<SortOrder>;
   id?: InputMaybe<SortOrder>;
   name?: InputMaybe<SortOrder>;
+  years?: InputMaybe<SortOrder>;
 };
 
 export type TopicCreateInput = {
   courses?: InputMaybe<CourseCreateNestedManyWithoutTopicInput>;
   department?: InputMaybe<DepartmentCreateNestedOneWithoutTopicsInput>;
-  grades: Scalars['Int'];
   name: Scalars['String'];
   students?: InputMaybe<StudentCreateNestedManyWithoutTopicInput>;
+  years: Scalars['Int'];
 };
 
 export type TopicCreateNestedManyWithoutDepartmentInput = {
@@ -5951,23 +5951,23 @@ export type TopicCreateOrConnectWithoutStudentsInput = {
 
 export type TopicCreateWithoutCoursesInput = {
   department?: InputMaybe<DepartmentCreateNestedOneWithoutTopicsInput>;
-  grades: Scalars['Int'];
   name: Scalars['String'];
   students?: InputMaybe<StudentCreateNestedManyWithoutTopicInput>;
+  years: Scalars['Int'];
 };
 
 export type TopicCreateWithoutDepartmentInput = {
   courses?: InputMaybe<CourseCreateNestedManyWithoutTopicInput>;
-  grades: Scalars['Int'];
   name: Scalars['String'];
   students?: InputMaybe<StudentCreateNestedManyWithoutTopicInput>;
+  years: Scalars['Int'];
 };
 
 export type TopicCreateWithoutStudentsInput = {
   courses?: InputMaybe<CourseCreateNestedManyWithoutTopicInput>;
   department?: InputMaybe<DepartmentCreateNestedOneWithoutTopicsInput>;
-  grades: Scalars['Int'];
   name: Scalars['String'];
+  years: Scalars['Int'];
 };
 
 export type TopicGroupBy = {
@@ -5978,9 +5978,9 @@ export type TopicGroupBy = {
   _min?: Maybe<TopicMinAggregate>;
   _sum?: Maybe<TopicSumAggregate>;
   departmentId?: Maybe<Scalars['Int']>;
-  grades: Scalars['Int'];
   id: Scalars['Int'];
   name: Scalars['String'];
+  years: Scalars['Int'];
 };
 
 export type TopicListRelationFilter = {
@@ -5992,31 +5992,31 @@ export type TopicListRelationFilter = {
 export type TopicMaxAggregate = {
   __typename?: 'TopicMaxAggregate';
   departmentId?: Maybe<Scalars['Int']>;
-  grades?: Maybe<Scalars['Int']>;
   id?: Maybe<Scalars['Int']>;
   name?: Maybe<Scalars['String']>;
+  years?: Maybe<Scalars['Int']>;
 };
 
 export type TopicMaxOrderByAggregateInput = {
   departmentId?: InputMaybe<SortOrder>;
-  grades?: InputMaybe<SortOrder>;
   id?: InputMaybe<SortOrder>;
   name?: InputMaybe<SortOrder>;
+  years?: InputMaybe<SortOrder>;
 };
 
 export type TopicMinAggregate = {
   __typename?: 'TopicMinAggregate';
   departmentId?: Maybe<Scalars['Int']>;
-  grades?: Maybe<Scalars['Int']>;
   id?: Maybe<Scalars['Int']>;
   name?: Maybe<Scalars['String']>;
+  years?: Maybe<Scalars['Int']>;
 };
 
 export type TopicMinOrderByAggregateInput = {
   departmentId?: InputMaybe<SortOrder>;
-  grades?: InputMaybe<SortOrder>;
   id?: InputMaybe<SortOrder>;
   name?: InputMaybe<SortOrder>;
+  years?: InputMaybe<SortOrder>;
 };
 
 export type TopicOrderByRelationAggregateInput = {
@@ -6030,19 +6030,19 @@ export type TopicOrderByWithAggregationInput = {
   _min?: InputMaybe<TopicMinOrderByAggregateInput>;
   _sum?: InputMaybe<TopicSumOrderByAggregateInput>;
   departmentId?: InputMaybe<SortOrder>;
-  grades?: InputMaybe<SortOrder>;
   id?: InputMaybe<SortOrder>;
   name?: InputMaybe<SortOrder>;
+  years?: InputMaybe<SortOrder>;
 };
 
 export type TopicOrderByWithRelationInput = {
   courses?: InputMaybe<CourseOrderByRelationAggregateInput>;
   department?: InputMaybe<DepartmentOrderByWithRelationInput>;
   departmentId?: InputMaybe<SortOrder>;
-  grades?: InputMaybe<SortOrder>;
   id?: InputMaybe<SortOrder>;
   name?: InputMaybe<SortOrder>;
   students?: InputMaybe<StudentOrderByRelationAggregateInput>;
+  years?: InputMaybe<SortOrder>;
 };
 
 export type TopicRelationFilter = {
@@ -6052,9 +6052,9 @@ export type TopicRelationFilter = {
 
 export enum TopicScalarFieldEnum {
   DepartmentId = 'departmentId',
-  Grades = 'grades',
   Id = 'id',
-  Name = 'name'
+  Name = 'name',
+  Years = 'years'
 }
 
 export type TopicScalarWhereInput = {
@@ -6062,9 +6062,9 @@ export type TopicScalarWhereInput = {
   NOT?: InputMaybe<Array<TopicScalarWhereInput>>;
   OR?: InputMaybe<Array<TopicScalarWhereInput>>;
   departmentId?: InputMaybe<IntNullableFilter>;
-  grades?: InputMaybe<IntFilter>;
   id?: InputMaybe<IntFilter>;
   name?: InputMaybe<StringFilter>;
+  years?: InputMaybe<IntFilter>;
 };
 
 export type TopicScalarWhereWithAggregatesInput = {
@@ -6072,35 +6072,35 @@ export type TopicScalarWhereWithAggregatesInput = {
   NOT?: InputMaybe<Array<TopicScalarWhereWithAggregatesInput>>;
   OR?: InputMaybe<Array<TopicScalarWhereWithAggregatesInput>>;
   departmentId?: InputMaybe<IntNullableWithAggregatesFilter>;
-  grades?: InputMaybe<IntWithAggregatesFilter>;
   id?: InputMaybe<IntWithAggregatesFilter>;
   name?: InputMaybe<StringWithAggregatesFilter>;
+  years?: InputMaybe<IntWithAggregatesFilter>;
 };
 
 export type TopicSumAggregate = {
   __typename?: 'TopicSumAggregate';
   departmentId?: Maybe<Scalars['Int']>;
-  grades?: Maybe<Scalars['Int']>;
   id?: Maybe<Scalars['Int']>;
+  years?: Maybe<Scalars['Int']>;
 };
 
 export type TopicSumOrderByAggregateInput = {
   departmentId?: InputMaybe<SortOrder>;
-  grades?: InputMaybe<SortOrder>;
   id?: InputMaybe<SortOrder>;
+  years?: InputMaybe<SortOrder>;
 };
 
 export type TopicUpdateInput = {
   courses?: InputMaybe<CourseUpdateManyWithoutTopicInput>;
   department?: InputMaybe<DepartmentUpdateOneWithoutTopicsInput>;
-  grades?: InputMaybe<IntFieldUpdateOperationsInput>;
   name?: InputMaybe<StringFieldUpdateOperationsInput>;
   students?: InputMaybe<StudentUpdateManyWithoutTopicInput>;
+  years?: InputMaybe<IntFieldUpdateOperationsInput>;
 };
 
 export type TopicUpdateManyMutationInput = {
-  grades?: InputMaybe<IntFieldUpdateOperationsInput>;
   name?: InputMaybe<StringFieldUpdateOperationsInput>;
+  years?: InputMaybe<IntFieldUpdateOperationsInput>;
 };
 
 export type TopicUpdateManyWithWhereWithoutDepartmentInput = {
@@ -6148,23 +6148,23 @@ export type TopicUpdateWithWhereUniqueWithoutDepartmentInput = {
 
 export type TopicUpdateWithoutCoursesInput = {
   department?: InputMaybe<DepartmentUpdateOneWithoutTopicsInput>;
-  grades?: InputMaybe<IntFieldUpdateOperationsInput>;
   name?: InputMaybe<StringFieldUpdateOperationsInput>;
   students?: InputMaybe<StudentUpdateManyWithoutTopicInput>;
+  years?: InputMaybe<IntFieldUpdateOperationsInput>;
 };
 
 export type TopicUpdateWithoutDepartmentInput = {
   courses?: InputMaybe<CourseUpdateManyWithoutTopicInput>;
-  grades?: InputMaybe<IntFieldUpdateOperationsInput>;
   name?: InputMaybe<StringFieldUpdateOperationsInput>;
   students?: InputMaybe<StudentUpdateManyWithoutTopicInput>;
+  years?: InputMaybe<IntFieldUpdateOperationsInput>;
 };
 
 export type TopicUpdateWithoutStudentsInput = {
   courses?: InputMaybe<CourseUpdateManyWithoutTopicInput>;
   department?: InputMaybe<DepartmentUpdateOneWithoutTopicsInput>;
-  grades?: InputMaybe<IntFieldUpdateOperationsInput>;
   name?: InputMaybe<StringFieldUpdateOperationsInput>;
+  years?: InputMaybe<IntFieldUpdateOperationsInput>;
 };
 
 export type TopicUpsertWithWhereUniqueWithoutDepartmentInput = {
@@ -6190,10 +6190,10 @@ export type TopicWhereInput = {
   courses?: InputMaybe<CourseListRelationFilter>;
   department?: InputMaybe<DepartmentRelationFilter>;
   departmentId?: InputMaybe<IntNullableFilter>;
-  grades?: InputMaybe<IntFilter>;
   id?: InputMaybe<IntFilter>;
   name?: InputMaybe<StringFilter>;
   students?: InputMaybe<StudentListRelationFilter>;
+  years?: InputMaybe<IntFilter>;
 };
 
 export type TopicWhereUniqueInput = {
@@ -6585,7 +6585,7 @@ export type CreateLessonMutationVariables = Exact<{
 }>;
 
 
-export type CreateLessonMutation = { __typename?: 'Mutation', createLesson: { __typename?: 'Lesson', id: number } };
+export type CreateLessonMutation = { __typename?: 'Mutation', createLesson: { __typename: 'Lesson', id: number } };
 
 export type UpdateLessonMutationVariables = Exact<{
   data: LessonUpdateInput;
@@ -6600,14 +6600,14 @@ export type DeleteLessonMutationVariables = Exact<{
 }>;
 
 
-export type DeleteLessonMutation = { __typename?: 'Mutation', deleteLesson?: { __typename?: 'Lesson', id: number } | null };
+export type DeleteLessonMutation = { __typename?: 'Mutation', deleteLesson?: { __typename: 'Lesson', id: number } | null };
 
 export type CreateCourseMutationVariables = Exact<{
   data: CourseCreateInput;
 }>;
 
 
-export type CreateCourseMutation = { __typename?: 'Mutation', createCourse: { __typename?: 'Course', id: number } };
+export type CreateCourseMutation = { __typename?: 'Mutation', createCourse: { __typename: 'Course', id: number } };
 
 export type UpdateCourseMutationVariables = Exact<{
   data: CourseUpdateInput;
@@ -6615,21 +6615,21 @@ export type UpdateCourseMutationVariables = Exact<{
 }>;
 
 
-export type UpdateCourseMutation = { __typename?: 'Mutation', updateCourse?: { __typename?: 'Course', id: number } | null };
+export type UpdateCourseMutation = { __typename?: 'Mutation', updateCourse?: { __typename: 'Course', id: number } | null };
 
 export type DeleteCourseMutationVariables = Exact<{
   where: CourseWhereUniqueInput;
 }>;
 
 
-export type DeleteCourseMutation = { __typename?: 'Mutation', deleteCourse?: { __typename?: 'Course', id: number } | null };
+export type DeleteCourseMutation = { __typename?: 'Mutation', deleteCourse?: { __typename: 'Course', id: number } | null };
 
 export type CreateUserMutationVariables = Exact<{
   data: UserCreateInput;
 }>;
 
 
-export type CreateUserMutation = { __typename?: 'Mutation', createUser: { __typename?: 'User', id: number } };
+export type CreateUserMutation = { __typename?: 'Mutation', createUser: { __typename: 'User', id: number } };
 
 export type UpdateManyUserMutationVariables = Exact<{
   data: UserUpdateManyMutationInput;
@@ -6637,7 +6637,7 @@ export type UpdateManyUserMutationVariables = Exact<{
 }>;
 
 
-export type UpdateManyUserMutation = { __typename?: 'Mutation', updateManyUser: { __typename?: 'AffectedRowsOutput', count: number } };
+export type UpdateManyUserMutation = { __typename?: 'Mutation', updateManyUser: { __typename: 'AffectedRowsOutput', count: number } };
 
 export type UpdateUserMutationVariables = Exact<{
   data: UserUpdateInput;
@@ -6645,21 +6645,21 @@ export type UpdateUserMutationVariables = Exact<{
 }>;
 
 
-export type UpdateUserMutation = { __typename?: 'Mutation', updateUser?: { __typename?: 'User', id: number } | null };
+export type UpdateUserMutation = { __typename?: 'Mutation', updateUser?: { __typename: 'User', id: number } | null };
 
 export type DeleteUserMutationVariables = Exact<{
   where: UserWhereUniqueInput;
 }>;
 
 
-export type DeleteUserMutation = { __typename?: 'Mutation', deleteUser?: { __typename?: 'User', id: number } | null };
+export type DeleteUserMutation = { __typename?: 'Mutation', deleteUser?: { __typename: 'User', id: number } | null };
 
 export type CreateStudentMutationVariables = Exact<{
   data: StudentCreateInput;
 }>;
 
 
-export type CreateStudentMutation = { __typename?: 'Mutation', createStudent: { __typename?: 'Student', id: number } };
+export type CreateStudentMutation = { __typename?: 'Mutation', createStudent: { __typename: 'Student', id: number } };
 
 export type UpdateStudentMutationVariables = Exact<{
   data: StudentUpdateInput;
@@ -6667,21 +6667,21 @@ export type UpdateStudentMutationVariables = Exact<{
 }>;
 
 
-export type UpdateStudentMutation = { __typename?: 'Mutation', updateStudent?: { __typename?: 'Student', id: number } | null };
+export type UpdateStudentMutation = { __typename?: 'Mutation', updateStudent?: { __typename: 'Student', id: number } | null };
 
 export type DeleteStudentMutationVariables = Exact<{
   where: StudentWhereUniqueInput;
 }>;
 
 
-export type DeleteStudentMutation = { __typename?: 'Mutation', deleteStudent?: { __typename?: 'Student', id: number } | null };
+export type DeleteStudentMutation = { __typename?: 'Mutation', deleteStudent?: { __typename: 'Student', id: number } | null };
 
 export type CreateTeacherMutationVariables = Exact<{
   data: TeacherCreateInput;
 }>;
 
 
-export type CreateTeacherMutation = { __typename?: 'Mutation', createTeacher: { __typename?: 'Teacher', id: number } };
+export type CreateTeacherMutation = { __typename?: 'Mutation', createTeacher: { __typename: 'Teacher', id: number } };
 
 export type UpdateTeacherMutationVariables = Exact<{
   data: TeacherUpdateInput;
@@ -6689,21 +6689,21 @@ export type UpdateTeacherMutationVariables = Exact<{
 }>;
 
 
-export type UpdateTeacherMutation = { __typename?: 'Mutation', updateTeacher?: { __typename?: 'Teacher', id: number } | null };
+export type UpdateTeacherMutation = { __typename?: 'Mutation', updateTeacher?: { __typename: 'Teacher', id: number } | null };
 
 export type DeleteTeacherMutationVariables = Exact<{
   where: TeacherWhereUniqueInput;
 }>;
 
 
-export type DeleteTeacherMutation = { __typename?: 'Mutation', deleteTeacher?: { __typename?: 'Teacher', id: number } | null };
+export type DeleteTeacherMutation = { __typename?: 'Mutation', deleteTeacher?: { __typename: 'Teacher', id: number } | null };
 
 export type CreateAdminMutationVariables = Exact<{
   data: AdminCreateInput;
 }>;
 
 
-export type CreateAdminMutation = { __typename?: 'Mutation', createAdmin: { __typename?: 'Admin', id: number } };
+export type CreateAdminMutation = { __typename?: 'Mutation', createAdmin: { __typename: 'Admin', id: number } };
 
 export type UpdateAdminMutationVariables = Exact<{
   data: AdminUpdateInput;
@@ -6711,21 +6711,21 @@ export type UpdateAdminMutationVariables = Exact<{
 }>;
 
 
-export type UpdateAdminMutation = { __typename?: 'Mutation', updateAdmin?: { __typename?: 'Admin', id: number } | null };
+export type UpdateAdminMutation = { __typename?: 'Mutation', updateAdmin?: { __typename: 'Admin', id: number } | null };
 
 export type DeleteAdminMutationVariables = Exact<{
   where: AdminWhereUniqueInput;
 }>;
 
 
-export type DeleteAdminMutation = { __typename?: 'Mutation', deleteAdmin?: { __typename?: 'Admin', id: number } | null };
+export type DeleteAdminMutation = { __typename?: 'Mutation', deleteAdmin?: { __typename: 'Admin', id: number } | null };
 
 export type CreateAssignmentMutationVariables = Exact<{
   data: AssignmentCreateInput;
 }>;
 
 
-export type CreateAssignmentMutation = { __typename?: 'Mutation', createAssignment: { __typename?: 'Assignment', id: number } };
+export type CreateAssignmentMutation = { __typename?: 'Mutation', createAssignment: { __typename: 'Assignment', id: number } };
 
 export type UpdateAssignmentMutationVariables = Exact<{
   data: AssignmentUpdateInput;
@@ -6733,21 +6733,21 @@ export type UpdateAssignmentMutationVariables = Exact<{
 }>;
 
 
-export type UpdateAssignmentMutation = { __typename?: 'Mutation', updateAssignment?: { __typename?: 'Assignment', id: number } | null };
+export type UpdateAssignmentMutation = { __typename?: 'Mutation', updateAssignment?: { __typename: 'Assignment', id: number } | null };
 
 export type DeleteAssignmentMutationVariables = Exact<{
   where: AssignmentWhereUniqueInput;
 }>;
 
 
-export type DeleteAssignmentMutation = { __typename?: 'Mutation', deleteAssignment?: { __typename?: 'Assignment', id: number } | null };
+export type DeleteAssignmentMutation = { __typename?: 'Mutation', deleteAssignment?: { __typename: 'Assignment', id: number } | null };
 
 export type CreateMeetingMutationVariables = Exact<{
   data: MeetingCreateInput;
 }>;
 
 
-export type CreateMeetingMutation = { __typename?: 'Mutation', createMeeting: { __typename?: 'Meeting', id: number } };
+export type CreateMeetingMutation = { __typename?: 'Mutation', createMeeting: { __typename: 'Meeting', id: number } };
 
 export type UpdateMeetingMutationVariables = Exact<{
   data: MeetingUpdateInput;
@@ -6755,14 +6755,36 @@ export type UpdateMeetingMutationVariables = Exact<{
 }>;
 
 
-export type UpdateMeetingMutation = { __typename?: 'Mutation', updateMeeting?: { __typename?: 'Meeting', id: number } | null };
+export type UpdateMeetingMutation = { __typename?: 'Mutation', updateMeeting?: { __typename: 'Meeting', id: number } | null };
 
 export type DeleteMeetingMutationVariables = Exact<{
   where: MeetingWhereUniqueInput;
 }>;
 
 
-export type DeleteMeetingMutation = { __typename?: 'Mutation', deleteMeeting?: { __typename?: 'Meeting', id: number } | null };
+export type DeleteMeetingMutation = { __typename?: 'Mutation', deleteMeeting?: { __typename: 'Meeting', id: number } | null };
+
+export type CreateDepartmentMutationVariables = Exact<{
+  data: DepartmentCreateInput;
+}>;
+
+
+export type CreateDepartmentMutation = { __typename?: 'Mutation', createDepartment: { __typename: 'Department', id: number } };
+
+export type UpdateDepartmentMutationVariables = Exact<{
+  data: DepartmentUpdateInput;
+  where: DepartmentWhereUniqueInput;
+}>;
+
+
+export type UpdateDepartmentMutation = { __typename?: 'Mutation', updateDepartment?: { __typename: 'Department', id: number } | null };
+
+export type DeleteDepartmentMutationVariables = Exact<{
+  where: DepartmentWhereUniqueInput;
+}>;
+
+
+export type DeleteDepartmentMutation = { __typename?: 'Mutation', deleteDepartment?: { __typename: 'Department', id: number } | null };
 
 export type LessonsQueryVariables = Exact<{
   where?: InputMaybe<LessonWhereInput>;
@@ -6812,7 +6834,7 @@ export type StatePageDataQueryVariables = Exact<{
 }>;
 
 
-export type StatePageDataQuery = { __typename?: 'Query', aggregateCourse: { __typename?: 'AggregateCourse', _count?: { __typename?: 'CourseCountAggregate', _all: number } | null }, aggregateStudent: { __typename?: 'AggregateStudent', _count?: { __typename?: 'StudentCountAggregate', _all: number } | null }, aggregateTeacher: { __typename?: 'AggregateTeacher', _count?: { __typename?: 'TeacherCountAggregate', _all: number } | null }, aggregateTopic: { __typename?: 'AggregateTopic', _count?: { __typename?: 'TopicCountAggregate', _all: number } | null }, students: Array<{ __typename?: 'Student', id: number, firstName: string, lastName: string, grade: number, topic?: { __typename?: 'Topic', name: string } | null, user: { __typename?: 'User', id: number, role: string, username: string, createdAt: any, disabled: boolean, email: string } }>, teachers: Array<{ __typename?: 'Teacher', id: number, firstName: string, lastName: string, user: { __typename?: 'User', id: number, username: string, disabled: boolean, createdAt: any, role: string, email: string } }> };
+export type StatePageDataQuery = { __typename?: 'Query', aggregateCourse: { __typename?: 'AggregateCourse', _count?: { __typename?: 'CourseCountAggregate', _all: number } | null }, aggregateStudent: { __typename?: 'AggregateStudent', _count?: { __typename?: 'StudentCountAggregate', _all: number } | null }, aggregateTeacher: { __typename?: 'AggregateTeacher', _count?: { __typename?: 'TeacherCountAggregate', _all: number } | null }, aggregateTopic: { __typename?: 'AggregateTopic', _count?: { __typename?: 'TopicCountAggregate', _all: number } | null }, students: Array<{ __typename?: 'Student', id: number, firstName: string, lastName: string, year: number, topic?: { __typename?: 'Topic', name: string } | null, user: { __typename?: 'User', id: number, role: string, username: string, createdAt: any, disabled: boolean, email: string } }>, teachers: Array<{ __typename?: 'Teacher', id: number, firstName: string, lastName: string, user: { __typename?: 'User', id: number, username: string, disabled: boolean, createdAt: any, role: string, email: string } }> };
 
 export type AdminsQueryVariables = Exact<{
   where?: InputMaybe<AdminWhereInput>;
@@ -6833,7 +6855,7 @@ export type StudentsQueryVariables = Exact<{
 }>;
 
 
-export type StudentsQuery = { __typename?: 'Query', students: Array<{ __typename?: 'Student', id: number, firstName: string, lastName: string, grade: number, topic?: { __typename?: 'Topic', name: string } | null, user: { __typename?: 'User', id: number, email: string, createdAt: any, disabled: boolean, username: string } }> };
+export type StudentsQuery = { __typename?: 'Query', students: Array<{ __typename?: 'Student', id: number, firstName: string, lastName: string, year: number, topic?: { __typename?: 'Topic', name: string } | null, user: { __typename?: 'User', id: number, email: string, createdAt: any, disabled: boolean, username: string } }> };
 
 export type CourseQueryVariables = Exact<{
   where: CourseWhereUniqueInput;
@@ -6847,7 +6869,7 @@ export type StudentQueryVariables = Exact<{
 }>;
 
 
-export type StudentQuery = { __typename?: 'Query', student?: { __typename?: 'Student', firstName: string, lastName: string, grade: number, topicId?: number | null, user: { __typename?: 'User', username: string, email: string, disabled: boolean, id: number, role: string } } | null };
+export type StudentQuery = { __typename?: 'Query', student?: { __typename?: 'Student', firstName: string, lastName: string, year: number, topicId?: number | null, user: { __typename?: 'User', username: string, email: string, disabled: boolean, id: number, role: string } } | null };
 
 export type CoursesQueryVariables = Exact<{
   where?: InputMaybe<CourseWhereInput>;
@@ -6856,14 +6878,14 @@ export type CoursesQueryVariables = Exact<{
 }>;
 
 
-export type CoursesQuery = { __typename?: 'Query', courses: Array<{ __typename?: 'Course', id: number, title: string, description?: string | null, topicId?: number | null, grade: number, topic?: { __typename?: 'Topic', id: number, name: string } | null, teacher?: { __typename?: 'Teacher', firstName: string, lastName: string } | null, _count?: { __typename?: 'CourseCount', lessons: number, assignments: number, meetings: number } | null }> };
+export type CoursesQuery = { __typename?: 'Query', courses: Array<{ __typename?: 'Course', id: number, title: string, description?: string | null, topicId?: number | null, year: number, topic?: { __typename?: 'Topic', id: number, name: string } | null, teacher?: { __typename?: 'Teacher', firstName: string, lastName: string } | null, _count?: { __typename?: 'CourseCount', lessons: number, assignments: number, meetings: number } | null }> };
 
 export type TopicsQueryVariables = Exact<{
   where?: InputMaybe<TopicWhereInput>;
 }>;
 
 
-export type TopicsQuery = { __typename?: 'Query', topics: Array<{ __typename?: 'Topic', id: number, name: string, grades: number, department?: { __typename?: 'Department', name: string } | null }> };
+export type TopicsQuery = { __typename?: 'Query', topics: Array<{ __typename?: 'Topic', id: number, name: string, years: number, department?: { __typename?: 'Department', id: number, name: string } | null, _count?: { __typename?: 'TopicCount', courses: number, students: number } | null }> };
 
 export type DashboardUsersQueryVariables = Exact<{
   awhere?: InputMaybe<AdminWhereInput>;
@@ -6872,13 +6894,14 @@ export type DashboardUsersQueryVariables = Exact<{
 }>;
 
 
-export type DashboardUsersQuery = { __typename?: 'Query', admins: Array<{ __typename?: 'Admin', id: number, firstName: string, lastName: string, user: { __typename?: 'User', id: number, username: string, createdAt: any, disabled: boolean, email: string } }>, teachers: Array<{ __typename?: 'Teacher', id: number, firstName: string, lastName: string, user: { __typename?: 'User', id: number, email: string, createdAt: any, disabled: boolean, username: string } }>, students: Array<{ __typename?: 'Student', id: number, firstName: string, lastName: string, grade: number, topicId?: number | null, topic?: { __typename?: 'Topic', name: string } | null, user: { __typename?: 'User', id: number, email: string, createdAt: any, disabled: boolean, username: string } }> };
+export type DashboardUsersQuery = { __typename?: 'Query', admins: Array<{ __typename?: 'Admin', id: number, firstName: string, lastName: string, user: { __typename?: 'User', id: number, username: string, createdAt: any, disabled: boolean, email: string } }>, teachers: Array<{ __typename?: 'Teacher', id: number, firstName: string, lastName: string, user: { __typename?: 'User', id: number, email: string, createdAt: any, disabled: boolean, username: string } }>, students: Array<{ __typename?: 'Student', id: number, firstName: string, lastName: string, year: number, topicId?: number | null, topic?: { __typename?: 'Topic', name: string } | null, user: { __typename?: 'User', id: number, email: string, createdAt: any, disabled: boolean, username: string } }> };
 
 
 export const CreateLessonDocument = gql`
     mutation createLesson($data: LessonCreateInput!) {
   createLesson(data: $data) {
     id
+    __typename
   }
 }
     `;
@@ -6946,6 +6969,7 @@ export const DeleteLessonDocument = gql`
     mutation deleteLesson($where: LessonWhereUniqueInput!) {
   deleteLesson(where: $where) {
     id
+    __typename
   }
 }
     `;
@@ -6979,6 +7003,7 @@ export const CreateCourseDocument = gql`
     mutation createCourse($data: CourseCreateInput!) {
   createCourse(data: $data) {
     id
+    __typename
   }
 }
     `;
@@ -7012,6 +7037,7 @@ export const UpdateCourseDocument = gql`
     mutation updateCourse($data: CourseUpdateInput!, $where: CourseWhereUniqueInput!) {
   updateCourse(data: $data, where: $where) {
     id
+    __typename
   }
 }
     `;
@@ -7046,6 +7072,7 @@ export const DeleteCourseDocument = gql`
     mutation deleteCourse($where: CourseWhereUniqueInput!) {
   deleteCourse(where: $where) {
     id
+    __typename
   }
 }
     `;
@@ -7079,6 +7106,7 @@ export const CreateUserDocument = gql`
     mutation createUser($data: UserCreateInput!) {
   createUser(data: $data) {
     id
+    __typename
   }
 }
     `;
@@ -7112,6 +7140,7 @@ export const UpdateManyUserDocument = gql`
     mutation updateManyUser($data: UserUpdateManyMutationInput!, $where: UserWhereInput) {
   updateManyUser(data: $data, where: $where) {
     count
+    __typename
   }
 }
     `;
@@ -7146,6 +7175,7 @@ export const UpdateUserDocument = gql`
     mutation updateUser($data: UserUpdateInput!, $where: UserWhereUniqueInput!) {
   updateUser(data: $data, where: $where) {
     id
+    __typename
   }
 }
     `;
@@ -7180,6 +7210,7 @@ export const DeleteUserDocument = gql`
     mutation deleteUser($where: UserWhereUniqueInput!) {
   deleteUser(where: $where) {
     id
+    __typename
   }
 }
     `;
@@ -7213,6 +7244,7 @@ export const CreateStudentDocument = gql`
     mutation createStudent($data: StudentCreateInput!) {
   createStudent(data: $data) {
     id
+    __typename
   }
 }
     `;
@@ -7246,6 +7278,7 @@ export const UpdateStudentDocument = gql`
     mutation updateStudent($data: StudentUpdateInput!, $where: StudentWhereUniqueInput!) {
   updateStudent(data: $data, where: $where) {
     id
+    __typename
   }
 }
     `;
@@ -7280,6 +7313,7 @@ export const DeleteStudentDocument = gql`
     mutation deleteStudent($where: StudentWhereUniqueInput!) {
   deleteStudent(where: $where) {
     id
+    __typename
   }
 }
     `;
@@ -7313,6 +7347,7 @@ export const CreateTeacherDocument = gql`
     mutation createTeacher($data: TeacherCreateInput!) {
   createTeacher(data: $data) {
     id
+    __typename
   }
 }
     `;
@@ -7346,6 +7381,7 @@ export const UpdateTeacherDocument = gql`
     mutation updateTeacher($data: TeacherUpdateInput!, $where: TeacherWhereUniqueInput!) {
   updateTeacher(data: $data, where: $where) {
     id
+    __typename
   }
 }
     `;
@@ -7380,6 +7416,7 @@ export const DeleteTeacherDocument = gql`
     mutation deleteTeacher($where: TeacherWhereUniqueInput!) {
   deleteTeacher(where: $where) {
     id
+    __typename
   }
 }
     `;
@@ -7413,6 +7450,7 @@ export const CreateAdminDocument = gql`
     mutation createAdmin($data: AdminCreateInput!) {
   createAdmin(data: $data) {
     id
+    __typename
   }
 }
     `;
@@ -7446,6 +7484,7 @@ export const UpdateAdminDocument = gql`
     mutation updateAdmin($data: AdminUpdateInput!, $where: AdminWhereUniqueInput!) {
   updateAdmin(data: $data, where: $where) {
     id
+    __typename
   }
 }
     `;
@@ -7480,6 +7519,7 @@ export const DeleteAdminDocument = gql`
     mutation deleteAdmin($where: AdminWhereUniqueInput!) {
   deleteAdmin(where: $where) {
     id
+    __typename
   }
 }
     `;
@@ -7513,6 +7553,7 @@ export const CreateAssignmentDocument = gql`
     mutation createAssignment($data: AssignmentCreateInput!) {
   createAssignment(data: $data) {
     id
+    __typename
   }
 }
     `;
@@ -7546,6 +7587,7 @@ export const UpdateAssignmentDocument = gql`
     mutation updateAssignment($data: AssignmentUpdateInput!, $where: AssignmentWhereUniqueInput!) {
   updateAssignment(data: $data, where: $where) {
     id
+    __typename
   }
 }
     `;
@@ -7580,6 +7622,7 @@ export const DeleteAssignmentDocument = gql`
     mutation deleteAssignment($where: AssignmentWhereUniqueInput!) {
   deleteAssignment(where: $where) {
     id
+    __typename
   }
 }
     `;
@@ -7613,6 +7656,7 @@ export const CreateMeetingDocument = gql`
     mutation createMeeting($data: MeetingCreateInput!) {
   createMeeting(data: $data) {
     id
+    __typename
   }
 }
     `;
@@ -7646,6 +7690,7 @@ export const UpdateMeetingDocument = gql`
     mutation updateMeeting($data: MeetingUpdateInput!, $where: MeetingWhereUniqueInput!) {
   updateMeeting(data: $data, where: $where) {
     id
+    __typename
   }
 }
     `;
@@ -7680,6 +7725,7 @@ export const DeleteMeetingDocument = gql`
     mutation deleteMeeting($where: MeetingWhereUniqueInput!) {
   deleteMeeting(where: $where) {
     id
+    __typename
   }
 }
     `;
@@ -7709,6 +7755,109 @@ export function useDeleteMeetingMutation(baseOptions?: Apollo.MutationHookOption
 export type DeleteMeetingMutationHookResult = ReturnType<typeof useDeleteMeetingMutation>;
 export type DeleteMeetingMutationResult = Apollo.MutationResult<DeleteMeetingMutation>;
 export type DeleteMeetingMutationOptions = Apollo.BaseMutationOptions<DeleteMeetingMutation, DeleteMeetingMutationVariables>;
+export const CreateDepartmentDocument = gql`
+    mutation createDepartment($data: DepartmentCreateInput!) {
+  createDepartment(data: $data) {
+    id
+    __typename
+  }
+}
+    `;
+export type CreateDepartmentMutationFn = Apollo.MutationFunction<CreateDepartmentMutation, CreateDepartmentMutationVariables>;
+
+/**
+ * __useCreateDepartmentMutation__
+ *
+ * To run a mutation, you first call `useCreateDepartmentMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useCreateDepartmentMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [createDepartmentMutation, { data, loading, error }] = useCreateDepartmentMutation({
+ *   variables: {
+ *      data: // value for 'data'
+ *   },
+ * });
+ */
+export function useCreateDepartmentMutation(baseOptions?: Apollo.MutationHookOptions<CreateDepartmentMutation, CreateDepartmentMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<CreateDepartmentMutation, CreateDepartmentMutationVariables>(CreateDepartmentDocument, options);
+      }
+export type CreateDepartmentMutationHookResult = ReturnType<typeof useCreateDepartmentMutation>;
+export type CreateDepartmentMutationResult = Apollo.MutationResult<CreateDepartmentMutation>;
+export type CreateDepartmentMutationOptions = Apollo.BaseMutationOptions<CreateDepartmentMutation, CreateDepartmentMutationVariables>;
+export const UpdateDepartmentDocument = gql`
+    mutation updateDepartment($data: DepartmentUpdateInput!, $where: DepartmentWhereUniqueInput!) {
+  updateDepartment(data: $data, where: $where) {
+    id
+    __typename
+  }
+}
+    `;
+export type UpdateDepartmentMutationFn = Apollo.MutationFunction<UpdateDepartmentMutation, UpdateDepartmentMutationVariables>;
+
+/**
+ * __useUpdateDepartmentMutation__
+ *
+ * To run a mutation, you first call `useUpdateDepartmentMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useUpdateDepartmentMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [updateDepartmentMutation, { data, loading, error }] = useUpdateDepartmentMutation({
+ *   variables: {
+ *      data: // value for 'data'
+ *      where: // value for 'where'
+ *   },
+ * });
+ */
+export function useUpdateDepartmentMutation(baseOptions?: Apollo.MutationHookOptions<UpdateDepartmentMutation, UpdateDepartmentMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<UpdateDepartmentMutation, UpdateDepartmentMutationVariables>(UpdateDepartmentDocument, options);
+      }
+export type UpdateDepartmentMutationHookResult = ReturnType<typeof useUpdateDepartmentMutation>;
+export type UpdateDepartmentMutationResult = Apollo.MutationResult<UpdateDepartmentMutation>;
+export type UpdateDepartmentMutationOptions = Apollo.BaseMutationOptions<UpdateDepartmentMutation, UpdateDepartmentMutationVariables>;
+export const DeleteDepartmentDocument = gql`
+    mutation deleteDepartment($where: DepartmentWhereUniqueInput!) {
+  deleteDepartment(where: $where) {
+    id
+    __typename
+  }
+}
+    `;
+export type DeleteDepartmentMutationFn = Apollo.MutationFunction<DeleteDepartmentMutation, DeleteDepartmentMutationVariables>;
+
+/**
+ * __useDeleteDepartmentMutation__
+ *
+ * To run a mutation, you first call `useDeleteDepartmentMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useDeleteDepartmentMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [deleteDepartmentMutation, { data, loading, error }] = useDeleteDepartmentMutation({
+ *   variables: {
+ *      where: // value for 'where'
+ *   },
+ * });
+ */
+export function useDeleteDepartmentMutation(baseOptions?: Apollo.MutationHookOptions<DeleteDepartmentMutation, DeleteDepartmentMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<DeleteDepartmentMutation, DeleteDepartmentMutationVariables>(DeleteDepartmentDocument, options);
+      }
+export type DeleteDepartmentMutationHookResult = ReturnType<typeof useDeleteDepartmentMutation>;
+export type DeleteDepartmentMutationResult = Apollo.MutationResult<DeleteDepartmentMutation>;
+export type DeleteDepartmentMutationOptions = Apollo.BaseMutationOptions<DeleteDepartmentMutation, DeleteDepartmentMutationVariables>;
 export const LessonsDocument = gql`
     query Lessons($where: LessonWhereInput) {
   lessons(where: $where) {
@@ -7998,7 +8147,7 @@ export const StatePageDataDocument = gql`
     id
     firstName
     lastName
-    grade
+    year
     topic {
       name
     }
@@ -8158,7 +8307,7 @@ export const StudentsDocument = gql`
     id
     firstName
     lastName
-    grade
+    year
     topic {
       name
     }
@@ -8270,7 +8419,7 @@ export const StudentDocument = gql`
   student(where: $where) {
     firstName
     lastName
-    grade
+    year
     lastName
     topicId
     user {
@@ -8325,7 +8474,7 @@ export const CoursesDocument = gql`
       name
     }
     topicId
-    grade
+    year
     teacher {
       firstName
       lastName
@@ -8376,9 +8525,14 @@ export const TopicsDocument = gql`
   topics(where: $where) {
     id
     name
-    grades
+    years
     department {
+      id
       name
+    }
+    _count {
+      courses
+      students
     }
   }
 }
@@ -8444,7 +8598,7 @@ export const DashboardUsersDocument = gql`
     id
     firstName
     lastName
-    grade
+    year
     topicId
     topic {
       name
@@ -8535,6 +8689,9 @@ export const namedOperations = {
     deleteAssignment: 'deleteAssignment',
     createMeeting: 'createMeeting',
     updateMeeting: 'updateMeeting',
-    deleteMeeting: 'deleteMeeting'
+    deleteMeeting: 'deleteMeeting',
+    createDepartment: 'createDepartment',
+    updateDepartment: 'updateDepartment',
+    deleteDepartment: 'deleteDepartment'
   }
 }

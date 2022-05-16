@@ -15,7 +15,7 @@ import {
   useTopicsQuery,
   useUpdateStudentMutation,
 } from "@/graphql";
-import { useEffect, useMemo } from "react";
+import { useMemo } from "react";
 
 interface EditStudentProps {
   student: Student;
@@ -30,7 +30,7 @@ export const EditStudent = ({
 }: EditStudentProps) => {
   const { t } = useTranslation();
   const [updateStudent] = useUpdateStudentMutation();
-  const { data, loading } = useTopicsQuery();
+  const { data } = useTopicsQuery();
 
   const schema = useMemo(
     () =>
@@ -39,7 +39,7 @@ export const EditStudent = ({
         lastName: z.string().nonempty(t("notEmpty")),
         email: z.string().email(t("invalidEmail")),
         username: z.string().nonempty(t("notEmpty")),
-        grade: z.string().nonempty(t("notEmpty")),
+        year: z.string().nonempty(t("notEmpty")),
         topic: z.string().nonempty(t("notEmpty")),
       }),
     []
@@ -52,7 +52,7 @@ export const EditStudent = ({
       lastName: student.lastName,
       username: student.user.username,
       email: student.user.email,
-      grade: student.grade.toString() as string,
+      year: student.year.toString() as string,
       topic: student.topicId?.toString() as string,
     },
   });
@@ -79,7 +79,7 @@ export const EditStudent = ({
               data: {
                 firstName: { set: values.firstName },
                 lastName: { set: values.lastName },
-                grade: { set: parseInt(values.grade) },
+                year: { set: parseInt(values.year) },
                 topic: {
                   connect: {
                     id: parseInt(values.topic),
@@ -132,13 +132,13 @@ export const EditStudent = ({
                 {...form.getInputProps("topic")}
               />
               <Select
-                label={t("grade")}
+                label={t("year")}
                 data={makeArray(
                   data?.topics.find(
                     (topic) => topic.id === parseInt(form.values.topic)
-                  )?.grades
+                  )?.years
                 )}
-                {...form.getInputProps("grade")}
+                {...form.getInputProps("year")}
               />
             </>
           )}

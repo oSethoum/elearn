@@ -3,16 +3,21 @@ import { useMemo } from "react";
 import { useForm, zodResolver } from "@mantine/form";
 import { z } from "zod";
 import { useTranslation } from "react-i18next";
-import { useCreateDepartmentMutation } from "@/graphql";
+import { Department, useUpdateDepartmentMutation } from "@/graphql";
 
-interface NewDepartmentProps {
+interface EditDepartmentProps {
   onSubmit?: () => void;
   onCancel?: () => void;
+  department: Department;
 }
 
-export const NewDepartments = ({ onCancel, onSubmit }: NewDepartmentProps) => {
+export const EditDepartments = ({
+  onCancel,
+  onSubmit,
+  department,
+}: EditDepartmentProps) => {
   const { t } = useTranslation();
-  const [createDepartment] = useCreateDepartmentMutation();
+  const [updateDepartment] = useUpdateDepartmentMutation();
   const schema = useMemo(
     () =>
       z.object({
@@ -23,7 +28,7 @@ export const NewDepartments = ({ onCancel, onSubmit }: NewDepartmentProps) => {
   const form = useForm({
     schema: zodResolver(schema),
     initialValues: {
-      name: "",
+      name: department.name,
     },
   });
 
@@ -31,10 +36,13 @@ export const NewDepartments = ({ onCancel, onSubmit }: NewDepartmentProps) => {
     <Box>
       <form
         onSubmit={form.onSubmit((values) => {
-          createDepartment({
+          updateDepartment({
             variables: {
+              where: {
+                id: department.id,
+              },
               data: {
-                name: values.name,
+                name: { set: values.name },
               },
             },
             onCompleted() {
@@ -50,9 +58,13 @@ export const NewDepartments = ({ onCancel, onSubmit }: NewDepartmentProps) => {
           {...form.getInputProps("name")}
         />
 
-        <Group>
-          <Button onClick={onCancel}>{t("cancel")}</Button>
-          <Button type="submit">{t("add")}</Button>
+        <Group position="right" mt="lg">
+          <Button variant="default" onClick={onCancel}>
+            {t("cancel")}
+          </Button>
+          <Button color="green" type="submit">
+            {t("apply")}
+          </Button>
         </Group>
       </form>
     </Box>

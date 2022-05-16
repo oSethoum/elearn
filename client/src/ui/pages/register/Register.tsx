@@ -27,7 +27,7 @@ import {} from "react-icons/fa";
 import z from "zod";
 import { useTranslation } from "react-i18next";
 import { useForm, zodResolver } from "@mantine/form";
-import {  useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useAppContext } from "@/context/";
 
 export const Register = () => {
@@ -35,7 +35,7 @@ export const Register = () => {
   const { t } = useTranslation();
   const { user } = useAppContext();
   const [topics, setTopics] = useState<
-    { value: string; label: string; grades: number }[]
+    { value: string; label: string; years: number }[]
   >([]);
 
   const navigate = useNavigate();
@@ -79,7 +79,7 @@ export const Register = () => {
     password: z.string().min(6, t("minimumLength") + " 6"),
   });
 
-  const [grades, setGrades] = useState<string[]>([]);
+  const [years, setYears] = useState<string[]>([]);
 
   useEffect(() => {
     fetch("/api/topics")
@@ -89,7 +89,7 @@ export const Register = () => {
           data.map((topic) => ({
             label: topic.name,
             value: topic.id.toString(),
-            grades: topic.grades,
+            years: topic.years,
             group: topic.department.name,
           }))
         );
@@ -103,7 +103,7 @@ export const Register = () => {
       firstName: "",
       lastName: "",
       topic: "",
-      grade: "",
+      year: "",
       username: "",
       role: "",
       email: "",
@@ -113,15 +113,15 @@ export const Register = () => {
 
   useEffect(() => {
     const currentTopic = topics.find((t) => t.value === form.values.topic);
-    const computerGrades: string[] = [];
+    const computerYears: string[] = [];
 
     if (currentTopic) {
-      for (let i = 1; i <= currentTopic.grades; i++) {
-        computerGrades.push(i.toString());
+      for (let i = 1; i <= currentTopic.years; i++) {
+        computerYears.push(i.toString());
       }
     }
-    setGrades(computerGrades);
-    form.values.grade = "1";
+    setYears(computerYears);
+    form.values.year = "1";
   }, [form.values.topic]);
 
   const [alert, setAlert] = useState(false);
@@ -191,13 +191,13 @@ export const Register = () => {
                     {...form.getInputProps("topic")}
                   />
                 )}
-                {grades.length > 0 && form.values.role === "student" && (
+                {years.length > 0 && form.values.role === "student" && (
                   <Select
-                    label={t("grade")}
-                    placeholder={t("grade")}
+                    label={t("year")}
+                    placeholder={t("year")}
                     required
-                    data={grades}
-                    {...form.getInputProps("grade")}
+                    data={years}
+                    {...form.getInputProps("year")}
                   />
                 )}
               </Group>

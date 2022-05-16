@@ -1,150 +1,133 @@
-import { Box, TextInput, Select, Group, Textarea, Switch } from "@mantine/core";
+import {
+  Box,
+  Button,
+  Group,
+  Select,
+  SimpleGrid,
+  Textarea,
+  TextInput,
+} from "@mantine/core";
+import { useMemo } from "react";
 import { useForm, zodResolver } from "@mantine/form";
-import z from "zod";
-import { useQuery, useMutation, gql } from "@apollo/client";
+import { z } from "zod";
 import { useTranslation } from "react-i18next";
-import { useEffect, useState } from "react";
-import { Loader } from "../components";
+import {
+  Course,
+  namedOperations,
+  useCreateCourseMutation,
+  useTopicsQuery,
+} from "@/graphql";
 
-interface Props {
-  onSuccess: () => void;
+interface EditCourseProps {
+  onSubmit?: () => void;
+  onCancel?: () => void;
+  course: Course;
 }
 
-export const EditCourse = ({ onSuccess }: Props) => {
+export const EditCourse = ({ onCancel, onSubmit, course }: EditCourseProps) => {
   const { t } = useTranslation();
-  const { data, loading } = useQuery(gql`
-    query {
-      topics {
-        id
-        name
-        grades
-        department {
-          id
-          name
-        }
-      }
+  const { data } = useTopicsQuery();
+  const [createCourse] = useCreateCourseMutation();
 
-      teachers {
-        id
-        firstName
-        lastName
-      }
-    }
-  `);
-
-  if (loading) return <Loader height={"80vh"} />;
-
-  const schema = z.object({
-    title: z.string(),
-    description: z.string().nonempty(t("notEmpty")),
-    published: z.boolean(),
-    grade: z.string(),
-    teacherId: z.number(),
-    topicId: z.number(),
-  });
+  const schema = useMemo(
+    () =>
+      z.object({
+        title: z.string().nonempty(t("notEmpty")),
+        description: z.string().nonempty(t("notEmpty")),
+        topic: z.string().nonempty(t("notEmpty")),
+        year: z.string().nonempty(t("notEmpty")),
+      }),
+    []
+  );
 
   const form = useForm({
     schema: zodResolver(schema),
     initialValues: {
-      title: "",
-      description: "",
-      published: false,
-      grade: "",
-      teacherId: 1,
-      topicId: 1,
+      title: course.title,
+      description: course.description,
+      topic: course.topicId?.toString() as string,
+      year: course.year.toString(),
     },
   });
 
-  const [grades, setGrades] = useState<string[]>([]);
-
-  const [addCourse, { error }] = useMutation(
-    gql`
-      mutation createCourse($course: CourseInput!) {
-        createCourse(course: $course) {
-          id
-        }
-      }
-    `
-  );
-
-  useEffect(() => {
-    const currentTopic = data?.topics.find(
-      (t) => t.value === form.values.topicId
-    );
-    const computerGrades: string[] = [];
-
-    if (currentTopic) {
-      for (let i = 1; i <= currentTopic.grades; i++) {
-        computerGrades.push(i.toString());
+  const makeArray = (max?: number) => {
+    const arr: string[] = [];
+    if (max) {
+      for (let i = 1; i <= max; i++) {
+        arr.push(i.toString());
       }
     }
-    setGrades(computerGrades);
-    form.values.grade = "1";
-  }, [form.values.topicId]);
+    return arr;
+  };
 
   return (
     <Box>
       <form
-        onSubmit={form.onSubmit(async (values) => {
-          const { topicId, teacherId, grade, ...others } = values;
-          addCourse({
+        onSubmit={form.onSubmit((values) => {
+          createCourse({
             variables: {
-              teacher: {
-                connect: {
-                  id: teacherId,
+              data: {
+                title: values.title,
+                description: values.description,
+                topic: {
+                  connect: {
+                    id: parseInt(values.topic),
+                  },
                 },
+                year: parseInt(values.year),
               },
-              topic: {
-                connect: {
-                  id: topicId,
-                },
-              },
-              grade: grade,
-              ...others,
+            },
+            onCompleted() {
+              onSubmit?.();
             },
           });
-          onSuccess();
         })}
+        noValidate
       >
-        <Group>
-          <TextInput label={t("title")} {...form.getInputProps("title")} />
+        <SimpleGrid cols={1} breakpoints={[{ minWidth: "md", cols: 2 }]}>
+          <TextInput
+            label={t("title")}
+            placeholder={t("title")}
+            {...form.getInputProps("title")}
+          />
+
           <Textarea
             label={t("description")}
+            placeholder={t("description")}
             {...form.getInputProps("description")}
           />
+
           <Select
             label={t("topic")}
-            data={data.topics.map((t) => {
-              return {
-                label: t.name,
-                value: t.id,
-                group: t.department.name,
-              };
-            })}
+            data={
+              data?.topics.map((topic) => ({
+                label: topic.name,
+                value: topic.id.toString(),
+                group: topic.department?.name,
+              })) || []
+            }
+            {...form.getInputProps("topic")}
           />
 
           <Select
-            label={t("grade")}
-            placeholder={t("grade")}
-            data={grades}
-            {...form.getInputProps("grade")}
+            label={t("year")}
+            data={
+              makeArray(
+                data?.topics.find(
+                  (topic) => topic.id === parseInt(form.values.topic)
+                )?.years
+              ) || []
+            }
+            {...form.getInputProps("year")}
           />
-
-          <Select
-            label={t("teacher")}
-            searchable
-            data={data.teachers.map((teacher) => {
-              return {
-                label: teacher.firstName + " " + teacher.lastName,
-                value: teacher.id,
-              };
-            })}
-          />
-          <Switch label={t("published")} {...form.getInputProps("published")} />
+        </SimpleGrid>
+        <Group position="right">
+          <Button onClick={onCancel}>{t("cancel")}</Button>
+          <Button type="submit" color="blue">
+            {t("confirm")}
+          </Button>
         </Group>
       </form>
     </Box>
   );
 };
-
-export default EditCourse;

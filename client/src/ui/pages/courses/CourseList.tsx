@@ -71,12 +71,12 @@ export const CourseList = () => {
         ? {
             AND: [
               { topicId: { equals: user?.student?.topicId } },
-              { grade: { equals: user?.student?.grade } },
+              { year: { equals: user?.student?.year } },
             ],
           }
         : user?.teacher
         ? {
-            // teacherId: { equals: user?.teacher?.id },
+            teacherId: { equals: user?.teacher?.id },
           }
         : {},
     },

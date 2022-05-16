@@ -111,6 +111,8 @@ export const ar = {
     editDepartment: "تعديل قسم",
     addTopic: "إضافة تخصص",
     editTopic: "تعديل تخصص",
+    years: "السنوات",
+    name: "الاسم",
   },
 };
 

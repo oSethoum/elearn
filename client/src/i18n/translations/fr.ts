@@ -111,6 +111,8 @@ export const fr = {
     editCourse: "Modifier un cours",
     addDepartment: "Ajouter un département",
     editDepartment: "Modifier un département",
+    years: "Années",
+    name: "Nom",
   },
 };
 
