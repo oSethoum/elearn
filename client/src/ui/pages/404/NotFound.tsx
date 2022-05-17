@@ -1,4 +1,4 @@
-import { Button, Center, Group, Title } from "@mantine/core";
+import { Button, Center, Group } from "@mantine/core";
 import { useNavigate } from "react-router-dom";
 import { Logo } from "../../components";
 

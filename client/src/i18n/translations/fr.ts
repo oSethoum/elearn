@@ -113,6 +113,7 @@ export const fr = {
     editDepartment: "Modifier un département",
     years: "Années",
     name: "Nom",
+    department: "Département",
   },
 };
 

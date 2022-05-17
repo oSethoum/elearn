@@ -4,6 +4,7 @@ import {
   useEffect,
   useState,
 } from "react";
+
 import {
   Box,
   Burger,
@@ -12,10 +13,12 @@ import {
   createStyles,
   Divider,
   Drawer,
+  MediaQuery,
   Paper,
   Space,
   useMantineTheme,
 } from "@mantine/core";
+
 import { useMediaQuery, useWindowScroll } from "@mantine/hooks";
 import { Logo } from "./Logo";
 import { useLocation, useNavigate, useNavigationType } from "react-router-dom";
@@ -57,7 +60,6 @@ const useStyles = createStyles((theme, { y, height }: stylesProps) => ({
   children: {
     flexGrow: 1,
   },
-  leftSide: {},
   rightSide: {
     marginLeft: 20,
   },
@@ -87,7 +89,7 @@ export function Header({
   const [{ y }] = useWindowScroll();
   const { classes } = useStyles({ y, height });
   const { breakpoints } = useMantineTheme();
-  const tablet = useMediaQuery(`(max-width:${breakpoints.sm}px)`);
+  const tablet = useMediaQuery(`(max-width:${breakpoints.md}px)`);
   const [opened, setOpened] = useState(false);
   const { pathname } = useLocation();
   const { t } = useTranslation();
@@ -123,12 +125,15 @@ export function Header({
               opened={opened}
             />
           ) : (
-            <div className={classes.leftSide}>{leftSide}</div>
+            <div>{leftSide}</div>
           )}
           {!!responsive && tablet ? (
             <div className={classes.children}></div>
           ) : (
-            <div className={classes.children}>{children}</div>
+            <>
+              <Logo width={110} />
+              <div className={classes.children}>{children}</div>
+            </>
           )}
           <div className={classes.rightSide}>{rightSide}</div>
         </Box>
@@ -212,43 +217,6 @@ export function Header({
           )}
         </Box>
       </Drawer>
-      {!!withLogo && (
-        <Box
-          sx={{
-            position: "absolute",
-            display: "flex",
-            justifyContent: "center",
-            width: "100%",
-            zIndex: 20,
-          }}
-        >
-          <Paper
-            mt={-2}
-            shadow="sm"
-            sx={(theme) => ({
-              borderTopLeftRadius: 0,
-              borderTopRightRadius: 0,
-              borderBottom: `1px solid ${
-                theme.colorScheme === "dark"
-                  ? theme.colors.gray[7]
-                  : theme.colors.gray[4]
-              }`,
-              borderLeft: `1px solid ${
-                theme.colorScheme === "dark"
-                  ? theme.colors.gray[7]
-                  : theme.colors.gray[4]
-              }`,
-              borderRight: `1px solid ${
-                theme.colorScheme === "dark"
-                  ? theme.colors.gray[7]
-                  : theme.colors.gray[4]
-              }`,
-            })}
-          >
-            <Logo width={250} />
-          </Paper>
-        </Box>
-      )}
     </Box>
   );
 }

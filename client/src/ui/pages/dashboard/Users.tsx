@@ -86,7 +86,13 @@ export const DashboardUsers = () => {
       size: "xl",
       children: (
         <NewStudent
-          onSubmit={() => {}}
+          onSubmit={() => {
+            notification.showNotification({
+              message: t("success"),
+              color: "green",
+            })
+            modals.closeModal(id);
+          }}
           onCancel={() => {
             modals.closeModal(id);
           }}

@@ -1033,7 +1033,6 @@ type Course {
   assignments(cursor: AssignmentWhereUniqueInput, distinct: [AssignmentScalarFieldEnum!], orderBy: [AssignmentOrderByWithRelationInput!], skip: Int, take: Int, where: AssignmentWhereInput): [Assignment!]!
   createdAt: DateTime!
   description: String
-  grade: Int!
   id: Int!
   lessons(cursor: LessonWhereUniqueInput, distinct: [LessonScalarFieldEnum!], orderBy: [LessonOrderByWithRelationInput!], skip: Int, take: Int, where: LessonWhereInput): [Lesson!]!
   meetings(cursor: MeetingWhereUniqueInput, distinct: [MeetingScalarFieldEnum!], orderBy: [MeetingOrderByWithRelationInput!], skip: Int, take: Int, where: MeetingWhereInput): [Meeting!]!
@@ -1044,20 +1043,21 @@ type Course {
   topic: Topic
   topicId: Int
   updatedAt: DateTime!
+  year: Int!
 }
 
 type CourseAvgAggregate {
-  grade: Float
   id: Float
   teacherId: Float
   topicId: Float
+  year: Float
 }
 
 input CourseAvgOrderByAggregateInput {
-  grade: SortOrder
   id: SortOrder
   teacherId: SortOrder
   topicId: SortOrder
+  year: SortOrder
 }
 
 type CourseCount {
@@ -1070,32 +1070,31 @@ type CourseCountAggregate {
   _all: Int!
   createdAt: Int!
   description: Int!
-  grade: Int!
   id: Int!
   published: Int!
   teacherId: Int!
   title: Int!
   topicId: Int!
   updatedAt: Int!
+  year: Int!
 }
 
 input CourseCountOrderByAggregateInput {
   createdAt: SortOrder
   description: SortOrder
-  grade: SortOrder
   id: SortOrder
   published: SortOrder
   teacherId: SortOrder
   title: SortOrder
   topicId: SortOrder
   updatedAt: SortOrder
+  year: SortOrder
 }
 
 input CourseCreateInput {
   assignments: AssignmentCreateNestedManyWithoutCourseInput
   createdAt: DateTime
   description: String
-  grade: Int!
   lessons: LessonCreateNestedManyWithoutCourseInput
   meetings: MeetingCreateNestedManyWithoutCourseInput
   published: Boolean
@@ -1103,6 +1102,7 @@ input CourseCreateInput {
   title: String!
   topic: TopicCreateNestedOneWithoutCoursesInput
   updatedAt: DateTime
+  year: Int!
 }
 
 input CourseCreateNestedManyWithoutTeacherInput {
@@ -1163,7 +1163,6 @@ input CourseCreateOrConnectWithoutTopicInput {
 input CourseCreateWithoutAssignmentsInput {
   createdAt: DateTime
   description: String
-  grade: Int!
   lessons: LessonCreateNestedManyWithoutCourseInput
   meetings: MeetingCreateNestedManyWithoutCourseInput
   published: Boolean
@@ -1171,58 +1170,59 @@ input CourseCreateWithoutAssignmentsInput {
   title: String!
   topic: TopicCreateNestedOneWithoutCoursesInput
   updatedAt: DateTime
+  year: Int!
 }
 
 input CourseCreateWithoutLessonsInput {
   assignments: AssignmentCreateNestedManyWithoutCourseInput
   createdAt: DateTime
   description: String
-  grade: Int!
   meetings: MeetingCreateNestedManyWithoutCourseInput
   published: Boolean
   teacher: TeacherCreateNestedOneWithoutCoursesInput
   title: String!
   topic: TopicCreateNestedOneWithoutCoursesInput
   updatedAt: DateTime
+  year: Int!
 }
 
 input CourseCreateWithoutMeetingsInput {
   assignments: AssignmentCreateNestedManyWithoutCourseInput
   createdAt: DateTime
   description: String
-  grade: Int!
   lessons: LessonCreateNestedManyWithoutCourseInput
   published: Boolean
   teacher: TeacherCreateNestedOneWithoutCoursesInput
   title: String!
   topic: TopicCreateNestedOneWithoutCoursesInput
   updatedAt: DateTime
+  year: Int!
 }
 
 input CourseCreateWithoutTeacherInput {
   assignments: AssignmentCreateNestedManyWithoutCourseInput
   createdAt: DateTime
   description: String
-  grade: Int!
   lessons: LessonCreateNestedManyWithoutCourseInput
   meetings: MeetingCreateNestedManyWithoutCourseInput
   published: Boolean
   title: String!
   topic: TopicCreateNestedOneWithoutCoursesInput
   updatedAt: DateTime
+  year: Int!
 }
 
 input CourseCreateWithoutTopicInput {
   assignments: AssignmentCreateNestedManyWithoutCourseInput
   createdAt: DateTime
   description: String
-  grade: Int!
   lessons: LessonCreateNestedManyWithoutCourseInput
   meetings: MeetingCreateNestedManyWithoutCourseInput
   published: Boolean
   teacher: TeacherCreateNestedOneWithoutCoursesInput
   title: String!
   updatedAt: DateTime
+  year: Int!
 }
 
 type CourseGroupBy {
@@ -1233,13 +1233,13 @@ type CourseGroupBy {
   _sum: CourseSumAggregate
   createdAt: DateTime!
   description: String
-  grade: Int!
   id: Int!
   published: Boolean!
   teacherId: Int
   title: String!
   topicId: Int
   updatedAt: DateTime!
+  year: Int!
 }
 
 input CourseListRelationFilter {
@@ -1251,49 +1251,49 @@ input CourseListRelationFilter {
 type CourseMaxAggregate {
   createdAt: DateTime
   description: String
-  grade: Int
   id: Int
   published: Boolean
   teacherId: Int
   title: String
   topicId: Int
   updatedAt: DateTime
+  year: Int
 }
 
 input CourseMaxOrderByAggregateInput {
   createdAt: SortOrder
   description: SortOrder
-  grade: SortOrder
   id: SortOrder
   published: SortOrder
   teacherId: SortOrder
   title: SortOrder
   topicId: SortOrder
   updatedAt: SortOrder
+  year: SortOrder
 }
 
 type CourseMinAggregate {
   createdAt: DateTime
   description: String
-  grade: Int
   id: Int
   published: Boolean
   teacherId: Int
   title: String
   topicId: Int
   updatedAt: DateTime
+  year: Int
 }
 
 input CourseMinOrderByAggregateInput {
   createdAt: SortOrder
   description: SortOrder
-  grade: SortOrder
   id: SortOrder
   published: SortOrder
   teacherId: SortOrder
   title: SortOrder
   topicId: SortOrder
   updatedAt: SortOrder
+  year: SortOrder
 }
 
 input CourseOrderByRelationAggregateInput {
@@ -1308,20 +1308,19 @@ input CourseOrderByWithAggregationInput {
   _sum: CourseSumOrderByAggregateInput
   createdAt: SortOrder
   description: SortOrder
-  grade: SortOrder
   id: SortOrder
   published: SortOrder
   teacherId: SortOrder
   title: SortOrder
   topicId: SortOrder
   updatedAt: SortOrder
+  year: SortOrder
 }
 
 input CourseOrderByWithRelationInput {
   assignments: AssignmentOrderByRelationAggregateInput
   createdAt: SortOrder
   description: SortOrder
-  grade: SortOrder
   id: SortOrder
   lessons: LessonOrderByRelationAggregateInput
   meetings: MeetingOrderByRelationAggregateInput
@@ -1332,6 +1331,7 @@ input CourseOrderByWithRelationInput {
   topic: TopicOrderByWithRelationInput
   topicId: SortOrder
   updatedAt: SortOrder
+  year: SortOrder
 }
 
 input CourseRelationFilter {
@@ -1342,13 +1342,13 @@ input CourseRelationFilter {
 enum CourseScalarFieldEnum {
   createdAt
   description
-  grade
   id
   published
   teacherId
   title
   topicId
   updatedAt
+  year
 }
 
 input CourseScalarWhereInput {
@@ -1357,13 +1357,13 @@ input CourseScalarWhereInput {
   OR: [CourseScalarWhereInput!]
   createdAt: DateTimeFilter
   description: StringNullableFilter
-  grade: IntFilter
   id: IntFilter
   published: BoolFilter
   teacherId: IntNullableFilter
   title: StringFilter
   topicId: IntNullableFilter
   updatedAt: DateTimeFilter
+  year: IntFilter
 }
 
 input CourseScalarWhereWithAggregatesInput {
@@ -1372,34 +1372,33 @@ input CourseScalarWhereWithAggregatesInput {
   OR: [CourseScalarWhereWithAggregatesInput!]
   createdAt: DateTimeWithAggregatesFilter
   description: StringNullableWithAggregatesFilter
-  grade: IntWithAggregatesFilter
   id: IntWithAggregatesFilter
   published: BoolWithAggregatesFilter
   teacherId: IntNullableWithAggregatesFilter
   title: StringWithAggregatesFilter
   topicId: IntNullableWithAggregatesFilter
   updatedAt: DateTimeWithAggregatesFilter
+  year: IntWithAggregatesFilter
 }
 
 type CourseSumAggregate {
-  grade: Int
   id: Int
   teacherId: Int
   topicId: Int
+  year: Int
 }
 
 input CourseSumOrderByAggregateInput {
-  grade: SortOrder
   id: SortOrder
   teacherId: SortOrder
   topicId: SortOrder
+  year: SortOrder
 }
 
 input CourseUpdateInput {
   assignments: AssignmentUpdateManyWithoutCourseInput
   createdAt: DateTimeFieldUpdateOperationsInput
   description: NullableStringFieldUpdateOperationsInput
-  grade: IntFieldUpdateOperationsInput
   lessons: LessonUpdateManyWithoutCourseInput
   meetings: MeetingUpdateManyWithoutCourseInput
   published: BoolFieldUpdateOperationsInput
@@ -1407,15 +1406,16 @@ input CourseUpdateInput {
   title: StringFieldUpdateOperationsInput
   topic: TopicUpdateOneWithoutCoursesInput
   updatedAt: DateTimeFieldUpdateOperationsInput
+  year: IntFieldUpdateOperationsInput
 }
 
 input CourseUpdateManyMutationInput {
   createdAt: DateTimeFieldUpdateOperationsInput
   description: NullableStringFieldUpdateOperationsInput
-  grade: IntFieldUpdateOperationsInput
   published: BoolFieldUpdateOperationsInput
   title: StringFieldUpdateOperationsInput
   updatedAt: DateTimeFieldUpdateOperationsInput
+  year: IntFieldUpdateOperationsInput
 }
 
 input CourseUpdateManyWithWhereWithoutTeacherInput {
@@ -1497,7 +1497,6 @@ input CourseUpdateWithWhereUniqueWithoutTopicInput {
 input CourseUpdateWithoutAssignmentsInput {
   createdAt: DateTimeFieldUpdateOperationsInput
   description: NullableStringFieldUpdateOperationsInput
-  grade: IntFieldUpdateOperationsInput
   lessons: LessonUpdateManyWithoutCourseInput
   meetings: MeetingUpdateManyWithoutCourseInput
   published: BoolFieldUpdateOperationsInput
@@ -1505,58 +1504,59 @@ input CourseUpdateWithoutAssignmentsInput {
   title: StringFieldUpdateOperationsInput
   topic: TopicUpdateOneWithoutCoursesInput
   updatedAt: DateTimeFieldUpdateOperationsInput
+  year: IntFieldUpdateOperationsInput
 }
 
 input CourseUpdateWithoutLessonsInput {
   assignments: AssignmentUpdateManyWithoutCourseInput
   createdAt: DateTimeFieldUpdateOperationsInput
   description: NullableStringFieldUpdateOperationsInput
-  grade: IntFieldUpdateOperationsInput
   meetings: MeetingUpdateManyWithoutCourseInput
   published: BoolFieldUpdateOperationsInput
   teacher: TeacherUpdateOneWithoutCoursesInput
   title: StringFieldUpdateOperationsInput
   topic: TopicUpdateOneWithoutCoursesInput
   updatedAt: DateTimeFieldUpdateOperationsInput
+  year: IntFieldUpdateOperationsInput
 }
 
 input CourseUpdateWithoutMeetingsInput {
   assignments: AssignmentUpdateManyWithoutCourseInput
   createdAt: DateTimeFieldUpdateOperationsInput
   description: NullableStringFieldUpdateOperationsInput
-  grade: IntFieldUpdateOperationsInput
   lessons: LessonUpdateManyWithoutCourseInput
   published: BoolFieldUpdateOperationsInput
   teacher: TeacherUpdateOneWithoutCoursesInput
   title: StringFieldUpdateOperationsInput
   topic: TopicUpdateOneWithoutCoursesInput
   updatedAt: DateTimeFieldUpdateOperationsInput
+  year: IntFieldUpdateOperationsInput
 }
 
 input CourseUpdateWithoutTeacherInput {
   assignments: AssignmentUpdateManyWithoutCourseInput
   createdAt: DateTimeFieldUpdateOperationsInput
   description: NullableStringFieldUpdateOperationsInput
-  grade: IntFieldUpdateOperationsInput
   lessons: LessonUpdateManyWithoutCourseInput
   meetings: MeetingUpdateManyWithoutCourseInput
   published: BoolFieldUpdateOperationsInput
   title: StringFieldUpdateOperationsInput
   topic: TopicUpdateOneWithoutCoursesInput
   updatedAt: DateTimeFieldUpdateOperationsInput
+  year: IntFieldUpdateOperationsInput
 }
 
 input CourseUpdateWithoutTopicInput {
   assignments: AssignmentUpdateManyWithoutCourseInput
   createdAt: DateTimeFieldUpdateOperationsInput
   description: NullableStringFieldUpdateOperationsInput
-  grade: IntFieldUpdateOperationsInput
   lessons: LessonUpdateManyWithoutCourseInput
   meetings: MeetingUpdateManyWithoutCourseInput
   published: BoolFieldUpdateOperationsInput
   teacher: TeacherUpdateOneWithoutCoursesInput
   title: StringFieldUpdateOperationsInput
   updatedAt: DateTimeFieldUpdateOperationsInput
+  year: IntFieldUpdateOperationsInput
 }
 
 input CourseUpsertWithWhereUniqueWithoutTeacherInput {
@@ -1593,7 +1593,6 @@ input CourseWhereInput {
   assignments: AssignmentListRelationFilter
   createdAt: DateTimeFilter
   description: StringNullableFilter
-  grade: IntFilter
   id: IntFilter
   lessons: LessonListRelationFilter
   meetings: MeetingListRelationFilter
@@ -1604,6 +1603,7 @@ input CourseWhereInput {
   topic: TopicRelationFilter
   topicId: IntNullableFilter
   updatedAt: DateTimeFilter
+  year: IntFilter
 }
 
 input CourseWhereUniqueInput {
@@ -3259,7 +3259,6 @@ input StringWithAggregatesFilter {
 type Student {
   _count: StudentCount
   firstName: String!
-  grade: Int!
   id: Int!
   lastName: String!
   submissions(cursor: SubmissionWhereUniqueInput, distinct: [SubmissionScalarFieldEnum!], orderBy: [SubmissionOrderByWithRelationInput!], skip: Int, take: Int, where: SubmissionWhereInput): [Submission!]!
@@ -3267,20 +3266,21 @@ type Student {
   topicId: Int
   user: User!
   userId: Int!
+  year: Int!
 }
 
 type StudentAvgAggregate {
-  grade: Float
   id: Float
   topicId: Float
   userId: Float
+  year: Float
 }
 
 input StudentAvgOrderByAggregateInput {
-  grade: SortOrder
   id: SortOrder
   topicId: SortOrder
   userId: SortOrder
+  year: SortOrder
 }
 
 type StudentCount {
@@ -3290,29 +3290,29 @@ type StudentCount {
 type StudentCountAggregate {
   _all: Int!
   firstName: Int!
-  grade: Int!
   id: Int!
   lastName: Int!
   topicId: Int!
   userId: Int!
+  year: Int!
 }
 
 input StudentCountOrderByAggregateInput {
   firstName: SortOrder
-  grade: SortOrder
   id: SortOrder
   lastName: SortOrder
   topicId: SortOrder
   userId: SortOrder
+  year: SortOrder
 }
 
 input StudentCreateInput {
   firstName: String!
-  grade: Int!
   lastName: String!
   submissions: SubmissionCreateNestedManyWithoutStudentInput
   topic: TopicCreateNestedOneWithoutStudentsInput
   user: UserCreateNestedOneWithoutStudentInput!
+  year: Int!
 }
 
 input StudentCreateNestedManyWithoutTopicInput {
@@ -3350,26 +3350,26 @@ input StudentCreateOrConnectWithoutUserInput {
 
 input StudentCreateWithoutSubmissionsInput {
   firstName: String!
-  grade: Int!
   lastName: String!
   topic: TopicCreateNestedOneWithoutStudentsInput
   user: UserCreateNestedOneWithoutStudentInput!
+  year: Int!
 }
 
 input StudentCreateWithoutTopicInput {
   firstName: String!
-  grade: Int!
   lastName: String!
   submissions: SubmissionCreateNestedManyWithoutStudentInput
   user: UserCreateNestedOneWithoutStudentInput!
+  year: Int!
 }
 
 input StudentCreateWithoutUserInput {
   firstName: String!
-  grade: Int!
   lastName: String!
   submissions: SubmissionCreateNestedManyWithoutStudentInput
   topic: TopicCreateNestedOneWithoutStudentsInput
+  year: Int!
 }
 
 type StudentGroupBy {
@@ -3379,11 +3379,11 @@ type StudentGroupBy {
   _min: StudentMinAggregate
   _sum: StudentSumAggregate
   firstName: String!
-  grade: Int!
   id: Int!
   lastName: String!
   topicId: Int
   userId: Int!
+  year: Int!
 }
 
 input StudentListRelationFilter {
@@ -3394,38 +3394,38 @@ input StudentListRelationFilter {
 
 type StudentMaxAggregate {
   firstName: String
-  grade: Int
   id: Int
   lastName: String
   topicId: Int
   userId: Int
+  year: Int
 }
 
 input StudentMaxOrderByAggregateInput {
   firstName: SortOrder
-  grade: SortOrder
   id: SortOrder
   lastName: SortOrder
   topicId: SortOrder
   userId: SortOrder
+  year: SortOrder
 }
 
 type StudentMinAggregate {
   firstName: String
-  grade: Int
   id: Int
   lastName: String
   topicId: Int
   userId: Int
+  year: Int
 }
 
 input StudentMinOrderByAggregateInput {
   firstName: SortOrder
-  grade: SortOrder
   id: SortOrder
   lastName: SortOrder
   topicId: SortOrder
   userId: SortOrder
+  year: SortOrder
 }
 
 input StudentOrderByRelationAggregateInput {
@@ -3439,16 +3439,15 @@ input StudentOrderByWithAggregationInput {
   _min: StudentMinOrderByAggregateInput
   _sum: StudentSumOrderByAggregateInput
   firstName: SortOrder
-  grade: SortOrder
   id: SortOrder
   lastName: SortOrder
   topicId: SortOrder
   userId: SortOrder
+  year: SortOrder
 }
 
 input StudentOrderByWithRelationInput {
   firstName: SortOrder
-  grade: SortOrder
   id: SortOrder
   lastName: SortOrder
   submissions: SubmissionOrderByRelationAggregateInput
@@ -3456,6 +3455,7 @@ input StudentOrderByWithRelationInput {
   topicId: SortOrder
   user: UserOrderByWithRelationInput
   userId: SortOrder
+  year: SortOrder
 }
 
 input StudentRelationFilter {
@@ -3465,11 +3465,11 @@ input StudentRelationFilter {
 
 enum StudentScalarFieldEnum {
   firstName
-  grade
   id
   lastName
   topicId
   userId
+  year
 }
 
 input StudentScalarWhereInput {
@@ -3477,11 +3477,11 @@ input StudentScalarWhereInput {
   NOT: [StudentScalarWhereInput!]
   OR: [StudentScalarWhereInput!]
   firstName: StringFilter
-  grade: IntFilter
   id: IntFilter
   lastName: StringFilter
   topicId: IntNullableFilter
   userId: IntFilter
+  year: IntFilter
 }
 
 input StudentScalarWhereWithAggregatesInput {
@@ -3489,40 +3489,40 @@ input StudentScalarWhereWithAggregatesInput {
   NOT: [StudentScalarWhereWithAggregatesInput!]
   OR: [StudentScalarWhereWithAggregatesInput!]
   firstName: StringWithAggregatesFilter
-  grade: IntWithAggregatesFilter
   id: IntWithAggregatesFilter
   lastName: StringWithAggregatesFilter
   topicId: IntNullableWithAggregatesFilter
   userId: IntWithAggregatesFilter
+  year: IntWithAggregatesFilter
 }
 
 type StudentSumAggregate {
-  grade: Int
   id: Int
   topicId: Int
   userId: Int
+  year: Int
 }
 
 input StudentSumOrderByAggregateInput {
-  grade: SortOrder
   id: SortOrder
   topicId: SortOrder
   userId: SortOrder
+  year: SortOrder
 }
 
 input StudentUpdateInput {
   firstName: StringFieldUpdateOperationsInput
-  grade: IntFieldUpdateOperationsInput
   lastName: StringFieldUpdateOperationsInput
   submissions: SubmissionUpdateManyWithoutStudentInput
   topic: TopicUpdateOneWithoutStudentsInput
   user: UserUpdateOneRequiredWithoutStudentInput
+  year: IntFieldUpdateOperationsInput
 }
 
 input StudentUpdateManyMutationInput {
   firstName: StringFieldUpdateOperationsInput
-  grade: IntFieldUpdateOperationsInput
   lastName: StringFieldUpdateOperationsInput
+  year: IntFieldUpdateOperationsInput
 }
 
 input StudentUpdateManyWithWhereWithoutTopicInput {
@@ -3570,26 +3570,26 @@ input StudentUpdateWithWhereUniqueWithoutTopicInput {
 
 input StudentUpdateWithoutSubmissionsInput {
   firstName: StringFieldUpdateOperationsInput
-  grade: IntFieldUpdateOperationsInput
   lastName: StringFieldUpdateOperationsInput
   topic: TopicUpdateOneWithoutStudentsInput
   user: UserUpdateOneRequiredWithoutStudentInput
+  year: IntFieldUpdateOperationsInput
 }
 
 input StudentUpdateWithoutTopicInput {
   firstName: StringFieldUpdateOperationsInput
-  grade: IntFieldUpdateOperationsInput
   lastName: StringFieldUpdateOperationsInput
   submissions: SubmissionUpdateManyWithoutStudentInput
   user: UserUpdateOneRequiredWithoutStudentInput
+  year: IntFieldUpdateOperationsInput
 }
 
 input StudentUpdateWithoutUserInput {
   firstName: StringFieldUpdateOperationsInput
-  grade: IntFieldUpdateOperationsInput
   lastName: StringFieldUpdateOperationsInput
   submissions: SubmissionUpdateManyWithoutStudentInput
   topic: TopicUpdateOneWithoutStudentsInput
+  year: IntFieldUpdateOperationsInput
 }
 
 input StudentUpsertWithWhereUniqueWithoutTopicInput {
@@ -3613,7 +3613,6 @@ input StudentWhereInput {
   NOT: [StudentWhereInput!]
   OR: [StudentWhereInput!]
   firstName: StringFilter
-  grade: IntFilter
   id: IntFilter
   lastName: StringFilter
   submissions: SubmissionListRelationFilter
@@ -3621,6 +3620,7 @@ input StudentWhereInput {
   topicId: IntNullableFilter
   user: UserRelationFilter
   userId: IntFilter
+  year: IntFilter
 }
 
 input StudentWhereUniqueInput {
@@ -4537,22 +4537,22 @@ type Topic {
   courses(cursor: CourseWhereUniqueInput, distinct: [CourseScalarFieldEnum!], orderBy: [CourseOrderByWithRelationInput!], skip: Int, take: Int, where: CourseWhereInput): [Course!]!
   department: Department
   departmentId: Int
-  grades: Int!
   id: Int!
   name: String!
   students(cursor: StudentWhereUniqueInput, distinct: [StudentScalarFieldEnum!], orderBy: [StudentOrderByWithRelationInput!], skip: Int, take: Int, where: StudentWhereInput): [Student!]!
+  years: Int!
 }
 
 type TopicAvgAggregate {
   departmentId: Float
-  grades: Float
   id: Float
+  years: Float
 }
 
 input TopicAvgOrderByAggregateInput {
   departmentId: SortOrder
-  grades: SortOrder
   id: SortOrder
+  years: SortOrder
 }
 
 type TopicCount {
@@ -4563,24 +4563,24 @@ type TopicCount {
 type TopicCountAggregate {
   _all: Int!
   departmentId: Int!
-  grades: Int!
   id: Int!
   name: Int!
+  years: Int!
 }
 
 input TopicCountOrderByAggregateInput {
   departmentId: SortOrder
-  grades: SortOrder
   id: SortOrder
   name: SortOrder
+  years: SortOrder
 }
 
 input TopicCreateInput {
   courses: CourseCreateNestedManyWithoutTopicInput
   department: DepartmentCreateNestedOneWithoutTopicsInput
-  grades: Int!
   name: String!
   students: StudentCreateNestedManyWithoutTopicInput
+  years: Int!
 }
 
 input TopicCreateNestedManyWithoutDepartmentInput {
@@ -4618,23 +4618,23 @@ input TopicCreateOrConnectWithoutStudentsInput {
 
 input TopicCreateWithoutCoursesInput {
   department: DepartmentCreateNestedOneWithoutTopicsInput
-  grades: Int!
   name: String!
   students: StudentCreateNestedManyWithoutTopicInput
+  years: Int!
 }
 
 input TopicCreateWithoutDepartmentInput {
   courses: CourseCreateNestedManyWithoutTopicInput
-  grades: Int!
   name: String!
   students: StudentCreateNestedManyWithoutTopicInput
+  years: Int!
 }
 
 input TopicCreateWithoutStudentsInput {
   courses: CourseCreateNestedManyWithoutTopicInput
   department: DepartmentCreateNestedOneWithoutTopicsInput
-  grades: Int!
   name: String!
+  years: Int!
 }
 
 type TopicGroupBy {
@@ -4644,9 +4644,9 @@ type TopicGroupBy {
   _min: TopicMinAggregate
   _sum: TopicSumAggregate
   departmentId: Int
-  grades: Int!
   id: Int!
   name: String!
+  years: Int!
 }
 
 input TopicListRelationFilter {
@@ -4657,30 +4657,30 @@ input TopicListRelationFilter {
 
 type TopicMaxAggregate {
   departmentId: Int
-  grades: Int
   id: Int
   name: String
+  years: Int
 }
 
 input TopicMaxOrderByAggregateInput {
   departmentId: SortOrder
-  grades: SortOrder
   id: SortOrder
   name: SortOrder
+  years: SortOrder
 }
 
 type TopicMinAggregate {
   departmentId: Int
-  grades: Int
   id: Int
   name: String
+  years: Int
 }
 
 input TopicMinOrderByAggregateInput {
   departmentId: SortOrder
-  grades: SortOrder
   id: SortOrder
   name: SortOrder
+  years: SortOrder
 }
 
 input TopicOrderByRelationAggregateInput {
@@ -4694,19 +4694,19 @@ input TopicOrderByWithAggregationInput {
   _min: TopicMinOrderByAggregateInput
   _sum: TopicSumOrderByAggregateInput
   departmentId: SortOrder
-  grades: SortOrder
   id: SortOrder
   name: SortOrder
+  years: SortOrder
 }
 
 input TopicOrderByWithRelationInput {
   courses: CourseOrderByRelationAggregateInput
   department: DepartmentOrderByWithRelationInput
   departmentId: SortOrder
-  grades: SortOrder
   id: SortOrder
   name: SortOrder
   students: StudentOrderByRelationAggregateInput
+  years: SortOrder
 }
 
 input TopicRelationFilter {
@@ -4716,9 +4716,9 @@ input TopicRelationFilter {
 
 enum TopicScalarFieldEnum {
   departmentId
-  grades
   id
   name
+  years
 }
 
 input TopicScalarWhereInput {
@@ -4726,9 +4726,9 @@ input TopicScalarWhereInput {
   NOT: [TopicScalarWhereInput!]
   OR: [TopicScalarWhereInput!]
   departmentId: IntNullableFilter
-  grades: IntFilter
   id: IntFilter
   name: StringFilter
+  years: IntFilter
 }
 
 input TopicScalarWhereWithAggregatesInput {
@@ -4736,34 +4736,34 @@ input TopicScalarWhereWithAggregatesInput {
   NOT: [TopicScalarWhereWithAggregatesInput!]
   OR: [TopicScalarWhereWithAggregatesInput!]
   departmentId: IntNullableWithAggregatesFilter
-  grades: IntWithAggregatesFilter
   id: IntWithAggregatesFilter
   name: StringWithAggregatesFilter
+  years: IntWithAggregatesFilter
 }
 
 type TopicSumAggregate {
   departmentId: Int
-  grades: Int
   id: Int
+  years: Int
 }
 
 input TopicSumOrderByAggregateInput {
   departmentId: SortOrder
-  grades: SortOrder
   id: SortOrder
+  years: SortOrder
 }
 
 input TopicUpdateInput {
   courses: CourseUpdateManyWithoutTopicInput
   department: DepartmentUpdateOneWithoutTopicsInput
-  grades: IntFieldUpdateOperationsInput
   name: StringFieldUpdateOperationsInput
   students: StudentUpdateManyWithoutTopicInput
+  years: IntFieldUpdateOperationsInput
 }
 
 input TopicUpdateManyMutationInput {
-  grades: IntFieldUpdateOperationsInput
   name: StringFieldUpdateOperationsInput
+  years: IntFieldUpdateOperationsInput
 }
 
 input TopicUpdateManyWithWhereWithoutDepartmentInput {
@@ -4811,23 +4811,23 @@ input TopicUpdateWithWhereUniqueWithoutDepartmentInput {
 
 input TopicUpdateWithoutCoursesInput {
   department: DepartmentUpdateOneWithoutTopicsInput
-  grades: IntFieldUpdateOperationsInput
   name: StringFieldUpdateOperationsInput
   students: StudentUpdateManyWithoutTopicInput
+  years: IntFieldUpdateOperationsInput
 }
 
 input TopicUpdateWithoutDepartmentInput {
   courses: CourseUpdateManyWithoutTopicInput
-  grades: IntFieldUpdateOperationsInput
   name: StringFieldUpdateOperationsInput
   students: StudentUpdateManyWithoutTopicInput
+  years: IntFieldUpdateOperationsInput
 }
 
 input TopicUpdateWithoutStudentsInput {
   courses: CourseUpdateManyWithoutTopicInput
   department: DepartmentUpdateOneWithoutTopicsInput
-  grades: IntFieldUpdateOperationsInput
   name: StringFieldUpdateOperationsInput
+  years: IntFieldUpdateOperationsInput
 }
 
 input TopicUpsertWithWhereUniqueWithoutDepartmentInput {
@@ -4853,10 +4853,10 @@ input TopicWhereInput {
   courses: CourseListRelationFilter
   department: DepartmentRelationFilter
   departmentId: IntNullableFilter
-  grades: IntFilter
   id: IntFilter
   name: StringFilter
   students: StudentListRelationFilter
+  years: IntFilter
 }
 
 input TopicWhereUniqueInput {

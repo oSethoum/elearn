@@ -22,9 +22,12 @@ export const Departments = () => {
 
   const handleDelete = (index: number) => {
     openConfirmModal({
-      title: t("delete"),
+      title: t("confirmAction"),
       children: t("deleteMessage"),
       labels: { confirm: t("confirm"), cancel: t("cancel") },
+      confirmProps: { color: "red" },
+      centered: true,
+      withCloseButton: false,
 
       onConfirm: () => {
         deleteDepartment({
@@ -49,6 +52,7 @@ export const Departments = () => {
 
     const id = openModal({
       title: t("editDepartment"),
+      withCloseButton: false,
       children: (
         <EditDepartments
           department={data.departments[index] as Department}

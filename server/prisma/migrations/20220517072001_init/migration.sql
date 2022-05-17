@@ -13,7 +13,7 @@ CREATE TABLE "User" (
 -- CreateTable
 CREATE TABLE "Student" (
     "id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
-    "grade" INTEGER NOT NULL,
+    "year" INTEGER NOT NULL,
     "firstName" TEXT NOT NULL,
     "lastName" TEXT NOT NULL,
     "userId" INTEGER NOT NULL,
@@ -50,7 +50,7 @@ CREATE TABLE "Department" (
 CREATE TABLE "Topic" (
     "id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
     "name" TEXT NOT NULL,
-    "grades" INTEGER NOT NULL,
+    "years" INTEGER NOT NULL,
     "departmentId" INTEGER,
     CONSTRAINT "Topic_departmentId_fkey" FOREIGN KEY ("departmentId") REFERENCES "Department" ("id") ON DELETE SET NULL ON UPDATE CASCADE
 );
@@ -59,7 +59,7 @@ CREATE TABLE "Topic" (
 CREATE TABLE "Course" (
     "id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
     "title" TEXT NOT NULL,
-    "grade" INTEGER NOT NULL,
+    "year" INTEGER NOT NULL,
     "description" TEXT,
     "published" BOOLEAN NOT NULL DEFAULT false,
     "createdAt" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -73,11 +73,12 @@ CREATE TABLE "Course" (
 -- CreateTable
 CREATE TABLE "Assignment" (
     "id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
-    "deadline" DATETIME NOT NULL,
+    "title" TEXT NOT NULL,
     "createdAt" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" DATETIME NOT NULL,
     "published" BOOLEAN NOT NULL,
     "content" TEXT NOT NULL,
+    "description" TEXT,
     "courseId" INTEGER,
     CONSTRAINT "Assignment_courseId_fkey" FOREIGN KEY ("courseId") REFERENCES "Course" ("id") ON DELETE SET NULL ON UPDATE CASCADE
 );
@@ -87,7 +88,8 @@ CREATE TABLE "Meeting" (
     "id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
     "title" TEXT NOT NULL,
     "description" TEXT,
-    "start" DATETIME NOT NULL,
+    "date" DATETIME NOT NULL,
+    "startTime" DATETIME NOT NULL,
     "duration" DATETIME NOT NULL,
     "link" TEXT,
     "createdAt" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -125,7 +127,6 @@ CREATE TABLE "Lesson" (
     "id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
     "title" TEXT NOT NULL,
     "description" TEXT,
-    "index" INTEGER NOT NULL,
     "published" BOOLEAN NOT NULL,
     "createdAt" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" DATETIME NOT NULL,

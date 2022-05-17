@@ -18,6 +18,18 @@ export const publicRoutes = (app: Application) => {
       });
   });
 
+  app.get("/api/departments", (_, res) => {
+    prisma.department
+      .findMany({
+        include: {
+          topics: true,
+        },
+      })
+      .then((departments) => {
+        res.json(departments);
+      });
+  });
+
   app.get("/api/topics/:id", (req, res) => {
     const id = req.params.id;
     prisma.topic

@@ -113,6 +113,8 @@ export const en = {
     editDepartment: "Edit Department",
     years: "Years",
     name: "Name",
+    department: "Department",
+    
   },
 };
 

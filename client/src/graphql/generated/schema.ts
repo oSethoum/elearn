@@ -6585,7 +6585,7 @@ export type CreateLessonMutationVariables = Exact<{
 }>;
 
 
-export type CreateLessonMutation = { __typename?: 'Mutation', createLesson: { __typename: 'Lesson', id: number } };
+export type CreateLessonMutation = { __typename?: 'Mutation', createLesson: { __typename?: 'Lesson', id: number } };
 
 export type UpdateLessonMutationVariables = Exact<{
   data: LessonUpdateInput;
@@ -6600,14 +6600,14 @@ export type DeleteLessonMutationVariables = Exact<{
 }>;
 
 
-export type DeleteLessonMutation = { __typename?: 'Mutation', deleteLesson?: { __typename: 'Lesson', id: number } | null };
+export type DeleteLessonMutation = { __typename?: 'Mutation', deleteLesson?: { __typename?: 'Lesson', id: number } | null };
 
 export type CreateCourseMutationVariables = Exact<{
   data: CourseCreateInput;
 }>;
 
 
-export type CreateCourseMutation = { __typename?: 'Mutation', createCourse: { __typename: 'Course', id: number } };
+export type CreateCourseMutation = { __typename?: 'Mutation', createCourse: { __typename?: 'Course', id: number } };
 
 export type UpdateCourseMutationVariables = Exact<{
   data: CourseUpdateInput;
@@ -6615,21 +6615,43 @@ export type UpdateCourseMutationVariables = Exact<{
 }>;
 
 
-export type UpdateCourseMutation = { __typename?: 'Mutation', updateCourse?: { __typename: 'Course', id: number } | null };
+export type UpdateCourseMutation = { __typename?: 'Mutation', updateCourse?: { __typename?: 'Course', id: number } | null };
 
 export type DeleteCourseMutationVariables = Exact<{
   where: CourseWhereUniqueInput;
 }>;
 
 
-export type DeleteCourseMutation = { __typename?: 'Mutation', deleteCourse?: { __typename: 'Course', id: number } | null };
+export type DeleteCourseMutation = { __typename?: 'Mutation', deleteCourse?: { __typename?: 'Course', id: number } | null };
+
+export type CreateTopicMutationVariables = Exact<{
+  data: TopicCreateInput;
+}>;
+
+
+export type CreateTopicMutation = { __typename?: 'Mutation', createTopic: { __typename?: 'Topic', id: number } };
+
+export type UpdateTopicMutationVariables = Exact<{
+  data: TopicUpdateInput;
+  where: TopicWhereUniqueInput;
+}>;
+
+
+export type UpdateTopicMutation = { __typename?: 'Mutation', updateTopic?: { __typename?: 'Topic', id: number } | null };
+
+export type DeleteTopicMutationVariables = Exact<{
+  where: TopicWhereUniqueInput;
+}>;
+
+
+export type DeleteTopicMutation = { __typename?: 'Mutation', deleteTopic?: { __typename?: 'Topic', id: number } | null };
 
 export type CreateUserMutationVariables = Exact<{
   data: UserCreateInput;
 }>;
 
 
-export type CreateUserMutation = { __typename?: 'Mutation', createUser: { __typename: 'User', id: number } };
+export type CreateUserMutation = { __typename?: 'Mutation', createUser: { __typename?: 'User', id: number } };
 
 export type UpdateManyUserMutationVariables = Exact<{
   data: UserUpdateManyMutationInput;
@@ -6637,7 +6659,7 @@ export type UpdateManyUserMutationVariables = Exact<{
 }>;
 
 
-export type UpdateManyUserMutation = { __typename?: 'Mutation', updateManyUser: { __typename: 'AffectedRowsOutput', count: number } };
+export type UpdateManyUserMutation = { __typename?: 'Mutation', updateManyUser: { __typename?: 'AffectedRowsOutput', count: number } };
 
 export type UpdateUserMutationVariables = Exact<{
   data: UserUpdateInput;
@@ -6645,21 +6667,21 @@ export type UpdateUserMutationVariables = Exact<{
 }>;
 
 
-export type UpdateUserMutation = { __typename?: 'Mutation', updateUser?: { __typename: 'User', id: number } | null };
+export type UpdateUserMutation = { __typename?: 'Mutation', updateUser?: { __typename?: 'User', id: number } | null };
 
 export type DeleteUserMutationVariables = Exact<{
   where: UserWhereUniqueInput;
 }>;
 
 
-export type DeleteUserMutation = { __typename?: 'Mutation', deleteUser?: { __typename: 'User', id: number } | null };
+export type DeleteUserMutation = { __typename?: 'Mutation', deleteUser?: { __typename?: 'User', id: number } | null };
 
 export type CreateStudentMutationVariables = Exact<{
   data: StudentCreateInput;
 }>;
 
 
-export type CreateStudentMutation = { __typename?: 'Mutation', createStudent: { __typename: 'Student', id: number } };
+export type CreateStudentMutation = { __typename?: 'Mutation', createStudent: { __typename?: 'Student', id: number } };
 
 export type UpdateStudentMutationVariables = Exact<{
   data: StudentUpdateInput;
@@ -6667,21 +6689,21 @@ export type UpdateStudentMutationVariables = Exact<{
 }>;
 
 
-export type UpdateStudentMutation = { __typename?: 'Mutation', updateStudent?: { __typename: 'Student', id: number } | null };
+export type UpdateStudentMutation = { __typename?: 'Mutation', updateStudent?: { __typename?: 'Student', id: number } | null };
 
 export type DeleteStudentMutationVariables = Exact<{
   where: StudentWhereUniqueInput;
 }>;
 
 
-export type DeleteStudentMutation = { __typename?: 'Mutation', deleteStudent?: { __typename: 'Student', id: number } | null };
+export type DeleteStudentMutation = { __typename?: 'Mutation', deleteStudent?: { __typename?: 'Student', id: number } | null };
 
 export type CreateTeacherMutationVariables = Exact<{
   data: TeacherCreateInput;
 }>;
 
 
-export type CreateTeacherMutation = { __typename?: 'Mutation', createTeacher: { __typename: 'Teacher', id: number } };
+export type CreateTeacherMutation = { __typename?: 'Mutation', createTeacher: { __typename?: 'Teacher', id: number } };
 
 export type UpdateTeacherMutationVariables = Exact<{
   data: TeacherUpdateInput;
@@ -6689,21 +6711,21 @@ export type UpdateTeacherMutationVariables = Exact<{
 }>;
 
 
-export type UpdateTeacherMutation = { __typename?: 'Mutation', updateTeacher?: { __typename: 'Teacher', id: number } | null };
+export type UpdateTeacherMutation = { __typename?: 'Mutation', updateTeacher?: { __typename?: 'Teacher', id: number } | null };
 
 export type DeleteTeacherMutationVariables = Exact<{
   where: TeacherWhereUniqueInput;
 }>;
 
 
-export type DeleteTeacherMutation = { __typename?: 'Mutation', deleteTeacher?: { __typename: 'Teacher', id: number } | null };
+export type DeleteTeacherMutation = { __typename?: 'Mutation', deleteTeacher?: { __typename?: 'Teacher', id: number } | null };
 
 export type CreateAdminMutationVariables = Exact<{
   data: AdminCreateInput;
 }>;
 
 
-export type CreateAdminMutation = { __typename?: 'Mutation', createAdmin: { __typename: 'Admin', id: number } };
+export type CreateAdminMutation = { __typename?: 'Mutation', createAdmin: { __typename?: 'Admin', id: number } };
 
 export type UpdateAdminMutationVariables = Exact<{
   data: AdminUpdateInput;
@@ -6711,21 +6733,21 @@ export type UpdateAdminMutationVariables = Exact<{
 }>;
 
 
-export type UpdateAdminMutation = { __typename?: 'Mutation', updateAdmin?: { __typename: 'Admin', id: number } | null };
+export type UpdateAdminMutation = { __typename?: 'Mutation', updateAdmin?: { __typename?: 'Admin', id: number } | null };
 
 export type DeleteAdminMutationVariables = Exact<{
   where: AdminWhereUniqueInput;
 }>;
 
 
-export type DeleteAdminMutation = { __typename?: 'Mutation', deleteAdmin?: { __typename: 'Admin', id: number } | null };
+export type DeleteAdminMutation = { __typename?: 'Mutation', deleteAdmin?: { __typename?: 'Admin', id: number } | null };
 
 export type CreateAssignmentMutationVariables = Exact<{
   data: AssignmentCreateInput;
 }>;
 
 
-export type CreateAssignmentMutation = { __typename?: 'Mutation', createAssignment: { __typename: 'Assignment', id: number } };
+export type CreateAssignmentMutation = { __typename?: 'Mutation', createAssignment: { __typename?: 'Assignment', id: number } };
 
 export type UpdateAssignmentMutationVariables = Exact<{
   data: AssignmentUpdateInput;
@@ -6733,21 +6755,21 @@ export type UpdateAssignmentMutationVariables = Exact<{
 }>;
 
 
-export type UpdateAssignmentMutation = { __typename?: 'Mutation', updateAssignment?: { __typename: 'Assignment', id: number } | null };
+export type UpdateAssignmentMutation = { __typename?: 'Mutation', updateAssignment?: { __typename?: 'Assignment', id: number } | null };
 
 export type DeleteAssignmentMutationVariables = Exact<{
   where: AssignmentWhereUniqueInput;
 }>;
 
 
-export type DeleteAssignmentMutation = { __typename?: 'Mutation', deleteAssignment?: { __typename: 'Assignment', id: number } | null };
+export type DeleteAssignmentMutation = { __typename?: 'Mutation', deleteAssignment?: { __typename?: 'Assignment', id: number } | null };
 
 export type CreateMeetingMutationVariables = Exact<{
   data: MeetingCreateInput;
 }>;
 
 
-export type CreateMeetingMutation = { __typename?: 'Mutation', createMeeting: { __typename: 'Meeting', id: number } };
+export type CreateMeetingMutation = { __typename?: 'Mutation', createMeeting: { __typename?: 'Meeting', id: number } };
 
 export type UpdateMeetingMutationVariables = Exact<{
   data: MeetingUpdateInput;
@@ -6755,21 +6777,21 @@ export type UpdateMeetingMutationVariables = Exact<{
 }>;
 
 
-export type UpdateMeetingMutation = { __typename?: 'Mutation', updateMeeting?: { __typename: 'Meeting', id: number } | null };
+export type UpdateMeetingMutation = { __typename?: 'Mutation', updateMeeting?: { __typename?: 'Meeting', id: number } | null };
 
 export type DeleteMeetingMutationVariables = Exact<{
   where: MeetingWhereUniqueInput;
 }>;
 
 
-export type DeleteMeetingMutation = { __typename?: 'Mutation', deleteMeeting?: { __typename: 'Meeting', id: number } | null };
+export type DeleteMeetingMutation = { __typename?: 'Mutation', deleteMeeting?: { __typename?: 'Meeting', id: number } | null };
 
 export type CreateDepartmentMutationVariables = Exact<{
   data: DepartmentCreateInput;
 }>;
 
 
-export type CreateDepartmentMutation = { __typename?: 'Mutation', createDepartment: { __typename: 'Department', id: number } };
+export type CreateDepartmentMutation = { __typename?: 'Mutation', createDepartment: { __typename?: 'Department', id: number } };
 
 export type UpdateDepartmentMutationVariables = Exact<{
   data: DepartmentUpdateInput;
@@ -6777,14 +6799,14 @@ export type UpdateDepartmentMutationVariables = Exact<{
 }>;
 
 
-export type UpdateDepartmentMutation = { __typename?: 'Mutation', updateDepartment?: { __typename: 'Department', id: number } | null };
+export type UpdateDepartmentMutation = { __typename?: 'Mutation', updateDepartment?: { __typename?: 'Department', id: number } | null };
 
 export type DeleteDepartmentMutationVariables = Exact<{
   where: DepartmentWhereUniqueInput;
 }>;
 
 
-export type DeleteDepartmentMutation = { __typename?: 'Mutation', deleteDepartment?: { __typename: 'Department', id: number } | null };
+export type DeleteDepartmentMutation = { __typename?: 'Mutation', deleteDepartment?: { __typename?: 'Department', id: number } | null };
 
 export type LessonsQueryVariables = Exact<{
   where?: InputMaybe<LessonWhereInput>;
@@ -6901,7 +6923,6 @@ export const CreateLessonDocument = gql`
     mutation createLesson($data: LessonCreateInput!) {
   createLesson(data: $data) {
     id
-    __typename
   }
 }
     `;
@@ -6969,7 +6990,6 @@ export const DeleteLessonDocument = gql`
     mutation deleteLesson($where: LessonWhereUniqueInput!) {
   deleteLesson(where: $where) {
     id
-    __typename
   }
 }
     `;
@@ -7003,7 +7023,6 @@ export const CreateCourseDocument = gql`
     mutation createCourse($data: CourseCreateInput!) {
   createCourse(data: $data) {
     id
-    __typename
   }
 }
     `;
@@ -7037,7 +7056,6 @@ export const UpdateCourseDocument = gql`
     mutation updateCourse($data: CourseUpdateInput!, $where: CourseWhereUniqueInput!) {
   updateCourse(data: $data, where: $where) {
     id
-    __typename
   }
 }
     `;
@@ -7072,7 +7090,6 @@ export const DeleteCourseDocument = gql`
     mutation deleteCourse($where: CourseWhereUniqueInput!) {
   deleteCourse(where: $where) {
     id
-    __typename
   }
 }
     `;
@@ -7102,11 +7119,110 @@ export function useDeleteCourseMutation(baseOptions?: Apollo.MutationHookOptions
 export type DeleteCourseMutationHookResult = ReturnType<typeof useDeleteCourseMutation>;
 export type DeleteCourseMutationResult = Apollo.MutationResult<DeleteCourseMutation>;
 export type DeleteCourseMutationOptions = Apollo.BaseMutationOptions<DeleteCourseMutation, DeleteCourseMutationVariables>;
+export const CreateTopicDocument = gql`
+    mutation createTopic($data: TopicCreateInput!) {
+  createTopic(data: $data) {
+    id
+  }
+}
+    `;
+export type CreateTopicMutationFn = Apollo.MutationFunction<CreateTopicMutation, CreateTopicMutationVariables>;
+
+/**
+ * __useCreateTopicMutation__
+ *
+ * To run a mutation, you first call `useCreateTopicMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useCreateTopicMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [createTopicMutation, { data, loading, error }] = useCreateTopicMutation({
+ *   variables: {
+ *      data: // value for 'data'
+ *   },
+ * });
+ */
+export function useCreateTopicMutation(baseOptions?: Apollo.MutationHookOptions<CreateTopicMutation, CreateTopicMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<CreateTopicMutation, CreateTopicMutationVariables>(CreateTopicDocument, options);
+      }
+export type CreateTopicMutationHookResult = ReturnType<typeof useCreateTopicMutation>;
+export type CreateTopicMutationResult = Apollo.MutationResult<CreateTopicMutation>;
+export type CreateTopicMutationOptions = Apollo.BaseMutationOptions<CreateTopicMutation, CreateTopicMutationVariables>;
+export const UpdateTopicDocument = gql`
+    mutation updateTopic($data: TopicUpdateInput!, $where: TopicWhereUniqueInput!) {
+  updateTopic(data: $data, where: $where) {
+    id
+  }
+}
+    `;
+export type UpdateTopicMutationFn = Apollo.MutationFunction<UpdateTopicMutation, UpdateTopicMutationVariables>;
+
+/**
+ * __useUpdateTopicMutation__
+ *
+ * To run a mutation, you first call `useUpdateTopicMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useUpdateTopicMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [updateTopicMutation, { data, loading, error }] = useUpdateTopicMutation({
+ *   variables: {
+ *      data: // value for 'data'
+ *      where: // value for 'where'
+ *   },
+ * });
+ */
+export function useUpdateTopicMutation(baseOptions?: Apollo.MutationHookOptions<UpdateTopicMutation, UpdateTopicMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<UpdateTopicMutation, UpdateTopicMutationVariables>(UpdateTopicDocument, options);
+      }
+export type UpdateTopicMutationHookResult = ReturnType<typeof useUpdateTopicMutation>;
+export type UpdateTopicMutationResult = Apollo.MutationResult<UpdateTopicMutation>;
+export type UpdateTopicMutationOptions = Apollo.BaseMutationOptions<UpdateTopicMutation, UpdateTopicMutationVariables>;
+export const DeleteTopicDocument = gql`
+    mutation deleteTopic($where: TopicWhereUniqueInput!) {
+  deleteTopic(where: $where) {
+    id
+  }
+}
+    `;
+export type DeleteTopicMutationFn = Apollo.MutationFunction<DeleteTopicMutation, DeleteTopicMutationVariables>;
+
+/**
+ * __useDeleteTopicMutation__
+ *
+ * To run a mutation, you first call `useDeleteTopicMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useDeleteTopicMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [deleteTopicMutation, { data, loading, error }] = useDeleteTopicMutation({
+ *   variables: {
+ *      where: // value for 'where'
+ *   },
+ * });
+ */
+export function useDeleteTopicMutation(baseOptions?: Apollo.MutationHookOptions<DeleteTopicMutation, DeleteTopicMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<DeleteTopicMutation, DeleteTopicMutationVariables>(DeleteTopicDocument, options);
+      }
+export type DeleteTopicMutationHookResult = ReturnType<typeof useDeleteTopicMutation>;
+export type DeleteTopicMutationResult = Apollo.MutationResult<DeleteTopicMutation>;
+export type DeleteTopicMutationOptions = Apollo.BaseMutationOptions<DeleteTopicMutation, DeleteTopicMutationVariables>;
 export const CreateUserDocument = gql`
     mutation createUser($data: UserCreateInput!) {
   createUser(data: $data) {
     id
-    __typename
   }
 }
     `;
@@ -7140,7 +7256,6 @@ export const UpdateManyUserDocument = gql`
     mutation updateManyUser($data: UserUpdateManyMutationInput!, $where: UserWhereInput) {
   updateManyUser(data: $data, where: $where) {
     count
-    __typename
   }
 }
     `;
@@ -7175,7 +7290,6 @@ export const UpdateUserDocument = gql`
     mutation updateUser($data: UserUpdateInput!, $where: UserWhereUniqueInput!) {
   updateUser(data: $data, where: $where) {
     id
-    __typename
   }
 }
     `;
@@ -7210,7 +7324,6 @@ export const DeleteUserDocument = gql`
     mutation deleteUser($where: UserWhereUniqueInput!) {
   deleteUser(where: $where) {
     id
-    __typename
   }
 }
     `;
@@ -7244,7 +7357,6 @@ export const CreateStudentDocument = gql`
     mutation createStudent($data: StudentCreateInput!) {
   createStudent(data: $data) {
     id
-    __typename
   }
 }
     `;
@@ -7278,7 +7390,6 @@ export const UpdateStudentDocument = gql`
     mutation updateStudent($data: StudentUpdateInput!, $where: StudentWhereUniqueInput!) {
   updateStudent(data: $data, where: $where) {
     id
-    __typename
   }
 }
     `;
@@ -7313,7 +7424,6 @@ export const DeleteStudentDocument = gql`
     mutation deleteStudent($where: StudentWhereUniqueInput!) {
   deleteStudent(where: $where) {
     id
-    __typename
   }
 }
     `;
@@ -7347,7 +7457,6 @@ export const CreateTeacherDocument = gql`
     mutation createTeacher($data: TeacherCreateInput!) {
   createTeacher(data: $data) {
     id
-    __typename
   }
 }
     `;
@@ -7381,7 +7490,6 @@ export const UpdateTeacherDocument = gql`
     mutation updateTeacher($data: TeacherUpdateInput!, $where: TeacherWhereUniqueInput!) {
   updateTeacher(data: $data, where: $where) {
     id
-    __typename
   }
 }
     `;
@@ -7416,7 +7524,6 @@ export const DeleteTeacherDocument = gql`
     mutation deleteTeacher($where: TeacherWhereUniqueInput!) {
   deleteTeacher(where: $where) {
     id
-    __typename
   }
 }
     `;
@@ -7450,7 +7557,6 @@ export const CreateAdminDocument = gql`
     mutation createAdmin($data: AdminCreateInput!) {
   createAdmin(data: $data) {
     id
-    __typename
   }
 }
     `;
@@ -7484,7 +7590,6 @@ export const UpdateAdminDocument = gql`
     mutation updateAdmin($data: AdminUpdateInput!, $where: AdminWhereUniqueInput!) {
   updateAdmin(data: $data, where: $where) {
     id
-    __typename
   }
 }
     `;
@@ -7519,7 +7624,6 @@ export const DeleteAdminDocument = gql`
     mutation deleteAdmin($where: AdminWhereUniqueInput!) {
   deleteAdmin(where: $where) {
     id
-    __typename
   }
 }
     `;
@@ -7553,7 +7657,6 @@ export const CreateAssignmentDocument = gql`
     mutation createAssignment($data: AssignmentCreateInput!) {
   createAssignment(data: $data) {
     id
-    __typename
   }
 }
     `;
@@ -7587,7 +7690,6 @@ export const UpdateAssignmentDocument = gql`
     mutation updateAssignment($data: AssignmentUpdateInput!, $where: AssignmentWhereUniqueInput!) {
   updateAssignment(data: $data, where: $where) {
     id
-    __typename
   }
 }
     `;
@@ -7622,7 +7724,6 @@ export const DeleteAssignmentDocument = gql`
     mutation deleteAssignment($where: AssignmentWhereUniqueInput!) {
   deleteAssignment(where: $where) {
     id
-    __typename
   }
 }
     `;
@@ -7656,7 +7757,6 @@ export const CreateMeetingDocument = gql`
     mutation createMeeting($data: MeetingCreateInput!) {
   createMeeting(data: $data) {
     id
-    __typename
   }
 }
     `;
@@ -7690,7 +7790,6 @@ export const UpdateMeetingDocument = gql`
     mutation updateMeeting($data: MeetingUpdateInput!, $where: MeetingWhereUniqueInput!) {
   updateMeeting(data: $data, where: $where) {
     id
-    __typename
   }
 }
     `;
@@ -7725,7 +7824,6 @@ export const DeleteMeetingDocument = gql`
     mutation deleteMeeting($where: MeetingWhereUniqueInput!) {
   deleteMeeting(where: $where) {
     id
-    __typename
   }
 }
     `;
@@ -7759,7 +7857,6 @@ export const CreateDepartmentDocument = gql`
     mutation createDepartment($data: DepartmentCreateInput!) {
   createDepartment(data: $data) {
     id
-    __typename
   }
 }
     `;
@@ -7793,7 +7890,6 @@ export const UpdateDepartmentDocument = gql`
     mutation updateDepartment($data: DepartmentUpdateInput!, $where: DepartmentWhereUniqueInput!) {
   updateDepartment(data: $data, where: $where) {
     id
-    __typename
   }
 }
     `;
@@ -7828,7 +7924,6 @@ export const DeleteDepartmentDocument = gql`
     mutation deleteDepartment($where: DepartmentWhereUniqueInput!) {
   deleteDepartment(where: $where) {
     id
-    __typename
   }
 }
     `;
@@ -8671,6 +8766,9 @@ export const namedOperations = {
     createCourse: 'createCourse',
     updateCourse: 'updateCourse',
     deleteCourse: 'deleteCourse',
+    createTopic: 'createTopic',
+    updateTopic: 'updateTopic',
+    deleteTopic: 'deleteTopic',
     createUser: 'createUser',
     updateManyUser: 'updateManyUser',
     updateUser: 'updateUser',

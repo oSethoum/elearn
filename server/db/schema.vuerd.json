@@ -3,9 +3,9 @@
     "version": "2.2.11",
     "width": 8000,
     "height": 8000,
-    "scrollTop": -3159.833333333333,
-    "scrollLeft": -4300.833333333334,
-    "zoomLevel": 0.9,
+    "scrollTop": -3634.833333333333,
+    "scrollLeft": -3534.833333333334,
+    "zoomLevel": 0.2,
     "show": {
       "tableComment": false,
       "columnComment": true,
@@ -237,7 +237,7 @@
           "active": false,
           "left": 3621.0753,
           "top": 3262.7845,
-          "zIndex": 3,
+          "zIndex": 2,
           "widthName": 60,
           "widthComment": 60,
           "color": "#03A9F4"
@@ -273,7 +273,7 @@
             "id": "4391f887-0707-465a-80ec-9bbbecc10fc9"
           },
           {
-            "name": "grade",
+            "name": "year",
             "comment": "",
             "dataType": "SMALLINT",
             "default": "",
@@ -392,7 +392,7 @@
           "active": false,
           "left": 4534.9488,
           "top": 3280.0541,
-          "zIndex": 4,
+          "zIndex": 41,
           "widthName": 60,
           "widthComment": 60,
           "color": "#03A9F4"
@@ -499,9 +499,9 @@
         ],
         "ui": {
           "active": false,
-          "left": 3624.6701,
-          "top": 4674.1028,
-          "zIndex": 5,
+          "left": 3626.3368,
+          "top": 4732.4364,
+          "zIndex": 26,
           "widthName": 60,
           "widthComment": 60,
           "color": "#03A9F4"
@@ -608,9 +608,9 @@
         ],
         "ui": {
           "active": false,
-          "left": 2997.2199,
-          "top": 3295.6738,
-          "zIndex": 15,
+          "left": 2977.22,
+          "top": 3305.6737,
+          "zIndex": 42,
           "widthName": 60,
           "widthComment": 60,
           "color": "#03A9F4"
@@ -671,9 +671,9 @@
         ],
         "ui": {
           "active": false,
-          "left": 4533.2337,
-          "top": 4532.7723,
-          "zIndex": 7,
+          "left": 3956.5675,
+          "top": 4251.1055,
+          "zIndex": 25,
           "widthName": 74.26171875,
           "widthComment": 60,
           "color": "#03A9F4"
@@ -755,7 +755,7 @@
             "id": "c15140bd-a4d2-4205-bebe-9c5c3b34f0b5"
           },
           {
-            "name": "grades",
+            "name": "years",
             "comment": "",
             "dataType": "SMALLINT",
             "default": "",
@@ -780,9 +780,9 @@
         ],
         "ui": {
           "active": false,
-          "left": 4522.2241,
-          "top": 4084.6724,
-          "zIndex": 1,
+          "left": 4543.8905,
+          "top": 4228.0057,
+          "zIndex": 29,
           "widthName": 60,
           "widthComment": 60,
           "color": "#03A9F4"
@@ -841,7 +841,7 @@
             "id": "675d411d-e580-4c83-8d18-94fbf17c79fa"
           },
           {
-            "name": "grade",
+            "name": "year",
             "comment": "",
             "dataType": "INT",
             "default": "",
@@ -1004,9 +1004,9 @@
         ],
         "ui": {
           "active": false,
-          "left": 5141.6229,
-          "top": 4620.7913,
-          "zIndex": 6,
+          "left": 5142.734,
+          "top": 4621.9024,
+          "zIndex": 37,
           "widthName": 60,
           "widthComment": 60,
           "color": "#2196F3"
@@ -1205,9 +1205,9 @@
         ],
         "ui": {
           "active": false,
-          "left": 5137.5938,
-          "top": 4301.4896,
-          "zIndex": 12,
+          "left": 5124.8154,
+          "top": 3790.934,
+          "zIndex": 38,
           "widthName": 74.97900390625,
           "widthComment": 60,
           "color": "#03A9F4"
@@ -1452,9 +1452,9 @@
         ],
         "ui": {
           "active": false,
-          "left": 5601.3603,
-          "top": 4838.9453,
-          "zIndex": 14,
+          "left": 5131.3609,
+          "top": 5063.9453,
+          "zIndex": 19,
           "widthName": 60,
           "widthComment": 60,
           "color": "#FFEB3B"
@@ -1607,9 +1607,9 @@
         ],
         "ui": {
           "active": false,
-          "left": 5329.8455,
-          "top": 3282.5547,
-          "zIndex": 9,
+          "left": 5165.4015,
+          "top": 3278.1105,
+          "zIndex": 15,
           "widthName": 73.525390625,
           "widthComment": 60,
           "color": "#03A9F4"
@@ -1785,9 +1785,9 @@
         ],
         "ui": {
           "active": false,
-          "left": 6020.9809,
-          "top": 4122.1429,
-          "zIndex": 11,
+          "left": 6192.6475,
+          "top": 3795.4762,
+          "zIndex": 22,
           "widthName": 98.8271484375,
           "widthComment": 60,
           "color": "#03A9F4"
@@ -1986,9 +1986,9 @@
         ],
         "ui": {
           "active": false,
-          "left": 5599.3889,
-          "top": 4485.7231,
-          "zIndex": 13,
+          "left": 5911.0555,
+          "top": 4630.7231,
+          "zIndex": 20,
           "widthName": 60,
           "widthComment": 60,
           "color": "#03A9F4"
@@ -2164,9 +2164,9 @@
         ],
         "ui": {
           "active": false,
-          "left": 6022.8337,
-          "top": 4504.8335,
-          "zIndex": 8,
+          "left": 6631.1672,
+          "top": 4643.1664,
+          "zIndex": 21,
           "widthName": 69.92626953125,
           "widthComment": 60,
           "color": "#03A9F4"
@@ -2344,7 +2344,7 @@
           "active": false,
           "left": 6024.3889,
           "top": 3273.1668,
-          "zIndex": 10,
+          "zIndex": 9,
           "widthName": 97.37353515625,
           "widthComment": 60,
           "color": "#03A9F4"
@@ -2369,18 +2369,18 @@
           "columnIds": [
             "5fcb959f-a03c-4077-ae6c-67d844d01412"
           ],
-          "x": 4722.651424609375,
-          "y": 4532.7723,
-          "direction": "top"
+          "x": 4335.40294921875,
+          "y": 4306.1055,
+          "direction": "right"
         },
         "end": {
           "tableId": "af88e94e-8371-4d30-b214-150460c00491",
           "columnIds": [
             "f184844c-2ec9-4608-9bd0-0c00fa12660f"
           ],
-          "x": 4724.5649203125,
-          "y": 4235.6723999999995,
-          "direction": "bottom"
+          "x": 4543.8905,
+          "y": 4303.5057,
+          "direction": "left"
         },
         "constraintName": "fk_departements_to_topics",
         "visible": true,
@@ -2395,8 +2395,8 @@
           "columnIds": [
             "89917f68-3bb0-47af-a960-d1aa82b8e643"
           ],
-          "x": 4926.905740625,
-          "y": 4160.1723999999995,
+          "x": 4948.572140625,
+          "y": 4303.5057,
           "direction": "right"
         },
         "end": {
@@ -2404,9 +2404,9 @@
           "columnIds": [
             "7426b7ae-ede4-4fbd-9104-9dce107b4036"
           ],
-          "x": 5431.0613765625,
-          "y": 4620.7913,
-          "direction": "top"
+          "x": 5142.734,
+          "y": 4685.2774,
+          "direction": "left"
         },
         "constraintName": "fk_topics_to_courses",
         "visible": true,
@@ -2430,8 +2430,8 @@
           "columnIds": [
             "c5a5f9bf-9c2d-418d-b119-10be58c56b00"
           ],
-          "x": 3815.4327953125,
-          "y": 4674.1028,
+          "x": 3817.0994953125,
+          "y": 4732.4364,
           "direction": "top"
         },
         "constraintName": "fk_users_to_teachers",
@@ -2456,8 +2456,8 @@
           "columnIds": [
             "7972830b-b3b1-4830-865d-a5f6d862ebf4"
           ],
-          "x": 3378.745290625,
-          "y": 3371.1738,
+          "x": 3358.745390625,
+          "y": 3381.1737,
           "direction": "right"
         },
         "constraintName": "fk_users_to_admins",
@@ -2473,8 +2473,8 @@
           "columnIds": [
             "fda0144c-b56b-4fdf-b404-9a297bf9f85a"
           ],
-          "x": 5238.1023921875,
-          "y": 4620.7913,
+          "x": 5335.692984375,
+          "y": 4621.9024,
           "direction": "top"
         },
         "end": {
@@ -2482,8 +2482,8 @@
           "columnIds": [
             "ed1b2995-13d9-4f1f-a753-bd9c16aa755a"
           ],
-          "x": 5330.552784375,
-          "y": 4534.4896,
+          "x": 5317.774384375,
+          "y": 4023.934,
           "direction": "bottom"
         },
         "constraintName": "fk_courses_to_assignments",
@@ -2525,8 +2525,8 @@
           "columnIds": [
             "64df45c5-77c0-47ae-87f0-75fba1fe502d"
           ],
-          "x": 4006.195490625,
-          "y": 4749.6028,
+          "x": 4007.862190625,
+          "y": 4807.9364,
           "direction": "right"
         },
         "end": {
@@ -2534,8 +2534,8 @@
           "columnIds": [
             "c6055ad4-526e-4db8-ba3a-06f4b82deabd"
           ],
-          "x": 5141.6229,
-          "y": 4747.5413,
+          "x": 5142.734,
+          "y": 4812.0274,
           "direction": "left"
         },
         "constraintName": "fk_teachers_to_courses",
@@ -2551,18 +2551,18 @@
           "columnIds": [
             "fda0144c-b56b-4fdf-b404-9a297bf9f85a"
           ],
-          "x": 5527.54086875,
-          "y": 4810.9163,
-          "direction": "right"
+          "x": 5335.692984375,
+          "y": 4875.4024,
+          "direction": "bottom"
         },
         "end": {
           "tableId": "a446aea0-5ed1-4b2a-8add-df825e2d4dcf",
           "columnIds": [
             "fd818504-ce3e-48eb-9f92-d1f605fab282"
           ],
-          "x": 5601.3603,
-          "y": 4975.9453,
-          "direction": "left"
+          "x": 5330.327941015625,
+          "y": 5063.9453,
+          "direction": "top"
         },
         "constraintName": "fk_courses_to_meetings",
         "visible": true,
@@ -2586,8 +2586,8 @@
           "columnIds": [
             "9173d95c-434c-432f-b2c0-d4d22bc8c66e"
           ],
-          "x": 5329.8455,
-          "y": 3378.5547,
+          "x": 5165.4015,
+          "y": 3374.1105,
           "direction": "left"
         },
         "constraintName": "fk_students_to_submissions",
@@ -2603,8 +2603,8 @@
           "columnIds": [
             "e9ec0b90-12eb-4997-b809-34be0187362c"
           ],
-          "x": 5330.552784375,
-          "y": 4301.4896,
+          "x": 5317.774384375,
+          "y": 3790.934,
           "direction": "top"
         },
         "end": {
@@ -2612,8 +2612,8 @@
           "columnIds": [
             "d7fe1a54-581f-461b-8722-c06cd1384b02"
           ],
-          "x": 5530.7390546875,
-          "y": 3474.5547,
+          "x": 5366.2950546875,
+          "y": 3470.1105,
           "direction": "bottom"
         },
         "constraintName": "fk_assignments_to_submissions",
@@ -2629,8 +2629,8 @@
           "columnIds": [
             "89917f68-3bb0-47af-a960-d1aa82b8e643"
           ],
-          "x": 4724.5649203125,
-          "y": 4084.6724,
+          "x": 4746.2313203125,
+          "y": 4228.0057,
           "direction": "top"
         },
         "end": {
@@ -2655,8 +2655,8 @@
           "columnIds": [
             "c8536865-fc4c-4d15-9005-c56ec7ad8af0"
           ],
-          "x": 5985.30686875,
-          "y": 4602.2231,
+          "x": 6296.97346875,
+          "y": 4747.2231,
           "direction": "right"
         },
         "end": {
@@ -2664,8 +2664,8 @@
           "columnIds": [
             "6a431387-e693-4c70-bdef-035c6764794d"
           ],
-          "x": 6022.8337,
-          "y": 4611.0835,
+          "x": 6631.1672,
+          "y": 4749.4164,
           "direction": "left"
         },
         "constraintName": "fk_lessons_to_lesson_files",
@@ -2681,8 +2681,8 @@
           "columnIds": [
             "e9ec0b90-12eb-4997-b809-34be0187362c"
           ],
-          "x": 5523.51176875,
-          "y": 4417.9896,
+          "x": 5510.73336875,
+          "y": 3907.434,
           "direction": "right"
         },
         "end": {
@@ -2690,8 +2690,8 @@
           "columnIds": [
             "30dd258d-90ff-4ad1-b1dc-08e780b40a37"
           ],
-          "x": 6020.9809,
-          "y": 4228.3929,
+          "x": 6192.6475,
+          "y": 3901.7262,
           "direction": "left"
         },
         "constraintName": "fk_assignments_to_assignment_files",
@@ -2707,8 +2707,8 @@
           "columnIds": [
             "cb1b454b-669c-4cdc-accd-81077fa31235"
           ],
-          "x": 5731.632609375,
-          "y": 3378.5547,
+          "x": 5567.188609375,
+          "y": 3374.1105,
           "direction": "right"
         },
         "end": {
@@ -2733,8 +2733,8 @@
           "columnIds": [
             "fda0144c-b56b-4fdf-b404-9a297bf9f85a"
           ],
-          "x": 5527.54086875,
-          "y": 4684.1663,
+          "x": 5528.65196875,
+          "y": 4748.6524,
           "direction": "right"
         },
         "end": {
@@ -2742,8 +2742,8 @@
           "columnIds": [
             "c0cec777-0de7-4172-8a6c-afb06cbc1cab"
           ],
-          "x": 5599.3889,
-          "y": 4602.2231,
+          "x": 5911.0555,
+          "y": 4747.2231,
           "direction": "left"
         },
         "constraintName": "fk_courses_to_lessons",

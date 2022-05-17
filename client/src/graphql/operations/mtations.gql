@@ -1,7 +1,6 @@
 mutation createLesson($data: LessonCreateInput!) {
   createLesson(data: $data) {
     id
-    __typename
   }
 }
 
@@ -17,7 +16,6 @@ mutation updateLesson(
 mutation deleteLesson($where: LessonWhereUniqueInput!) {
   deleteLesson(where: $where) {
     id
-    __typename
   }
 }
 
@@ -26,7 +24,6 @@ mutation deleteLesson($where: LessonWhereUniqueInput!) {
 mutation createCourse($data: CourseCreateInput!) {
   createCourse(data: $data) {
     id
-    __typename
   }
 }
 
@@ -36,22 +33,40 @@ mutation updateCourse(
 ) {
   updateCourse(data: $data, where: $where) {
     id
-    __typename
   }
 }
 
 mutation deleteCourse($where: CourseWhereUniqueInput!) {
   deleteCourse(where: $where) {
     id
-    __typename
   }
 }
+
+# Topic CUD
+
+mutation createTopic($data: TopicCreateInput!) {
+  createTopic(data: $data) {
+    id
+  }
+}
+
+mutation updateTopic($data: TopicUpdateInput!, $where: TopicWhereUniqueInput!) {
+  updateTopic(data: $data, where: $where) {
+    id
+  }
+}
+
+mutation deleteTopic($where: TopicWhereUniqueInput!) {
+  deleteTopic(where: $where) {
+    id
+  }
+}
+
 # User CUD
 
 mutation createUser($data: UserCreateInput!) {
   createUser(data: $data) {
     id
-    __typename
   }
 }
 
@@ -61,21 +76,18 @@ mutation updateManyUser(
 ) {
   updateManyUser(data: $data, where: $where) {
     count
-    __typename
   }
 }
 
 mutation updateUser($data: UserUpdateInput!, $where: UserWhereUniqueInput!) {
   updateUser(data: $data, where: $where) {
     id
-    __typename
   }
 }
 
 mutation deleteUser($where: UserWhereUniqueInput!) {
   deleteUser(where: $where) {
     id
-    __typename
   }
 }
 
@@ -84,7 +96,6 @@ mutation deleteUser($where: UserWhereUniqueInput!) {
 mutation createStudent($data: StudentCreateInput!) {
   createStudent(data: $data) {
     id
-    __typename
   }
 }
 
@@ -94,14 +105,12 @@ mutation updateStudent(
 ) {
   updateStudent(data: $data, where: $where) {
     id
-    __typename
   }
 }
 
 mutation deleteStudent($where: StudentWhereUniqueInput!) {
   deleteStudent(where: $where) {
     id
-    __typename
   }
 }
 
@@ -110,7 +119,6 @@ mutation deleteStudent($where: StudentWhereUniqueInput!) {
 mutation createTeacher($data: TeacherCreateInput!) {
   createTeacher(data: $data) {
     id
-    __typename
   }
 }
 
@@ -120,14 +128,12 @@ mutation updateTeacher(
 ) {
   updateTeacher(data: $data, where: $where) {
     id
-    __typename
   }
 }
 
 mutation deleteTeacher($where: TeacherWhereUniqueInput!) {
   deleteTeacher(where: $where) {
     id
-    __typename
   }
 }
 
@@ -136,21 +142,18 @@ mutation deleteTeacher($where: TeacherWhereUniqueInput!) {
 mutation createAdmin($data: AdminCreateInput!) {
   createAdmin(data: $data) {
     id
-    __typename
   }
 }
 
 mutation updateAdmin($data: AdminUpdateInput!, $where: AdminWhereUniqueInput!) {
   updateAdmin(data: $data, where: $where) {
     id
-    __typename
   }
 }
 
 mutation deleteAdmin($where: AdminWhereUniqueInput!) {
   deleteAdmin(where: $where) {
     id
-    __typename
   }
 }
 
@@ -159,7 +162,6 @@ mutation deleteAdmin($where: AdminWhereUniqueInput!) {
 mutation createAssignment($data: AssignmentCreateInput!) {
   createAssignment(data: $data) {
     id
-    __typename
   }
 }
 
@@ -169,14 +171,12 @@ mutation updateAssignment(
 ) {
   updateAssignment(data: $data, where: $where) {
     id
-    __typename
   }
 }
 
 mutation deleteAssignment($where: AssignmentWhereUniqueInput!) {
   deleteAssignment(where: $where) {
     id
-    __typename
   }
 }
 
@@ -185,7 +185,6 @@ mutation deleteAssignment($where: AssignmentWhereUniqueInput!) {
 mutation createMeeting($data: MeetingCreateInput!) {
   createMeeting(data: $data) {
     id
-    __typename
   }
 }
 
@@ -195,14 +194,12 @@ mutation updateMeeting(
 ) {
   updateMeeting(data: $data, where: $where) {
     id
-    __typename
   }
 }
 
 mutation deleteMeeting($where: MeetingWhereUniqueInput!) {
   deleteMeeting(where: $where) {
     id
-    __typename
   }
 }
 # Department CUD
@@ -210,7 +207,6 @@ mutation deleteMeeting($where: MeetingWhereUniqueInput!) {
 mutation createDepartment($data: DepartmentCreateInput!) {
   createDepartment(data: $data) {
     id
-    __typename
   }
 }
 
@@ -220,13 +216,11 @@ mutation updateDepartment(
 ) {
   updateDepartment(data: $data, where: $where) {
     id
-    __typename
   }
 }
 
 mutation deleteDepartment($where: DepartmentWhereUniqueInput!) {
   deleteDepartment(where: $where) {
     id
-    __typename
   }
 }

@@ -113,6 +113,7 @@ export const ar = {
     editTopic: "تعديل تخصص",
     years: "السنوات",
     name: "الاسم",
+    department: "القسم",
   },
 };
 
