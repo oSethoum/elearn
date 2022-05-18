@@ -133,6 +133,42 @@ export function Home() {
         <Space h={75} />
         {/* @ts-ignore */}
         <Space h={75} ref={departmentsRef} />
+        <Card withBorder>
+          <h1
+            style={{
+              textAlign: "center",
+              margin: 0,
+              color: theme.colors.green[6],
+            }}
+          >
+            {t("departments")}
+          </h1>
+        </Card>
+
+        <Space h={50} />
+        <SimpleGrid
+          cols={3}
+          spacing="lg"
+          sx={{ textAlign: "center" }}
+          breakpoints={[{ maxWidth: theme.breakpoints.sm, cols: 1 }]}
+        >
+          <FeatureCard
+            title={t("lessons")}
+            color={theme.colors.teal[5]}
+            icon={<FaBook size={120} />}
+          />
+          <FeatureCard
+            title={t("homeWorks")}
+            color={theme.colors.orange[7]}
+            icon={<MdOutlineAssignmentTurnedIn size={120} />}
+          />
+          <FeatureCard
+            title={t("videoConference")}
+            color={theme.colors.blue[5]}
+            icon={<BsCameraVideoFill size={120} />}
+          />
+        </SimpleGrid>
+        <Space h={75} />
       </Container>
       <Footer withBorder />
     </>

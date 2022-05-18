@@ -66,7 +66,7 @@ export function DataGrid({
     if (data) {
       setElements([...data.slice((page - 1) * 10, page * 10)]);
     }
-  }, [page]);
+  }, [page, data]);
 
   if (!data || data?.length == 0)
     return (

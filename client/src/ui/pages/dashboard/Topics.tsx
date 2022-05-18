@@ -1,5 +1,10 @@
 import { ActionIcon, Box, Group } from "@mantine/core";
-import { Topic, useDeleteTopicMutation, useTopicsQuery } from "@/graphql";
+import {
+  namedOperations,
+  Topic,
+  useDeleteTopicMutation,
+  useTopicsQuery,
+} from "@/graphql";
 import { DataGrid, Loader } from "@/ui/components";
 import { MdDelete, MdEdit } from "react-icons/md";
 import { useTranslation } from "react-i18next";
@@ -27,6 +32,7 @@ export const Topics = () => {
       onConfirm: () => {
         deleteTopic({
           variables: { where: { id: data.topics[index].id } },
+          refetchQueries: [namedOperations.Query.Topics],
           onCompleted() {
             modals.closeModal(id);
             notifications.showNotification({
@@ -51,6 +57,7 @@ export const Topics = () => {
               message: t("success"),
               color: "green",
             });
+            console.log(data.topics[index]);
           }}
           onCancel={() => modals.closeModal(id)}
         />

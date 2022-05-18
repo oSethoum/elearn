@@ -82,7 +82,6 @@ export function Header({
   leftSide,
   rightSide,
   responsive,
-  withLogo,
   borderSize,
   ...others
 }: HeaderProps) {
@@ -131,7 +130,6 @@ export function Header({
             <div className={classes.children}></div>
           ) : (
             <>
-              <Logo width={110} />
               <div className={classes.children}>{children}</div>
             </>
           )}

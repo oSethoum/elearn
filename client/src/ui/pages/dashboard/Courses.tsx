@@ -4,19 +4,11 @@ import {
   useDeleteCourseMutation,
 } from "@/graphql";
 import { DataGrid, Loader } from "@/ui/components";
-import {
-  ActionIcon,
-  Box,
-  Button,
-  Group,
-  Menu,
-  Paper,
-  Text,
-} from "@mantine/core";
+import { ActionIcon, Box, Button, Group, Menu } from "@mantine/core";
 import { useModals } from "@mantine/modals";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
-import { MdEdit } from "react-icons/md";
+import { MdDelete, MdEdit } from "react-icons/md";
 
 export const DashboardCourses = () => {
   const [selectedCourses, setSelectedCourses] = useState<number[]>([]);
@@ -27,7 +19,7 @@ export const DashboardCourses = () => {
 
   if (loading) return <Loader height="80vh" />;
 
-  const deleteModal = (id?: number) =>
+  const deleteModal = (index: number) =>
     modals.openConfirmModal({
       title: t("delete"),
       children: t("deleteMessage"),
@@ -37,17 +29,18 @@ export const DashboardCourses = () => {
       centered: true,
       onCancel: () => {},
       onConfirm: () => {
-        id &&
-          deleteCourse({
-            variables: {
-              where: {
-                id,
-              },
+        deleteCourse({
+          variables: {
+            where: {
+              id: data?.courses[index].id,
             },
-            refetchQueries: [namedOperations.Query.Courses],
-          });
+          },
+          refetchQueries: [namedOperations.Query.Courses],
+        });
       },
     });
+
+  const editModal = (index: number) => {};
 
   return (
     <Box sx={{ height: "100%" }}>
@@ -73,22 +66,12 @@ export const DashboardCourses = () => {
             <ActionIcon color="green" variant="light">
               <MdEdit />
             </ActionIcon>
-            <Menu>
-              <Menu.Item color={"blue"} onClick={() => {}}>
-                {"publish"}
-              </Menu.Item>
-              <Menu.Item
-                color="red"
-                onClick={() => deleteModal(data?.courses[index].id)}
-              >
-                {t("delete")}
-              </Menu.Item>
-            </Menu>
+            <ActionIcon color="red" variant="light">
+              <MdDelete />
+            </ActionIcon>
           </Group>
         )}
       />
     </Box>
   );
 };
-
-export default DashboardCourses;

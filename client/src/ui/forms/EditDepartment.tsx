@@ -3,7 +3,12 @@ import { useMemo } from "react";
 import { useForm, zodResolver } from "@mantine/form";
 import { z } from "zod";
 import { useTranslation } from "react-i18next";
-import { Department, useUpdateDepartmentMutation } from "@/graphql";
+import {
+  Department,
+  namedOperations,
+  useDepartmentsQuery,
+  useUpdateDepartmentMutation,
+} from "@/graphql";
 
 interface EditDepartmentProps {
   onSubmit?: () => void;
@@ -45,6 +50,7 @@ export const EditDepartments = ({
                 name: { set: values.name },
               },
             },
+            refetchQueries: [namedOperations.Query.Departments],
             onCompleted() {
               onSubmit?.();
             },

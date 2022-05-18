@@ -1,4 +1,3 @@
-import React, { useContext } from "react";
 import {
   Title,
   Text,
@@ -9,10 +8,13 @@ import {
   Group,
   Box,
   Space,
+  Paper,
+  useMantineTheme,
 } from "@mantine/core";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { useAppContext } from "@/context";
+import { Logo } from "./Logo";
 
 const useStyles = createStyles((theme) => ({
   wrapper: {
@@ -108,14 +110,26 @@ export function HeroSection() {
   const { classes, cx } = useStyles();
   const { t } = useTranslation();
   const { user } = useAppContext();
+  const theme = useMantineTheme();
 
   return (
     <div className={classes.wrapper}>
       <Overlay color="#000" opacity={0.65} zIndex={1} />
-
+      <Paper
+        sx={(theme) => ({
+          position: "absolute",
+          left: "40%",
+          zIndex: 10,
+          width: 250,
+          top: 20,
+          backgroundColor: theme.fn.rgba(theme.colors.dark[9], 0.6),
+        })}
+      >
+        <Logo fill={theme.colors[theme.primaryColor][3]} width={250} />
+      </Paper>
       <div className={classes.inner}>
         <Title className={classes.title}>
-          {t("heroLine")}{" "}
+          {t("heroLine")}
           <Text component="span" inherit className={classes.highlight}>
             {t("online")}
           </Text>

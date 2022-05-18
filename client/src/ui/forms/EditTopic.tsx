@@ -2,6 +2,7 @@ import {
   namedOperations,
   Topic,
   useDepartmentsQuery,
+  useTopicsQuery,
   useUpdateTopicMutation,
 } from "@/graphql";
 import {

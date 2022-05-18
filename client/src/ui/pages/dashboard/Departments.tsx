@@ -1,6 +1,7 @@
 import { ActionIcon, Box, Button, Group, Menu, Paper } from "@mantine/core";
 import {
   Department,
+  namedOperations,
   useDeleteDepartmentMutation,
   useDepartmentsQuery,
 } from "@/graphql";
@@ -36,6 +37,7 @@ export const Departments = () => {
               id: data.departments[index].id,
             },
           },
+          refetchQueries: [namedOperations.Query.Departments],
           onCompleted() {
             showNotification({
               message: t("success"),
