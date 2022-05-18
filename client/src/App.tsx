@@ -5,7 +5,6 @@ import { Loader } from "./ui/components";
 import { Suspense } from "react";
 
 // lazy
-
 const DashboardCourses = lazy(() => import("./ui/pages/dashboard/Courses"));
 const DashboardTopics = lazy(() => import("./ui/pages/dashboard/Topics"));
 const NewMeeting = lazy(() => import("./ui/forms/NewMeeting"));
@@ -29,7 +28,6 @@ const EditLesson = lazy(() => import("./ui/forms/EditLesson"));
 const Users = lazy(() => import("./ui/pages/dashboard/Users"));
 const Departments = lazy(() => import("./ui/pages/dashboard/Departments"));
 const AboutUs = lazy(() => import("./ui/pages/about-us/AboutUs"));
-
 const Stats = lazy(() => import("./ui/pages/dashboard/Stats"));
 
 function App() {
