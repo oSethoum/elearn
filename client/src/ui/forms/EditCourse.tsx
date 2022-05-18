@@ -33,7 +33,7 @@ export const EditCourse = ({ onCancel, onSubmit, course }: EditCourseProps) => {
     () =>
       z.object({
         title: z.string().nonempty(t("notEmpty")),
-        description: z.string().nonempty(t("notEmpty")),
+        description: z.string().nullable(),
         topic: z.string().nonempty(t("notEmpty")),
         year: z.string().nonempty(t("notEmpty")),
       }),
@@ -77,6 +77,7 @@ export const EditCourse = ({ onCancel, onSubmit, course }: EditCourseProps) => {
                 year: parseInt(values.year),
               },
             },
+            refetchQueries: [namedOperations.Query.Courses],
             onCompleted() {
               onSubmit?.();
             },
@@ -84,7 +85,7 @@ export const EditCourse = ({ onCancel, onSubmit, course }: EditCourseProps) => {
         })}
         noValidate
       >
-        <SimpleGrid cols={1} breakpoints={[{ minWidth: "md", cols: 2 }]}>
+        <SimpleGrid cols={1}>
           <TextInput
             label={t("title")}
             placeholder={t("title")}
@@ -121,10 +122,12 @@ export const EditCourse = ({ onCancel, onSubmit, course }: EditCourseProps) => {
             {...form.getInputProps("year")}
           />
         </SimpleGrid>
-        <Group position="right">
-          <Button onClick={onCancel}>{t("cancel")}</Button>
-          <Button type="submit" color="blue">
-            {t("confirm")}
+        <Group mt={20} position="right">
+          <Button variant="default" onClick={onCancel}>
+            {t("cancel")}
+          </Button>
+          <Button color="green" type="submit">
+            {t("apply")}
           </Button>
         </Group>
       </form>

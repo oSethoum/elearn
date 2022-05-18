@@ -129,7 +129,7 @@ export function HeroSection() {
       </Paper>
       <div className={classes.inner}>
         <Title className={classes.title}>
-          {t("heroLine")}
+          {t("heroLine")}{" "}
           <Text component="span" inherit className={classes.highlight}>
             {t("online")}
           </Text>

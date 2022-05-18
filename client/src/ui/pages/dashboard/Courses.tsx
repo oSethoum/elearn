@@ -10,7 +10,10 @@ import { useModals } from "@mantine/modals";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { MdDelete, MdEdit } from "react-icons/md";
-import Course from "../courses/Course";
+import { Course } from "@/graphql";
+import { EditCourse } from "@/ui/forms/EditCourse";
+import { useNotifications } from "@mantine/notifications";
+import { NewCourse } from "@/ui/forms/NewCourse";
 
 export const DashboardCourses = () => {
   const [selectedCourses, setSelectedCourses] = useState<number[]>([]);
@@ -18,6 +21,7 @@ export const DashboardCourses = () => {
   const { t } = useTranslation();
   const modals = useModals();
   const [deleteCourse] = useDeleteCourseMutation();
+  const notifications = useNotifications();
 
   if (loading) return <Loader height="80vh" />;
 
@@ -42,7 +46,31 @@ export const DashboardCourses = () => {
       },
     });
 
-  const editModal = (index: number) => {};
+  const editModal = (index: number) => {
+    const id = modals.openModal({
+      title: t("editCourse"),
+      children: (
+        <EditCourse
+          course={data?.courses[index] as Course}
+          onCancel={() => modals.closeModal(id)}
+          onSubmit={() => {
+            modals.closeModal(id);
+            notifications.showNotification({
+              message: t("success"),
+              color: "green",
+            });
+          }}
+        />
+      ),
+    });
+  };
+
+  const addModal = () => {
+    const id = modals.openModal({
+      title: t("addCourse"),
+      children: <NewCourse onCancel={() => {}} onSubmit={() => {}} />,
+    });
+  };
 
   return (
     <Box sx={{ height: "100%" }}>
@@ -65,10 +93,18 @@ export const DashboardCourses = () => {
         actionsLabel={t("actions")}
         actions={(index) => (
           <Group>
-            <ActionIcon color="green" variant="light">
+            <ActionIcon
+              onClick={() => editModal(index)}
+              color="green"
+              variant="light"
+            >
               <MdEdit />
             </ActionIcon>
-            <ActionIcon color="red" variant="light">
+            <ActionIcon
+              onClick={() => deleteModal(index)}
+              color="red"
+              variant="light"
+            >
               <MdDelete />
             </ActionIcon>
           </Group>
