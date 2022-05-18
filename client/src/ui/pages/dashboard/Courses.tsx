@@ -10,6 +10,7 @@ import { useModals } from "@mantine/modals";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { MdDelete, MdEdit } from "react-icons/md";
+import Course from "../courses/Course";
 
 export const DashboardCourses = () => {
   const [selectedCourses, setSelectedCourses] = useState<number[]>([]);
@@ -76,3 +77,5 @@ export const DashboardCourses = () => {
     </Box>
   );
 };
+
+export default DashboardCourses;
