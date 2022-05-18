@@ -3,6 +3,7 @@ import {
   useCoursesQuery,
   useDeleteCourseMutation,
 } from "@/graphql";
+
 import { DataGrid, Loader } from "@/ui/components";
 import { ActionIcon, Box, Button, Group, Menu } from "@mantine/core";
 import { useModals } from "@mantine/modals";
@@ -52,7 +53,7 @@ export const DashboardCourses = () => {
         selectedIndexes={selectedCourses}
         setSelectedIndexes={setSelectedCourses}
         data={
-          data?.courses.map((course, index) => ({
+          data?.courses.map((course) => ({
             id: course.id,
             title: course.title,
             teacher: course.teacher
