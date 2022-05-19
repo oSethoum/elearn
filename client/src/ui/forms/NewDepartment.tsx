@@ -3,7 +3,7 @@ import { useMemo } from "react";
 import { useForm, zodResolver } from "@mantine/form";
 import { z } from "zod";
 import { useTranslation } from "react-i18next";
-import { useCreateDepartmentMutation } from "@/graphql";
+import { namedOperations, useCreateDepartmentMutation } from "@/graphql";
 
 interface NewDepartmentProps {
   onSubmit?: () => void;
@@ -37,6 +37,7 @@ export const NewDepartments = ({ onCancel, onSubmit }: NewDepartmentProps) => {
                 name: values.name,
               },
             },
+            refetchQueries: [namedOperations.Query.Departments],
             onCompleted() {
               onSubmit?.();
             },
@@ -47,11 +48,14 @@ export const NewDepartments = ({ onCancel, onSubmit }: NewDepartmentProps) => {
         <TextInput
           label={t("name")}
           placeholder={t("name")}
+          required
           {...form.getInputProps("name")}
         />
 
-        <Group>
-          <Button onClick={onCancel}>{t("cancel")}</Button>
+        <Group position="right" mt={10}>
+          <Button variant="default" onClick={onCancel}>
+            {t("cancel")}
+          </Button>
           <Button type="submit">{t("add")}</Button>
         </Group>
       </form>

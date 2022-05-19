@@ -82,6 +82,7 @@ export const NewMeeting = () => {
               label={t("title")}
               placeholder={t("title")}
               {...form.getInputProps("title")}
+              required
             />
             <TextInput
               label={t("description")}
@@ -93,21 +94,25 @@ export const NewMeeting = () => {
               label={t("date")}
               placeholder={t("date")}
               {...form.getInputProps("date")}
+              required
             />
             <TimeInput
               label={t("startTime")}
               placeholder={t("startTime")}
               {...form.getInputProps("startTime")}
+              required
             />
             <TimeInput
               label={t("duration")}
               placeholder={t("duration")}
               {...form.getInputProps("duration")}
+              required
             />
             <TextInput
               label={t("link")}
               placeholder={t("link")}
               {...form.getInputProps("link")}
+              required
             />
           </Group>
           <Space h={20} />

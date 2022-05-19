@@ -7,7 +7,7 @@ import {
   Textarea,
   TextInput,
 } from "@mantine/core";
-import { useMemo } from "react";
+import { useEffect, useMemo } from "react";
 import { useForm, zodResolver } from "@mantine/form";
 import { z } from "zod";
 import { useTranslation } from "react-i18next";
@@ -15,7 +15,9 @@ import {
   namedOperations,
   useCreateCourseMutation,
   useTopicsQuery,
+  useTeachersQuery,
 } from "@/graphql";
+import { useAppContext } from "@/context";
 
 interface NewCourseProps {
   onSubmit?: () => void;
@@ -24,8 +26,13 @@ interface NewCourseProps {
 
 export const NewCourse = ({ onCancel, onSubmit }: NewCourseProps) => {
   const { t } = useTranslation();
-  const { data } = useTopicsQuery();
+  const { data: topicsQuery } = useTopicsQuery();
+  const { data: teachersQuery } = useTeachersQuery();
   const [createCourse] = useCreateCourseMutation();
+  const { setHeader } = useAppContext();
+  useEffect(() => {
+    setHeader("courses");
+  }, []);
 
   const schema = useMemo(
     () =>
@@ -34,6 +41,7 @@ export const NewCourse = ({ onCancel, onSubmit }: NewCourseProps) => {
         description: z.string().nonempty(t("notEmpty")),
         topic: z.string().nonempty(t("notEmpty")),
         year: z.string().nonempty(t("notEmpty")),
+        teacher: z.string().nonempty(t("notEmpty")),
       }),
     []
   );
@@ -43,8 +51,9 @@ export const NewCourse = ({ onCancel, onSubmit }: NewCourseProps) => {
     initialValues: {
       title: "",
       description: "",
-      topic: "",
-      year: "",
+      topic: "1",
+      year: "1",
+      teacher: "1",
     },
   });
 
@@ -72,9 +81,15 @@ export const NewCourse = ({ onCancel, onSubmit }: NewCourseProps) => {
                     id: parseInt(values.topic),
                   },
                 },
+                teacher: {
+                  connect: {
+                    id: parseInt(values.teacher),
+                  },
+                },
                 year: parseInt(values.year),
               },
             },
+            refetchQueries: [namedOperations.Query.Courses],
             onCompleted() {
               onSubmit?.();
             },
@@ -82,23 +97,35 @@ export const NewCourse = ({ onCancel, onSubmit }: NewCourseProps) => {
         })}
         noValidate
       >
-        <SimpleGrid cols={1} breakpoints={[{ minWidth: "md", cols: 2 }]}>
+        <SimpleGrid
+          cols={1}
+          breakpoints={[{ minWidth: "md", cols: 2 }]}
+          mb={10}
+        >
           <TextInput
             label={t("title")}
             placeholder={t("title")}
             {...form.getInputProps("title")}
-          />
-
-          <Textarea
-            label={t("description")}
-            placeholder={t("description")}
-            {...form.getInputProps("description")}
+            required
           />
 
           <Select
+            required
+            label={t("teacher")}
+            data={
+              teachersQuery?.teachers.map((teacher) => ({
+                label: teacher.firstName + " " + teacher.lastName,
+                value: teacher.id.toString(),
+              })) || []
+            }
+            {...form.getInputProps("teacher")}
+          />
+
+          <Select
+            required
             label={t("topic")}
             data={
-              data?.topics.map((topic) => ({
+              topicsQuery?.topics.map((topic) => ({
                 label: topic.name,
                 value: topic.id.toString(),
                 group: topic.department?.name,
@@ -109,9 +136,10 @@ export const NewCourse = ({ onCancel, onSubmit }: NewCourseProps) => {
 
           <Select
             label={t("year")}
+            required
             data={
               makeArray(
-                data?.topics.find(
+                topicsQuery?.topics.find(
                   (topic) => topic.id === parseInt(form.values.topic)
                 )?.years
               ) || []
@@ -119,9 +147,18 @@ export const NewCourse = ({ onCancel, onSubmit }: NewCourseProps) => {
             {...form.getInputProps("year")}
           />
         </SimpleGrid>
-        <Group position="right">
-          <Button onClick={onCancel}>{t("cancel")}</Button>
-          <Button color="blue">{t("add")}</Button>
+        <Textarea
+          label={t("description")}
+          placeholder={t("description")}
+          {...form.getInputProps("description")}
+        />
+        <Group mt={20} position="right">
+          <Button variant="default" onClick={onCancel}>
+            {t("cancel")}
+          </Button>
+          <Button type="submit" color="blue">
+            {t("add")}
+          </Button>
         </Group>
       </form>
     </Box>

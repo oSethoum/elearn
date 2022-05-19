@@ -110,12 +110,14 @@ export const EditStudent = ({
             label={t("firstName")}
             placeholder={t("firstName")}
             {...form.getInputProps("firstName")}
+            required
           />
 
           <TextInput
             label={t("lastName")}
             placeholder={t("lastName")}
             {...form.getInputProps("lastName")}
+            required
           />
 
           {data && (
@@ -146,19 +148,23 @@ export const EditStudent = ({
             label={t("username")}
             placeholder={t("username")}
             {...form.getInputProps("username")}
+            required
           />
 
           <TextInput
             label={t("email")}
             placeholder={t("email")}
             {...form.getInputProps("email")}
+            required
           />
         </SimpleGrid>
         <Group position="right" mt={20}>
           <Button variant="default" onClick={onCancel}>
             {t("cancel")}
           </Button>
-          <Button type="submit" color="green">{t("apply")}</Button>
+          <Button type="submit" color="green">
+            {t("apply")}
+          </Button>
         </Group>
       </form>
     </Box>

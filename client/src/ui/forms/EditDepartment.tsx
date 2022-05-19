@@ -6,7 +6,6 @@ import { useTranslation } from "react-i18next";
 import {
   Department,
   namedOperations,
-  useDepartmentsQuery,
   useUpdateDepartmentMutation,
 } from "@/graphql";
 
@@ -62,6 +61,7 @@ export const EditDepartments = ({
           label={t("name")}
           placeholder={t("name")}
           {...form.getInputProps("name")}
+          required
         />
 
         <Group position="right" mt="lg">

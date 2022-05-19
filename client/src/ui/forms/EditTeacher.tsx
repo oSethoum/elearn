@@ -92,7 +92,9 @@ export const EditTeacher = ({
           <Button onClick={onCancel} variant="default">
             {t("cancel")}
           </Button>
-          <Button type="submit">{t("apply")}</Button>
+          <Button type="submit" color="green">
+            {t("apply")}
+          </Button>
         </Group>
       </form>
     </Box>

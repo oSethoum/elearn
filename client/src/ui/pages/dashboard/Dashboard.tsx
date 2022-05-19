@@ -30,7 +30,7 @@ import {
 export interface IDashboardProps extends BoxProps<"div"> {}
 
 export const Dashboard: FC<IDashboardProps> = () => {
-  const { user } = useAppContext();
+  const { user, header } = useAppContext();
   const { pathname } = useLocation();
   const { t } = useTranslation();
   const [opened, setOpened] = useState(false);
@@ -164,7 +164,7 @@ export const Dashboard: FC<IDashboardProps> = () => {
             </MediaQuery>
           </Group>
           <Text size="xl" weight="bold">
-            {t("dashboard")}
+            {t(header)}
           </Text>
           <Group>
             <UserButton />

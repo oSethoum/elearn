@@ -1,20 +1,22 @@
+import { useAppContext } from "@/context";
 import {
-  Title,
-  Text,
-  Container,
+  BackgroundImage,
+  Box,
   Button,
-  Overlay,
+  Center,
   createStyles,
   Group,
-  Box,
+  Text,
+  Container,
   Space,
+  Overlay,
   Paper,
+  Title,
   useMantineTheme,
 } from "@mantine/core";
-import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import { useAppContext } from "@/context";
-import { Logo } from "./Logo";
+import { Logo } from ".";
+import { Link } from "react-router-dom";
 
 const useStyles = createStyles((theme) => ({
   wrapper: {
@@ -106,63 +108,78 @@ const useStyles = createStyles((theme) => ({
   },
 }));
 
-export function HeroSection() {
+export const HeroSection = () => {
   const { classes, cx } = useStyles();
   const { t } = useTranslation();
   const { user } = useAppContext();
   const theme = useMantineTheme();
 
   return (
-    <div className={classes.wrapper}>
-      <Overlay color="#000" opacity={0.65} zIndex={1} />
-      <Paper
-        sx={(theme) => ({
-          position: "absolute",
-          left: "40%",
-          zIndex: 10,
-          width: 250,
-          top: 20,
-          backgroundColor: theme.fn.rgba(theme.colors.dark[9], 0.6),
-        })}
+    <Box>
+      <BackgroundImage
+        sx={{
+          height: "100vh",
+          position: "relative",
+          display: "flex",
+          justifyContent: "center",
+        }}
+        src="https://images.pexels.com/photos/4065876/pexels-photo-4065876.jpeg?cs=srgb&dl=pexels-cottonbro-4065876.jpg&fm=jpg"
       >
-        <Logo fill={theme.colors[theme.primaryColor][3]} width={250} />
-      </Paper>
-      <div className={classes.inner}>
-        <Title className={classes.title}>
-          {t("heroLine")}{" "}
-          <Text component="span" inherit className={classes.highlight}>
-            {t("online")}
-          </Text>
-        </Title>
+        <Overlay zIndex={1} color="#000" opacity={0.65} />
+        <Paper
+          sx={(theme) => ({
+            position: "absolute",
+            zIndex: 10,
+            width: 300,
+            top: 20,
+            backgroundColor: theme.fn.rgba(theme.colors.dark[9], 0.6),
+          })}
+        >
+          <Logo fill={theme.colors[theme.primaryColor][3]} width={300} />
+        </Paper>
+        <Center sx={{ height: "120vh" }}>
+          <div className={classes.inner}>
+            <Title className={classes.title}>
+              {t("heroLine")}{" "}
+              <Text component="span" inherit className={classes.highlight}>
+                {t("online")}
+              </Text>
+            </Title>
 
-        <Container size={640}>
-          <Text size="lg" className={classes.description}>
-            {t("subHeroLine")}
-          </Text>
-        </Container>
+            <Container size={640}>
+              <Text size="lg" className={classes.description}>
+                {t("subHeroLine")}
+              </Text>
+            </Container>
 
-        <Box className={classes.controls}>
-          {user ? (
-            <Space h={80} />
-          ) : (
-            <Group mt={10}>
-              <Link to="/register">
-                <Button className={classes.control} variant="white" size="lg">
-                  {t("register")}
-                </Button>
-              </Link>
-              <Link to="/login">
-                <Button
-                  className={cx(classes.control, classes.secondaryControl)}
-                  size="lg"
-                >
-                  {t("login")}
-                </Button>
-              </Link>
-            </Group>
-          )}
-        </Box>
-      </div>
-    </div>
+            <Box className={classes.controls}>
+              {user ? (
+                <Space h={80} />
+              ) : (
+                <Group mt={10}>
+                  <Link to="/register">
+                    <Button
+                      className={classes.control}
+                      variant="white"
+                      size="lg"
+                    >
+                      {t("register")}
+                    </Button>
+                  </Link>
+                  <Link to="/login">
+                    <Button
+                      className={cx(classes.control, classes.secondaryControl)}
+                      size="lg"
+                    >
+                      {t("login")}
+                    </Button>
+                  </Link>
+                </Group>
+              )}
+            </Box>
+          </div>
+        </Center>
+      </BackgroundImage>
+    </Box>
   );
-}
+};

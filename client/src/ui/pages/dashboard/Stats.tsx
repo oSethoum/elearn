@@ -1,3 +1,4 @@
+import { useAppContext } from "@/context";
 import {
   useStatePageDataQuery,
   useUpdateManyUserMutation,
@@ -14,7 +15,7 @@ import {
   createStyles,
   Button,
 } from "@mantine/core";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { MdPersonOutline, MdBook } from "react-icons/md";
 
@@ -61,6 +62,10 @@ export const Stats = () => {
   const [selectedStudents, setSelectedStudents] = useState<number[]>([]);
   const [selectedTeachers, setSelectedTeachers] = useState<number[]>([]);
   const [updateUsers] = useUpdateManyUserMutation();
+  const { setHeader } = useAppContext();
+  useEffect(() => {
+    setHeader("dashboard");
+  }, []);
 
   let { data, loading } = useStatePageDataQuery({
     variables: {

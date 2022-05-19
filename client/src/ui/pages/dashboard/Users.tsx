@@ -1,3 +1,4 @@
+import { useAppContext } from "@/context";
 import {
   namedOperations,
   Student,
@@ -23,7 +24,7 @@ import {
 } from "@mantine/core";
 import { useModals } from "@mantine/modals";
 import { useNotifications } from "@mantine/notifications";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { MdEdit } from "react-icons/md";
 
@@ -36,6 +37,10 @@ export const DashboardUsers = () => {
   const [deleteUser] = useDeleteUserMutation();
   const [updateUser] = useUpdateUserMutation();
   const notification = useNotifications();
+  const { setHeader } = useAppContext();
+  useEffect(() => {
+    setHeader("users");
+  }, []);
 
   const deleteModal = (id?: number) =>
     modals.openConfirmModal({
@@ -90,7 +95,7 @@ export const DashboardUsers = () => {
             notification.showNotification({
               message: t("success"),
               color: "green",
-            })
+            });
             modals.closeModal(id);
           }}
           onCancel={() => {

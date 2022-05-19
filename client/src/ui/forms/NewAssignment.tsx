@@ -16,14 +16,14 @@ import z from "zod";
 import RichTextEditorInput from "../components/RichTextEditor";
 
 export const NewAssignment = () => {
-  const [create, { loading: isCreating }] = useCreateAssignmentMutation();
+  const [create] = useCreateAssignmentMutation();
   const params = useParams();
   const { showNotification } = useNotifications();
   const navigate = useNavigate();
   const { t } = useTranslation();
   const schema = z.object({
     title: z.string().nonempty(t("notEmpty")),
-    description: z.string().nonempty(t("notEmpty")),
+    description: z.string(),
     published: z.boolean(),
     content: z.string().nonempty(t("notEmpty")),
   });
@@ -70,6 +70,7 @@ export const NewAssignment = () => {
               label={t("title")}
               placeholder={t("title")}
               {...form.getInputProps("title")}
+              required
             />
             <TextInput
               label={t("description")}
@@ -81,6 +82,7 @@ export const NewAssignment = () => {
               {...form.getInputProps("published", { type: "checkbox" })}
             />
             <RichTextEditorInput
+              required
               label={t("content")}
               {...form.getInputProps("content")}
             />

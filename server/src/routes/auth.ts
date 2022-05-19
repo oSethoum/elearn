@@ -3,7 +3,7 @@ import { sign, verify } from "jsonwebtoken";
 import prisma from "../db";
 
 export const register: Handler = async (req, res) => {
-  const { topic, grade, firstName, lastName, role, ...others } = req.body;
+  const { topic, year, firstName, lastName, role, ...others } = req.body;
 
   console.log("route hit register");
 
@@ -26,7 +26,7 @@ export const register: Handler = async (req, res) => {
       data: {
         firstName,
         lastName,
-        grade: parseInt(grade),
+        year: parseInt(year),
         topicId: parseInt(topic),
         userId: user.id,
       },
@@ -146,5 +146,7 @@ export const refresh: Handler = async (req, res) => {
 };
 
 export const logout: Handler = (_, res) => {
+  console.log("loggin out");
+  
   res.clearCookie("access_token").status(200).end();
 };

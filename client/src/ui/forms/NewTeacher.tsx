@@ -75,31 +75,37 @@ export const NewTeacher = ({ onCancel, onSubmit }: NewTeacherProps) => {
             label={t("firstName")}
             placeholder={t("firstName")}
             {...form.getInputProps("firstName")}
+            required
           />
           <TextInput
             label={t("lastName")}
             placeholder={t("lastName")}
             {...form.getInputProps("lastName")}
+            required
           />
           <TextInput
             label={t("email")}
             placeholder={t("email")}
             {...form.getInputProps("email")}
+            required
           />
           <TextInput
             label={t("username")}
             placeholder={t("username")}
             {...form.getInputProps("username")}
+            required
           />
           <TextInput
             label={t("password")}
             placeholder={t("password")}
             {...form.getInputProps("password")}
+            required
           />
           <TextInput
             label={t("confirmPassword")}
             placeholder={t("confirmPassword")}
             {...form.getInputProps("confirmPassword")}
+            required
           />
         </SimpleGrid>
         <Group position="right" mt={20}>

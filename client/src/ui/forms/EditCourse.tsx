@@ -14,7 +14,8 @@ import { useTranslation } from "react-i18next";
 import {
   Course,
   namedOperations,
-  useCreateCourseMutation,
+  useUpdateCourseMutation,
+  useTeachersQuery,
   useTopicsQuery,
 } from "@/graphql";
 
@@ -26,8 +27,9 @@ interface EditCourseProps {
 
 export const EditCourse = ({ onCancel, onSubmit, course }: EditCourseProps) => {
   const { t } = useTranslation();
-  const { data } = useTopicsQuery();
-  const [createCourse] = useCreateCourseMutation();
+  const { data: topicsQuery } = useTopicsQuery();
+  const { data: teachersQuery } = useTeachersQuery();
+  const [editCourse] = useUpdateCourseMutation();
 
   const schema = useMemo(
     () =>
@@ -36,6 +38,7 @@ export const EditCourse = ({ onCancel, onSubmit, course }: EditCourseProps) => {
         description: z.string().nullable(),
         topic: z.string().nonempty(t("notEmpty")),
         year: z.string().nonempty(t("notEmpty")),
+        teacher: z.string().nonempty(),
       }),
     []
   );
@@ -46,6 +49,7 @@ export const EditCourse = ({ onCancel, onSubmit, course }: EditCourseProps) => {
       title: course.title,
       description: course.description,
       topic: course.topicId?.toString() as string,
+      teacher: "1",
       year: course.year.toString(),
     },
   });
@@ -64,17 +68,25 @@ export const EditCourse = ({ onCancel, onSubmit, course }: EditCourseProps) => {
     <Box>
       <form
         onSubmit={form.onSubmit((values) => {
-          createCourse({
+          editCourse({
             variables: {
+              where: {
+                id: course.id,
+              },
               data: {
-                title: values.title,
-                description: values.description,
+                title: { set: values.title },
+                description: { set: values.description },
                 topic: {
                   connect: {
                     id: parseInt(values.topic),
                   },
                 },
-                year: parseInt(values.year),
+                teacher: {
+                  connect: {
+                    id: parseInt(values.teacher),
+                  },
+                },
+                year: { set: parseInt(values.year) },
               },
             },
             refetchQueries: [namedOperations.Query.Courses],
@@ -85,23 +97,34 @@ export const EditCourse = ({ onCancel, onSubmit, course }: EditCourseProps) => {
         })}
         noValidate
       >
-        <SimpleGrid cols={1}>
+        <SimpleGrid
+          cols={1}
+          breakpoints={[{ minWidth: "md", cols: 2 }]}
+          mb={10}
+        >
           <TextInput
             label={t("title")}
             placeholder={t("title")}
             {...form.getInputProps("title")}
           />
 
-          <Textarea
-            label={t("description")}
-            placeholder={t("description")}
-            {...form.getInputProps("description")}
+          <Select
+            label={t("teacher")}
+            required
+            data={
+              teachersQuery?.teachers.map((teacher) => ({
+                label: teacher.firstName + " " + teacher.lastName,
+                value: teacher.id.toString(),
+              })) || []
+            }
+            {...form.getInputProps("teacher")}
           />
 
           <Select
             label={t("topic")}
+            required
             data={
-              data?.topics.map((topic) => ({
+              topicsQuery?.topics.map((topic) => ({
                 label: topic.name,
                 value: topic.id.toString(),
                 group: topic.department?.name,
@@ -112,9 +135,10 @@ export const EditCourse = ({ onCancel, onSubmit, course }: EditCourseProps) => {
 
           <Select
             label={t("year")}
+            required
             data={
               makeArray(
-                data?.topics.find(
+                topicsQuery?.topics.find(
                   (topic) => topic.id === parseInt(form.values.topic)
                 )?.years
               ) || []
@@ -122,6 +146,11 @@ export const EditCourse = ({ onCancel, onSubmit, course }: EditCourseProps) => {
             {...form.getInputProps("year")}
           />
         </SimpleGrid>
+        <Textarea
+          label={t("description")}
+          placeholder={t("description")}
+          {...form.getInputProps("description")}
+        />
         <Group mt={20} position="right">
           <Button variant="default" onClick={onCancel}>
             {t("cancel")}

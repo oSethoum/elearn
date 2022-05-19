@@ -16,17 +16,16 @@ import { useCreateLessonMutation } from "../../graphql";
 import { showNotification } from "@mantine/notifications";
 
 export const NewLesson = () => {
+  const { t } = useTranslation();
   const schema = z.object({
-    title: z.string().nonempty(),
-    description: z.string().nonempty(),
+    title: z.string().nonempty(t("notEmpty")),
+    description: z.string(),
     content: z.string().min(20),
   });
 
   const navigate = useNavigate();
 
   const [createLesson, { data, error }] = useCreateLessonMutation({});
-
-  const { t } = useTranslation();
 
   const { onSubmit, getInputProps } = useForm({
     schema: zodResolver(schema),
@@ -57,6 +56,7 @@ export const NewLesson = () => {
     <Container my={20} size="xl">
       <Paper withBorder p={20}>
         <form
+          noValidate
           onSubmit={onSubmit((values) => {
             createLesson({
               variables: {
@@ -77,6 +77,7 @@ export const NewLesson = () => {
               label={t("title")}
               placeholder={t("title")}
               {...getInputProps("title")}
+              required
             />
             <Textarea
               label={t("description")}
@@ -85,6 +86,7 @@ export const NewLesson = () => {
             />
             <Switch label={t("published")} {...getInputProps("published")} />
             <RichTextEditorInput
+              required
               label={t("content")}
               {...getInputProps("content")}
             />

@@ -17,6 +17,7 @@ import { Loader } from "../components";
 import { useEffect } from "react";
 import { useLessonQuery, useUpdateLessonMutation } from "../../graphql/";
 import { useNotifications } from "@mantine/notifications";
+import RichTextEditorInput from "../components/RichTextEditor";
 
 export const EditLesson = () => {
   const schema = z.object({
@@ -101,6 +102,7 @@ export const EditLesson = () => {
               label={t("title")}
               placeholder={t("title")}
               {...form.getInputProps("title")}
+              required
             />
             <Textarea
               label={t("description")}
@@ -114,7 +116,8 @@ export const EditLesson = () => {
             <Text sx={{ fontSize: 14 }} mb={-15} weight={500}>
               {t("Content")}
             </Text>
-            <RichTextEditor
+            <RichTextEditorInput
+              required
               sx={(theme) => ({
                 minHeight: 250,
                 border: form.getInputProps("content").error

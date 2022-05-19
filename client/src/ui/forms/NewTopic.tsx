@@ -73,6 +73,7 @@ export const NewTopic = ({ onSubmit, onCancel }: Props) => {
             label={t("name")}
             placeholder={t("name")}
             {...form.getInputProps("name")}
+            required
           />
 
           <Select
@@ -83,18 +84,21 @@ export const NewTopic = ({ onSubmit, onCancel }: Props) => {
                 value: d.id.toString(),
               })) || []
             }
+            required
             {...form.getInputProps("department")}
           />
 
-          <NumberInput label={t("years")} {...form.getInputProps("years")} />
+          <NumberInput
+            label={t("years")}
+            {...form.getInputProps("years")}
+            required
+          />
         </SimpleGrid>
         <Group mt={20} position="right">
           <Button onClick={onCancel} variant="default">
             {t("cancel")}
           </Button>
-          <Button type={"submit"} color="green">
-            {t("apply")}
-          </Button>
+          <Button type={"submit"}>{t("add")}</Button>
         </Group>
       </form>
     </Box>

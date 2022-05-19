@@ -1,16 +1,19 @@
-import { ActionIcon, Box, Button, Group, Menu, Paper } from "@mantine/core";
+import { ActionIcon, Box, Button, Group } from "@mantine/core";
 import {
   Department,
   namedOperations,
   useDeleteDepartmentMutation,
   useDepartmentsQuery,
 } from "@/graphql";
-import { DataGrid } from "@/ui/components";
+import { DataGrid, Loader } from "@/ui/components";
 import { MdDelete, MdEdit } from "react-icons/md";
 import { useTranslation } from "react-i18next";
 import { useModals } from "@mantine/modals";
 import { EditDepartments } from "@/ui/forms/EditDepartment";
 import { useNotifications } from "@mantine/notifications";
+import { NewDepartments } from "@/ui/forms/NewDepartment";
+import { useAppContext } from "@/context";
+import { useEffect } from "react";
 
 export const Departments = () => {
   const { data } = useDepartmentsQuery();
@@ -18,10 +21,32 @@ export const Departments = () => {
   const [deleteDepartment] = useDeleteDepartmentMutation();
   const { openModal, closeModal, openConfirmModal } = useModals();
   const { showNotification } = useNotifications();
+  const { setHeader } = useAppContext();
+  useEffect(() => {
+    setHeader("departments");
+  }, []);
 
-  if (!data) return <Box>Loading...</Box>;
+  if (!data) return <Loader height="80vh" />;
 
-  const handleDelete = (index: number) => {
+  const addModal = () => {
+    const id = openModal({
+      title: t("addDepartment"),
+      children: (
+        <NewDepartments
+          onCancel={() => closeModal(id)}
+          onSubmit={() => {
+            closeModal(id);
+            showNotification({
+              message: t("success"),
+              color: "green",
+            });
+          }}
+        />
+      ),
+    });
+  };
+
+  const deleteModal = (index: number) => {
     openConfirmModal({
       title: t("confirmAction"),
       children: t("deleteMessage"),
@@ -49,12 +74,10 @@ export const Departments = () => {
     });
   };
 
-  const handleEdit = (index: number) => {
-    console.log(data.departments[index]);
-
+  const editModal = (index: number) => {
     const id = openModal({
       title: t("editDepartment"),
-      withCloseButton: false,
+      size: "xl",
       children: (
         <EditDepartments
           department={data.departments[index] as Department}
@@ -73,6 +96,10 @@ export const Departments = () => {
 
   return (
     <Box sx={{ height: "100%" }} m={10}>
+      <Button mb={20} onClick={addModal}>
+        {t("add")}
+      </Button>
+
       <DataGrid
         headerModifier={t}
         data={data?.departments.map((department, index) => ({
@@ -83,10 +110,10 @@ export const Departments = () => {
         actionsLabel="actions"
         actions={(index) => (
           <Group>
-            <ActionIcon onClick={() => handleEdit(index)} color="green">
+            <ActionIcon onClick={() => editModal(index)} color="green">
               <MdEdit />
             </ActionIcon>
-            <ActionIcon onClick={() => handleDelete(index)} color="red">
+            <ActionIcon onClick={() => deleteModal(index)} color="red">
               <MdDelete />
             </ActionIcon>
           </Group>

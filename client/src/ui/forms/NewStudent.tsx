@@ -57,8 +57,8 @@ export const NewStudent = ({ onSubmit, onCancel }: NewStudentProps) => {
       password: "",
       confirmPassword: "",
       email: "",
-      year: "",
-      topic: "",
+      year: "1",
+      topic: "1",
     },
   });
 
@@ -119,16 +119,19 @@ export const NewStudent = ({ onSubmit, onCancel }: NewStudentProps) => {
             label={t("firstName")}
             placeholder={t("firstName")}
             {...form.getInputProps("firstName")}
+            required
           />
 
           <TextInput
             label={t("lastName")}
             placeholder={t("lastName")}
             {...form.getInputProps("lastName")}
+            required
           />
 
           <Select
             label={t("topic")}
+            required
             data={
               data?.topics.map((topic) => ({
                 label: topic.name,
@@ -140,6 +143,7 @@ export const NewStudent = ({ onSubmit, onCancel }: NewStudentProps) => {
           />
           <Select
             label={t("year")}
+            required
             data={
               makeArray(
                 data?.topics.find(
@@ -154,22 +158,26 @@ export const NewStudent = ({ onSubmit, onCancel }: NewStudentProps) => {
             label={t("username")}
             placeholder={t("username")}
             {...form.getInputProps("username")}
+            required
           />
 
           <TextInput
             label={t("email")}
             placeholder={t("email")}
             {...form.getInputProps("email")}
+            required
           />
           <PasswordInput
             label={t("password")}
             placeholder={t("password")}
             {...form.getInputProps("password")}
+            required
           />
           <PasswordInput
             label={t("confirmPassword")}
             placeholder={t("confirmPassword")}
             {...form.getInputProps("confirmPassword")}
+            required
           />
         </SimpleGrid>
         <Group position="right">

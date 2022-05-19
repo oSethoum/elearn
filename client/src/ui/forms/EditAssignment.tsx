@@ -96,6 +96,7 @@ export const NewAssignment = () => {
             <TextInput
               label={t("title")}
               placeholder={t("title")}
+              required
               {...form.getInputProps("title")}
             />
             <TextInput
@@ -108,6 +109,7 @@ export const NewAssignment = () => {
               {...form.getInputProps("published", { type: "checkbox" })}
             />
             <RichTextEditorInput
+              required
               label={t("content")}
               {...form.getInputProps("content")}
             />

@@ -84,6 +84,7 @@ export const EditTopic = ({ onSubmit, onCancel, topic }: Props) => {
             label={t("name")}
             placeholder={t("name")}
             {...form.getInputProps("name")}
+            required
           />
 
           <Select
@@ -95,6 +96,7 @@ export const EditTopic = ({ onSubmit, onCancel, topic }: Props) => {
               })) || []
             }
             {...form.getInputProps("department")}
+            required
           />
           <NumberInput label={t("years")} {...form.getInputProps("years")} />
         </SimpleGrid>

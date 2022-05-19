@@ -121,32 +121,38 @@ export const EditMeeting = () => {
               label={t("title")}
               placeholder={t("title")}
               {...form.getInputProps("title")}
+              required
             />
             <TextInput
               label={t("description")}
               placeholder={t("description")}
               {...form.getInputProps("description")}
+              required
             />
             <DatePicker
               locale={language === "ar" ? "ar-dz" : language}
               label={t("date")}
               placeholder={t("date")}
               {...form.getInputProps("date")}
+              required
             />
             <TimeInput
               label={t("startTime")}
               placeholder={t("startTime")}
               {...form.getInputProps("startTime")}
+              required
             />
             <TimeInput
               label={t("duration")}
               placeholder={t("duration")}
               {...form.getInputProps("duration")}
+              required
             />
             <TextInput
               label={t("link")}
               placeholder={t("link")}
               {...form.getInputProps("link")}
+              required
             />
           </Group>
           <Space h={20} />
@@ -159,7 +165,9 @@ export const EditMeeting = () => {
             >
               {t("cancel")}
             </Button>
-            <Button type="submit">{t("apply")}</Button>
+            <Button type="submit" color="green">
+              {t("apply")}
+            </Button>
           </Group>
         </form>
       </Paper>

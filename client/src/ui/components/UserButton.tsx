@@ -34,9 +34,13 @@ export function UserButton() {
       title: t("logout"),
       children: t("logoutMessage"),
       centered: true,
+      confirmProps: { color: "red" },
       labels: { confirm: t("confirm"), cancel: t("cancel") },
       withCloseButton: false,
-      onConfirm: () => {
+      onConfirm: async () => {
+        await fetch("/api/logout", {
+          method: "POST",
+        });
         setUser(null);
         navigate("/");
       },
