@@ -71,6 +71,8 @@ export const NewCourse = ({ onCancel, onSubmit }: NewCourseProps) => {
     <Box>
       <form
         onSubmit={form.onSubmit((values) => {
+          console.log(values);
+
           createCourse({
             variables: {
               data: {

@@ -16,7 +16,6 @@ import {
   useTopicsQuery,
 } from "@/graphql";
 import { useEffect, useMemo } from "react";
-import { Loader } from "@/ui/components";
 
 interface NewStudentProps {
   onSubmit?: () => void;
@@ -61,10 +60,6 @@ export const NewStudent = ({ onSubmit, onCancel }: NewStudentProps) => {
       topic: "1",
     },
   });
-
-  useEffect(() => {
-    form.setFieldValue("year", "1");
-  }, [form.values.topic]);
 
   const makeArray = (max?: number) => {
     const arr: string[] = [];

@@ -137,6 +137,10 @@ export const refresh: Handler = async (req, res) => {
     return res.status(404).json({
       message: "Invalid credentials",
     });
+  } else if (user.disabled) {
+    return res.status(401).json({
+      message: "Account disabled",
+    });
   }
 
   const { password, ...payload } = user;
@@ -146,7 +150,5 @@ export const refresh: Handler = async (req, res) => {
 };
 
 export const logout: Handler = (_, res) => {
-  console.log("loggin out");
-  
   res.clearCookie("access_token").status(200).end();
 };

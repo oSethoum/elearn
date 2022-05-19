@@ -35,7 +35,7 @@ export const EditCourse = ({ onCancel, onSubmit, course }: EditCourseProps) => {
     () =>
       z.object({
         title: z.string().nonempty(t("notEmpty")),
-        description: z.string().nullable(),
+        description: z.string(),
         topic: z.string().nonempty(t("notEmpty")),
         year: z.string().nonempty(t("notEmpty")),
         teacher: z.string().nonempty(),
@@ -47,7 +47,7 @@ export const EditCourse = ({ onCancel, onSubmit, course }: EditCourseProps) => {
     schema: zodResolver(schema),
     initialValues: {
       title: course.title,
-      description: course.description,
+      description: course.description || "",
       topic: course.topicId?.toString() as string,
       teacher: "1",
       year: course.year.toString(),

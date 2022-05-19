@@ -12,7 +12,7 @@ import z from "zod";
 import { useTranslation } from "react-i18next";
 import { useNavigate, useParams } from "react-router-dom";
 import RichTextEditorInput from "../components/RichTextEditor";
-import { useCreateLessonMutation } from "../../graphql";
+import { namedOperations, useCreateLessonMutation } from "../../graphql";
 import { showNotification } from "@mantine/notifications";
 
 export const NewLesson = () => {
@@ -69,6 +69,7 @@ export const NewLesson = () => {
                   },
                 },
               },
+              refetchQueries: [namedOperations.Query.Course],
             });
           })}
         >

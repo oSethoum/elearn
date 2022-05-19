@@ -57,7 +57,7 @@ export default function CourseCard({
             </Tooltip>
             <Tooltip label={t("assignments")}>
               <Badge color="green" size="lg">
-                {_count?.lessons}
+                {_count?.assignments}
               </Badge>
             </Tooltip>
           </Group>

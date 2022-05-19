@@ -41,8 +41,8 @@ export function UserButton() {
         await fetch("/api/logout", {
           method: "POST",
         });
-        setUser(null);
         navigate("/");
+        setUser(null);
       },
     });
   };

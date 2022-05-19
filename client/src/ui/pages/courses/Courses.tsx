@@ -18,8 +18,6 @@ export function Courses() {
   const [to, setTo] = useState<string | undefined>("");
 
   useEffect(() => {
-    console.log(pathname);
-
     if (pathname.endsWith("/courses") || pathname.endsWith("/courses/")) {
       setTo("/");
     } else if (!!query.get("tab")) {

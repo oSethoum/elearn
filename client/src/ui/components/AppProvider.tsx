@@ -20,6 +20,7 @@ import {
   ApolloProvider,
   from,
   HttpLink,
+  DefaultOptions,
   InMemoryCache,
 } from "@apollo/client";
 
@@ -47,6 +48,17 @@ const GlobalStyles = () => {
   );
 };
 
+const defaultOptions: DefaultOptions = {
+  watchQuery: {
+    fetchPolicy: "no-cache",
+    errorPolicy: "ignore",
+  },
+  query: {
+    fetchPolicy: "no-cache",
+    errorPolicy: "all",
+  },
+};
+
 const errorLink = onError(({ graphQLErrors, networkError }) => {
   if (graphQLErrors)
     graphQLErrors.map(({ message, locations, path }) =>
@@ -67,6 +79,7 @@ const link = from([
 const client = new ApolloClient({
   link,
   cache: new InMemoryCache(),
+  defaultOptions,
 });
 
 export function AppProvider({ children }: React.ComponentPropsWithRef<"div">) {

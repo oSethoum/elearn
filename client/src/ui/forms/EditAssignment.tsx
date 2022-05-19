@@ -87,7 +87,7 @@ export const NewAssignment = () => {
                   message: t("success"),
                   color: "green",
                 });
-                navigate("/courses/" + params?.courseId + "/assignments");
+                navigate("/courses/" + params?.courseId + "?tab=assignments");
               },
             });
           })}
