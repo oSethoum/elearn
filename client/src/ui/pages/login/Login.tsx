@@ -23,7 +23,7 @@ import {
 import z from "zod";
 import { zodResolver, useForm } from "@mantine/form";
 import { useTranslation } from "react-i18next";
-import { useContext, useState } from "react";
+import { useState } from "react";
 import { useAppContext } from "@/context/";
 
 export function Login() {
@@ -31,6 +31,11 @@ export function Login() {
   const { t } = useTranslation();
   const { user, setUser } = useAppContext();
   const [alert, setAlert] = useState(false);
+  const [alertType, setAlertType] = useState({
+    title: "",
+    color: "",
+    content: "",
+  });
 
   const schema = z.object({
     email: z
@@ -60,7 +65,7 @@ export function Login() {
         withBorder
       >
         <Text align="center" size="xl" weight="bolder">
-          Login
+          {t("login")}
         </Text>
       </Header>
 
@@ -70,7 +75,6 @@ export function Login() {
             <Logo width={350} />
           </Center>
           <Space h={10} />
-
           <form
             onSubmit={form.onSubmit((values) => {
               fetch("/api/login", {
@@ -82,12 +86,22 @@ export function Login() {
               }).then((res) => {
                 if (res.status == 200) {
                   res.json().then((data) => {
-                    console.log("Logged in successfully");
-
                     setUser(data);
                     setAlert(false);
                   });
+                } else if (res.status == 401) {
+                  setAlertType({
+                    title: "accountDisabled",
+                    content: "yourAccountIsDisabled",
+                    color: "blue",
+                  });
+                  setAlert(true);
                 } else {
+                  setAlertType({
+                    title: "invalidCredentials",
+                    content: "emailOrPasswordIncorrect",
+                    color: "red",
+                  });
                   setAlert(true);
                 }
               });
@@ -119,14 +133,14 @@ export function Login() {
             <Space h={30} />
             {alert && (
               <Alert
-                color="red"
+                color={alertType.color}
                 mb={20}
                 onClose={() => setAlert(false)}
                 withCloseButton
-                title={t("invalidCredentials")}
+                title={t(alertType.title)}
                 variant="outline"
               >
-                {t("emailOrPasswordIncorrect")}
+                {t(alertType.content)}
               </Alert>
             )}
             <Group position="apart" grow>

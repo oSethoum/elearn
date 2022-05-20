@@ -17,23 +17,9 @@ import {
 import { useTranslation } from "react-i18next";
 import { Logo } from ".";
 import { Link } from "react-router-dom";
+import heroImage from "@/assets/hero-image.jpg";
 
 const useStyles = createStyles((theme) => ({
-  wrapper: {
-    position: "relative",
-    height: "100vh",
-    paddingTop: 220,
-    paddingBottom: 130,
-    backgroundImage:
-      "url(https://images.pexels.com/photos/4065876/pexels-photo-4065876.jpeg?cs=srgb&dl=pexels-cottonbro-4065876.jpg&fm=jpg)",
-    backgroundSize: "cover",
-    backgroundPosition: "center",
-    "@media (max-width: 520px)": {
-      paddingTop: 80,
-      paddingBottom: 50,
-    },
-  },
-
   inner: {
     position: "relative",
     zIndex: 1,
@@ -123,7 +109,7 @@ export const HeroSection = () => {
           display: "flex",
           justifyContent: "center",
         }}
-        src="https://images.pexels.com/photos/4065876/pexels-photo-4065876.jpeg?cs=srgb&dl=pexels-cottonbro-4065876.jpg&fm=jpg"
+        src={heroImage}
       >
         <Overlay zIndex={1} color="#000" opacity={0.65} />
         <Paper

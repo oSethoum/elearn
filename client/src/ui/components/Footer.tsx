@@ -45,7 +45,7 @@ export function Footer({
   const { language, setLanguage } = useAppContext();
   return (
     <Paper component="div" className={classes.root} {...others}>
-      {!!withBorder && <Divider size={borderSize || "xs"} />}
+      <Divider size={borderSize || "xs"} />
       <Grid columns={9} gutter="sm" mx={15}>
         <Grid.Col span={9} lg={3}>
           <Center style={{ minHeight: 170 }}>

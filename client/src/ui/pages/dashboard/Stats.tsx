@@ -17,7 +17,7 @@ import {
 } from "@mantine/core";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { MdPersonOutline, MdBook } from "react-icons/md";
+import { MdPersonOutline, MdBook, MdTopic } from "react-icons/md";
 
 const styles = createStyles((theme) => ({
   students: {
@@ -133,7 +133,7 @@ export const Stats = () => {
           <Card shadow="sm" className={classes.topics}>
             <Group position="apart">
               <Text size="xl">{t("topics")}</Text>
-              <MdBook size={25} />
+              <MdTopic size={25} />
             </Group>
             <Space h={20} />
             <Text size="xl" weight="bold">

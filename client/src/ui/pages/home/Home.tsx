@@ -1,14 +1,22 @@
 import {
+  Affix,
   Button,
   Card,
   Container,
   Group,
   SimpleGrid,
   Space,
+  Transition,
   useMantineTheme,
 } from "@mantine/core";
 import { BsCameraVideoFill } from "react-icons/bs";
-import { MdOutlineAssignmentTurnedIn, MdDashboard } from "react-icons/md";
+import {
+  MdOutlineAssignmentTurnedIn,
+  MdDashboard,
+  MdSchool,
+} from "react-icons/md";
+
+import { useWindowScroll } from "@mantine/hooks";
 import { Link } from "react-router-dom";
 import {
   ColorSchemeButton,
@@ -18,7 +26,7 @@ import {
 } from "../../components";
 import { FeatureCard } from "../../components/FeatureCard";
 import { HeroSection } from "../../components/HeroSection";
-import { FaBook, FaUniversity, FaRocket, FaQuestion } from "react-icons/fa";
+import { FaBook, FaUniversity, FaRocket, FaArrowUp } from "react-icons/fa";
 
 import { useAppContext } from "@/context/";
 import { useTranslation } from "react-i18next";
@@ -26,6 +34,7 @@ import { useTranslation } from "react-i18next";
 export function Home() {
   const theme = useMantineTheme();
   const { t } = useTranslation();
+  const [scroll, scrollTo] = useWindowScroll();
   const {
     user,
     departmentsRef,
@@ -64,7 +73,7 @@ export function Home() {
             {t("departments")}
           </Button>
           <Link to="about-us">
-            <Button leftIcon={<FaQuestion />} color="orange">
+            <Button leftIcon={<MdSchool />} color="orange">
               {t("aboutUs")}
             </Button>
           </Link>
@@ -132,7 +141,7 @@ export function Home() {
         </SimpleGrid>
         <Space h={75} />
         {/* @ts-ignore */}
-        <Space h={75} ref={departmentsRef} />
+        <Space h={90} ref={departmentsRef} />
         <Card withBorder>
           <h1
             style={{
@@ -170,6 +179,19 @@ export function Home() {
         </SimpleGrid>
         <Space h={75} />
       </Container>
+      <Affix position={{ bottom: 20, right: 20 }}>
+        <Transition transition="slide-up" mounted={scroll.y > 600}>
+          {(transitionStyles) => (
+            <Button
+              leftIcon={<FaArrowUp />}
+              style={transitionStyles}
+              onClick={() => scrollTo({ y: 0 })}
+            >
+              {t("backToTop")}
+            </Button>
+          )}
+        </Transition>
+      </Affix>
       <Footer withBorder />
     </>
   );

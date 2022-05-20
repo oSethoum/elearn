@@ -19,6 +19,7 @@
     "graphql": "^15.3.0",
     "graphql-fields": "^2.0.3",
     "graphql-scalars": "^1.17.0",
+    "graphql-upload": "^13.0.0",
     "jsonwebtoken": "^8.5.1",
     "morgan": "^1.10.0",
     "reflect-metadata": "^0.1.13",

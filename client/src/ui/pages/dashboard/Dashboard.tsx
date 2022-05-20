@@ -25,6 +25,7 @@ import {
   MdPerson,
   MdAccountBalance,
   MdBook,
+  MdTopic,
 } from "react-icons/md";
 
 export interface IDashboardProps extends BoxProps<"div"> {}
@@ -59,7 +60,7 @@ export const Dashboard: FC<IDashboardProps> = () => {
       link: "topics",
       label: t("topics"),
       color: "teal",
-      icon: MdAccountBalance,
+      icon: MdTopic,
     },
     {
       link: "courses",

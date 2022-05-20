@@ -15,6 +15,7 @@ import {
   List,
   AspectRatio,
   SimpleGrid,
+  Space,
 } from "@mantine/core";
 import { useTranslation } from "react-i18next";
 import about from "@/assets/about.jpg";
@@ -74,10 +75,12 @@ const AboutUsFr = () => (
       </AspectRatio>
     </SimpleGrid>
 
-    <Text mt={60}>
+    {/* <Text mt={60}>
       L’école est un établissement public, à caractère administratif doté de la
       personnalité morale et de l’autonomie financière.
-    </Text>
+    </Text> */}
+
+    <Space h={20} />
 
     <Title
       order={2}
@@ -155,11 +158,12 @@ const AboutUsEn = () => (
       </AspectRatio>
     </SimpleGrid>
 
-    <Text mt={60}>
+    {/* <Text mt={60}>
       The school is a public establishment, with an administrative character,
       legal personality, and financial autonomy.
-    </Text>
+    </Text> */}
 
+    <Space h={20} />
     <Title
       order={2}
       sx={(theme) => ({
@@ -210,11 +214,12 @@ const AboutUsAr = () => (
           التنفيذي رقم 14-230 لمراسلي 29 شاوال 1435 اعتبارًا من 25 أغسطس 2014
           ونشرت في الجريدة الرسمية رقم 51 بتاريخ 31 أغسطس 2014.
         </Text>
-        <Text component="p">
+        {/* <Text component="p">
           وتخضع المدرسة لإشراف وزارة التعليم العالي والبحث العلمي والغرض الأساسي
           منها هو تدريب خريجين جدد لمهنة التدريس في الاطوار الثلاث: الابتدائية
           والمتوسطة والثانوية
-        </Text>
+        </Text> */}
+        <Space h={20} />
         <Text component="p">يتلقى خريجو البكالوريا تدريب للتأهل لوظيفة:</Text>
         <List>
           <List.Item>مدرس التعليم الابتدائي: بكالوريا + 3</List.Item>

@@ -87,6 +87,10 @@ export const login: Handler = async (req, res) => {
     return res.status(404).json({
       message: "Invalid credentials",
     });
+  } else if (user.disabled) {
+    return res.status(401).json({
+      message: "Account disabled",
+    });
   }
 
   const token = sign({ userId: user?.id }, "secret", {

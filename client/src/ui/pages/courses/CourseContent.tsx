@@ -31,6 +31,7 @@ import {
 } from "@/graphql";
 import { useUrlQuery } from "@/hooks";
 import { useModals } from "@mantine/modals";
+import { ImFilesEmpty } from "react-icons/im";
 
 export const CourseContent = () => {
   const modals = useModals();
@@ -103,7 +104,10 @@ export const CourseContent = () => {
               )}
               {data?.course?.lessons?.length == 0 ? (
                 <Center sx={{ height: "80vh" }}>
-                  <Text>No Data </Text>
+                  <Group direction="column">
+                    <ImFilesEmpty size={36} />
+                    <Text>{t("empty")}</Text>
+                  </Group>
                 </Center>
               ) : (
                 data?.course?.lessons?.map((lesson) => (
@@ -157,7 +161,10 @@ export const CourseContent = () => {
               )}
               {data?.course?.assignments?.length == 0 ? (
                 <Center sx={{ height: "80vh" }}>
-                  <Text>No Data</Text>
+                  <Group direction="column">
+                    <ImFilesEmpty size={36} />
+                    <Text>{t("empty")}</Text>
+                  </Group>
                 </Center>
               ) : (
                 data?.course?.assignments?.map((assignment) => (
@@ -211,7 +218,10 @@ export const CourseContent = () => {
               )}
               {data?.course?.meetings?.length == 0 ? (
                 <Center sx={{ height: "80vh" }}>
-                  <Text>No Data </Text>
+                  <Group direction="column">
+                    <ImFilesEmpty size={36} />
+                    <Text>{t("empty")}</Text>
+                  </Group>
                 </Center>
               ) : (
                 data?.course?.meetings?.map((meeting) => (

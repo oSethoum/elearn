@@ -8,8 +8,10 @@ import {
   Text,
   TableProps,
   Pagination,
+  Group,
 } from "@mantine/core";
 import { useEffect, useState } from "react";
+import { ImFilesEmpty } from "react-icons/im";
 
 interface DataGridProps extends TableProps {
   data?: object[];
@@ -72,7 +74,10 @@ export function DataGrid({
     return (
       <Paper sx={{ minHeight: 300 }}>
         <Center sx={{ minHeight: 300 }}>
-          <Text>{t("empty")}</Text>
+          <Group direction="column">
+            <ImFilesEmpty size={36} />
+            <Text>{t("empty")}</Text>
+          </Group>
         </Center>
       </Paper>
     );

@@ -39,7 +39,7 @@ export function Reset() {
     <>
       <Header
         withBorder
-        leftSide={<BackButton to="/login" />}
+        leftSide={<BackButton />}
         rightSide={<ColorSchemeButton />}
       >
         <Text align="center" size="xl" weight="bold">

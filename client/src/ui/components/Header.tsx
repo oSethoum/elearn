@@ -21,11 +21,12 @@ import {
 
 import { useMediaQuery, useWindowScroll } from "@mantine/hooks";
 import { Logo } from "./Logo";
-import { useLocation, useNavigate, useNavigationType } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { FaUniversity, FaBook, FaRocket, FaQuestion } from "react-icons/fa";
 import { useAppContext } from "@/context";
 import { useTranslation } from "react-i18next";
 import { MdDashboard } from "react-icons/md";
+import { MdSchool } from "react-icons/md";
 
 interface stylesProps {
   y: number;
@@ -178,7 +179,7 @@ export function Header({
             onClick={() => {
               navigate("/about-us");
             }}
-            leftIcon={<FaQuestion />}
+            leftIcon={<MdSchool />}
             size="lg"
             color="orange"
             fullWidth
