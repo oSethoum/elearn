@@ -1,4 +1,5 @@
 import {
+  ActionIcon,
   Affix,
   Button,
   Card,
@@ -30,6 +31,12 @@ import { FaBook, FaUniversity, FaRocket, FaArrowUp } from "react-icons/fa";
 
 import { useAppContext } from "@/context/";
 import { useTranslation } from "react-i18next";
+
+// import images
+import science from "@/assets/science.jpg";
+import languages from "@/assets/languages.jpg";
+import arabic from "@/assets/arabic.jpeg";
+import { DepartmentCard } from "@/ui/components/DepartmentCard";
 
 export function Home() {
   const theme = useMantineTheme();
@@ -161,20 +168,22 @@ export function Home() {
           sx={{ textAlign: "center" }}
           breakpoints={[{ maxWidth: theme.breakpoints.sm, cols: 1 }]}
         >
-          <FeatureCard
-            title={t("lessons")}
-            color={theme.colors.teal[5]}
-            icon={<FaBook size={120} />}
+          <DepartmentCard
+            title={"Arabic"}
+            description="description"
+            image={arabic}
           />
-          <FeatureCard
-            title={t("homeWorks")}
-            color={theme.colors.orange[7]}
-            icon={<MdOutlineAssignmentTurnedIn size={120} />}
+
+          <DepartmentCard
+            title={"Languages"}
+            description="description"
+            image={languages}
           />
-          <FeatureCard
-            title={t("videoConference")}
-            color={theme.colors.blue[5]}
-            icon={<BsCameraVideoFill size={120} />}
+
+          <DepartmentCard
+            title={"Science"}
+            description="description"
+            image={science}
           />
         </SimpleGrid>
         <Space h={75} />
@@ -182,13 +191,16 @@ export function Home() {
       <Affix position={{ bottom: 20, right: 20 }}>
         <Transition transition="slide-up" mounted={scroll.y > 600}>
           {(transitionStyles) => (
-            <Button
-              leftIcon={<FaArrowUp />}
+            <ActionIcon
               style={transitionStyles}
+              size={"xl"}
+              variant="outline"
+              color="blue"
+              radius={100}
               onClick={() => scrollTo({ y: 0 })}
             >
-              {t("backToTop")}
-            </Button>
+              <FaArrowUp />
+            </ActionIcon>
           )}
         </Transition>
       </Affix>

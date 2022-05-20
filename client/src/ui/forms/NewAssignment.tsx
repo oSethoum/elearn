@@ -3,6 +3,7 @@ import {
   Button,
   Container,
   Group,
+  Text,
   Paper,
   Space,
   Switch,
@@ -40,6 +41,10 @@ export const NewAssignment = () => {
 
   return (
     <Container size="xl" my={20} sx={{ minHeight: "60vh" }}>
+      <Text weight="bold" sx={{ fontSize: 22 }}>
+        {t("addAssignment")}
+      </Text>
+      <Space h={15} />
       <Paper p={20} withBorder>
         <form
           onSubmit={form.onSubmit((values) => {

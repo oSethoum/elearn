@@ -3,9 +3,12 @@ import {
   Container,
   Group,
   Paper,
+  Space,
   Switch,
+  Text,
   Textarea,
   TextInput,
+  Title,
 } from "@mantine/core";
 import { useForm, zodResolver } from "@mantine/form";
 import z from "zod";
@@ -55,6 +58,10 @@ export const NewLesson = () => {
   return (
     <Container my={20} size="xl">
       <Paper withBorder p={20}>
+        <Text weight="bold" sx={{ fontSize: 22 }}>
+          {t("addLesson")}
+        </Text>
+        <Space h={15} />
         <form
           noValidate
           onSubmit={onSubmit((values) => {

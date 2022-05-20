@@ -56,7 +56,7 @@ export const fr = {
     failed: "Échec de l'opération",
     registerFailed: "Échec de l'enregistrement",
     published: "Publié",
-    content: " le Contenu",
+    content: "Contenu",
     online: "En ligne",
     heroLine: "Améliorez votre expérience d'apprentissage",
     subHeroLine:
@@ -118,6 +118,12 @@ export const fr = {
     accountDisabled: "Compte désactivé",
     yourAccountIsDisabled: "Votre compte est désactivé",
     backToTop: "Retour en haut",
+    addLesson: "Ajouter une leçon",
+    editLesson: "Modifier une leçon",
+    addAssignment: "Ajouter une assignation",
+    editAssignment: "Modifier une assignation",
+    addHomeWork: "Ajouter un travail dirigé",
+    editHomeWork: "Modifier un travail dirigé",
   },
 };
 

@@ -5,6 +5,7 @@ import cookieParser from "cookie-parser";
 import * as graphql from "./src/graphql";
 import * as routes from "./src/routes";
 import { publicRoutes } from "./src/routes/public";
+import { graphqlUploadExpress } from "graphql-upload";
 
 async function main() {
   const app = express();
@@ -13,6 +14,7 @@ async function main() {
   app.use(morgan("dev"));
   app.use(json({ limit: "50mb" }));
   app.use(cookieParser());
+  app.use(graphqlUploadExpress());
 
   publicRoutes(app);
   routes.setup(app);

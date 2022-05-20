@@ -31,7 +31,7 @@ const ListCourse = ({ courses }: { courses: Course[] }) => {
           className="ListInner"
           style={{
             height: `${rowVirtualizer.totalSize}px`,
-            width: "100%",
+            width: "99.5%",
             position: "relative",
           }}
         >

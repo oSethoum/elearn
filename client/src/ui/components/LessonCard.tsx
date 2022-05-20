@@ -6,6 +6,7 @@ import {
   createStyles,
   Group,
   Button,
+  Space,
 } from "@mantine/core";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
@@ -57,6 +58,7 @@ export const LessonCard = ({
       <Divider />
       <Box m={10}>
         <Box>{lesson.description || t("noDescription")}</Box>
+        <Space h={15} />
         <Group position="right">
           <Group>
             {!!canDelete && (

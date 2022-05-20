@@ -110,32 +110,40 @@ export const CourseContent = () => {
                   </Group>
                 </Center>
               ) : (
-                data?.course?.lessons?.map((lesson) => (
-                  <LessonCard
-                    key={lesson.title}
-                    lesson={lesson as Lesson}
-                    canEdit={user?.role === "teacher"}
-                    canDelete={user?.role === "teacher"}
-                    onDelete={() => {
-                      modals.openConfirmModal({
-                        title: t("confirmAction"),
-                        children: <Text size="sm">{t("deleteMessage")}</Text>,
-                        labels: { confirm: t("confirm"), cancel: t("cancel") },
-                        confirmProps: { color: "red" },
-                        centered: true,
-                        onConfirm: () =>
-                          deleteLesson({
-                            variables: {
-                              where: {
-                                id: lesson.id,
-                              },
+                data?.course?.lessons?.map(
+                  (lesson) =>
+                    (lesson.published || user?.role != "teacher") && (
+                      <LessonCard
+                        key={lesson.title}
+                        lesson={lesson as Lesson}
+                        canEdit={user?.role === "teacher"}
+                        canDelete={user?.role === "teacher"}
+                        onDelete={() => {
+                          modals.openConfirmModal({
+                            title: t("confirmAction"),
+                            children: (
+                              <Text size="sm">{t("deleteMessage")}</Text>
+                            ),
+                            labels: {
+                              confirm: t("confirm"),
+                              cancel: t("cancel"),
                             },
-                            refetchQueries: [namedOperations.Query.Course],
-                          }),
-                      });
-                    }}
-                  />
-                ))
+                            confirmProps: { color: "red" },
+                            centered: true,
+                            onConfirm: () =>
+                              deleteLesson({
+                                variables: {
+                                  where: {
+                                    id: lesson.id,
+                                  },
+                                },
+                                refetchQueries: [namedOperations.Query.Course],
+                              }),
+                          });
+                        }}
+                      />
+                    )
+                )
               )}
             </Box>
           </Tabs.Tab>
@@ -167,32 +175,40 @@ export const CourseContent = () => {
                   </Group>
                 </Center>
               ) : (
-                data?.course?.assignments?.map((assignment) => (
-                  <AssignmentCard
-                    key={assignment.id}
-                    onDelete={() => {
-                      modals.openConfirmModal({
-                        title: t("confirmAction"),
-                        children: <Text size="sm">{t("deleteMessage")}</Text>,
-                        labels: { confirm: t("confirm"), cancel: t("cancel") },
-                        confirmProps: { color: "red" },
-                        centered: true,
-                        onConfirm: () =>
-                          deleteAssignment({
-                            variables: {
-                              where: {
-                                id: assignment.id,
-                              },
+                data?.course?.assignments?.map(
+                  (assignment) =>
+                    (assignment.published || user?.role != "teacher") && (
+                      <AssignmentCard
+                        key={assignment.id}
+                        onDelete={() => {
+                          modals.openConfirmModal({
+                            title: t("confirmAction"),
+                            children: (
+                              <Text size="sm">{t("deleteMessage")}</Text>
+                            ),
+                            labels: {
+                              confirm: t("confirm"),
+                              cancel: t("cancel"),
                             },
-                            refetchQueries: [namedOperations.Query.Course],
-                          }),
-                      });
-                    }}
-                    assignment={assignment as Assignment}
-                    canEdit={user?.role === "teacher"}
-                    canDelete={user?.role === "teacher"}
-                  />
-                ))
+                            confirmProps: { color: "red" },
+                            centered: true,
+                            onConfirm: () =>
+                              deleteAssignment({
+                                variables: {
+                                  where: {
+                                    id: assignment.id,
+                                  },
+                                },
+                                refetchQueries: [namedOperations.Query.Course],
+                              }),
+                          });
+                        }}
+                        assignment={assignment as Assignment}
+                        canEdit={user?.role === "teacher"}
+                        canDelete={user?.role === "teacher"}
+                      />
+                    )
+                )
               )}
             </Box>
           </Tabs.Tab>

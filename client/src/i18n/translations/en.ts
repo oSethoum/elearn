@@ -118,6 +118,12 @@ export const en = {
     accountDisabled: "Account Disabled",
     yourAccountIsDisabled: "Your Account Is Disabled",
     backToTop: "Back To Top",
+    addLesson: "Add Lesson",
+    editLesson: "Edit Lesson",
+    addAssignment: "Add Assignment",
+    editAssignment: "Edit Assignment",
+    addHomeWork: "Add Home Work",
+    editHomeWork: "Edit Home Work",
   },
 };
 

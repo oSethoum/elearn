@@ -4,6 +4,8 @@ import {
   Group,
   Paper,
   Space,
+  Textarea,
+  Text,
   TextInput,
 } from "@mantine/core";
 import { DatePicker, TimeInput } from "@mantine/dates";
@@ -12,7 +14,7 @@ import { useTranslation } from "react-i18next";
 import z from "zod";
 import "dayjs/locale/fr";
 import "dayjs/locale/ar-dz";
-import { useContext, useEffect } from "react";
+import { useEffect } from "react";
 import { useAppContext } from "@/context";
 import { useMeetingQuery, useUpdateMeetingMutation } from "@/graphql";
 import { useNotifications } from "@mantine/notifications";
@@ -70,6 +72,10 @@ export const EditMeeting = () => {
   return (
     <Container size="xl">
       <Paper withBorder p={20} my={20}>
+        <Text weight="bold" sx={{ fontSize: 22 }}>
+          {t("editMeeting")}
+        </Text>
+        <Space h={15} />
         <form
           onSubmit={form.onSubmit((values) => {
             console.log(values);
@@ -123,7 +129,7 @@ export const EditMeeting = () => {
               {...form.getInputProps("title")}
               required
             />
-            <TextInput
+            <Textarea
               label={t("description")}
               placeholder={t("description")}
               {...form.getInputProps("description")}

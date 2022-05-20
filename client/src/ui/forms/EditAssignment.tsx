@@ -4,6 +4,7 @@ import {
   Group,
   Paper,
   Space,
+  Text,
   Switch,
   TextInput,
 } from "@mantine/core";
@@ -59,6 +60,10 @@ export const NewAssignment = () => {
   return (
     <Container size="xl" my={20} sx={{ minHeight: "60vh" }}>
       <Paper p={20} withBorder>
+        <Text weight="bold" sx={{ fontSize: 22 }}>
+          {t("editAssignment")}
+        </Text>
+        <Space h={15} />
         <form
           onSubmit={form.onSubmit((values) => {
             console.log(values);

@@ -2916,6 +2916,7 @@ type Mutation {
   updateTeacher(data: TeacherUpdateInput!, where: TeacherWhereUniqueInput!): Teacher
   updateTopic(data: TopicUpdateInput!, where: TopicWhereUniqueInput!): Topic
   updateUser(data: UserUpdateInput!, where: UserWhereUniqueInput!): User
+  uploadFile(file: Upload!): Boolean!
   upsertAdmin(create: AdminCreateInput!, update: AdminUpdateInput!, where: AdminWhereUniqueInput!): Admin!
   upsertAssignment(create: AssignmentCreateInput!, update: AssignmentUpdateInput!, where: AssignmentWhereUniqueInput!): Assignment!
   upsertAssignmentFile(create: AssignmentFileCreateInput!, update: AssignmentFileUpdateInput!, where: AssignmentFileWhereUniqueInput!): AssignmentFile!
@@ -4862,6 +4863,9 @@ input TopicWhereInput {
 input TopicWhereUniqueInput {
   id: Int
 }
+
+"""The `Upload` scalar type represents a file upload."""
+scalar Upload
 
 type User {
   admin: Admin

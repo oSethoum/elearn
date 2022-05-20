@@ -118,6 +118,12 @@ export const ar = {
     addCourse: "إضافة وحدة",
     editCourse: "تعديل وحدة",
     backToTop: "رجوع للأعلى",
+    addLesson: "إضافة درس",
+    editLesson: "تعديل درس",
+    addHomeWork: "إضافة واجب شخصي",
+    editHomeWork: "تعديل واجب شخصي",
+    addMeeting: "إضافة محادثة فيديو",
+    editMeeting: "تعديل محادثة فيديو",
   },
 };
 

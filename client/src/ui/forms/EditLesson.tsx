@@ -3,12 +3,12 @@ import {
   Container,
   Group,
   Paper,
+  Space,
   Switch,
   Text,
   Textarea,
   TextInput,
 } from "@mantine/core";
-import { RichTextEditor } from "@mantine/rte";
 import { useForm, zodResolver } from "@mantine/form";
 import z from "zod";
 import { useTranslation } from "react-i18next";
@@ -64,6 +64,10 @@ export const EditLesson = () => {
   return (
     <Container my={20} size="xl">
       <Paper withBorder p={20}>
+        <Text weight="bold" sx={{ fontSize: 22 }}>
+          {t("editLesson")}
+        </Text>
+        <Space h={15} />
         <form
           onSubmit={form.onSubmit((values) => {
             updateLesson({

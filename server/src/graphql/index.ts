@@ -5,6 +5,7 @@ import { Application } from "express";
 import { buildSchema } from "type-graphql";
 import { resolvers } from "../../prisma/generated/type-graphql";
 import path from "path";
+import { FileResolver } from "./resolvers";
 
 interface Context {
   prisma: PrismaClient;
@@ -12,7 +13,7 @@ interface Context {
 
 export async function setup(app: Application) {
   const schema = await buildSchema({
-    resolvers,
+    resolvers: [...resolvers, FileResolver],
     emitSchemaFile: path.resolve(__dirname, "schema.graphql"),
     validate: false,
   });

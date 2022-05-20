@@ -97,7 +97,7 @@ export const Topics = () => {
   return (
     <Box sx={{ height: "100%" }} m={10}>
       <Button onClick={addModal} mb={20}>
-        {t("addTopic")}
+        {t("add")}
       </Button>
       <DataGrid
         headerModifier={t}
