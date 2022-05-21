@@ -55,8 +55,7 @@ export const updateUser: Handler = async (req, res) => {
 };
 
 export const register: Handler = async (req, res) => {
-  const { topic, year, firstName, lastName, role, password, ...others } =
-    req.body;
+  const { topic, year, firstName, lastName, role, ...others } = req.body;
 
   if (role != "student" && role != "teacher") {
     return res.status(400).json({
