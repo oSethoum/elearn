@@ -1,12 +1,15 @@
 import {
   ActionIcon,
   Affix,
+  Box,
   Button,
   Card,
   Container,
   Group,
+  List,
   SimpleGrid,
   Space,
+  Text,
   Transition,
   useMantineTheme,
 } from "@mantine/core";
@@ -169,21 +172,57 @@ export function Home() {
           breakpoints={[{ maxWidth: theme.breakpoints.sm, cols: 1 }]}
         >
           <DepartmentCard
-            title={"Arabic"}
-            description="description"
-            image={arabic}
+            title={t("departmentOfExactSciences")}
+            description={
+              <Box p={20} sx={{ textAlign: "left" }}>
+                <Text size="xl">{t("topics")} :</Text>
+                <Space h={8} />
+                <Text size="lg" color="blue">
+                  {t("mathematicsAndPhysics")}
+                </Text>
+                <Text>{t("teacherOfMiddleEducation")}</Text>
+                <Space h={5} />
+                <Text size="lg" color="blue">
+                  {t("mathematicsPhysicsAndComputerScience")}
+                </Text>
+                <Text>{t("teacherOfSecondaryEducation")}</Text>
+              </Box>
+            }
+            image={science}
           />
 
           <DepartmentCard
-            title={"Languages"}
-            description="description"
+            title={t("departmentOfForeignLanguages")}
+            description={
+              <Box p={20} sx={{ textAlign: "left" }}>
+                <Text size="xl">{t("topics")} :</Text>
+                <Space h={8} />
+                <Text size="lg" color="blue">
+                  {t("frenchLanguage")}
+                </Text>
+                <Text>{t("teacherOfSecondaryEducation")}</Text>
+                <Space h={5} />
+                <Text size="lg" color="blue">
+                  {t("englishLanguage")}
+                </Text>
+                <Text>{t("teacherOfSecondaryEducation")}</Text>
+              </Box>
+            }
             image={languages}
           />
-
           <DepartmentCard
-            title={"Science"}
-            description="description"
-            image={science}
+            title={t("departmentOfArabic")}
+            description={
+              <Box p={20} sx={{ textAlign: "left" }}>
+                <Text size="xl">{t("topics")} :</Text>
+                <Space h={8} />
+                <Text size="lg" color="blue">
+                  {t("arabic")}
+                </Text>
+                <Text>{t("teacherOfPrimaryEducation")}</Text>
+              </Box>
+            }
+            image={arabic}
           />
         </SimpleGrid>
         <Space h={75} />

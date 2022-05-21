@@ -124,6 +124,21 @@ export const fr = {
     editAssignment: "Modifier une assignation",
     addHomeWork: "Ajouter un travail dirigé",
     editHomeWork: "Modifier un travail dirigé",
+    editProfile: "Modifier le profil",
+    newPassword: "Nouveau mot de passe",
+    departmentOfExactSciences: "Sciences Exactes",
+    departmentOfForeignLanguages: "Langues Etrangères",
+    departmentOfArabic: "Arabe",
+    mathematicsAndPhysics: "Mathématiques, Physiques",
+    physics: "Physiques",
+    teacherofMiddleEducation: "Professeur de l’Enseignement Moyen ",
+    mathematicsPhysicsandComputerScience:
+      "Mathématiques, Physiques, Informatique",
+    teacherOfSecondaryEducation: "Professeur de l’Enseignement Secondaire ",
+    frenchLanguage: "Français",
+    englishLanguage: "Anglais",
+    arabicLanguage: "Arabe",
+    teacherofPrimaryEducation: "Professeur de l’Enseignement Primaire ",
   },
 };
 

@@ -124,6 +124,20 @@ export const en = {
     editAssignment: "Edit Assignment",
     addHomeWork: "Add Home Work",
     editHomeWork: "Edit Home Work",
+    editProfile: "Edit Profile",
+    newPassword: "New Password",
+    departmentOfExactSciences: "Exact Sciences",
+    departmentOfForeignLanguages: "Foreign Languages",
+    departmentOfArabic: "Arabic ",
+    mathematicsAndPhysics: "Mathematics, Physics",
+    teacherOfMiddleEducation: "Teacher of Middle Education",
+    mathematicsPhysicsAndComputerScience:
+      "Mathematics, Physics, Computer Science",
+    teacherOfSecondaryEducation: "Teacher of Secondary Education",
+    frenchLanguage: "French",
+    englishLanguage: "English",
+    arabicLanguage: "Arabic",
+    teacherOfPrimaryEducation: "Teacher of Primary Education",
   },
 };
 

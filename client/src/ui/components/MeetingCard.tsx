@@ -50,7 +50,7 @@ export const MeetingCard = ({
   };
 
   return (
-    <Card m={10} p={0}>
+    <Card m={10} p={0} shadow="xs">
       <Box className={classes.title} p={10}>
         <Text size="xl" weight="bold">
           {meeting.title}

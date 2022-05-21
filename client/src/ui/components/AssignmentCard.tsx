@@ -49,7 +49,7 @@ export const AssignmentCard = ({
   };
 
   return (
-    <Card p={0} m={10}>
+    <Card p={0} m={10} shadow="xs">
       <Box className={classes.title} p={10}>
         <Text size="xl" weight="bold">
           {assignment.title}

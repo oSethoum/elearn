@@ -1,11 +1,62 @@
 import { Handler } from "express";
 import { sign, verify } from "jsonwebtoken";
+import { User } from "@prisma/client";
 import prisma from "../db";
 
-export const register: Handler = async (req, res) => {
-  const { topic, year, firstName, lastName, role, ...others } = req.body;
+interface UserInput extends User {
+  firstName: string;
+  lastName: string;
+  password: string;
+  newPassword: string;
+}
 
-  console.log("route hit register");
+export const updateUser: Handler = async (req, res) => {
+  const body: UserInput = req.body;
+  const user = await prisma.user.findUnique({
+    where: { id: body.id },
+  });
+
+  if (user?.password != "" || user?.password === body.password) {
+    const updatePersonal = {
+      update: {
+        firstName: { set: body.firstName },
+        lastName: { set: body.lastName },
+      },
+    };
+
+    const updatePassword =
+      body?.password != ""
+        ? {
+            password: body?.newPassword,
+          }
+        : {};
+
+    const result = await prisma.user.update({
+      where: { id: body.id },
+      data: {
+        username: { set: body.username },
+        email: { set: body.email },
+        teacher: user?.role === "teacher" ? updatePersonal : undefined,
+        student: user?.role === "student" ? updatePersonal : undefined,
+        admin: user?.role === "admin" ? updatePersonal : undefined,
+        ...updatePassword,
+      },
+    });
+
+    const { password, ...others } = result;
+
+    return res.status(200).json(others);
+  } else {
+    // password does not match
+    return res.status(400).json({
+      error: "Password does not match",
+    });
+  }
+};
+
+export const register: Handler = async (req, res) => {
+  const { topic, year, firstName, lastName, role, password, ...others } =
+    req.body;
 
   if (role != "student" && role != "teacher") {
     return res.status(400).json({
