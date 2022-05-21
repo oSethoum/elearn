@@ -1,1 +1,0 @@
-import{u as e}from"./index.388e8e0a.js";import{j as s,aD as r,d as o,B as u,a6 as a,aE as n}from"./vendor.0be45842.js";const x=()=>{const{user:t}=e();return t?o(u,{children:[s(a,{h:20}),s(n,{}),s(a,{h:20})]}):s(r,{to:"/404"})};export{x as Course,x as default};

@@ -129,10 +129,11 @@ export const ar = {
     departmentOfExactSciences: "العلوم الدقيقة ",
     departmentOfForeignLanguages: "اللغات الاجنبية",
     departmentOfArabic: "اللغة العربية ",
-    mathematics: "الرياضيات ",
+    mathematicsAndPhysics: "الرياضيات ,العلوم الفيزيائية ",
     physics: "الفيزياء",
     teacherOfMiddleEducation: "استاذ التعليم المتوسط",
-    mathematicsPhysicsAndComputerScience: "رياضيات ,فيزياء ,اعلام الي",
+    mathematicsPhysicsAndComputerScience:
+      "الرياضيات ,العلوم الفيزيائية ,الاعلام الالي",
     teacherOfSecondaryEducation: "استاذ التعليم الثانوي",
     teacherOfPrimaryEducation: "استاذ التعليم الابتدائي",
     frenchLanguage: "اللغة الفرنسية ",

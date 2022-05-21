@@ -1,1 +1,0 @@
-import{a8 as i,a3 as n,j as e,O as r,b1 as o,b2 as c}from"./vendor.0be45842.js";function g({to:s}){const t=i(),a=n();return e(r,{onClick:()=>{a(s||-1)},radius:"xl",size:"xl",children:t.dir==="ltr"?e(o,{size:28}):e(c,{size:28})})}export{g as B};

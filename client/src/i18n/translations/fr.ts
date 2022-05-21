@@ -131,14 +131,14 @@ export const fr = {
     departmentOfArabic: "Arabe",
     mathematicsAndPhysics: "Mathématiques, Physiques",
     physics: "Physiques",
-    teacherofMiddleEducation: "Professeur de l’Enseignement Moyen ",
+    teacherOfMiddleEducation: "Professeur de l’Enseignement Moyen ",
     mathematicsPhysicsandComputerScience:
       "Mathématiques, Physiques, Informatique",
     teacherOfSecondaryEducation: "Professeur de l’Enseignement Secondaire ",
     frenchLanguage: "Français",
     englishLanguage: "Anglais",
     arabicLanguage: "Arabe",
-    teacherofPrimaryEducation: "Professeur de l’Enseignement Primaire ",
+    teacherOfPrimaryEducation: "Professeur de l’Enseignement Primaire ",
   },
 };
 

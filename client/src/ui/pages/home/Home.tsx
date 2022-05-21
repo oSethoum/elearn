@@ -217,7 +217,7 @@ export function Home() {
                 <Text size="xl">{t("topics")} :</Text>
                 <Space h={8} />
                 <Text size="lg" color="blue">
-                  {t("arabic")}
+                  {t("arabicLanguage")}
                 </Text>
                 <Text>{t("teacherOfPrimaryEducation")}</Text>
               </Box>
