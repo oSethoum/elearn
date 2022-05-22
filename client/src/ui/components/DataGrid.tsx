@@ -128,7 +128,7 @@ export function DataGrid({
       {keys.map((k, i) => (
         <td key={i}>{element[k]}</td>
       ))}
-      {actions && <td>{actions(index)}</td>}
+      {actions && <td>{actions((page - 1) * 10 + index)}</td>}
     </tr>
   ));
 
