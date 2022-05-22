@@ -105,6 +105,8 @@ export const DashboardCourses = () => {
           data?.courses.map((course) => ({
             id: course.id,
             title: course.title,
+            topic: course.topic?.name,
+            year: course.year,
             teacher: course.teacher
               ? course.teacher.firstName + " " + course.teacher.lastName
               : "no author",
