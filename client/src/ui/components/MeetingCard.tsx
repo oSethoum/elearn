@@ -1,4 +1,4 @@
-import { Meeting, useDeleteMeetingMutation } from "@/graphql";
+import { Meeting } from "@/graphql";
 import {
   Text,
   Card,
@@ -90,9 +90,9 @@ export const MeetingCard = ({
                 {t("edit")}
               </Button>
             )}
-            <Link target="_blank" to={meeting.link as string}>
+            <a target="_blank" href={meeting.link as string} >
               <Button color="blue">{t("join")}</Button>
-            </Link>
+            </a>
           </Group>
         </Group>
       </Box>

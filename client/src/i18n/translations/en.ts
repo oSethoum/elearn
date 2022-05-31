@@ -138,6 +138,7 @@ export const en = {
     englishLanguage: "English",
     arabicLanguage: "Arabic",
     teacherOfPrimaryEducation: "Teacher of Primary Education",
+    passwordDontMatch: "Password Dont Match",
   },
 };
 

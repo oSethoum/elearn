@@ -31,6 +31,7 @@ export const Departments = () => {
   const addModal = () => {
     const id = openModal({
       title: t("addDepartment"),
+      size:"xl",
       children: (
         <NewDepartments
           onCancel={() => closeModal(id)}

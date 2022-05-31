@@ -11,7 +11,7 @@ import {
 import { useAssignmentQuery, useUpdateAssignmentMutation } from "@/graphql";
 import { useForm, zodResolver } from "@mantine/form";
 import { useNotifications } from "@mantine/notifications";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate, useParams } from "react-router-dom";
 import z from "zod";
@@ -20,7 +20,7 @@ import RichTextEditorInput from "../components/RichTextEditor";
 export const NewAssignment = () => {
   const params = useParams();
 
-  const { data } = useAssignmentQuery({
+  const { data, loading } = useAssignmentQuery({
     variables: {
       where: { id: parseInt(params?.assignmentId as string) },
     },
@@ -31,6 +31,7 @@ export const NewAssignment = () => {
   const { showNotification } = useNotifications();
   const navigate = useNavigate();
   const { t } = useTranslation();
+  const [contentLoaded, setContentLoaded] = useState(false);
   const schema = z.object({
     title: z.string().nonempty(t("notEmpty")),
     description: z.string().nonempty(t("notEmpty")),
@@ -49,13 +50,16 @@ export const NewAssignment = () => {
   });
 
   useEffect(() => {
-    form.setValues({
-      title: data?.assignment?.title as string,
-      published: data?.assignment?.published as boolean,
-      description: data?.assignment?.description as string,
-      content: data?.assignment?.content as string,
-    });
-  }, [data]);
+    if (data) {
+      form.setValues({
+        title: data?.assignment?.title as string,
+        published: data?.assignment?.published as boolean,
+        description: data?.assignment?.description as string,
+        content: data?.assignment?.content as string,
+      });
+      setContentLoaded(true);
+    }
+  }, [loading]);
 
   return (
     <Container size="xl" my={20} sx={{ minHeight: "60vh" }}>
@@ -113,11 +117,13 @@ export const NewAssignment = () => {
               label={t("published")}
               {...form.getInputProps("published", { type: "checkbox" })}
             />
-            <RichTextEditorInput
-              required
-              label={t("content")}
-              {...form.getInputProps("content")}
-            />
+            {contentLoaded && (
+              <RichTextEditorInput
+                required
+                label={t("content")}
+                {...form.getInputProps("content")}
+              />
+            )}
           </Group>
           <Space h={20} />
           <Group position="right">

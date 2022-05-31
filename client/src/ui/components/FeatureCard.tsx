@@ -1,4 +1,4 @@
-import { Box, Card, List, Paper, Title } from "@mantine/core";
+import { Box, Paper } from "@mantine/core";
 import React, {
   FC,
   ComponentPropsWithRef,

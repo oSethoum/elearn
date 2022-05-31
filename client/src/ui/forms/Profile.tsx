@@ -46,9 +46,9 @@ export const Profile = ({ onSubmit, onCancel }: Props) => {
           newPassword: z.string(),
           confirmPassword: z.string(),
         })
-        .refine((values) => values.password === values.confirmPassword, {
-          message: t("passwordsDontMatch"),
-          path: ["newPassword", "confirmPassword"],
+        .refine((values) => values.newPassword === values.confirmPassword, {
+          message: t("passwordDontMatch"),
+          path: ["confirmPassword"],
         }),
     []
   );

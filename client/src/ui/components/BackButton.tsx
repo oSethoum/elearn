@@ -1,6 +1,6 @@
 import { ActionIcon, useMantineTheme } from "@mantine/core";
 import { BsArrow90DegLeft, BsArrow90DegRight } from "react-icons/bs";
-import { Link, To, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 export function BackButton({ to }: { to?: string }) {
   const theme = useMantineTheme();

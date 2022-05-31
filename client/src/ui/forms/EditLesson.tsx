@@ -14,7 +14,7 @@ import z from "zod";
 import { useTranslation } from "react-i18next";
 import { useNavigate, useParams } from "react-router-dom";
 import { Loader } from "../components";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useLessonQuery, useUpdateLessonMutation } from "../../graphql/";
 import { useNotifications } from "@mantine/notifications";
 import RichTextEditorInput from "../components/RichTextEditor";
@@ -36,6 +36,7 @@ export const EditLesson = () => {
   });
   const params = useParams();
   const [updateLesson] = useUpdateLessonMutation();
+  const [contentLoaded, setContentLoaded] = useState(false);
 
   const { loading, data } = useLessonQuery({
     variables: {
@@ -46,12 +47,16 @@ export const EditLesson = () => {
   });
 
   useEffect(() => {
-    form.setValues({
-      content: data?.lesson?.content as string,
-      description: data?.lesson?.description as string,
-      published: data?.lesson?.published as boolean,
-      title: data?.lesson?.title as string,
-    });
+    if (data) {
+      form.setValues({
+        title: data?.lesson?.title as string,
+        description: data?.lesson?.description as string,
+        published: data?.lesson?.published as boolean,
+        content: data?.lesson?.content as string,
+      });
+
+      setContentLoaded(true);
+    }
   }, [loading]);
 
   const navigate = useNavigate();
@@ -117,30 +122,15 @@ export const EditLesson = () => {
               label={t("published")}
               {...form.getInputProps("published", { type: "checkbox" })}
             />
-            <Text sx={{ fontSize: 14 }} mb={-15} weight={500}>
-              {t("Content")}
-            </Text>
-            <RichTextEditorInput
-              required
-              sx={(theme) => ({
-                minHeight: 250,
-                border: form.getInputProps("content").error
-                  ? `1px solid ${theme.colors.red[6]}`
-                  : undefined,
-                color: form.getInputProps("content").error
-                  ? theme.colors.red[6]
-                  : undefined,
-              })}
-              {...form.getInputProps("content")}
-            />
-            {form.getInputProps("content").error && (
-              <Text
-                mt={-15}
-                sx={(theme) => ({ fontSize: 14, color: theme.colors.red[6] })}
-              >
-                {form.getInputProps("content").error}
-              </Text>
+
+            {contentLoaded && (
+              <RichTextEditorInput
+                required
+                label={t("content")}
+                {...form.getInputProps("content")}
+              />
             )}
+
             <Group position="right">
               <Button
                 variant="outline"
@@ -150,7 +140,7 @@ export const EditLesson = () => {
                 sx={{ width: 100 }}
                 color="gray"
               >
-                Cancel
+                {t("cancel")}
               </Button>
               <Button type="submit" color="green" sx={{ width: 100 }}>
                 {t("apply")}
