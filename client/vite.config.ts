@@ -12,6 +12,10 @@ export default defineConfig({
     },
   },
 
+  build:{
+    outDir:"../server/dist/public",
+  },
+
   server: {
     proxy: {
       "/api": "http://localhost:3001/",

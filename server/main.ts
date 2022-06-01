@@ -20,7 +20,7 @@ async function main() {
   routes.setup(app);
   await graphql.setup(app);
 
-  app.use(express.static("public"));
+  app.use(express.static(join(__dirname, "public"), {extensions: ["js", "jpg", "png", "svg", "css", "html"]}));
   app.get("*", (req, res) => {
     res.sendFile(join(__dirname, "public", "index.html"));
   });

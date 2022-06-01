@@ -5,7 +5,7 @@
     "dev": "nodemon --transpile-only main.ts",
     "generate": "prisma generate",
     "migrate:dev": "prisma migrate dev --skip-generate",
-    "preview": "node dist/src/main.js",
+    "preview": "node dist/main.js",
     "build": "tsc",
     "seed": "ts-node --transpile-only ./prisma/seed.ts"
   },
