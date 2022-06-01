@@ -144,7 +144,7 @@ export function Home() {
             icon={<MdOutlineAssignmentTurnedIn size={120} />}
           />
           <FeatureCard
-            title={t("videoConference")}
+            title={t("videoConferences")}
             color={theme.colors.blue[5]}
             icon={<BsCameraVideoFill size={120} />}
           />

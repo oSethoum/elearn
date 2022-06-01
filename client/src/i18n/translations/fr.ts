@@ -132,7 +132,7 @@ export const fr = {
     mathematicsAndPhysics: "Mathématiques, Physiques",
     physics: "Physiques",
     teacherOfMiddleEducation: "Professeur de l’Enseignement Moyen ",
-    mathematicsPhysicsandComputerScience:
+    mathematicsPhysicsAndComputerScience:
       "Mathématiques, Physiques, Informatique",
     teacherOfSecondaryEducation: "Professeur de l’Enseignement Secondaire ",
     frenchLanguage: "Français",

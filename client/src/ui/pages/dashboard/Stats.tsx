@@ -188,7 +188,7 @@ export const Stats = () => {
               (student) =>
                 ({
                   username: student.user.username,
-                  firstName: student.lastName,
+                  firstName: student.firstName,
                   lastName: student.lastName,
                   email: student.user.email,
                   year: student.year,
