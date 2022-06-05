@@ -195,7 +195,6 @@ query Course($where: CourseWhereUniqueInput!) {
       startTime
       duration
       courseId
-      published
     }
     assignments {
       id

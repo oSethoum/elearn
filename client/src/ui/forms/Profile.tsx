@@ -32,7 +32,7 @@ export const Profile = ({ onSubmit, onCancel }: Props) => {
       ? user?.admin?.lastName
       : user?.role == "student"
       ? user?.student?.lastName
-      : (user?.teacher?.firstName as string);
+      : (user?.teacher?.lastName as string);
 
   const schema = useMemo(
     () =>

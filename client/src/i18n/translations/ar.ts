@@ -139,7 +139,9 @@ export const ar = {
     frenchLanguage: "اللغة الفرنسية ",
     englishLanguage: "اللغة الانجليزية",
     arabicLanguage: "اللغة العربية",
-    PasswordDontMatch: "كلمة المرور غير متطابقة",
+    passwordDontMatch: "كلمة المرور غير متطابقة",
+    editAssignment: "تعديل الواجب",
+    join: "انضم",
   },
 };
 

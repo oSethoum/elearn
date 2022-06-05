@@ -140,6 +140,7 @@ export const fr = {
     arabicLanguage: "Arabe",
     teacherOfPrimaryEducation: "Professeur de l’Enseignement Primaire ",
     passwordDontMatch: "Les mots de passe ne correspondent pas",
+    join: "Rejoindre",
   },
 };
 
