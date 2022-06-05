@@ -13,12 +13,7 @@ interface Course {
   year: number;
 }
 
-interface Department {
-  name: string;
-  topics: {
-    create: Topic[];
-  };
-}
+
 
 const departments = [
   {
@@ -1000,6 +995,7 @@ async function main() {
       },
     },
   });
+
   await prisma.student.create({
     data: {
       year: 1,
