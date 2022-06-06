@@ -56,8 +56,8 @@ export const NewStudent = ({ onSubmit, onCancel }: NewStudentProps) => {
       password: "",
       confirmPassword: "",
       email: "",
-      year: "1",
-      topic: "1",
+      year: "",
+      topic: "",
     },
   });
 
@@ -97,7 +97,7 @@ export const NewStudent = ({ onSubmit, onCancel }: NewStudentProps) => {
                 },
               },
             },
-            refetchQueries: [namedOperations.Query.DashboardUsers],
+            refetchQueries: [namedOperations.Query.Students],
             onCompleted() {
               onSubmit && onSubmit();
             },
@@ -126,6 +126,7 @@ export const NewStudent = ({ onSubmit, onCancel }: NewStudentProps) => {
 
           <Select
             label={t("topic")}
+            placeholder={t("topic")}
             required
             data={
               data?.topics.map((topic) => ({
@@ -138,6 +139,7 @@ export const NewStudent = ({ onSubmit, onCancel }: NewStudentProps) => {
           />
           <Select
             label={t("year")}
+            placeholder={t("year")}
             required
             data={
               makeArray(

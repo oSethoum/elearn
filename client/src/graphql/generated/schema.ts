@@ -6877,7 +6877,7 @@ export type StudentsQueryVariables = Exact<{
 }>;
 
 
-export type StudentsQuery = { __typename?: 'Query', students: Array<{ __typename?: 'Student', id: number, firstName: string, lastName: string, year: number, topic?: { __typename?: 'Topic', name: string } | null, user: { __typename?: 'User', id: number, email: string, createdAt: any, disabled: boolean, username: string } }> };
+export type StudentsQuery = { __typename?: 'Query', students: Array<{ __typename?: 'Student', id: number, firstName: string, lastName: string, year: number, topicId?: number | null, userId: number, topic?: { __typename?: 'Topic', name: string } | null, user: { __typename?: 'User', id: number, email: string, createdAt: any, disabled: boolean, username: string } }> };
 
 export type CourseQueryVariables = Exact<{
   where: CourseWhereUniqueInput;
@@ -6900,7 +6900,7 @@ export type CoursesQueryVariables = Exact<{
 }>;
 
 
-export type CoursesQuery = { __typename?: 'Query', courses: Array<{ __typename?: 'Course', id: number, title: string, description?: string | null, topicId?: number | null, year: number, topic?: { __typename?: 'Topic', id: number, name: string } | null, teacher?: { __typename?: 'Teacher', firstName: string, lastName: string } | null, _count?: { __typename?: 'CourseCount', lessons: number, assignments: number, meetings: number } | null }> };
+export type CoursesQuery = { __typename?: 'Query', courses: Array<{ __typename?: 'Course', id: number, title: string, description?: string | null, topicId?: number | null, teacherId?: number | null, year: number, topic?: { __typename?: 'Topic', id: number, name: string } | null, teacher?: { __typename?: 'Teacher', firstName: string, lastName: string } | null, _count?: { __typename?: 'CourseCount', lessons: number, assignments: number, meetings: number } | null }> };
 
 export type TopicsQueryVariables = Exact<{
   where?: InputMaybe<TopicWhereInput>;
@@ -8403,9 +8403,11 @@ export const StudentsDocument = gql`
     firstName
     lastName
     year
+    topicId
     topic {
       name
     }
+    userId
     user {
       id
       email
@@ -8569,6 +8571,7 @@ export const CoursesDocument = gql`
       name
     }
     topicId
+    teacherId
     year
     teacher {
       firstName

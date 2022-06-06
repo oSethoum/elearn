@@ -23,7 +23,6 @@ import {
   DefaultOptions,
   InMemoryCache,
 } from "@apollo/client";
-import { createUploadLink } from "apollo-upload-client";
 
 const GlobalStyles = () => {
   return (
@@ -75,8 +74,6 @@ const link = from([
   new HttpLink({
     uri: "/graphql",
   }),
-  // @ts-ignore
-  createUploadLink({ uri: "/graphql" }),
 ]);
 
 const client = new ApolloClient({

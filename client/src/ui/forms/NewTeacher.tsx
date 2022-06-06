@@ -1,4 +1,11 @@
-import { Box, Button, Group, SimpleGrid, TextInput } from "@mantine/core";
+import {
+  Box,
+  Button,
+  Group,
+  PasswordInput,
+  SimpleGrid,
+  TextInput,
+} from "@mantine/core";
 import { useMemo } from "react";
 import { useForm, zodResolver } from "@mantine/form";
 import { z } from "zod";
@@ -62,7 +69,7 @@ export const NewTeacher = ({ onCancel, onSubmit }: NewTeacherProps) => {
                 },
               },
             },
-            refetchQueries: [namedOperations.Query.DashboardUsers],
+            refetchQueries: [namedOperations.Query.Teachers],
             onCompleted() {
               onSubmit && onSubmit();
             },
@@ -95,13 +102,13 @@ export const NewTeacher = ({ onCancel, onSubmit }: NewTeacherProps) => {
             {...form.getInputProps("username")}
             required
           />
-          <TextInput
+          <PasswordInput
             label={t("password")}
             placeholder={t("password")}
             {...form.getInputProps("password")}
             required
           />
-          <TextInput
+          <PasswordInput
             label={t("confirmPassword")}
             placeholder={t("confirmPassword")}
             {...form.getInputProps("confirmPassword")}

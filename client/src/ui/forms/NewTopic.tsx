@@ -40,7 +40,7 @@ export const NewTopic = ({ onSubmit, onCancel }: Props) => {
     schema: zodResolver(schema),
     initialValues: {
       name: "",
-      department: "1",
+      department: "",
       years: 1,
     },
   });

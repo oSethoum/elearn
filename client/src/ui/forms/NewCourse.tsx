@@ -51,9 +51,9 @@ export const NewCourse = ({ onCancel, onSubmit }: NewCourseProps) => {
     initialValues: {
       title: "",
       description: "",
-      topic: "1",
-      year: "1",
-      teacher: "1",
+      topic: "",
+      year: "",
+      teacher: "",
     },
   });
 
@@ -114,6 +114,7 @@ export const NewCourse = ({ onCancel, onSubmit }: NewCourseProps) => {
           <Select
             required
             label={t("teacher")}
+            placeholder={t("teacher")}
             data={
               teachersQuery?.teachers.map((teacher) => ({
                 label: teacher.firstName + " " + teacher.lastName,
@@ -126,6 +127,7 @@ export const NewCourse = ({ onCancel, onSubmit }: NewCourseProps) => {
           <Select
             required
             label={t("topic")}
+            placeholder={t("topic")}
             data={
               topicsQuery?.topics.map((topic) => ({
                 label: topic.name,
@@ -138,6 +140,7 @@ export const NewCourse = ({ onCancel, onSubmit }: NewCourseProps) => {
 
           <Select
             label={t("year")}
+            placeholder={t("year")}
             required
             data={
               makeArray(

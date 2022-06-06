@@ -7,7 +7,7 @@ import {
   Textarea,
   TextInput,
 } from "@mantine/core";
-import { useMemo } from "react";
+import { useEffect, useMemo } from "react";
 import { useForm, zodResolver } from "@mantine/form";
 import { z } from "zod";
 import { useTranslation } from "react-i18next";
@@ -49,7 +49,7 @@ export const EditCourse = ({ onCancel, onSubmit, course }: EditCourseProps) => {
       title: course.title,
       description: course.description || "",
       topic: course.topicId?.toString() as string,
-      teacher: "1",
+      teacher: course.teacherId?.toString() as string,
       year: course.year.toString(),
     },
   });
@@ -110,6 +110,7 @@ export const EditCourse = ({ onCancel, onSubmit, course }: EditCourseProps) => {
 
           <Select
             label={t("teacher")}
+            placeholder={t("teacher")}
             required
             data={
               teachersQuery?.teachers.map((teacher) => ({
@@ -122,6 +123,7 @@ export const EditCourse = ({ onCancel, onSubmit, course }: EditCourseProps) => {
 
           <Select
             label={t("topic")}
+            placeholder={t("topic")}
             required
             data={
               topicsQuery?.topics.map((topic) => ({
@@ -135,6 +137,7 @@ export const EditCourse = ({ onCancel, onSubmit, course }: EditCourseProps) => {
 
           <Select
             label={t("year")}
+            placeholder={t("year")}
             required
             data={
               makeArray(

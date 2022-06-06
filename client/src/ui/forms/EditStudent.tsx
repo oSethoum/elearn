@@ -93,7 +93,7 @@ export const EditStudent = ({
                 },
               },
             },
-            refetchQueries: [namedOperations.Query.DashboardUsers],
+            refetchQueries: [namedOperations.Query.Students],
             onCompleted() {
               onSubmit && onSubmit();
             },
@@ -124,6 +124,7 @@ export const EditStudent = ({
             <>
               <Select
                 label={t("topic")}
+                placeholder={t("topic")}
                 data={data?.topics.map((topic) => {
                   return {
                     label: topic.name,
@@ -135,6 +136,7 @@ export const EditStudent = ({
               />
               <Select
                 label={t("year")}
+                placeholder={t("year")}
                 data={makeArray(
                   data?.topics.find(
                     (topic) => topic.id === parseInt(form.values.topic)

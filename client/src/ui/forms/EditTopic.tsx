@@ -89,6 +89,7 @@ export const EditTopic = ({ onSubmit, onCancel, topic }: Props) => {
 
           <Select
             label={t("department")}
+            placeholder={t("department")}
             data={
               data?.departments.map((d) => ({
                 label: d.name,

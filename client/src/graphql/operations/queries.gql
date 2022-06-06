@@ -163,9 +163,11 @@ query Students($where: StudentWhereInput) {
     firstName
     lastName
     year
+    topicId
     topic {
       name
     }
+    userId
     user {
       id
       email
@@ -237,6 +239,7 @@ query Courses(
       name
     }
     topicId
+    teacherId
     year
     teacher {
       firstName

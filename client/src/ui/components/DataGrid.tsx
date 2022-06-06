@@ -66,7 +66,7 @@ export function DataGrid({
 
   useEffect(() => {
     if (data) {
-      setElements([...data.slice((page - 1) * 10, page * 10)]);
+      setElements(data.slice((page - 1) * 10, page * 10));
     }
   }, [page, data]);
 

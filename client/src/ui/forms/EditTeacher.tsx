@@ -58,7 +58,7 @@ export const EditTeacher = ({
                 },
               },
             },
-            refetchQueries: [namedOperations.Query.DashboardUsers],
+            refetchQueries: [namedOperations.Query.Teachers],
             onCompleted() {
               onSubmit && onSubmit();
             },
