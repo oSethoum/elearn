@@ -140,6 +140,7 @@ export const ar = {
     englishLanguage: "اللغة الانجليزية",
     arabicLanguage: "اللغة العربية",
     passwordDontMatch: "كلمة المرور غير متطابقة",
+    addAssignment: "إضافة واجب",
     editAssignment: "تعديل الواجب",
     join: "انضم",
   },
