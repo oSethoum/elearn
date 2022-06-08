@@ -139,7 +139,7 @@ export const en = {
     arabicLanguage: "Arabic",
     teacherOfPrimaryEducation: "Teacher of Primary Education",
     passwordDontMatch: "Password Dont Match",
+    addMeeting: "Add Video Conference",
+    editMeeting: "Edit Video Conference",
   },
 };
-
-export default en;

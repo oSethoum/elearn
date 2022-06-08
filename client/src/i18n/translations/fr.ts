@@ -7,7 +7,7 @@ export const fr = {
     lastName: "Nom",
     loginInformation: "Informations de connexion",
     personalInformation: "Informations personnelles",
-    topic: "Specialite", //specialty
+    topic: "Spécialité", //specialty
     register: "S'inscrire",
     login: "Se connecter",
     email: "Email",
@@ -141,6 +141,8 @@ export const fr = {
     teacherOfPrimaryEducation: "Professeur de l’Enseignement Primaire ",
     passwordDontMatch: "Les mots de passe ne correspondent pas",
     join: "Rejoindre",
+    addMeeting: "Ajouter une vidéo-conférence",
+    editMeeting: "Modifier une vidéo-conférence",
   },
 };
 

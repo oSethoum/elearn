@@ -90,7 +90,7 @@ export const Teachers = () => {
   };
   const editTeacher = (index: number) => {
     const id = modals.openModal({
-      title: t("addTeacher"),
+      title: t("editTeacher"),
       size: "xl",
       children: (
         <EditTeacher
@@ -139,6 +139,8 @@ export const Teachers = () => {
         }
         actionsLabel={t("actions")}
         actions={(index) => {
+          if (!data?.teachers[index]) return <></>;
+
           return (
             <Group>
               <ActionIcon
