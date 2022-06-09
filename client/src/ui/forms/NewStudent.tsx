@@ -41,7 +41,7 @@ export const NewStudent = ({ onSubmit, onCancel }: NewStudentProps) => {
           topic: z.string().nonempty(t("notEmpty")),
         })
         .refine((data) => data.password === data.confirmPassword, {
-          message: t("passwordsDontMatch"),
+          message: t("passwordDontMatch"),
           path: ["confirmPassword"],
         }),
     []
