@@ -73,7 +73,7 @@ export const fr = {
     newTeachers: "Nouveaux enseignants",
     students: "Étudiants",
     teachers: "Enseignants",
-    topics: "Specialités",
+    topics: "Spécialités",
     approve: "Approuvé",
     role: "Rôle",
     teacher: "Enseignant",

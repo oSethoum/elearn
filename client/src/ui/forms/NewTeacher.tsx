@@ -32,7 +32,7 @@ export const NewTeacher = ({ onCancel, onSubmit }: NewTeacherProps) => {
           confirmPassword: z.string().nonempty(t("notEmpty")),
         })
         .refine((data) => data.password === data.confirmPassword, {
-          message: t("passwordsDontMatch"),
+          message: t("passwordDontMatch"),
           path: ["confirmPassword"],
         }),
     []

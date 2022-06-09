@@ -98,6 +98,7 @@ export const NewMeeting = () => {
               locale={language === "ar" ? "ar-dz" : language}
               label={t("date")}
               minDate={new Date()}
+              firstDayOfWeek="sunday"
               placeholder={t("date")}
               {...form.getInputProps("date")}
               required
